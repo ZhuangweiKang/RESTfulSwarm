@@ -7,6 +7,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import utl
 import threading
+import requests
 import json
 from flask import *
 import argparse
@@ -92,7 +93,12 @@ class Worker:
         notMigrateThr.start()
 
     def requestJoinSwarm(self):
-        pass
+        url = 'http://' + self.manager_addr + ':5000/SwarmLMGM/worker/requestJoin'
+        requests.post(url=url, data=self.hostname)
+
+    def requestLeaveSwarm(self):
+        url = 'http://' + self.manager_addr + ':5000/SwarmLMGM/worker/requestLeave'
+        requests.post(url=url, data=self.hostname)
 
 
 if __name__ == '__main__':
@@ -101,6 +107,14 @@ if __name__ == '__main__':
     args = parser.parse_args()
     manager_addr = args.address
     worker = Worker(manager_addr)
-    worker.main()
+
     while True:
-        pass
+        join = input('Would you like to join Swarm environment? (y/n)')
+        if join == 'y':
+            worker.requestJoinSwarm()
+            worker.main()
+            while True:
+                leave = input('Press \'q\' to leave Swarm environment.')
+                if leave == 'q':
+                    worker.requestLeaveSwarm()
+                    break
