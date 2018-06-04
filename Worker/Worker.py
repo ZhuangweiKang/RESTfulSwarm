@@ -7,7 +7,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import utl
 import threading
-import time
+import json
 import argparse
 from LiveMigration import LiveMigration
 import DockerHelper as dHelper
@@ -25,7 +25,11 @@ class Worker:
         zmqHelper.subscribeTopic(self.swarmSocket, self.hostname)
         zmqHelper.addTopic(self.swarmSocket, self.host_address)
 
-    def listenMsg(self):
+        # local storage
+        # format: {$container : $containerInfo}
+        self.storage = {}
+
+    def listenManagerMsg(self):
         while True:
             msg = self.swarmSocket.recv()
             msg = msg.split()[1:]
@@ -35,56 +39,67 @@ class Worker:
                 join_token = msg[2]
                 self.joinSwarm(remote_addr, join_token)
             elif msg_type == 'migrate':
-                pass
+                info = json.loads(msg[1])
+                dst = info['dst']
+                container = info['container']
+                lmController = LiveMigration(self.storage[container]['image'], container, self.storage[container]['network'], self.logger, self.dockerClient)
+                lmController.migrate(dst, self.storage[container]['command'])
             elif msg_type == 'new_container':
-                pass
+                info = msg[1]
+                container_name = info['container_name']
+                del info['node']
+                del info['container_name']
+                self.storage.update({container_name: info})
+                self.deleteOldContainer(container_name)
+                self.pullImage(self.storage[container_name]['image'])
+                self.runContainer(self.storage[container_name]['image'], container_name, self.storage[container_name]['network'], self.storage[container_name]['command'])
             elif msg_type == 'leave':
-                pass
+                dHelper.leaveSwarm(self.dockerClient)
+
+    def listenWorkerMessage(self, port='3200'):
+        lmController = LiveMigration()
+        lmController.notMigrate(port)
 
     def joinSwarm(self, remote_addr, join_token):
         dHelper.joinSwarm(self.dockerClient, join_token, remote_addr)
         self.logger.info('Worker node join the Swarm environment.')
 
-    def recvContainerAddr(self):
-        zmqHelper.addTopic(self.swarmInfoSocket, 'container-ip')
-        msg = self.swarmInfoSocket.recv_string()
-        msg = msg.split()[1]
-        self.pub_con_addr = msg
-        self.logger.info('Received container address')
-
-    def deleteOldContainer(self):
-        if dHelper.checkContainer(self.dockerClient, self.name) is True:
-            container = dHelper.getContainer(self.dockerClient, self.name)
+    def deleteOldContainer(self, name):
+        if dHelper.checkContainer(self.dockerClient, name) is True:
+            container = dHelper.getContainer(self.dockerClient, name)
             dHelper.deleteContainer(container)
-            self.logger.info('Old container exists, deleting old container.')
+            self.logger.info('Old container %s exists, deleting old container.' % name)
 
     def pullImage(self, image):
         if dHelper.checkImage(self.dockerClient, image) is False:
             dHelper.pullImage(self.dockerClient, image)
             self.logger.info('Image doesn\'t exist, building image.')
 
-    def runContainer(self, pub_con_port='3000'):
-        while self.pub_con_addr is None:
-            pass
-        command = 'python SubscribeData.py -a %s -p %s' % (self.pub_con_addr, pub_con_port)
-        container = dHelper.runContainer(self.dockerClient, self.image, self.name, network=self.network, command=command)
-        self.logger.info('Container is running.')
+    def runContainer(self, image, name, network, command):
+        container = dHelper.runContainer(self.dockerClient, image, name, network=network, command=command)
+        self.logger.info('Container %s is running.' % name)
         return container
 
     def main(self):
-        self.joinSwarm(self.pub_node_addr)
-        self.recvContainerAddr()
-        self.deleteOldContainer()
-        self.pullImage(self.image)
-        self.runContainer()
-        cmd = 'python SubscribeData.py -a %s -p %s' % (self.pub_con_addr, '3000')
-        self.lmController.menue(cmd=cmd)
+        migrateThr = threading.Thread(target=self.listenManagerMsg, args=())
+        migrateThr.setDaemon(True)
+
+        notMigrateThr = threading.Thread(target=self.listenWorkerMessage, args=())
+        notMigrateThr.setDaemon(True)
+
+        migrateThr.start()
+        notMigrateThr.start()
+
+    def requestJoinSwarm(self):
+        pass
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-a', '--address', type=str, help='The IP address of publisher.')
+    parser.add_argument('-a', '--address', type=str, help='Manager IP address.')
     args = parser.parse_args()
-    address = args.address
-    sub = Subscriber(name='subscriber', image='zhuangweikang/subscriber', pub_node_addr=address, network='kangNetwork')
-    sub.main()
+    manager_addr = args.address
+    worker = Worker(manager_addr)
+    worker.main()
+    while True:
+        pass

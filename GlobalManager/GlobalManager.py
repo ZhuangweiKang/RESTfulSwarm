@@ -20,13 +20,14 @@ host_addr = utl.getHostIP()
 network = None
 subnet = None
 dockerClient = dHelper.setClient()
+pubSocket = None
 
 
 @app.route('/SwarmLMGM/manager/init', methods=['POST'])
 def init():
     global network
     global subnet
-
+    global pubSocket
     network = request.args.get('network')
     subnet = request.args.get('subnet')
     if network is None:
@@ -37,6 +38,7 @@ def init():
         response = 'Error: Specified Network already exists in Swarm environment.'
     else:
         try:
+            pubSocket = zmq.bind('3100')
             initSwarmEnv()
             createOverlayNetwork()
             response = 'OK: Initialize Swarm environment and create network succeed.'
@@ -62,7 +64,8 @@ def requestJoin():
         if dHelper.checkNodeHostName(dockerClient, hostname):
             remote_addr = host_addr + ':2377'
             join_token = dHelper.getJoinToken()
-            response = 'OK: %s %s' % (remote_addr, join_token)
+            response = '%s join %s %s' % (hostname, remote_addr, join_token)
+            pubSocket.send(response)
             app.logger.info('Send manager address and join token to worker node.')
         else:
             response = 'Error: Node already in Swarm environment.'
@@ -91,8 +94,8 @@ def requestNewContainer():
                     'ports': ports,
                     'network': network
                     }
-
-
+        pubContent = '%s new_container %s' % (node, json.dumps(jsonForm))
+        pubSocket.send(pubContent)
         app.logger.info('Create a new container in node %s.' % node)
         return 'OK'
     else:
@@ -112,8 +115,8 @@ def requestMigrate():
         response = 'Error: %s is an invalid address.' % dst
     else:
         jsonForm = {'src': src, 'dst': dst, 'container': container}
-
-
+        pubContent = '%s migrate %s' % (src, json.dumps(jsonForm))
+        pubSocket.send(pubContent)
         response = 'OK'
         app.logger.info('Migrate container %s from %s to %s.' % (container, src, dst))
     return response

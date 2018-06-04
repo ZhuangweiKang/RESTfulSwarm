@@ -166,3 +166,4 @@ def getNodeInfo(client, name):
         return json.dumps(node.attrs)
     except Exception as ex:
         return None
+

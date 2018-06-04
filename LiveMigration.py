@@ -10,7 +10,7 @@ import ZMQHelper as zmqHelper
 
 
 class LiveMigration:
-    def __init__(self, image, name, network, logger, dockerClient):
+    def __init__(self, image=None, name=None, network=None, logger=None, dockerClient=None):
         self.image = image
         self.name = name
         self.logger = logger
