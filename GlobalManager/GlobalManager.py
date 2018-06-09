@@ -59,7 +59,7 @@ def createOverlayNetwork():
 
 @app.route('/SwarmLMGM/worker/requestJoin', methods=['POST'])
 def requestJoin():
-    hostname = app.request.args.get('hostname')
+    hostname = request.args.get('hostname')
     if hostname is not None:
         if dHelper.checkNodeHostName(dockerClient, hostname):
             remote_addr = host_addr + ':2377'
