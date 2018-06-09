@@ -20,11 +20,25 @@ def pullImage(client, repository):
     client.images.pull(repository)
 
 
-def runContainer(client, image, name, network=None, command=None):
-    if command is None:
-        return client.containers.run(image=image, name=name, detach=True, network=network)
-    else:
-        return client.containers.run(image=image, name=name, detach=True, network=network, command=command)
+def runContainer(client, image, name, detach=True, network=None, command=None, cpuset_cpus=None, mem_limit=None, ports=None, volumes=None):
+    return client.containers.run(
+        image=image,
+        name=name,
+        detach=detach,
+        network=network,
+        cpuset_cpus=cpuset_cpus,
+        mem_limit=mem_limit,
+        ports=ports,
+        volumes=volumes,
+        command=command)
+
+
+def updateContainer(client, container_name, cpuset_cpus, mem_limit):
+    container = getContainer(client=client, name=container_name)
+    if container is not None:
+        container.update(cpuset_cpus=cpuset_cpus, mem_limit=mem_limit)
+        return True
+    return False
 
 
 def getContainer(client, name):

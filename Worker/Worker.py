@@ -9,6 +9,7 @@ import utl
 import threading
 import requests
 import json
+import time
 from flask import *
 import argparse
 from LiveMigration import LiveMigration
@@ -44,17 +45,26 @@ class Worker:
                 info = json.loads(msg[1])
                 dst = info['dst']
                 container = info['container']
-                lmController = LiveMigration(self.storage[container]['image'], container, self.storage[container]['network'], self.logger, self.dockerClient)
-                lmController.migrate(dst, self.storage[container]['command'])
+                try:
+                    lmController = LiveMigration(self.storage[container]['image'], container, self.storage[container]['network'], self.logger, self.dockerClient)
+                    lmController.migrate(dst, self.storage[container]['command'])
+                    del self.storage[container]
+                except Exception as ex:
+                    print(ex)
             elif msg_type == 'new_container':
-                info = msg[1]
+                info = json.loads(msg[1])
                 container_name = info['container_name']
                 del info['node']
-                del info['container_name']
                 self.storage.update({container_name: info})
                 self.deleteOldContainer(container_name)
                 self.pullImage(self.storage[container_name]['image'])
-                self.runContainer(self.storage[container_name]['image'], container_name, self.storage[container_name]['network'], self.storage[container_name]['command'])
+                self.runContainer(self.storage[container_name])
+            elif msg_type == 'update':
+                newInfo = json.loads(msg[1])
+                container_name = newInfo['container_name']
+                cpuset_cpus = newInfo['cpuset_cpus']
+                mem_limits = newInfo['mem_limits']
+                dHelper.updateContainer(self.dockerClient, container_name=container_name, cpuset_cpus=cpuset_cpus, mem_limit=mem_limits)
             elif msg_type == 'leave':
                 dHelper.leaveSwarm(self.dockerClient)
 
@@ -77,18 +87,33 @@ class Worker:
             dHelper.pullImage(self.dockerClient, image)
             self.logger.info('Image doesn\'t exist, building image.')
 
-    def runContainer(self, image, name, network, command):
-        container = dHelper.runContainer(self.dockerClient, image, name, network=network, command=command)
-        self.logger.info('Container %s is running.' % name)
+    def runContainer(self, containerInfo):
+        container_name = containerInfo['name']
+        image_name = containerInfo['image']
+        network = containerInfo['network']
+        command = containerInfo['command']
+        cpuset_cpus = containerInfo['cpus']
+        mem_limit = containerInfo['memory']
+        detach = containerInfo['detach']
+        ports = containerInfo['ports']
+        volumes = containerInfo['volumes']
+
+        container = dHelper.runContainer(self.dockerClient,
+                                         image=image_name,
+                                         name=container_name,
+                                         detach=detach,
+                                         network=network,
+                                         command=command,
+                                         cpuset_cpus=cpuset_cpus,
+                                         mem_limit=mem_limit,
+                                         ports=ports,
+                                         volumes=volumes)
+        self.logger.info('Container %s is running.' % container_name)
         return container
 
     def main(self):
         migrateThr = threading.Thread(target=self.listenManagerMsg, args=())
-        migrateThr.setDaemon(True)
-
         notMigrateThr = threading.Thread(target=self.listenWorkerMessage, args=())
-        notMigrateThr.setDaemon(True)
-
         migrateThr.start()
         notMigrateThr.start()
 
@@ -107,14 +132,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     manager_addr = args.address
     worker = Worker(manager_addr)
-
-    while True:
-        join = input('Would you like to join Swarm environment? (y/n)')
-        if join == 'y':
-            worker.requestJoinSwarm()
-            worker.main()
-            while True:
-                leave = input('Press \'q\' to leave Swarm environment.')
-                if leave == 'q':
-                    worker.requestLeaveSwarm()
-                    break
+    worker.requestJoinSwarm()
+    time.sleep(1)
+    worker.main()

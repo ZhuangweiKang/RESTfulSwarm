@@ -76,25 +76,10 @@ def requestJoin():
 
 @app.route('/SwarmLMGM/worker/requestNewContainer', methods=['POST'])
 def requestNewContainer():
-    node = app.request.args.get('node')
+    data = request.get_json()
+    node = data['node']
     if dHelper.checkNodeHostName(dockerClient, node):
-        container = app.request.args.get('container')
-        image = app.request.args.get('image')
-        command = app.request.args.get('command')
-        detach = app.request.args.get('detach')
-        stdin_open = app.request.args.get('stdin_open')
-        ports = app.request.args.get('ports')
-        network = app.request.args.get('network')
-        jsonForm = {'node': node,
-                    'container_name': container,
-                    'image': image,
-                    'command': command,
-                    'detach': detach,
-                    'stdin_open': stdin_open,
-                    'ports': ports,
-                    'network': network
-                    }
-        pubContent = '%s new_container %s' % (node, json.dumps(jsonForm))
+        pubContent = '%s new_container %s' % (node, json.dumps(data))
         pubSocket.send(pubContent)
         app.logger.info('Create a new container in node %s.' % node)
         return 'OK'
@@ -133,6 +118,27 @@ def requestLeave():
         return 'OK'
     else:
         return 'Error: Host %s is not in Swarm environment.' % hostname
+
+
+@app.route('/SwarmLMGM/worker/requestUpdateContainer', methods=['POST'])
+def requestUpdateContainer():
+    newInfo = request.get_json()
+    node = newInfo['node']
+    container = newInfo['container_name']
+    '''
+    newInfo data format: 
+    {'node': $node_name,
+    'container_name': $container_name,
+    'cpuset_cpus': $cpuset_cpus,
+    'mem_limit': $mem_limit}
+    '''
+    if dHelper.checkNodeHostName(client=dockerClient, host=node):
+        newInfo = json.dumps(newInfo)
+        pubSocket.send('%s update %s' % (node, newInfo))
+        app.logger.info('%s updated container %s' % (node, container))
+        return 'OK'
+    else:
+        return 'Error: requested node %s is not in Swarm environment.' % node
 
 
 @app.route('/SwarmLMGM/manager/getWorkerList', methods=['GET'])
