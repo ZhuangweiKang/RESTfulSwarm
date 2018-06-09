@@ -55,5 +55,6 @@ if __name__ == '__main__':
     print('1. Init Swarm')
     print('2. New Container')
     print('3. Migrate Container')
-    print('4. ')
+    print('4. Update Container')
+    print('5. Leave Swarm')
     get_input = input('Please enter your choice: ')
