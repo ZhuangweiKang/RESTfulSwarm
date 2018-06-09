@@ -40,7 +40,7 @@ def bind(port):
 
 def subscribeTopic(socket, topic):
     topicfilter = topic
-    socket.setsockopt(zmq.SUBSCRIBE, topicfilter)
+    socket.setsockopt_string(zmq.SUBSCRIBE, topicfilter)
 
 
 def addTopic(socket, topic):
