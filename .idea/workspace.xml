@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4b91691b-ca15-48f9-96ca-c77325512efe" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SamplePubSubWorker/publisher.json" beforeDir="false" afterPath="$PROJECT_DIR$/SamplePubSubWorker/publisher.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,7 +34,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Worker.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Worker.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
@@ -74,7 +73,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="publisher.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="publisher.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SamplePubSubWorker/publisher.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
@@ -389,11 +388,18 @@
       <option name="project" value="LOCAL" />
       <updated>1528668501748</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Update">
+      <created>1528668747594</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1528668747594</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -433,7 +439,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/LiveMigration.py</url>
+          <url />
           <line>25</line>
         </line-breakpoint>
       </breakpoints>
@@ -691,13 +697,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="55" column="42" lean-forward="true" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/Client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -712,6 +711,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="32" lean-forward="true" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="55" column="42" lean-forward="true" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
         </state>
       </provider>
     </entry>

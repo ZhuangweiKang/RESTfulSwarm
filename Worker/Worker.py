@@ -88,12 +88,12 @@ class Worker:
             self.logger.info('Image doesn\'t exist, pulling image.')
 
     def runContainer(self, containerInfo):
-        container_name = containerInfo['name']
+        container_name = containerInfo['container_name']
         image_name = containerInfo['image']
         network = containerInfo['network']
         command = containerInfo['command']
-        cpuset_cpus = containerInfo['cpus']
-        mem_limit = containerInfo['memory']
+        cpuset_cpus = containerInfo['cpuset_cpus']
+        mem_limit = containerInfo['mem_limit']
         detach = containerInfo['detach']
         ports = containerInfo['ports']
         volumes = containerInfo['volumes']
