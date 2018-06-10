@@ -113,7 +113,7 @@ def requestMigrate():
 def requestLeave():
     hostname = request.get_json()['hostname']
     checkNode = dHelper.checkNodeHostName(client=dockerClient, host=hostname)
-    if checkNode:
+    if checkNode is False:
         pubContent = '%s leave' % hostname
         pubSocket.send_string(pubContent)
         app.logger.info('Node %s left Swarm environment.' % hostname)
