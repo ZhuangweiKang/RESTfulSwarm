@@ -29,7 +29,7 @@ def newContainer(image, name, detach=True, network=None, command=None, cpuset_cp
         'command': command
     }
     url = 'http://%s:%s/SwarmLMGM/worker/requestNewContainer' % (manager_addr, manager_port)
-    requests.post(url=url, data=data)
+    requests.post(url=url, json=data)
 
 
 def doMigrate(container, src, dst):
@@ -38,7 +38,7 @@ def doMigrate(container, src, dst):
             'to': dst
     }
     url = 'http://%s:%s/SwarmLMGM/worker/requestMigrate' % (manager_addr, manager_port)
-    requests.post(url=url, data=data)
+    requests.post(url=url, json=data)
 
 
 def updateContainer(node_name, container_name, cpuset_cpus, mem_limit):
@@ -47,13 +47,13 @@ def updateContainer(node_name, container_name, cpuset_cpus, mem_limit):
             'cpuset_cpus': cpuset_cpus,
             'mem_limit': mem_limit}
     url = 'http://%s:%s/SwarmLMGM/worker/requestUpdateContainer' % (manager_addr, manager_port)
-    requests.post(url=url, data=data)
+    requests.post(url=url, json=data)
 
 
 def leaveSwarm(hostname):
     data = {'hostname': hostname}
     url = 'http://%s:%s/SwarmLMGM/worker/requestLeave' % (manager_addr, manager_port)
-    requests.post(url=url, data=data)
+    requests.post(url=url, json=data)
 
 
 if __name__ == '__main__':
@@ -70,7 +70,9 @@ if __name__ == '__main__':
         print('3. Migrate Container')
         print('4. Update Container')
         print('5. Leave Swarm')
-        print('6. Exit')
+        print('6. Describe Workers')
+        print('7. Describe Manager')
+        print('8. Exit')
         try:
             get_input = int(input('Please enter your choice: '))
             if get_input == 1:
@@ -95,9 +97,17 @@ if __name__ == '__main__':
                 mem_limit = input('Memory limit: ')
                 updateContainer(node_name, container_name, cpuset_cpus, mem_limit)
             elif get_input == 5:
-                hostname = input('Node host name: ')
+                hostname = input('Node hostname: ')
                 leaveSwarm(hostname)
             elif get_input == 6:
+                hostname = input('Node hostname: ')
+                url = 'http://%s:%s/SwarmLMGM/worker/%s/describeWorker' % (manager_addr, manager_port, hostname)
+                requests.get(url=url)
+            elif get_input == 7:
+                hostname = input('Node hostname: ')
+                url = 'http://%s:%s/SwarmLMGM/manager/%s/describeManager' % (manager_addr, manager_port, hostname)
+                requests.get(url=url)
+            elif get_input == 8:
                 print('Thanks for using RESTfulSwarmLM, bye.')
                 break
         except ValueError as er:

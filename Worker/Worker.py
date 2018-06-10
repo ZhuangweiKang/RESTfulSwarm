@@ -119,11 +119,11 @@ class Worker:
 
     def requestJoinSwarm(self):
         url = 'http://' + self.manager_addr + ':5000/SwarmLMGM/worker/requestJoin'
-        requests.post(url=url, data=self.hostname)
+        requests.post(url=url, json={'hostname': self.hostname})
 
     def requestLeaveSwarm(self):
         url = 'http://' + self.manager_addr + ':5000/SwarmLMGM/worker/requestLeave'
-        requests.post(url=url, data=self.hostname)
+        requests.post(url=url, json={'hostname': self.hostname})
 
 
 if __name__ == '__main__':

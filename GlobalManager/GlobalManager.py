@@ -62,7 +62,7 @@ def createOverlayNetwork():
 
 @app.route('/SwarmLMGM/worker/requestJoin', methods=['POST'])
 def requestJoin():
-    hostname = request.args.get('hostname')
+    hostname = request.get_json()['hostname']
     if hostname is not None:
         if dHelper.checkNodeHostName(dockerClient, hostname):
             remote_addr = host_addr + ':2377'
@@ -92,9 +92,10 @@ def requestNewContainer():
 
 @app.route('/SwarmLMGM/worker/requestMigrate', methods=['POST'])
 def requestMigrate():
-    src = app.request.args.get('from')
-    dst = app.request.args.get('to')
-    container = app.request.args.get('container')
+    data = request.get_json()
+    src = data['from']
+    dst = data['to']
+    container = data['container']
     checkSrc = dHelper.checkNodeIP(dockerClient, src)
     checkDst = dHelper.checkNodeIP(dockerClient, dst)
     if checkSrc is False:
@@ -112,7 +113,7 @@ def requestMigrate():
 
 @app.route('/SwarmLMGM/worker/requestLeave', methods=['POST'])
 def requestLeave():
-    hostname = app.request.args.get('hostname')
+    hostname = request.get_json()['hostname']
     checkNode = dHelper.checkNodeHostName(client=dockerClient, host=hostname)
     if checkNode:
         pubContent = '%s leave' % hostname
