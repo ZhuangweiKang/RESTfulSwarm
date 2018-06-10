@@ -16,18 +16,7 @@ def init_manager(network, subnet):
     requests.post(url=url, json=data)
 
 
-def newContainer(image, name, detach=True, network=None, command=None, cpuset_cpus=None, mem_limit=None, ports=None, volumes=None):
-    data = {
-        'image': image,
-        'name': name,
-        'detach': detach,
-        'network': network,
-        'cpuset_cpus': cpuset_cpus,
-        'mem_limit': mem_limit,
-        'ports': ports,
-        'volumes': volumes,
-        'command': command
-    }
+def newContainer(data):
     url = 'http://%s:%s/SwarmLMGM/worker/requestNewContainer' % (manager_addr, manager_port)
     requests.post(url=url, json=data)
 
@@ -83,8 +72,7 @@ if __name__ == '__main__':
                 json_path = input('Json file path: ')
                 with open(json_path, 'r') as f:
                     data = json.load(f)
-                newContainer(data['image'], data['name'], data['detach'], data['network'], data['command'],
-                             data['cpuset_cpus'], data['mem_limit'], data['ports'], data['volumes'])
+                newContainer(data)
             elif get_input == 3:
                 container = input('Container name: ')
                 src = input('From: ')
