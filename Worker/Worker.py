@@ -132,6 +132,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     manager_addr = args.address
     worker = Worker(manager_addr)
-    worker.requestJoinSwarm()
-    time.sleep(1)
     worker.main()
+    worker.requestJoinSwarm()

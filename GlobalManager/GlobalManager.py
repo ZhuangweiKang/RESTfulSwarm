@@ -31,8 +31,6 @@ def init():
     data = request.get_json()
     network = data['network']
     subnet = data['subnet']
-    print(network)
-    print(subnet)
     if network is None:
         response = 'Error: Please specify the network name.'
     elif subnet is None:
