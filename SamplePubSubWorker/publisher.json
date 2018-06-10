@@ -1,6 +1,6 @@
 {
   "node": "kang7",
-  "name": "Publisher",
+  "container_name": "Publisher",
   "image": "zhuangweikang/publisher",
   "detach": "True",
   "network": "kangNetwork",
