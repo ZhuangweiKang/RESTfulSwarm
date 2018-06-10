@@ -1,4 +1,5 @@
 {
+  "node": "kang7",
   "name": "Publisher",
   "image": "zhuangweikang/publisher",
   "detach": "True",

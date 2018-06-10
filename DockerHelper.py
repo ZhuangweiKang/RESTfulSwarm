@@ -170,8 +170,8 @@ def checkNodeHostName(client, host):
     nodes = getNodeList(client)
     for node in nodes:
         if (node.attrs)['Description']['Hostname'] == host:
-            return False
-    return True
+            return True
+    return False
 
 
 def getNodeInfo(client, name):
