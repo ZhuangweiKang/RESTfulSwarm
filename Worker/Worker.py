@@ -77,7 +77,7 @@ class Worker:
         self.logger.info('Worker node join the Swarm environment.')
 
     def deleteOldContainer(self, name):
-        if dHelper.checkContainer(self.dockerClient, name) is True:
+        if dHelper.checkContainer(self.dockerClient, name):
             container = dHelper.getContainer(self.dockerClient, name)
             dHelper.deleteContainer(container)
             self.logger.info('Old container %s exists, deleting old container.' % name)
@@ -85,7 +85,7 @@ class Worker:
     def pullImage(self, image):
         if dHelper.checkImage(self.dockerClient, image) is False:
             dHelper.pullImage(self.dockerClient, image)
-            self.logger.info('Image doesn\'t exist, building image.')
+            self.logger.info('Image doesn\'t exist, pulling image.')
 
     def runContainer(self, containerInfo):
         container_name = containerInfo['name']

@@ -13,12 +13,12 @@ manager_port = None
 def init_manager(network, subnet):
     url = 'http://%s:%s/SwarmLMGM/manager/init' % (manager_addr, manager_port)
     data = {'network': network, 'subnet': subnet}
-    requests.post(url=url, json=data)
+    print(requests.post(url=url, json=data).content)
 
 
 def newContainer(data):
     url = 'http://%s:%s/SwarmLMGM/worker/requestNewContainer' % (manager_addr, manager_port)
-    requests.post(url=url, json=data)
+    print(requests.post(url=url, json=data).content)
 
 
 def doMigrate(container, src, dst):
@@ -27,7 +27,7 @@ def doMigrate(container, src, dst):
             'to': dst
     }
     url = 'http://%s:%s/SwarmLMGM/worker/requestMigrate' % (manager_addr, manager_port)
-    requests.post(url=url, json=data)
+    print(requests.post(url=url, json=data).content)
 
 
 def updateContainer(node_name, container_name, cpuset_cpus, mem_limit):
@@ -36,13 +36,13 @@ def updateContainer(node_name, container_name, cpuset_cpus, mem_limit):
             'cpuset_cpus': cpuset_cpus,
             'mem_limit': mem_limit}
     url = 'http://%s:%s/SwarmLMGM/worker/requestUpdateContainer' % (manager_addr, manager_port)
-    requests.post(url=url, json=data)
+    print(requests.post(url=url, json=data).content)
 
 
 def leaveSwarm(hostname):
     data = {'hostname': hostname}
     url = 'http://%s:%s/SwarmLMGM/worker/requestLeave' % (manager_addr, manager_port)
-    requests.post(url=url, json=data)
+    print(requests.post(url=url, json=data).content)
 
 
 if __name__ == '__main__':
@@ -90,11 +90,11 @@ if __name__ == '__main__':
             elif get_input == 6:
                 hostname = input('Node hostname: ')
                 url = 'http://%s:%s/SwarmLMGM/worker/%s/describeWorker' % (manager_addr, manager_port, hostname)
-                requests.get(url=url)
+                print(requests.get(url=url).content)
             elif get_input == 7:
                 hostname = input('Node hostname: ')
                 url = 'http://%s:%s/SwarmLMGM/manager/%s/describeManager' % (manager_addr, manager_port, hostname)
-                requests.get(url=url)
+                print(requests.get(url=url).content)
             elif get_input == 8:
                 print('Thanks for using RESTfulSwarmLM, bye.')
                 break
