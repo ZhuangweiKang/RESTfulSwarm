@@ -13,7 +13,7 @@ manager_port = None
 def init_manager(network, subnet):
     url = 'http://%s:%s/SwarmLMGM/manager/init' % (manager_addr, manager_port)
     data = {'network': network, 'subnet': subnet}
-    requests.post(url=url, data=data)
+    requests.post(url=url, json=data)
 
 
 def newContainer(image, name, detach=True, network=None, command=None, cpuset_cpus=None, mem_limit=None, ports=None, volumes=None):

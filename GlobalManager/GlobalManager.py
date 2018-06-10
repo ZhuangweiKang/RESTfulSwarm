@@ -28,7 +28,7 @@ def init():
     global network
     global subnet
     global pubSocket
-    data = json.loads(request.get_data())
+    data = request.get_json()
     network = data['network']
     subnet = data['subnet']
     print(network)
