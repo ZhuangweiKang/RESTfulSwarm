@@ -30,6 +30,8 @@ def init():
     global pubSocket
     network = request.args.get('network')
     subnet = request.args.get('subnet')
+    print(network)
+    print(subnet)
     if network is None:
         response = 'Error: Please specify the network name.'
     elif subnet is None:
