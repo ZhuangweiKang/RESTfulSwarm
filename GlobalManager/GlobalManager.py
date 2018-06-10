@@ -66,7 +66,7 @@ def requestJoin():
             remote_addr = host_addr + ':2377'
             join_token = dHelper.getJoinToken()
             response = '%s join %s %s' % (hostname, remote_addr, join_token)
-            pubSocket.send(response)
+            pubSocket.send_string(response)
             app.logger.info('Send manager address and join token to worker node.')
         else:
             response = 'Error: Node already in Swarm environment.'
@@ -81,7 +81,7 @@ def requestNewContainer():
     node = data['node']
     if dHelper.checkNodeHostName(dockerClient, node):
         pubContent = '%s new_container %s' % (node, json.dumps(data))
-        pubSocket.send(pubContent)
+        pubSocket.send_string(pubContent)
         app.logger.info('Create a new container in node %s.' % node)
         return 'OK'
     else:
@@ -103,7 +103,7 @@ def requestMigrate():
     else:
         jsonForm = {'src': src, 'dst': dst, 'container': container}
         pubContent = '%s migrate %s' % (src, json.dumps(jsonForm))
-        pubSocket.send(pubContent)
+        pubSocket.send_string(pubContent)
         response = 'OK'
         app.logger.info('Migrate container %s from %s to %s.' % (container, src, dst))
     return response
@@ -115,7 +115,7 @@ def requestLeave():
     checkNode = dHelper.checkNodeHostName(client=dockerClient, host=hostname)
     if checkNode:
         pubContent = '%s leave' % hostname
-        pubSocket.send(pubContent)
+        pubSocket.send_string(pubContent)
         app.logger.info('Node %s left Swarm environment.' % hostname)
         return 'OK'
     else:
@@ -136,7 +136,7 @@ def requestUpdateContainer():
     '''
     if dHelper.checkNodeHostName(client=dockerClient, host=node):
         newInfo = json.dumps(newInfo)
-        pubSocket.send('%s update %s' % (node, newInfo))
+        pubSocket.send_string('%s update %s' % (node, newInfo))
         app.logger.info('%s updated container %s' % (node, container))
         return 'OK'
     else:

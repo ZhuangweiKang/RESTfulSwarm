@@ -34,7 +34,7 @@ class Worker:
 
     def listenManagerMsg(self):
         while True:
-            msg = self.swarmSocket.recv()
+            msg = self.swarmSocket.recv_string()
             msg = msg.split()[1:]
             msg_type = msg[0]
             if msg_type == 'join':
