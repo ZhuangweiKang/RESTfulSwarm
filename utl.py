@@ -28,7 +28,7 @@ def doLog(loggerName, logFile):
 
 def getHostName():
     cmd = 'hostname'
-    return os.popen(cmd).read()
+    return os.popen(cmd).read().strip()
 
 
 def getHostIP():
