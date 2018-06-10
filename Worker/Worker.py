@@ -26,7 +26,7 @@ class Worker:
         self.host_address = utl.getHostIP()
         self.hostname = utl.getHostName()
         zmqHelper.subscribeTopic(self.swarmSocket, self.hostname)
-        zmqHelper.addTopic(self.swarmSocket, self.host_address)
+        zmqHelper.subscribeTopic(self.swarmSocket, self.host_address)
 
         # local storage
         # format: {$container : $containerInfo}
