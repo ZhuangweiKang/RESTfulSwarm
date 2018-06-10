@@ -79,7 +79,7 @@ def requestJoin():
 def requestNewContainer():
     data = request.get_json()
     node = data['node']
-    if dHelper.checkNodeHostName(dockerClient, node):
+    if dHelper.checkNodeHostName(dockerClient, node) is False:
         pubContent = '%s new_container %s' % (node, json.dumps(data))
         pubSocket.send_string(pubContent)
         app.logger.info('Create a new container in node %s.' % node)
