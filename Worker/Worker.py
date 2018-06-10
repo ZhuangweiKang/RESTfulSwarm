@@ -42,7 +42,7 @@ class Worker:
                 join_token = msg[2]
                 self.joinSwarm(remote_addr, join_token)
             elif msg_type == 'migrate':
-                info = json.loads(msg[1:].join())
+                info = json.loads(' '.join(msg[1:]))
                 dst = info['dst']
                 container = info['container']
                 try:
@@ -52,7 +52,7 @@ class Worker:
                 except Exception as ex:
                     print(ex)
             elif msg_type == 'new_container':
-                info = json.loads(msg[1:].join())
+                info = json.loads(' '.join(msg[1:]))
                 container_name = info['container_name']
                 del info['node']
                 self.storage.update({container_name: info})
@@ -60,7 +60,7 @@ class Worker:
                 self.pullImage(self.storage[container_name]['image'])
                 self.runContainer(self.storage[container_name])
             elif msg_type == 'update':
-                newInfo = json.loads(msg[1:].join())
+                newInfo = json.loads(' '.join(msg[1:]))
                 container_name = newInfo['container_name']
                 cpuset_cpus = newInfo['cpuset_cpus']
                 mem_limits = newInfo['mem_limits']
