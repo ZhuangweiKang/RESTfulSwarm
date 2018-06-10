@@ -83,10 +83,10 @@ def requestNewContainer():
         pubContent = '%s new_container %s' % (node, json.dumps(data))
         pubSocket.send_string(pubContent)
         app.logger.info('Create a new container in node %s.' % node)
-        return 'OK'
+        response = 'OK'
     else:
-        return 'Error: The node you specified is unavailable.'
-
+        response = 'Error: The node you specified is unavailable.'
+    return response
 
 @app.route('/SwarmLMGM/worker/requestMigrate', methods=['POST'])
 def requestMigrate():
