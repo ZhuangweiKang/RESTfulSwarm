@@ -1,5 +1,5 @@
 {
-  "node": "kang7",
+  "node": "kang2",
   "container_name": "Publisher",
   "image": "zhuangweikang/publisher:0.0",
   "detach": true,

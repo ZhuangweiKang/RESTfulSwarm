@@ -1,5 +1,5 @@
 {
-  "node": "kang5",
+  "node": "kang3",
   "container_name": "Subscriber",
   "image": "zhuangweikang/subscriber:0.0",
   "detach": true,
