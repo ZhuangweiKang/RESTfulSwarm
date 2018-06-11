@@ -90,11 +90,11 @@ if __name__ == '__main__':
             elif get_input == 6:
                 hostname = input('Node hostname: ')
                 url = 'http://%s:%s/SwarmLMGM/worker/%s/describeWorker' % (manager_addr, manager_port, hostname)
-                print(json.loads(str(requests.get(url=url).content)))
+                print(requests.get(url=url).content.decode('utf-8'))
             elif get_input == 7:
                 hostname = input('Node hostname: ')
                 url = 'http://%s:%s/SwarmLMGM/manager/%s/describeManager' % (manager_addr, manager_port, hostname)
-                print(json.loads(str(requests.get(url=url).content)))
+                print(requests.get(url=url).content.decode('utf-8'))
             elif get_input == 8:
                 print('Thanks for using RESTfulSwarmLM, bye.')
                 break
