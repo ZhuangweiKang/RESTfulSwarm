@@ -1,7 +1,13 @@
 #!/bin/bash
 
+apt-get update
+
+# install pip3
+apt-get install python3-pip python3-dev xmlto asciidoc
+
 # install docker sdk
 pip install docker
+pip3 install flask docker pyzmq
 
 # check if docker exists
 docker_check=$(which docker)
@@ -9,7 +15,7 @@ docker_check=$(which docker)
 if [ "$docker_check" = "" ];
 then
     # install docker
-    cd /home/ubuntu
+    cd /home/cc
     wget https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/docker-ce_17.03.0~ce-0~ubuntu-xenial_amd64.deb
     dpkg -i docker-ce_17.03.0~ce-0~ubuntu-xenial_amd64.deb
 
