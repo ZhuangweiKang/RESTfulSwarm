@@ -95,14 +95,15 @@ class LiveMigration:
 
     def notMigrate(self, port='3200'):
         self.socket = zmqHelper.csBind(port)
-        newImage = self.recvImageInfo()
-        command = self.recvSpawnCmd()
-        tarFile = self.recvTar()
-        time.sleep(1)
-        checkpoint = tarFile.split('.')[0]
-        if tarFile is not None:
-            self.unTarCheckpoint(fileName=tarFile)
-            self.restoreContainer(checkpoint, newImage, command)
+        while True:
+            newImage = self.recvImageInfo()
+            command = self.recvSpawnCmd()
+            tarFile = self.recvTar()
+            time.sleep(1)
+            checkpoint = tarFile.split('.')[0]
+            if tarFile is not None:
+                self.unTarCheckpoint(fileName=tarFile)
+                self.restoreContainer(checkpoint, newImage, command)
 
     def menue(self, cmd=None):
         migrate = raw_input('Would you like to migrate your container?(y/n) ')
