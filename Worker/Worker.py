@@ -97,7 +97,6 @@ class Worker:
         detach = containerInfo['detach']
         ports = containerInfo['ports']
         volumes = containerInfo['volumes']
-
         container = dHelper.runContainer(self.dockerClient,
                                          image=image_name,
                                          name=container_name,

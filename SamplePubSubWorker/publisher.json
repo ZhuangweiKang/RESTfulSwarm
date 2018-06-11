@@ -1,12 +1,12 @@
 {
   "node": "kang7",
   "container_name": "Publisher",
-  "image": "zhuangweikang/publisher",
+  "image": "zhuangweikang/publisher:latest",
   "detach": "True",
   "network": "kangNetwork",
-  "command": "None",
+  "command": "",
   "cpuset_cpus": "(0-3, 0, 1)",
   "mem_limit": "10m",
   "ports": "{'3000/tcp': 3000}",
-  "volumes": "None"
+  "volumes": ""
 }
