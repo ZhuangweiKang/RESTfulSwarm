@@ -80,7 +80,9 @@ def transferFile(fileName, dst_addr, port, logger):
         sys.exit(1)
     if os.path.isfile(fileName):
         fileinfo_size = struct.calcsize('128sl')
+        print(fileinfo_size)
         fhead = struct.pack('128sl', os.path.basename(fileName), os.stat(fileName).st_size)
+        print(fhead)
         s.send(fhead)
 
         fp = open(fileName, 'rb')
