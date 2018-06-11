@@ -3,10 +3,9 @@
 apt-get update
 
 # install pip3
-apt-get install python3-pip python3-dev xmlto asciidoc
+apt-get install -y python3-pip python3-dev python3-setuptools xmlto asciidoc
 
 # install docker sdk
-pip install docker
 pip3 install flask docker pyzmq
 
 # check if docker exists
