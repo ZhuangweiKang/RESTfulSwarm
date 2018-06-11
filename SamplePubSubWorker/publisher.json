@@ -5,7 +5,7 @@
   "detach": true,
   "network": "kangNetwork",
   "command": "",
-  "cpuset_cpus": "(0-3, 0, 1)",
+  "cpuset_cpus": "1, 0, 1",
   "mem_limit": "10m",
   "ports": {"3000/tcp": 3000},
   "volumes": {}
