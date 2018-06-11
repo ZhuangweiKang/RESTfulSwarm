@@ -132,7 +132,6 @@ def commitContainer(client, name, repository, imageName, tag='latest'):
     return repository + ':' + tag
 
 
-
 def getTags(client, imageName):
     tags = client.images.get(imageName).tags
     image = client.images.get(imageName)

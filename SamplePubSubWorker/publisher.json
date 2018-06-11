@@ -1,7 +1,7 @@
 {
   "node": "kang2",
   "container_name": "Publisher",
-  "image": "zhuangweikang/publisher:0.0",
+  "image": "zhuangweikang/publisher",
   "detach": true,
   "network": "kangNetwork",
   "command": "",
