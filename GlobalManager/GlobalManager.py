@@ -136,7 +136,7 @@ def requestUpdateContainer():
     'cpuset_cpus': $cpuset_cpus,
     'mem_limit': $mem_limit}
     '''
-    if dHelper.checkNodeHostName(client=dockerClient, host=node):
+    if dHelper.checkNodeHostName(client=dockerClient, host=node) is False:
         newInfo = json.dumps(newInfo)
         pubSocket.send_string('%s update %s' % (node, newInfo))
         app.logger.info('%s updated container %s' % (node, container))
