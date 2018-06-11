@@ -1,3 +1,7 @@
+#!/usr/bin/env /usr/local/bin/python
+# encoding: utf-8
+# Author: Zhuangwei Kang
+
 import os, sys
 import socket
 import struct
