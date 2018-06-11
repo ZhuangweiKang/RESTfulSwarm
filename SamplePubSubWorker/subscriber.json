@@ -1,11 +1,12 @@
 {
-  "name": "Subscriber",
-  "image": "zhuangweikang/subscriber",
-  "detach": "True",
+  "node": "kang5",
+  "container_name": "Subscriber",
+  "image": "zhuangweikang/subscriber:latest",
+  "detach": true,
   "network": "kangNetwork",
-  "command": "python3 SubscribeData.py -a 10.10.26.156 -p 3000",
-  "cpuset_cpus": "(0-3, 0, 1)",
+  "command": "",
+  "cpuset_cpus": "0,1",
   "mem_limit": "10m",
-  "ports": "{'3000/tcp': 3000}",
-  "volumes": "None"
+  "ports": {"3000/tcp": 3000},
+  "volumes": {}
 }
