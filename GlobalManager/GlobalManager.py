@@ -159,7 +159,7 @@ def describeNode(hostname):
     if nodeinfo is None:
         return 'The requested node is unavailable.'
     else:
-        return jsonify(nodeinfo)
+        return nodeinfo
 
 
 @app.route('/SwarmLMGM/worker/<hostname>/describeWorker', methods=['GET'])
