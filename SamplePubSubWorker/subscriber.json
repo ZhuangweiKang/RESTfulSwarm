@@ -1,7 +1,7 @@
 {
   "node": "kang5",
   "container_name": "Subscriber",
-  "image": "zhuangweikang/subscriber",
+  "image": "zhuangweikang/subscriber:0.0",
   "detach": true,
   "network": "kangNetwork",
   "command": "python SubscribeData.py -a 10.10.26.2 -p 3000",
