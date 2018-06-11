@@ -80,14 +80,16 @@ class Worker:
 
     def deleteOldContainer(self, name):
         if dHelper.checkContainer(self.dockerClient, name):
+            self.logger.info('Old container %s exists, deleting old container.' % name)
             container = dHelper.getContainer(self.dockerClient, name)
             dHelper.deleteContainer(container)
-            self.logger.info('Old container %s exists, deleting old container.' % name)
 
     def pullImage(self, image):
         if dHelper.checkImage(self.dockerClient, image) is False:
-            dHelper.pullImage(self.dockerClient, image)
             self.logger.info('Image doesn\'t exist, pulling image.')
+            dHelper.pullImage(self.dockerClient, image)
+        else:
+            self.logger.info('Image already exists.')
 
     def runContainer(self, containerInfo):
         container_name = containerInfo['container_name']
