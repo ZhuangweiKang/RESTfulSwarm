@@ -181,3 +181,6 @@ def getNodeInfo(client, name):
     except Exception as ex:
         return None
 
+def removeNode(name):
+    cmd = 'docker node rm -f %s' % name
+    print(os.popen(cmd).read())

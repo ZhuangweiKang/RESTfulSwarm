@@ -116,6 +116,8 @@ def requestLeave():
     if checkNode is False:
         pubContent = '%s leave' % hostname
         pubSocket.send_string(pubContent)
+        # force delete the node on Manager side
+        dHelper.removeNode(hostname)
         app.logger.info('Node %s left Swarm environment.' % hostname)
         return 'OK'
     else:

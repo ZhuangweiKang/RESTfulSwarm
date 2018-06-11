@@ -67,6 +67,7 @@ class Worker:
                 dHelper.updateContainer(self.dockerClient, container_name=container_name, cpuset_cpus=cpuset_cpus, mem_limit=mem_limits)
             elif msg_type == 'leave':
                 dHelper.leaveSwarm(self.dockerClient)
+                self.logger.info('Leave Swarm environment.')
 
     def listenWorkerMessage(self, port='3200'):
         lmController = LiveMigration()
