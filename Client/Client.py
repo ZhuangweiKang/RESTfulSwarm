@@ -30,11 +30,11 @@ def doMigrate(container, src, dst):
     print(requests.post(url=url, json=data).content)
 
 
-def updateContainer(node_name, container_name, cpuset_cpus, mem_limit):
+def updateContainer(node_name, container_name, cpuset_cpus, mem_limits):
     data = {'node': node_name,
             'container_name': container_name,
             'cpuset_cpus': cpuset_cpus,
-            'mem_limit': mem_limit}
+            'mem_limits': mem_limits}
     url = 'http://%s:%s/SwarmLMGM/worker/requestUpdateContainer' % (manager_addr, manager_port)
     print(requests.post(url=url, json=data).content)
 
@@ -82,8 +82,8 @@ if __name__ == '__main__':
                 node_name = input('Node hostname: ')
                 container_name = input('Container name: ')
                 cpuset_cpus = input('CPU set cpus: ')
-                mem_limit = input('Memory limit: ')
-                updateContainer(node_name, container_name, cpuset_cpus, mem_limit)
+                mem_limits = input('Memory limit: ')
+                updateContainer(node_name, container_name, cpuset_cpus, mem_limits)
             elif get_input == 5:
                 hostname = input('Node hostname: ')
                 leaveSwarm(hostname)

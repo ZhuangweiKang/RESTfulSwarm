@@ -134,7 +134,7 @@ def requestUpdateContainer():
     {'node': $node_name,
     'container_name': $container_name,
     'cpuset_cpus': $cpuset_cpus,
-    'mem_limit': $mem_limit}
+    'mem_limits': $mem_limits}
     '''
     if dHelper.checkNodeHostName(client=dockerClient, host=node) is False:
         newInfo = json.dumps(newInfo)
