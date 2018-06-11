@@ -71,7 +71,7 @@ class Worker:
                 self.logger.info('Leave Swarm environment.')
 
     def listenWorkerMessage(self, port='3200'):
-        lmController = LiveMigration()
+        lmController = LiveMigration(logger=self.logger, dockerClient=self.dockerClient)
         lmController.notMigrate(port)
 
     def joinSwarm(self, remote_addr, join_token):
