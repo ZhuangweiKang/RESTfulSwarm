@@ -72,8 +72,12 @@ class LiveMigration:
             msg = self.socket.recv_string()
             self.socket.send_string('Ack')
             if msg.split()[0] == 'command':
-                self.logger.info('Received init command: %s ' % msg.split()[1])
-                return msg.split()[1]
+                try:
+                    command = msg.split()[1]
+                    self.logger.info('Received init command: %s ' % command)
+                    return msg.split()[1]
+                except IndexError as ex:
+                    return
 
     def recvTar(self):
         return utl.recvFile(self.logger)
