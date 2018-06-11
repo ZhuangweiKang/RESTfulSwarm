@@ -125,14 +125,12 @@ def createContainer(client, image, name, network=None, command=None):
 
 
 def commitContainer(client, name, repository, imageName, tag='latest'):
-    try:
-        container = getContainer(client, name)
-        getTags(client, imageName)
-        container.commit(repository=repository, tag=tag)
-        client.images.push(repository, tag=tag)
-        return repository + ':' + tag
-    except docker.errors.APIError as ex:
-        print(ex)
+    container = getContainer(client, name)
+    getTags(client, imageName)
+    container.commit(repository=repository, tag=tag)
+    client.images.push(repository, tag=tag)
+    return repository + ':' + tag
+
 
 
 def getTags(client, imageName):
