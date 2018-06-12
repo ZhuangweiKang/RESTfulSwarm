@@ -110,9 +110,8 @@ def recvFile(logger, port=3300):
         fn, fileSize = struct.unpack('128sl', fhead)
         logger.info('Received file info: %s' % fn)
         logger.info('File size: ' + str(fileSize))
-        fileName = fn.decode('utf-8')
-        fileName = fileName.strip('\00')
-        with open(fileName, 'wb') as tarFile:
+        # fileName = fn.strip('\00')
+        with open(fn, 'wb') as tarFile:
             logger.info('Start receiving file...')
             tempSize = fileSize
             while True:
