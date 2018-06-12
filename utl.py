@@ -108,12 +108,12 @@ def recvFile(logger, port=3300):
         fileinfo_size = struct.calcsize('128sl')
         fhead = conn.recv(fileinfo_size)
         fn, fileSize = struct.unpack('128sl', fhead)
-        logger.info('Received file info: %s' % fn)
-        logger.info('File size: ' + str(fileSize))
         fileName = fn.decode('utf-8')
         fileName = fileName.strip('\00')
-        fileName = os.path.join('/var/lib/docker/tmp/', fileName)
-        with open(fileName, 'wb') as tarFile:
+        logger.info('Received file info: %s' % fn)
+        logger.info('File size: ' + str(fileSize))
+        filenewName = os.path.join('/var/lib/docker/tmp/', fileName)
+        with open(filenewName, 'wb') as tarFile:
             logger.info('Start receiving file...')
             tempSize = fileSize
             while True:
@@ -131,7 +131,7 @@ def recvFile(logger, port=3300):
         conn.close()
         recvSocket.close()
         logger.info('Connection has been closed...')
-        return fn
+        return fileName
     except Exception as ex:
         logger.error(ex)
         return None

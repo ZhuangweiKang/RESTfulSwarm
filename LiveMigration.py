@@ -83,7 +83,6 @@ class LiveMigration:
         return utl.recvFile(self.logger)
 
     def unTarCheckpoint(self, fileName):
-        fileName = fileName.strip('\00')
         utl.untarFile(fileName)
         self.logger.info('Checkpoint has been untared...')
 
