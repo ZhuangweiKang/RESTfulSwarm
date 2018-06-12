@@ -79,13 +79,15 @@ def transferFile(fileName, dst_addr, port, logger):
         logger.error(er)
         sys.exit(1)
     if os.path.isfile(fileName):
+        print('1111111')
         fileinfo_size = struct.calcsize('128sl')
-        print(fileinfo_size)
-        fhead = struct.pack(b'128sl', os.path.basename(fileName), os.stat(fileName).st_size)
-        print(fhead)
+        print('2222222')
+        fhead = struct.pack('128sl', os.path.basename(fileName), os.stat(fileName).st_size)
+        print('3333333')
         s.send(fhead)
-
+        print('4444444')
         fp = open(fileName, 'rb')
+        print('55555555')
         while True:
             data = fp.read(1024)
             if not data:
