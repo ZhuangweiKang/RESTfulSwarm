@@ -79,20 +79,15 @@ def transferFile(fileName, dst_addr, port, logger):
         logger.error(er)
         sys.exit(1)
     if os.path.isfile(fileName):
-        print('1111111')
         fileinfo_size = struct.calcsize('128sl')
-        print('2222222')
         fhead = struct.pack('128sl', os.path.basename(fileName).encode('utf-8'), os.stat(fileName).st_size)
-        print('3333333')
         s.send(fhead)
-        print('4444444')
         fp = open(fileName, 'rb')
-        print('55555555')
         while True:
             data = fp.read(1024)
             if not data:
                 break
-            s.sendall(data)
+            s.send(data)
         logger.info('Tar file has been sent.')
         fp.close()
         s.close()
@@ -115,7 +110,8 @@ def recvFile(logger, port=3300):
         fn, fileSize = struct.unpack('128sl', fhead)
         logger.info('Received file info: %s' % fn)
         logger.info('File size: ' + str(fileSize))
-        fileName = fn.strip('\00')
+        fileName = fn.decode('utf-8')
+        fileName = fileName.strip('\00')
         with open(fileName, 'wb') as tarFile:
             logger.info('Start receiving file...')
             tempSize = fileSize
