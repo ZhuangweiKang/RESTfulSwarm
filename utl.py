@@ -82,7 +82,7 @@ def transferFile(fileName, dst_addr, port, logger):
         print('1111111')
         fileinfo_size = struct.calcsize('128sl')
         print('2222222')
-        fhead = struct.pack(b'128sl', os.path.basename(fileName), os.stat(fileName).st_size)
+        fhead = struct.pack('128sl', os.path.basename(fileName).encode('utf-8'), os.stat(fileName).st_size)
         print('3333333')
         s.send(fhead)
         print('4444444')
