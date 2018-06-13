@@ -38,8 +38,7 @@ class LiveMigration:
         self.socket.recv_string()
 
     def dumpContainer(self):
-        # checkpoint_name = 'checkpoint_' + str(random.randint(1, 100))
-        checkpoint_name = self.name
+        checkpoint_name = self.name + str(random.randint(1, 100))
         tarName = checkpoint_name + '.tar'
         dHelper.checkpoint(checkpoint_name, dHelper.getContainerID(self.dockerClient, self.name))
         return checkpoint_name, tarName
@@ -97,7 +96,7 @@ class LiveMigration:
                 try:
                     detail = json.loads(msg.split()[1])
                     self.logger.info('Received container details.')
-                    return msg.split()[1]
+                    return detail
                 except IndexError as ex:
                     return
 
@@ -108,14 +107,13 @@ class LiveMigration:
         utl.untarFile(fileName)
         self.logger.info('Checkpoint has been untared...')
 
-    def restoreContainer(self, checkpoint, newImage, command=None):
+    def restoreContainer(self, checkpoint, new_container_name, newImage, command=None):
         checkpoint_dir = '/var/lib/docker/tmp'
-        newContainer = checkpoint
 
         # create the new container using base image
-        dHelper.createContainer(self.dockerClient, newImage, newContainer, self.network, command)
+        dHelper.createContainer(self.dockerClient, newImage, new_container_name, self.network, command)
 
-        dHelper.restore(newContainer, checkpoint_dir, checkpoint)
+        dHelper.restore(new_container_name, checkpoint_dir, checkpoint)
         self.logger.info('Container has been restored...')
 
     def notMigrate(self, port='3200'):
@@ -123,13 +121,14 @@ class LiveMigration:
         while True:
             newImage = self.recvImageInfo()
             command = self.recvSpawnCmd()
-            detail = json.loads(self.recvContainerDetail())
+            detail = self.recvContainerDetail()
             tarFile = self.recvTar()
             time.sleep(1)
             checkpoint = tarFile.split('.')[0]
+            container_name = checkpoint.split('_')[0]
             if tarFile is not None:
                 self.unTarCheckpoint(fileName=tarFile)
-                self.restoreContainer(checkpoint, newImage, command)
+                self.restoreContainer(checkpoint, container_name, newImage, command)
                 self.storage.update({checkpoint: detail})
 
     def menue(self, cmd=None):
