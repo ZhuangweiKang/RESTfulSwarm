@@ -95,6 +95,7 @@ def requestMigrate():
     src = data['from']
     dst = data['to']
     container = data['container']
+    info = data['info']
     checkSrc = dHelper.checkNodeIP(dockerClient, src)
     checkDst = dHelper.checkNodeIP(dockerClient, dst)
     if checkSrc is False:
@@ -102,7 +103,7 @@ def requestMigrate():
     elif checkDst is False:
         response = 'Error: %s is an invalid address.' % dst
     else:
-        jsonForm = {'src': src, 'dst': dst, 'container': container}
+        jsonForm = {'src': src, 'dst': dst, 'container': container, 'info': info}
         pubContent = '%s migrate %s' % (src, json.dumps(jsonForm))
         pubSocket.send_string(pubContent)
         response = 'OK'

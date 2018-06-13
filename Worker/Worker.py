@@ -45,11 +45,14 @@ class Worker:
                 info = json.loads(' '.join(msg[1:]))
                 dst = info['dst']
                 container = info['container']
+                container_info = info['info']
+                container_info['node'] = self.hostname
                 try:
                     lmController = LiveMigration(image=self.storage[container]['image'], name=container,
                                                  network=self.storage[container]['network'], logger=self.logger,
                                                  dockerClient=self.dockerClient)
-                    lmController.migrate(dst_addr=dst, port='3200', cmd=self.storage[container]['command'])
+                    lmController.migrate(dst_addr=dst, port='3200', cmd=self.storage[container]['command'],
+                                         container_detail=container_info)
                     del self.storage[container]
                 except Exception as ex:
                     print(ex)
@@ -73,7 +76,7 @@ class Worker:
                 self.logger.info('Leave Swarm environment.')
 
     def listenWorkerMessage(self, port='3200'):
-        lmController = LiveMigration(logger=self.logger, dockerClient=self.dockerClient)
+        lmController = LiveMigration(logger=self.logger, dockerClient=self.dockerClient, storage=self.storage)
         lmController.notMigrate(port)
 
     def joinSwarm(self, remote_addr, join_token):

@@ -21,10 +21,11 @@ def newContainer(data):
     print(requests.post(url=url, json=data).content)
 
 
-def doMigrate(container, src, dst):
+def doMigrate(container, src, dst, info):
     data = {'container': container,
             'from': src,
-            'to': dst
+            'to': dst,
+            'info': info
     }
     url = 'http://%s:%s/SwarmLMGM/worker/requestMigrate' % (manager_addr, manager_port)
     print(requests.post(url=url, json=data).content)
@@ -77,7 +78,10 @@ if __name__ == '__main__':
                 container = input('Container name: ')
                 src = input('From: ')
                 dst = input('To: ')
-                doMigrate(container, src, dst)
+                json_path = input('Json file path: ')
+                with open(json_path, 'r') as f:
+                    info = json.loads(f)
+                doMigrate(container, src, dst, info)
             elif get_input == 4:
                 node_name = input('Node hostname: ')
                 container_name = input('Container name: ')

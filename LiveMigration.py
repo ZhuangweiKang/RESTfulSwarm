@@ -5,18 +5,20 @@
 import utl
 import time
 import random
+import json
 import DockerHelper as dHelper
 import ZMQHelper as zmqHelper
 
 
 class LiveMigration:
-    def __init__(self, image=None, name=None, network=None, logger=None, dockerClient=None):
+    def __init__(self, image=None, name=None, network=None, logger=None, dockerClient=None, storage=None):
         self.image = image
         self.name = name
         self.logger = logger
         self.dockerClient = dockerClient
         self.socket = None
         self.network = network
+        self.storage = storage
 
     def sendImageInfo(self):
         msg = 'image %s' % self.image
@@ -26,6 +28,12 @@ class LiveMigration:
     def sendSpawnCmd(self, cmd):
         msg = 'command %s' % cmd
         self.logger.info('Send init command to destination node: %s' % cmd)
+        self.socket.send_string(msg)
+        self.socket.recv_string()
+
+    def sendContainerDetail(self, container_detail):
+        msg = 'container_detail %s' % json.dumps(container_detail)
+        self.logger.info('Send container details to destination node.')
         self.socket.send_string(msg)
         self.socket.recv_string()
 
@@ -48,7 +56,7 @@ class LiveMigration:
     def commitCon(self, name, imageName, repository):
         return dHelper.commitContainer(self.dockerClient, name, repository, imageName)
 
-    def migrate(self, dst_addr, port='3200', cmd=None):
+    def migrate(self, dst_addr, port='3200', cmd=None, container_detail=None):
         self.socket = zmqHelper.csConnect(dst_addr, port)
         checkpoint_name, tarName = self.dumpContainer()
 
@@ -56,6 +64,7 @@ class LiveMigration:
         self.logger.info('Container has been committed.')
         self.sendImageInfo()
         self.sendSpawnCmd(cmd)
+        self.sendContainerDetail(container_detail)
 
         self.tarImage(checkpoint_name, tarName)
         self.transferTar(checkpoint_name, dst_addr)
@@ -80,6 +89,18 @@ class LiveMigration:
                 except IndexError as ex:
                     return
 
+    def recvContainerDetail(self):
+        while True:
+            msg = self.socket.recv_string()
+            self.socket.send_string('Ack')
+            if msg.split()[0] == 'container_detail':
+                try:
+                    detail = json.loads(msg.split()[1])
+                    self.logger.info('Received container details.')
+                    return msg.split()[1]
+                except IndexError as ex:
+                    return
+
     def recvTar(self):
         return utl.recvFile(self.logger)
 
@@ -89,7 +110,6 @@ class LiveMigration:
 
     def restoreContainer(self, checkpoint, newImage, command=None):
         checkpoint_dir = '/var/lib/docker/tmp'
-        #newContainer = 'newContainerFrom' + checkpoint
         newContainer = checkpoint
 
         # create the new container using base image
@@ -103,12 +123,14 @@ class LiveMigration:
         while True:
             newImage = self.recvImageInfo()
             command = self.recvSpawnCmd()
+            detail = json.loads(self.recvContainerDetail())
             tarFile = self.recvTar()
             time.sleep(1)
             checkpoint = tarFile.split('.')[0]
             if tarFile is not None:
                 self.unTarCheckpoint(fileName=tarFile)
                 self.restoreContainer(checkpoint, newImage, command)
+                self.storage.update({checkpoint: detail})
 
     def menue(self, cmd=None):
         migrate = raw_input('Would you like to migrate your container?(y/n) ')
