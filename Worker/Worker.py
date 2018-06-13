@@ -46,7 +46,9 @@ class Worker:
                 dst = info['dst']
                 container = info['container']
                 try:
-                    lmController = LiveMigration(image=self.storage[container]['image'], name=container, network=self.storage[container]['network'], logger=self.logger, dockerClient=self.dockerClient)
+                    lmController = LiveMigration(image=self.storage[container]['image'], name=container,
+                                                 network=self.storage[container]['network'], logger=self.logger,
+                                                 dockerClient=self.dockerClient)
                     lmController.migrate(dst_addr=dst, port='3200', cmd=self.storage[container]['command'])
                     del self.storage[container]
                 except Exception as ex:

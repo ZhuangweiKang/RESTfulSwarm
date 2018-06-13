@@ -88,6 +88,7 @@ def requestNewContainer():
         response = 'Error: The node you specified is unavailable.'
     return response
 
+
 @app.route('/SwarmLMGM/worker/requestMigrate', methods=['POST'])
 def requestMigrate():
     data = request.get_json()

@@ -30,7 +30,8 @@ class LiveMigration:
         self.socket.recv_string()
 
     def dumpContainer(self):
-        checkpoint_name = 'checkpoint_' + str(random.randint(1, 100))
+        # checkpoint_name = 'checkpoint_' + str(random.randint(1, 100))
+        checkpoint_name = self.name
         tarName = checkpoint_name + '.tar'
         dHelper.checkpoint(checkpoint_name, dHelper.getContainerID(self.dockerClient, self.name))
         return checkpoint_name, tarName
@@ -88,7 +89,8 @@ class LiveMigration:
 
     def restoreContainer(self, checkpoint, newImage, command=None):
         checkpoint_dir = '/var/lib/docker/tmp'
-        newContainer = 'newContainerFrom' + checkpoint
+        #newContainer = 'newContainerFrom' + checkpoint
+        newContainer = checkpoint
 
         # create the new container using base image
         dHelper.createContainer(self.dockerClient, newImage, newContainer, self.network, command)
