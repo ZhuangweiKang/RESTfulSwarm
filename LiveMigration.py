@@ -128,8 +128,7 @@ class LiveMigration:
             if tarFile is not None:
                 self.unTarCheckpoint(fileName=tarFile)
                 self.restoreContainer(checkpoint, container_name, newImage, command)
-                self.storage.update({checkpoint: detail})
-                print(self.storage)
+                self.storage.update({container_name: detail})
 
     def menue(self, cmd=None):
         migrate = raw_input('Would you like to migrate your container?(y/n) ')
