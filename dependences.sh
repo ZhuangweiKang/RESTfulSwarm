@@ -26,6 +26,7 @@ fi
 
 # check docker experimental feature
 docker_version=$(docker version | grep Experimental)
+docker_version=${docker_version:15}
 
 if [ "$docker_version" = "$false" ];
 then
