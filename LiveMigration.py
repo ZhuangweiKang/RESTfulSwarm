@@ -38,7 +38,7 @@ class LiveMigration:
         self.socket.recv_string()
 
     def dumpContainer(self):
-        checkpoint_name = self.name + '_' + str(random.randint(1, 100))
+        checkpoint_name = self.name + '_' + str(random.randint(1, 1000))
         tarName = checkpoint_name + '.tar'
         dHelper.checkpoint(checkpoint_name, dHelper.getContainerID(self.dockerClient, self.name))
         return checkpoint_name, tarName
@@ -129,6 +129,7 @@ class LiveMigration:
                 self.unTarCheckpoint(fileName=tarFile)
                 self.restoreContainer(checkpoint, container_name, newImage, command)
                 self.storage.update({checkpoint: detail})
+                print(self.storage)
 
     def menue(self, cmd=None):
         migrate = raw_input('Would you like to migrate your container?(y/n) ')
