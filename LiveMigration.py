@@ -90,11 +90,10 @@ class LiveMigration:
     def recvContainerDetail(self):
         while True:
             msg = self.socket.recv_string()
-            print(msg)
             self.socket.send_string('Ack')
             if msg.split()[0] == 'container_detail':
                 try:
-                    detail = json.loads(msg.split()[1])
+                    detail = json.loads(' '.join(msg.split()[1:]))
                     self.logger.info('Received container details.')
                     return detail
                 except IndexError as ex:
