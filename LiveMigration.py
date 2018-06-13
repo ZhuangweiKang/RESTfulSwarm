@@ -38,7 +38,7 @@ class LiveMigration:
         self.socket.recv_string()
 
     def dumpContainer(self):
-        checkpoint_name = self.name + str(random.randint(1, 100))
+        checkpoint_name = self.name + '_' + str(random.randint(1, 100))
         tarName = checkpoint_name + '.tar'
         dHelper.checkpoint(checkpoint_name, dHelper.getContainerID(self.dockerClient, self.name))
         return checkpoint_name, tarName
@@ -73,7 +73,6 @@ class LiveMigration:
         self.socket.send_string('Ack')
         image = msg.split()[1]
         dHelper.pullImage(self.dockerClient, image)
-        # self.logger.info('Image doesn\'t exist, building image.')
         return image
 
     def recvSpawnCmd(self):
@@ -91,6 +90,7 @@ class LiveMigration:
     def recvContainerDetail(self):
         while True:
             msg = self.socket.recv_string()
+            print(msg)
             self.socket.send_string('Ack')
             if msg.split()[0] == 'container_detail':
                 try:
