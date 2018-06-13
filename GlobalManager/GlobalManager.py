@@ -16,7 +16,7 @@ import ZMQHelper as zmq
 
 app = Flask(__name__)
 
-host_addr = utl.getHostIP()
+host_addr = None
 network = None
 subnet = None
 dockerClient = dHelper.setClient()
@@ -176,7 +176,9 @@ def describeManager(hostname):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('-a', '--address', type=str, help='The IP address of your Global Manager node.')
     parser.add_argument('-p', '--port', type=int, help='The port number you want to run your manager node.')
     args = parser.parse_args()
+    host_addr = args.address
     port = args.port
     app.run(host=host_addr, port=port, debug=True)

@@ -9,7 +9,6 @@ import utl
 import threading
 import requests
 import json
-import time
 from flask import *
 import argparse
 from LiveMigration import LiveMigration
@@ -18,12 +17,12 @@ import ZMQHelper as zmqHelper
 
 
 class Worker:
-    def __init__(self, manager_addr):
+    def __init__(self, manager_addr, self_addr):
         self.logger = utl.doLog('WorkerLogger', 'worker.log')
         self.swarmSocket = zmqHelper.connect(manager_addr, '3100')
         self.dockerClient = dHelper.setClient()
         self.manager_addr = manager_addr
-        self.host_address = utl.getHostIP()
+        self.host_address = self_addr
         self.hostname = utl.getHostName()
         zmqHelper.subscribeTopic(self.swarmSocket, self.hostname)
         zmqHelper.subscribeTopic(self.swarmSocket, self.host_address)
@@ -136,9 +135,11 @@ class Worker:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-a', '--address', type=str, help='Manager IP address.')
+    parser.add_argument('-ma', '--manager_addr', type=str, help='Manager IP address.')
+    parser.add_argument('-sa', '--self_addr', type=str, help='Self IP address')
     args = parser.parse_args()
     manager_addr = args.address
-    worker = Worker(manager_addr)
+    self_addr = args.self_addr
+    worker = Worker(manager_addr, self_addr)
     worker.main()
     worker.requestJoinSwarm()
