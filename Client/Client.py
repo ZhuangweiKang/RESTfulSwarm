@@ -80,7 +80,7 @@ if __name__ == '__main__':
                 dst = input('To: ')
                 json_path = input('Json file path: ')
                 with open(json_path, 'r') as f:
-                    info = json.loads(f)
+                    info = json.load(f)
                 doMigrate(container, src, dst, info)
             elif get_input == 4:
                 node_name = input('Node hostname: ')
