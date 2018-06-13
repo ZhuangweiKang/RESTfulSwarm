@@ -40,7 +40,7 @@ python3 Client.py -a your_global_manager_addr -p 5000
 * Step4: Make worker nodes join the Swarm environment
 ```Bash
 # On Worker Node:
-python3 Worker.py -a your_global_manager_addr
+python3 Worker.py -ma your_global_manager_addr -sa worker_addr
 ```
 * Step5: Create container
 ```Bash
