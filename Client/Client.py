@@ -58,6 +58,7 @@ if __name__ == '__main__':
         print('--------------RESTfulSwarmLiveMigration Menu--------------')
         print('1. Init Swarm')
         print('2. New Container')
+        print('3. Check point a group a containers')
         print('3. Migrate Container')
         print('4. Migrate a group of containers')
         print('5. Update Container')
@@ -77,6 +78,12 @@ if __name__ == '__main__':
                     data = json.load(f)
                 newContainer(data)
             elif get_input == 3:
+                json_path = input('Checkpoint Json file path: ')
+                with open(json_path, 'r') as f:
+                    data = json.load(f)
+                url = 'http://%s:%s/SwarmLMGM/worker/checkpointCons' % (manager_addr, manager_port)
+                print(requests.post(url=url, json=data).content)
+            elif get_input == 4:
                 container = input('Container name: ')
                 src = input('From: ')
                 dst = input('To: ')
@@ -84,7 +91,7 @@ if __name__ == '__main__':
                 with open(json_path, 'r') as f:
                     info = json.load(f)
                 doMigrate(container, src, dst, info)
-            elif get_input == 4:
+            elif get_input == 5:
                 migrate_json = input('Migration Json file: ')
                 with open(migrate_json, 'r') as f:
                     data = json.load(f)
@@ -92,24 +99,24 @@ if __name__ == '__main__':
                     with open(item['container_details'], 'r') as f:
                         container_detail = json.load(f)
                     doMigrate(item['container'], item['from'], item['to'], container_detail)
-            elif get_input == 5:
+            elif get_input == 6:
                 node_name = input('Node hostname: ')
                 container_name = input('Container name: ')
                 cpuset_cpus = input('CPU set cpus: ')
                 mem_limits = input('Memory limit: ')
                 updateContainer(node_name, container_name, cpuset_cpus, mem_limits)
-            elif get_input == 6:
+            elif get_input == 7:
                 hostname = input('Node hostname: ')
                 leaveSwarm(hostname)
-            elif get_input == 7:
+            elif get_input == 8:
                 hostname = input('Node hostname: ')
                 url = 'http://%s:%s/SwarmLMGM/worker/%s/describeWorker' % (manager_addr, manager_port, hostname)
                 print(requests.get(url=url).content.decode('utf-8'))
-            elif get_input == 8:
+            elif get_input == 9:
                 hostname = input('Node hostname: ')
                 url = 'http://%s:%s/SwarmLMGM/manager/%s/describeManager' % (manager_addr, manager_port, hostname)
                 print(requests.get(url=url).content.decode('utf-8'))
-            elif get_input == 9:
+            elif get_input == 10:
                 print('Thanks for using RESTfulSwarmLM, bye.')
                 break
         except ValueError as er:

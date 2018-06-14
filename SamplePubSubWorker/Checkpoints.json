@@ -1,0 +1,6 @@
+[
+  {
+    "node": "kang2",
+    "containers": ["Publisher", "Subscriber"]
+  }
+]

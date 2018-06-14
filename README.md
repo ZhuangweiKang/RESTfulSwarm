@@ -1,6 +1,7 @@
 RESTfulSwarm
 ============
 An API for some basic container operations in Swarm environment.
+![](http://blog.pridybailo.com/wp-content/uploads/sites/2/2015/01/swar-q.png)
 ## [Environment(Prerequisites)](https://github.com/doc-vu/RESTfulSwarm/blob/master/dependences.sh)
 * Ubuntu 16.04
 * Python3
@@ -8,17 +9,22 @@ An API for some basic container operations in Swarm environment.
 * CRIU
 * Flask
 * Pyzmq
+```Bash
+./dependences.sh
+```
 ## Architecture
 * Layer1: [Client](https://github.com/doc-vu/RESTfulSwarm/blob/master/Client/Client.py)
 * Available commands now；
 >>> 1. Init Swarm Environment (with overlay network name and subnet)
 >>> 2. Create Container (using Json file)
->>> 3. Migrate Container
->>> 4. Update Container Resources (including cpuset_cpus and mem_limits)
->>> 5. Leave Swarm Environment (Not only turn down worker node but also completely remove it from swarm manager node.)
->>> 6. Describe Worker Node
->>> 7. Describe Manager Node
->>> 8. Exit
+>>> 3. Checkpoint a group of containers
+>>> 4. Migrate Container
+>>> 5. Migrate a group of containers
+>>> 6. Update Container Resources (including cpuset_cpus and mem_limits)
+>>> 7. Leave Swarm Environment (Not only turn down worker node but also completely remove it from swarm manager node.)
+>>> 8. Describe Worker Node
+>>> 9. Describe Manager Node
+>>> 10. Exit
 * Layer2: [Global Manager(Swarm Manager Node)](https://github.com/doc-vu/RESTfulSwarm/blob/master/GlobalManager/GlobalManager.py)
 >> Global Manager is responsible for creating Swarm environment, building overlay network and sending commands to worker nodes.
 * Layer3: [Worker Node](https://github.com/doc-vu/RESTfulSwarm/blob/master/Worker/Worker.py) <br/>
@@ -54,11 +60,14 @@ python3 Worker.py -ma your_global_manager_addr -sa worker_addr
 # Enter your new cpuset_cpus(for example: 1, 2)
 # Enter your new mem_limits(for example: 20m)
 # ---------------------------------
-# Migrate Container:
+# Migrate Container: (Please make sure you login your DockerHub on your worker nodes.)
 # Choose option3 "Migrate Container"
 # Enter the container name you want to migrate
 # Enter the source host addr
 # Enter the destination host addr
+# ----------------------------------
+# Migrate a group of containers
+# Enter the migration json file
 # ----------------------------------
 # Leave Swarm:
 # Choose option5

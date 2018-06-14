@@ -89,6 +89,18 @@ def requestNewContainer():
     return response
 
 
+@app.route('/SwarmLMGM/worker/checkpointCons', methods=['POST'])
+def checkpointCons():
+    data = request.get_json()
+    for item in data:
+        if dHelper.checkNodeHostName(dockerClient,  item['node']):
+            return 'Node %s is unavailable.' % item['node']
+        pubContent = '%s checkpoints %s' % (item['node'], json.dumps(item['containers']))
+        pubSocket.send_string(pubContent)
+        app.logger.info('Checkpoint containers %s on node %s' % (json.dumps(item['containers']), item['node']))
+    return 'OK'
+
+
 @app.route('/SwarmLMGM/worker/requestMigrate', methods=['POST'])
 def requestMigrate():
     data = request.get_json()

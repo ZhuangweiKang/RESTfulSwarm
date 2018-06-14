@@ -11,6 +11,7 @@ import requests
 import json
 from flask import *
 import argparse
+import random
 from LiveMigration import LiveMigration
 import DockerHelper as dHelper
 import ZMQHelper as zmqHelper
@@ -40,6 +41,18 @@ class Worker:
                 remote_addr = msg[1]
                 join_token = msg[2]
                 self.joinSwarm(remote_addr, join_token)
+            elif msg_type == 'checkpoints':
+                data = json.loads(' '.join(msg[1:]))
+                threads = []
+                for i in range(0, len(data)):
+                    checkpoint_name = data[i] + '_' + str(random.randint(1, 1000))
+                    container_id = dHelper.getContainerID(self.dockerClient, data[i])
+                    thr = threading.Thread(target=dHelper.checkpoint, args=(checkpoint_name, container_id, ))
+                    thr.setDaemon(True)
+                    threads.append(thr)
+
+                for thr in threads:
+                    thr.start()
             elif msg_type == 'migrate':
                 info = json.loads(' '.join(msg[1:]))
                 print(info)
