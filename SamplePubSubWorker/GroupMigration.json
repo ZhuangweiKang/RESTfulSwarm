@@ -1,0 +1,14 @@
+[
+  {
+    "container": "Publisher",
+    "from": "10.52.0.136",
+    "to": "10.52.0.132",
+    "container_details": "../SamplePubSubWorker/publisher.json"
+  },
+  {
+    "container": "Subscriber",
+    "from": "10.52.0.136",
+    "to": "10.52.0.132",
+    "container_details": "../SamplePubSubWorker/subscriber.json"
+  }
+]

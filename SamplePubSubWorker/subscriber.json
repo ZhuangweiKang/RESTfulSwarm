@@ -1,10 +1,10 @@
 {
-  "node": "kang3",
+  "node": "kang2",
   "container_name": "Subscriber",
   "image": "zhuangweikang/subscriber",
   "detach": true,
   "network": "kangNetwork",
-  "command": "python SubscribeData.py -a 10.52.0.6 -p 3000",
+  "command": "python SubscribeData.py -a 10.52.0.2 -p 3000",
   "cpuset_cpus": "0,1",
   "mem_limit": "10m",
   "ports": {"3000/tcp": 3000},
