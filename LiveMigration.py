@@ -106,11 +106,11 @@ class LiveMigration:
         utl.untarFile(fileName)
         self.logger.info('Checkpoint has been untared...')
 
-    def restoreContainer(self, checkpoint, new_container_name, newImage, command=None):
+    def restoreContainer(self, checkpoint, new_container_name, newImage, network, command=None):
         checkpoint_dir = '/var/lib/docker/tmp'
 
         # create the new container using base image
-        dHelper.createContainer(self.dockerClient, newImage, new_container_name, self.network, command)
+        dHelper.createContainer(self.dockerClient, newImage, new_container_name, network, command)
 
         dHelper.restore(new_container_name, checkpoint_dir, checkpoint)
         self.logger.info('Container has been restored...')
@@ -127,7 +127,7 @@ class LiveMigration:
             container_name = checkpoint.split('_')[0]
             if tarFile is not None:
                 self.unTarCheckpoint(fileName=tarFile)
-                self.restoreContainer(checkpoint, container_name, newImage, command)
+                self.restoreContainer(checkpoint, container_name, newImage, detail['network'], command=command)
                 self.storage.update({container_name: detail})
 
     def menue(self, cmd=None):
