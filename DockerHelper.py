@@ -74,10 +74,10 @@ def getContainerID(client, container):
 
 
 def checkpoint(checkpoint_name, containerID):
-    print(containerID, datetime.datetime.now().microsecond)
+    print(containerID, int(round(time.time() * 1000)))
     checkpoint_cmd = 'docker checkpoint create ' + containerID + ' ' + checkpoint_name
     print(os.popen(checkpoint_cmd, 'r').read())
-    print(containerID, datetime.datetime.now().microsecond)
+    print(containerID, int(round(time.time() * 1000)))
 
 
 def restore(containerID, checkpoint_dir, checkpoint_name):
