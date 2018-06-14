@@ -58,7 +58,7 @@ if __name__ == '__main__':
         print('--------------RESTfulSwarmLiveMigration Menu--------------')
         print('1. Init Swarm')
         print('2. New Container')
-        print('3. Check point a group a containers')
+        print('3. Check point a group containers')
         print('4. Migrate Container')
         print('5. Migrate a group of containers')
         print('6. Update Container')
