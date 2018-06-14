@@ -42,6 +42,7 @@ class Worker:
                 self.joinSwarm(remote_addr, join_token)
             elif msg_type == 'migrate':
                 info = json.loads(' '.join(msg[1:]))
+                print(info)
                 dst = info['dst']
                 container = info['container']
                 container_info = info['info']
