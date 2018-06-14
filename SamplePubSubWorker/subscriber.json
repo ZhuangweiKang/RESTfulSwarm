@@ -7,6 +7,6 @@
   "command": "python SubscribeData.py -a 10.52.0.2 -p 3000",
   "cpuset_cpus": "0,1",
   "mem_limit": "10m",
-  "ports": {"3000/tcp": 3000},
+  "ports": {},
   "volumes": {}
 }

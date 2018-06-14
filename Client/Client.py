@@ -92,7 +92,6 @@ if __name__ == '__main__':
                     with open(item['container_details'], 'r') as f:
                         container_detail = json.load(f)
                     doMigrate(item['container'], item['from'], item['to'], container_detail)
-                    time.sleep(3)
             elif get_input == 5:
                 node_name = input('Node hostname: ')
                 container_name = input('Container name: ')
