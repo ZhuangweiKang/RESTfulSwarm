@@ -47,7 +47,7 @@ class Worker:
                 for i in range(0, len(data)):
                     checkpoint_name = data[i] + '_' + str(random.randint(1, 1000))
                     container_id = dHelper.getContainerID(self.dockerClient, data[i])
-                    thr = threading.Thread(target=dHelper.checkpoint, args=(checkpoint_name, container_id, ))
+                    thr = threading.Thread(target=dHelper.checkpoint, args=(checkpoint_name, container_id, True, ))
                     thr.setDaemon(True)
                     threads.append(thr)
 

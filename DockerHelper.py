@@ -73,9 +73,12 @@ def getContainerID(client, container):
     return client.containers.get(container).id
 
 
-def checkpoint(checkpoint_name, containerID):
+def checkpoint(checkpoint_name, containerID, leave_running=False):
     print(containerID, int(round(time.time() * 1000)))
-    checkpoint_cmd = 'docker checkpoint create ' + containerID + ' ' + checkpoint_name
+    if leave_running:
+        checkpoint_cmd = 'docker checkpoint create --leave-running' + containerID + ' ' + checkpoint_name
+    else:
+        checkpoint_cmd = 'docker checkpoint create ' + containerID + ' ' + checkpoint_name
     print(os.popen(checkpoint_cmd, 'r').read())
     print(containerID, int(round(time.time() * 1000)))
 
