@@ -75,9 +75,7 @@ def requestJoin():
     return response
 
 
-@app.route('/SwarmLMGM/worker/requestNewContainer', methods=['POST'])
-def requestNewContainer():
-    data = request.get_json()
+def newContainer(data):
     node = data['node']
     if dHelper.checkNodeHostName(dockerClient, node) is False:
         pubContent = '%s new_container %s' % (node, json.dumps(data))
@@ -87,6 +85,19 @@ def requestNewContainer():
     else:
         response = 'Error: The node you specified is unavailable.'
     return response
+
+
+@app.route('/SwarmLMGM/worker/requestNewContainer', methods=['POST'])
+def requestNewContainer():
+    data = request.get_json()
+    newContainer(data)
+
+
+@app.route('/SwarmLMGM/worker/requestNewJob', methods=['POST'])
+def requestNewJob():
+    data = request.get_json()
+    for item in data['tasks']:
+        newContainer(item)
 
 
 @app.route('/SwarmLMGM/worker/checkpointCons', methods=['POST'])
