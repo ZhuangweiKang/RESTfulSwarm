@@ -9,6 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import utl
 import json
 from flask import *
+import time
 import DockerHelper as dHelper
 import argparse
 import ZMQHelper as zmq
@@ -17,34 +18,19 @@ import ZMQHelper as zmq
 app = Flask(__name__)
 
 host_addr = None
-network = None
-subnet = None
 dockerClient = dHelper.setClient()
 pubSocket = None
 
 
-@app.route('/SwarmLMGM/manager/init', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/init', methods=['GET'])
 def init():
-    global network
-    global subnet
     global pubSocket
-    data = request.get_json()
-    network = data['network']
-    subnet = data['subnet']
-    if network is None:
-        response = 'Error: Please specify the network name.'
-    elif subnet is None:
-        response = 'Error: Please specify the subnet CIDR.'
-    elif dHelper.verifyNetwork(dockerClient, network) is False:
-        response = 'Error: Specified Network already exists in Swarm environment.'
-    else:
-        try:
-            pubSocket = zmq.bind('3100')
-            initSwarmEnv()
-            createOverlayNetwork()
-            response = 'OK: Initialize Swarm environment and create network succeed.'
-        except Exception as ex:
-            response = 'Error: %s' % ex
+    try:
+        pubSocket = zmq.bind('3100')
+        initSwarmEnv()
+        response = 'OK: Initialize Swarm environment and create network succeed.'
+    except Exception as ex:
+        response = 'Error: %s' % ex
     return response
 
 
@@ -53,12 +39,12 @@ def initSwarmEnv():
     app.logger.info('Init Swarm environment.')
 
 
-def createOverlayNetwork():
+def createOverlayNetwork(network, subnet):
     dHelper.createNetwork(dockerClient, name=network, driver='overlay', subnet=subnet)
     app.logger.info('Build overlay network: %s.' % network)
 
 
-@app.route('/SwarmLMGM/worker/requestJoin', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/requestJoin', methods=['POST'])
 def requestJoin():
     hostname = request.get_json()['hostname']
     if hostname is not None:
@@ -87,20 +73,28 @@ def newContainer(data):
     return response
 
 
-@app.route('/SwarmLMGM/worker/requestNewContainer', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/requestNewContainer', methods=['POST'])
 def requestNewContainer():
     data = request.get_json()
     newContainer(data)
 
 
-@app.route('/SwarmLMGM/worker/requestNewJob', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/requestNewJob', methods=['POST'])
 def requestNewJob():
     data = request.get_json()
-    for item in data['tasks']:
+    # create overlay network if not exists
+    if dHelper.verifyNetwork(dockerClient, data['job_info']['network']):
+        createOverlayNetwork(data['job_info']['network']['name'], data['job_info']['network']['subnet'])
+    time.sleep(1)
+
+    # deploy job
+    for item in data['job_info']['tasks'].values():
         newContainer(item)
 
+    return 'OK'
 
-@app.route('/SwarmLMGM/worker/checkpointCons', methods=['POST'])
+
+@app.route('/RESTfulSwarm/GM/checkpointCons', methods=['POST'])
 def checkpointCons():
     data = request.get_json()
     for item in data:
@@ -112,7 +106,7 @@ def checkpointCons():
     return 'OK'
 
 
-@app.route('/SwarmLMGM/worker/requestMigrate', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/requestMigrate', methods=['POST'])
 def requestMigrate():
     data = request.get_json()
     src = data['from']
@@ -134,7 +128,7 @@ def requestMigrate():
     return response
 
 
-@app.route('/SwarmLMGM/worker/requestLeave', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/requestLeave', methods=['POST'])
 def requestLeave():
     hostname = request.get_json()['hostname']
     checkNode = dHelper.checkNodeHostName(client=dockerClient, host=hostname)
@@ -149,7 +143,7 @@ def requestLeave():
         return 'Error: Host %s is not in Swarm environment.' % hostname
 
 
-@app.route('/SwarmLMGM/worker/requestUpdateContainer', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/requestUpdateContainer', methods=['POST'])
 def requestUpdateContainer():
     newInfo = request.get_json()
     node = newInfo['node']
@@ -170,7 +164,7 @@ def requestUpdateContainer():
         return 'Error: requested node %s is not in Swarm environment.' % node
 
 
-@app.route('/SwarmLMGM/manager/getWorkerList', methods=['GET'])
+@app.route('/RESTfulSwarm/GM/getWorkerList', methods=['GET'])
 def getWorkerList():
     nodes = dHelper.getNodeList(dockerClient)
     response = {}
@@ -187,12 +181,12 @@ def describeNode(hostname):
         return nodeinfo
 
 
-@app.route('/SwarmLMGM/worker/<hostname>/describeWorker', methods=['GET'])
+@app.route('/RESTfulSwarm/GM/<hostname>/describeWorker', methods=['GET'])
 def describeWorker(hostname):
     return describeNode(hostname)
 
 
-@app.route('/SwarmLMGM/manager/<hostname>/describeManager', methods=['GET'])
+@app.route('/RESTfulSwarm/GM/<hostname>/describeManager', methods=['GET'])
 def describeManager(hostname):
     return describeNode(hostname)
 

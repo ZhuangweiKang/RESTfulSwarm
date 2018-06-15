@@ -1,0 +1,36 @@
+[
+  {
+    "container": "Publisher",
+    "from": "10.52.0.136",
+    "to": "10.52.0.132",
+    "info": {
+      "node": "kang2",
+      "container_name": "Publisher",
+      "image": "zhuangweikang/publisher",
+      "detach": true,
+      "network": "kangNetwork",
+      "command": "",
+      "cpuset_cpus": "0,1",
+      "mem_limit": "10m",
+      "ports": {},
+      "volumes": {}
+    }
+  },
+  {
+    "container": "Subscriber",
+    "from": "10.52.0.136",
+    "to": "10.52.0.132",
+    "info":{
+      "node": "kang2",
+      "container_name": "Subscriber",
+      "image": "zhuangweikang/subscriber",
+      "detach": true,
+      "network": "kangNetwork",
+      "command": "python SubscribeData.py -a 10.52.0.2 -p 3000",
+      "cpuset_cpus": "0,1",
+      "mem_limit": "10m",
+      "ports": {},
+      "volumes": {}
+    }
+  }
+]

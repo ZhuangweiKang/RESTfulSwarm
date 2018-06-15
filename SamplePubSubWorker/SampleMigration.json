@@ -1,0 +1,17 @@
+{
+  "container": "Publisher",
+  "from": "10.52.0.136",
+  "to": "10.52.0.132",
+  "info": {
+    "node": "kang2",
+    "container_name": "Publisher",
+    "image": "zhuangweikang/publisher",
+    "detach": true,
+    "network": "kangNetwork",
+    "command": "",
+    "cpuset_cpus": "0,1",
+    "mem_limit": "10m",
+    "ports": {},
+    "volumes": {}
+  }
+}

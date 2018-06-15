@@ -1,29 +1,35 @@
 {
-  "job_name": "kang",
-  "tasks": [
-    {
+  "job_info": {
+    "job_name": "kang",
+    "network": {
+      "name": "kangNetwork",
+      "driver": "overlay",
+      "subnet": "10.52.0.114/24"
+    },
+    "tasks": {
+      "task1": {
         "node": "kang2",
         "container_name": "Publisher",
         "image": "zhuangweikang/publisher",
         "detach": true,
-        "network": "kangNetwork",
         "command": "",
         "cpuset_cpus": "0,1",
         "mem_limit": "10m",
         "ports": {},
         "volumes": {}
-    },
-    {
+      },
+      "task2": {
         "node": "kang2",
         "container_name": "Subscriber",
         "image": "zhuangweikang/subscriber",
         "detach": true,
-        "network": "kangNetwork",
         "command": "python SubscribeData.py -a 10.52.0.2 -p 3000",
         "cpuset_cpus": "0,1",
         "mem_limit": "10m",
         "ports": {},
         "volumes": {}
+      }
     }
-  ]
+  },
+  "status": "Ready"
 }
