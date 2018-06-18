@@ -13,6 +13,8 @@ import MongoDBHelper as mHelper
 gm_addr = None
 gm_port = None
 db_name = 'RESTfulSwarmDB'
+db_client = None
+db = mHelper.get_db(db_client, db_name)
 
 
 # Initialize global manager(Swarm manager node)
@@ -28,7 +30,7 @@ def newTask(data):
 
 
 # Migrate a container
-def doMigrate(db_client, data):
+def doMigrate(data):
     url = 'http://%s:%s/RESTfulSwarm/GM/requestMigrate' % (gm_addr, gm_port)
     print(requests.post(url=url, json=data).content)
 
@@ -39,17 +41,18 @@ def doMigrate(db_client, data):
     for con in data:
         update_info.append({'job': con['job'], 'container': con['container'], 'node': con['to'].split('@')[0]})
 
-    db = mHelper.get_db(db_client, db_name)
-    for con in update_info:
-        col = mHelper.get_col(db, con['job'])
-        id = mHelper.get_col_id(col, 'container', con['container'])
-        key = 'node'
-        value = con['node']
-        mHelper.update_doc(col, id, key, value)
+    for item in update_info:
+        col = db[item['job']]
+        filter_key = 'job_info.tasks.%s.container_name' % item['container']
+        filter_value = item['container']
+        target_key = 'job_info.tasks.%s.node' % item['container']
+        target_value = item['node']
+        mHelper.update_doc(col, filter_key, filter_value, target_key, target_value)
+        time.sleep(1)
 
 
 # Update container resources(cpu & mem)
-def updateContainer(client, data):
+def updateContainer(data):
     url = 'http://%s:%s/RESTfulSwarm/GM/requestUpdateContainer' % (gm_addr, gm_port)
     print(requests.post(url=url, json=data).content)
 
@@ -59,26 +62,29 @@ def updateContainer(client, data):
     container_name = data['container']
     job = data['job']
 
-    db = mHelper.get_db(client, db_name)
     col = mHelper.get_col(db, job)
-    id = mHelper.get_col_id(col, 'container', container_name)
-    key = 'cpuset_cpus'
-    value = new_cpu
-    mHelper.update_doc(col, id, key, value)
-    key = 'mem_limits'
-    value = new_mem
-    mHelper.update_doc(col, id, key, value)
+    filter_key = 'job_info.tasks.%s.container_name' % container_name
+    filter_value = container_name
+
+    # update cpu
+    target_key = 'job_info.tasks.%s.cpuset_cpus' % container_name
+    target_value = new_cpu
+    mHelper.update_doc(col, filter_key, filter_value, target_key, target_value)
+
+    # update memory
+    target_key = 'job_info.tasks.%s.mem_limits' % container_name
+    target_value = new_mem
+    mHelper.update_doc(col, filter_key, filter_value, target_key, target_value)
 
 
 # Leave Swarm
-def leaveSwarm(client, hostname):
+def leaveSwarm(hostname):
     data = {'hostname': hostname}
     url = 'http://%s:%s/RESTfulSwarm/GM/requestLeave' % (gm_addr, gm_port)
     print(requests.post(url=url, json=data).content)
 
     # TODO: update db (delete all jobs & tasks on the node)
-    db = mHelper.get_db(client, db_name)
-    col = mHelper.get_col(db, job)
+
 
 
 

@@ -1,13 +1,13 @@
 {
+  "job_name": "kang",
   "job_info": {
-    "job_name": "kang",
     "network": {
       "name": "kangNetwork",
       "driver": "overlay",
       "subnet": "10.52.0.114/24"
     },
     "tasks": {
-      "task1": {
+      "Publisher": {
         "node": "kang2",
         "container_name": "Publisher",
         "image": "zhuangweikang/publisher",
@@ -18,7 +18,7 @@
         "ports": {},
         "volumes": {}
       },
-      "task2": {
+      "Subscriber": {
         "node": "kang2",
         "container_name": "Subscriber",
         "image": "zhuangweikang/subscriber",
