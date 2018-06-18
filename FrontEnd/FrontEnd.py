@@ -35,10 +35,16 @@ def requestNewJob():
 
     time.sleep(1)
 
+    # TODO：Apply Schedule Algorithm here
+
     # Notify job manager
     msg = '%s %s' % (m_db, m_col)
     socket.send_string(msg)
     socket.recv_string()
+
+
+def scheduel():
+    return None
 
 
 if __name__ == '__main__':

@@ -24,4 +24,12 @@ def drop_col(client, db_name, col_name):
 
 
 def insert_doc(col, data):
-    return col.insert_one(data)
+    return col.insert_one(data).inserted_id
+
+
+def update_doc(col, id, key, value):
+    return col.update_one({'_id': id}, {key: value}, upsert=False)
+
+
+def find_col():
+    pass
