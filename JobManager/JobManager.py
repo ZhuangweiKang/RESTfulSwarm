@@ -6,11 +6,13 @@ import requests
 import argparse
 import json
 import threading
+import time
 import ZMQHelper as zmq
 import MongoDBHelper as mHelper
 
 gm_addr = None
 gm_port = None
+db_name = 'RESTfulSwarmDB'
 
 
 # Initialize global manager(Swarm manager node)
@@ -26,22 +28,58 @@ def newTask(data):
 
 
 # Migrate a container
-def doMigrate(data):
+def doMigrate(db_client, data):
     url = 'http://%s:%s/RESTfulSwarm/GM/requestMigrate' % (gm_addr, gm_port)
     print(requests.post(url=url, json=data).content)
 
+    time.sleep(1)
+
+    # TODO: update db (node name) --- Need to debug
+    update_info = []
+    for con in data:
+        update_info.append({'job': con['job'], 'container': con['container'], 'node': con['to'].split('@')[0]})
+
+    db = mHelper.get_db(db_client, db_name)
+    for con in update_info:
+        col = mHelper.get_col(db, con['job'])
+        id = mHelper.get_col_id(col, 'container', con['container'])
+        key = 'node'
+        value = con['node']
+        mHelper.update_doc(col, id, key, value)
+
 
 # Update container resources(cpu & mem)
-def updateContainer(data):
+def updateContainer(client, data):
     url = 'http://%s:%s/RESTfulSwarm/GM/requestUpdateContainer' % (gm_addr, gm_port)
     print(requests.post(url=url, json=data).content)
 
+    # TODO: Update db (cpuset_cpus & mem_limits) --- Need to debug
+    new_cpu = data['cpuset_cpus']
+    new_mem = data['mem_limits']
+    container_name = data['container']
+    job = data['job']
+
+    db = mHelper.get_db(client, db_name)
+    col = mHelper.get_col(db, job)
+    id = mHelper.get_col_id(col, 'container', container_name)
+    key = 'cpuset_cpus'
+    value = new_cpu
+    mHelper.update_doc(col, id, key, value)
+    key = 'mem_limits'
+    value = new_mem
+    mHelper.update_doc(col, id, key, value)
+
 
 # Leave Swarm
-def leaveSwarm(hostname):
+def leaveSwarm(client, hostname):
     data = {'hostname': hostname}
     url = 'http://%s:%s/RESTfulSwarm/GM/requestLeave' % (gm_addr, gm_port)
     print(requests.post(url=url, json=data).content)
+
+    # TODO: update db (delete all jobs & tasks on the node)
+    db = mHelper.get_db(client, db_name)
+    col = mHelper.get_col(db, job)
+
 
 
 def dumpContainer(data):
@@ -55,6 +93,8 @@ def newJobNotify(manager_addr, manager_port, mongo_addr, mongo_port):
         msg = socket.recv_string()
         socket.send_string('Ack')
         msg = msg.split()
+
+        # Note: read db
         db = msg[0]
         col = msg[1]
         m_client = mHelper.get_client(mongo_addr, mongo_port)
@@ -63,8 +103,7 @@ def newJobNotify(manager_addr, manager_port, mongo_addr, mongo_port):
         url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (manager_addr, manager_port)
         print(requests.post(url=url, json=col_data).content)
 
-        # update job status in db
-        m_db[col].update_one({"status": "deployed"})
+        # TODO: update db (job status)
 
 
 if __name__ == '__main__':
@@ -79,6 +118,7 @@ if __name__ == '__main__':
 
     mongo_addr = args.mmaddr
     mongo_port = args.mport
+    db_client = mHelper.get_client(mongo_addr, mongo_port)
 
     fe_notify_thr = threading.Thread(target=newJobNotify, args=(mongo_addr, mongo_port, ))
     fe_notify_thr.setDaemon(True)

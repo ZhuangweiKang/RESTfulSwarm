@@ -1,8 +1,9 @@
 [
   {
+    "job": "kang",
     "container": "Publisher",
-    "from": "10.52.0.136",
-    "to": "10.52.0.132",
+    "from": "kang2@10.52.0.136",
+    "to": "kang3@10.52.0.132",
     "info": {
       "node": "kang2",
       "container_name": "Publisher",
@@ -17,9 +18,10 @@
     }
   },
   {
+    "job": "kang",
     "container": "Subscriber",
-    "from": "10.52.0.136",
-    "to": "10.52.0.132",
+    "from": "kang2@10.52.0.136",
+    "to": "kang3@10.52.0.132",
     "info":{
       "node": "kang2",
       "container_name": "Subscriber",

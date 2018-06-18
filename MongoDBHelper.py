@@ -28,8 +28,12 @@ def insert_doc(col, data):
 
 
 def update_doc(col, id, key, value):
-    return col.update_one({'_id': id}, {key: value}, upsert=False)
+    return col.update_one({"_id": id}, {"$set": {key: value}}, upsert=False)
 
 
-def find_col():
-    pass
+def get_col_id(col, key, value):
+    return col.find_one({key: value}).get('_id')
+
+
+def delete_doc(col, key, value):
+    return col.delete_one({key: value})

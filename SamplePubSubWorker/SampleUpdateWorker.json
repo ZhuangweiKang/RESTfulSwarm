@@ -1,4 +1,5 @@
 {
+  "job": "kang",
   "node": "kang2",
   "container": "Publisher",
   "cpuset_cpus": "1,2",
