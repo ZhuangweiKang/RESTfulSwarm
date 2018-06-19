@@ -20,6 +20,10 @@ def get_col(db, col_name):
     return db[col_name]
 
 
+def get_all_cols(db):
+    return db.list_collection_names()
+
+
 # delete a collection(a job in my work)
 def drop_col(client, db_name, col_name):
     db = client[db_name]
@@ -33,3 +37,18 @@ def insert_doc(col, data):
 
 def update_doc(col, filter_key, filter_value, target_key, target_value):
     return col.update_one({filter_key: filter_value}, {"$set": {target_key: target_value}}, upsert=False)
+
+
+# for leave swarm
+def update_tasks(cols, target_node):
+    for col in cols:
+        cursor_objs = {}
+        for document in col.find({}):
+            for task in document['job_info']['tasks']:
+                filter_key = 'job_info.tasks.%s.node' % task
+                obj = col.find({filter_key: {'$ne': target_node}})
+                obj = list(obj)
+                if len(obj) != 0:
+                    cursor_objs.update({task: obj[0]['job_info']['tasks'][task]})
+
+        col.replace_one({}, {'job_info.tasks': cursor_objs})

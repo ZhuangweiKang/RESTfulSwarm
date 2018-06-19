@@ -3,6 +3,7 @@
 # Author: Zhuangwei Kang
 
 import pymongo as mg
+import pprint
 
 
 def get_client(address, port=27017):
@@ -46,16 +47,16 @@ if __name__ == '__main__':
     drop_col(client, col)
 
     data = {
+        "job_name": "kang",
         "job_info": {
-            "job_name": "kang",
             "network": {
                 "name": "kangNetwork",
                 "driver": "overlay",
                 "subnet": "10.52.0.114/24"
             },
             "tasks": {
-                "task1": {
-                    "node": "kang2",
+                "Publisher": {
+                    "node": "kang3",
                     "container_name": "Publisher",
                     "image": "zhuangweikang/publisher",
                     "detach": True,
@@ -65,9 +66,20 @@ if __name__ == '__main__':
                     "ports": {},
                     "volumes": {}
                 },
-                "task2": {
+                "Subscriber": {
                     "node": "kang2",
                     "container_name": "Subscriber",
+                    "image": "zhuangweikang/subscriber",
+                    "detach": True,
+                    "command": "python SubscribeData.py -a 10.52.0.2 -p 3000",
+                    "cpuset_cpus": "0,1",
+                    "mem_limit": "10m",
+                    "ports": {},
+                    "volumes": {}
+                },
+                "Subscriber2": {
+                    "node": "kang2",
+                    "container_name": "Subscriber2",
                     "image": "zhuangweikang/subscriber",
                     "detach": True,
                     "command": "python SubscribeData.py -a 10.52.0.2 -p 3000",
@@ -105,11 +117,31 @@ if __name__ == '__main__':
     print('-------------------------------------')
 
     # update node name for container
-    col.update_one({'job_info.tasks.task1.node': 'kang2'}, {"$set": {'job_info.tasks.task1.node': 'kang3'}})
+    container = 'Publisher'
+    filter_key = 'job_info.tasks.%s.container_name' % container
+    key = 'job_info.tasks.%s.node' % container
+    value = 'kang5'
+    col.update_one({filter_key: 'Publisher'}, {"$set": {key: value}})
     print(col.find({}))
 
     # update job status
-    col.update_one({'status': 'Ready'}, {'$set': {'status':  'Deployed'}})
+    col.update_one({'status': 'Ready'}, {'$set': {'status': 'Deployed'}})
 
-    # delete Container SUbscriber
-    col.delete_one({'job_info.tasks.task2.container_name': 'Subscriber'})
+    # delete job
+    '''
+    get_input = input('delete job?')
+    if get_input == 'y':
+    	col.delete_one({'job_info.job_name': 'kang'})
+    '''
+
+    # get all collections localted on a specified node via iterating documents
+    cursor_objs = []
+    for document in col.find({}):
+        for task in document['job_info']['tasks']:
+            filter_key = 'job_info.tasks.%s.node' % task
+            print(filter_key)
+            obj = col.find({filter_key: {'$ne': 'kang2'}})
+            cursor_objs.append(obj)
+
+    for item in cursor_objs:
+        print(list(item))
