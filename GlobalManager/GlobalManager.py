@@ -10,16 +10,24 @@ import utl
 import json
 from flask import *
 import time
-import DockerHelper as dHelper
 import argparse
+import DockerHelper as dHelper
 import ZMQHelper as zmq
-
+import MongoDBHelper as mg
 
 app = Flask(__name__)
 
 host_addr = None
 dockerClient = dHelper.setClient()
 pubSocket = None
+
+m_addr = None
+m_port = None
+mongo_client = None
+db_name = 'RESTfulSwarmDB'
+workers_collection_name = 'WorkersInfo'
+db = None
+worker_col = None
 
 
 @app.route('/RESTfulSwarm/GM/init', methods=['GET'])
@@ -46,9 +54,11 @@ def createOverlayNetwork(network, subnet):
 
 @app.route('/RESTfulSwarm/GM/requestJoin', methods=['POST'])
 def requestJoin():
-    hostname = request.get_json()['hostname']
+    data = request.get_json()
+    hostname = data['hostname']
     if hostname is not None:
         if dHelper.checkNodeHostName(dockerClient, hostname):
+            init_worker_info(hostname, data['CPUs'], data['MemFree'])
             remote_addr = host_addr + ':2377'
             join_token = dHelper.getJoinToken()
             response = '%s join %s %s' % (hostname, remote_addr, join_token)
@@ -59,6 +69,19 @@ def requestJoin():
     else:
         response = 'Error: Please enter the IP address of node.'
     return response
+
+
+def init_worker_info(hostname, cpus, memfree):
+    cores = {}
+    for i in range(cpus):
+        cores.update({str(i): False})
+    worker_info = {
+        'hostname':  hostname,
+        'CPUs': cores,
+        'MemFree': memfree
+    }
+    # Write initial worker information into database
+    mg.insert_doc(worker_col, worker_info)
 
 
 def newContainer(data):
@@ -193,9 +216,19 @@ def describeManager(hostname):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-a', '--address', type=str, help='The IP address of your Global Manager node.')
-    parser.add_argument('-p', '--port', type=int, help='The port number you want to run your manager node.')
+    parser.add_argument('-ga', '--gaddr', type=str, help='The IP address of your Global Manager node.')
+    parser.add_argument('-gp', '--gport', type=int, help='The port number you want to run your manager node.')
+    parser.add_argument('-ma', '--maddr', type=str, help='MongoDB address.')
+    parser.add_argument('-mp', '--mport', type=int, help='MongoDB port.')
     args = parser.parse_args()
-    host_addr = args.address
-    port = args.port
-    app.run(host=host_addr, port=port, debug=True)
+    g_addr = args.gaddr
+    gport = args.gport
+
+    # mongodb
+    m_addr = args.maddr
+    m_port = args.mport
+    mongo_client = mg.get_client(m_addr, m_port)
+    db = mg.get_db(mongo_client, db_name)
+    worker_col = mg.get_col(db, workers_collection_name)
+
+    app.run(host=g_addr, port=gport, debug=True)

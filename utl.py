@@ -5,9 +5,11 @@
 import os, sys
 import socket
 import struct
+import re
 import tarfile
 import shutil
 import logging
+import cpuinfo
 
 
 def doLog(loggerName, logFile):
@@ -69,6 +71,7 @@ def untarFile(tarFile):
     os.remove(tarFile)
 
 
+# socket
 def transferFile(fileName, dst_addr, port, logger):
     try:
         logger.info('Prepare to send tar file to destination host.')
@@ -96,6 +99,7 @@ def transferFile(fileName, dst_addr, port, logger):
         sys.exit(1)
 
 
+# socket
 def recvFile(logger, port=3300):
     try:
         recvSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -135,3 +139,13 @@ def recvFile(logger, port=3300):
     except Exception as ex:
         logger.error(ex)
         return None
+
+
+def get_total_cores():
+    return cpuinfo.get_cpu_info()['count']
+
+
+def get_total_mem():
+    meminfo = open('/proc/meminfo').read()
+    memfree = re.search('MemFree:\s+(\d+)', meminfo)
+    return memfree.group(0).split()[1]

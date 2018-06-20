@@ -139,11 +139,16 @@ class Worker:
         notMigrateThr.start()
 
     def requestJoinSwarm(self):
-        url = 'http://' + self.manager_addr + ':5000/SwarmLMGM/worker/requestJoin'
-        print(requests.post(url=url, json={'hostname': self.hostname}).content)
+        url = 'http://' + self.manager_addr + ':5000/RESTfulSwarm/GM/requestJoin'
+        json_info = {
+            'hostname': self.hostname,
+            'CPUs': utl.get_total_cores(),
+            'MemFree': utl.get_total_mem()
+        }
+        print(requests.post(url=url, json=json_info).content)
 
     def requestLeaveSwarm(self):
-        url = 'http://' + self.manager_addr + ':5000/SwarmLMGM/worker/requestLeave'
+        url = 'http://' + self.manager_addr + ':5000/RESTfulSwarm/GM/requestLeave'
         print(requests.post(url=url, json={'hostname': self.hostname}).content)
 
 

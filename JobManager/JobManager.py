@@ -83,7 +83,7 @@ def leaveSwarm(hostname):
     url = 'http://%s:%s/RESTfulSwarm/GM/requestLeave' % (gm_addr, gm_port)
     print(requests.post(url=url, json=data).content)
 
-    # TODO: update db (delete all jobs & tasks on the node) --- Need to be debug
+    # TODO: update db (delete all jobs & tasks on the node) --- Need to debug
     col_names = mHelper.get_all_cols(db)
     cols = []
     for col in col_names:
@@ -103,7 +103,7 @@ def newJobNotify(manager_addr, manager_port, mongo_addr, mongo_port):
         socket.send_string('Ack')
         msg = msg.split()
 
-        # todo: need to be changed for schedule algorithm
+        # TODO: need to be changed for scheduling algorithm
         # Note: read db
         db = msg[0]
         col = msg[1]
@@ -138,7 +138,7 @@ if __name__ == '__main__':
         print('2. Create Task(one container)')
         print('3. Check point a group containers')
         print('4. Migrate Container')
-        print('5. Migrate a group of containers')
+        print('5. Create Job(a group of containers)')
         print('6. Update Container')
         print('7. Leave Swarm')
         print('8. Describe Workers')

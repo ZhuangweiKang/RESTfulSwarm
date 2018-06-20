@@ -1,0 +1,22 @@
+[
+  {
+    "hostname": "kang1",
+    "CPUs": {
+      "0": true,
+      "1": false,
+      "2": false,
+      "3": false
+    },
+    "MemFree": "30000 kB"
+  },
+  {
+    "hostname": "kang2",
+    "CPUs": {
+      "0": true,
+      "1": true,
+      "2": false,
+      "3": false
+    },
+    "MemFree": "40000 kB"
+  }
+]

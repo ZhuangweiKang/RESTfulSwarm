@@ -8,7 +8,6 @@
     },
     "tasks": {
       "Publisher": {
-        "node": "kang2",
         "container_name": "Publisher",
         "image": "zhuangweikang/publisher",
         "detach": true,
@@ -19,7 +18,6 @@
         "volumes": {}
       },
       "Subscriber": {
-        "node": "kang2",
         "container_name": "Subscriber",
         "image": "zhuangweikang/subscriber",
         "detach": true,
