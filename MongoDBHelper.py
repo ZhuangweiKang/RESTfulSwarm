@@ -15,9 +15,13 @@ def get_db(client, db_name):
     return client[db_name]
 
 
-# return a collection object
+# return a collection cursor object
 def get_col(db, col_name):
     return db[col_name]
+
+
+def find_col(col):
+    return list(col.find({}))
 
 
 def get_all_cols(db):

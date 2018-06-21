@@ -6,13 +6,12 @@
 
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from flask import *
 import MongoDBHelper as mhelper
 import time
 import ZMQHelper as zmq
 import argparse
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 app = Flask(__name__)
 
@@ -30,14 +29,15 @@ def requestNewJob():
 
     # Write job data into MongoDB
     data = request.get_json()
-    col_name = data['job_info']['job_name']
+    data.update({'TimeStamp': time.time()})
+    col_name = data['job_name']
     m_col = mhelper.get_col(m_db, col_name)
     mhelper.insert_doc(m_col, data)
 
     time.sleep(1)
 
     # Notify job manager
-    msg = '%s %s' % (m_db, m_col)
+    msg = 'newJob %s' % col_name
     socket.send_string(msg)
     socket.recv_string()
 
@@ -48,11 +48,11 @@ if __name__ == '__main__':
     parser.add_argument('-mp', '--mport', type=str, help='MongoDB node port number.')
     parser.add_argument('-db', '--database', type=str, help='MongoDB database name.')
     args = parser.parse_args()
+
+    # db
     m_addr = args.maddr
     m_port = args.mport
     m_db = args.database
-
-    # db
     m_client = mhelper.get_client(address=m_addr, port=m_port)
     m_db = mhelper.get_db(m_client, m_db)
 

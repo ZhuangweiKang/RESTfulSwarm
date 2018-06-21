@@ -2,7 +2,7 @@
   {
     "hostname": "kang1",
     "CPUs": {
-      "0": true,
+      "0": false,
       "1": false,
       "2": false,
       "3": false
@@ -12,8 +12,8 @@
   {
     "hostname": "kang2",
     "CPUs": {
-      "0": true,
-      "1": true,
+      "0": false,
+      "1": false,
       "2": false,
       "3": false
     },

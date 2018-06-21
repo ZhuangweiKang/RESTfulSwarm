@@ -6,9 +6,8 @@ import MongoDBHelper as mg
 
 
 class Scheduler:
-    def __init__(self, db_address, db_port, db_name, workers_col_name):
-        self.db_client = mg.get_client(address=db_address, port=db_port)
-        self.db = mg.get_db(self.db_client, db_name=db_name)
+    def __init__(self, db, workers_col_name):
+        self.db = db
         self.workers_col = mg.get_col(self.db, workers_col_name)
 
     def check_resources(self, core_request):
@@ -42,6 +41,20 @@ class Scheduler:
             return result
         else:
             return None
+
+    def update_job_info(self, job_name, resource_check_result):
+        for item in resource_check_result:
+            job_col = mg.get_col(self.db, job_name)
+            job_filter = 'job_info.tasks.%s.name' % item[0]
+            target = 'job_info.tasks.%s.node' % item[0]
+            job_col.update({job_filter: item[0]}, {target: item[1]}, upsert=True)
+            target = 'job_info.tasks.%s.cpuset_cpus' % item[0]
+            job_col.update({job_filter: item[0]}, {target: ','.join(item[2])}, upsert=True)
+
+    def update_workers_info(self, resource_check_result):
+        for item in resource_check_result:
+            for core in item[2]:
+                self.workers_col.update({'hostname': item[1]}, {str(core): True})
 
     def best_fit(self, request, available):
         '''

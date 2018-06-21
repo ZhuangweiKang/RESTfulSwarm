@@ -9,12 +9,15 @@ import threading
 import time
 import ZMQHelper as zmq
 import MongoDBHelper as mHelper
+from JobManager import Scheduler
+
 
 gm_addr = None
 gm_port = None
 db_name = 'RESTfulSwarmDB'
 db_client = None
-db = mHelper.get_db(db_client, db_name)
+db = None
+scheduler = None
 
 
 # Initialize global manager(Swarm manager node)
@@ -96,22 +99,31 @@ def dumpContainer(data):
     print(requests.post(url=url, json=data).content)
 
 
-def newJobNotify(manager_addr, manager_port, mongo_addr, mongo_port):
+def newJobNotify(manager_addr, manager_port):
     socket = zmq.csBind(port='2990')
     while True:
         msg = socket.recv_string()
         socket.send_string('Ack')
         msg = msg.split()
 
-        # TODO: need to be changed for scheduling algorithm
-        # Note: read db
-        db = msg[0]
-        col = msg[1]
-        m_client = mHelper.get_client(mongo_addr, mongo_port)
-        m_db = mHelper.get_db(m_client, db)
-        col_data = mHelper.get_col(m_db, col).find_one()
-        url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (manager_addr, manager_port)
-        print(requests.post(url=url, json=col_data).content)
+        # Note: read db, parse job resources request
+        job_col_name = msg[1]
+        job_col = mHelper.get_col(db, job_col_name)
+        col_data = list(mHelper.find_col(job_col))[0]
+
+        core_requests = []
+        for task in col_data['job_info']['tasks']:
+            core_requests.append(task['cpu_count'])
+
+        # !!! Assuming we have enough capacity to hold any job
+        # check resources
+        res_check = scheduler.check_resources(core_request=core_requests)
+        if res_check is not None:
+            scheduler.update_job_info(job_col_name, res_check)
+            # update WorkersInfo collection
+            scheduler.update_workers_info(res_check)
+            url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (manager_addr, manager_port)
+            print(requests.post(url=url, json=col_data).content)
 
 
 if __name__ == '__main__':
@@ -127,6 +139,8 @@ if __name__ == '__main__':
     mongo_addr = args.mmaddr
     mongo_port = args.mport
     db_client = mHelper.get_client(mongo_addr, mongo_port)
+    db = mHelper.get_db(db_client, db_name)
+    scheduler = Scheduler.Scheduler(db, 'WorkersInfo')
 
     fe_notify_thr = threading.Thread(target=newJobNotify, args=(mongo_addr, mongo_port, ))
     fe_notify_thr.setDaemon(True)
