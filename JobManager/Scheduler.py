@@ -102,3 +102,14 @@ class Scheduler:
         else:
             temp = temp[0]
             return temp['job_info']['tasks'][container_name]['node']
+
+    def get_node_info(self, node_name):
+        '''
+        Get node information by node_name
+        :param node_name:
+        :return: A python dict if the node is available, or None if not
+        '''
+        try:
+            return list(self.workers_col.find({'hostname': node_name}))[0]
+        except Exception:
+            return None

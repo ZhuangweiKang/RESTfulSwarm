@@ -34,24 +34,55 @@ def newTask(data):
 
 # Migrate a container
 def doMigrate(data):
-    url = 'http://%s:%s/RESTfulSwarm/GM/requestMigrate' % (gm_addr, gm_port)
-    print(requests.post(url=url, json=data).content)
+    # NOTE: We assume destination node always has enough cores to hold the migrated container
+    # In other words, Job Manager is a very smart guy.
+    dest_node = data['to'].split('@')[0]
+    dest_node_info = scheduler.get_node_info(dest_node)
+    if dest_node_info is None:
+        print('Migration failed, because node %s is not in Swarm environment.')
+        return False
+    else:
+        job_col = db[data['job']]
+        workers_col = db['WorkersInfo']
+        container = data['container']
+        filter_key = 'job_info.tasks.%s.container_name' % container
+        target_key = 'job_info.tasks.%s.node' % container
+        mHelper.update_doc(job_col, filter_key=filter_key, filter_value=container,
+                           target_key=target_key, target_value=dest_node)
 
-    time.sleep(1)
+        # get cores id from old node
+        job_info = list(job_col.find({}))[0]
+        cores = job_info['job_info']['tasks'][container]['cpuset_cpus']
+        cores = cores.split(',')
 
-    # TODO: update db (node name) --- Need to debug
-    update_info = []
-    for con in data:
-        update_info.append({'job': con['job'], 'container': con['container'], 'node': con['to'].split('@')[0]})
+        # get available cores from destination node
+        free_cores = []
+        for core in dest_node_info['CPUs'].keys():
+            if len(free_cores) == len(cores):
+                break
+            if dest_node_info['CPUs'][core] is False:
+                free_cores.append(core)
 
-    for item in update_info:
-        col = db[item['job']]
-        filter_key = 'job_info.tasks.%s.container_name' % item['container']
-        filter_value = item['container']
-        target_key = 'job_info.tasks.%s.node' % item['container']
-        target_value = item['node']
-        mHelper.update_doc(col, filter_key, filter_value, target_key, target_value)
-        time.sleep(1)
+        # update cpuset_cpus in job info collection
+        target_key = 'job_info.tasks.%s.cpuset_cpus' % container
+        mHelper.update_doc(job_col, filter_key=filter_key, filter_value=container,
+                           target_key=target_key, target_value=','.join(free_cores))
+
+        # mark those cores in old node as free
+        old_node = scheduler.find_container(data['container'])
+        for core in cores:
+            target_key = 'CPUs.%s' % core
+            mHelper.update_doc(workers_col, 'hostname', old_node, target_key, False)
+            # mark those core in new node as busy
+            mHelper.update_doc(workers_col, 'hostname', dest_node, target_key, True)
+
+        data.update({'from': data['from'].split('@')[1]})
+        data.update({'to': data['to'].split('@')[1]})
+
+        url = 'http://%s:%s/RESTfulSwarm/GM/requestMigrate' % (gm_addr, gm_port)
+        print(requests.post(url=url, json=data).content)
+
+        return True
 
 
 # Update container resources(cpu & mem)

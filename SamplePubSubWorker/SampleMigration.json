@@ -1,9 +1,9 @@
 {
-  "container": "Publisher",
-  "from": "10.52.0.136",
-  "to": "10.52.0.132",
+  "job": "kang",
+  "container": "kang_Publisher",
+  "from": "kang2@10.52.0.136",
+  "to": "kang3@10.52.0.132",
   "info": {
-    "node": "kang2",
     "container_name": "Publisher",
     "image": "zhuangweikang/publisher",
     "detach": true,
