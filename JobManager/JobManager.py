@@ -85,6 +85,8 @@ def doMigrate(data):
         return True
 
 
+# ----------------------------------START FROM HERE---------------------------------
+
 # Update container resources(cpu & mem)
 def updateContainer(data):
     url = 'http://%s:%s/RESTfulSwarm/GM/requestUpdateContainer' % (gm_addr, gm_port)
