@@ -43,6 +43,10 @@ def update_doc(col, filter_key, filter_value, target_key, target_value):
     return col.update_one({filter_key: filter_value}, {"$set": {target_key: target_value}}, upsert=False)
 
 
+def delete_document(col, filter_key, filter_val):
+    return col.delete_one({filter_key: filter_val})
+
+
 # for leave swarm
 def update_tasks(cols, target_node):
     for col in cols:

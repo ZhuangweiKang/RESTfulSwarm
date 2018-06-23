@@ -16,7 +16,7 @@ RUN pip install pyzmq
 WORKDIR /home
 
 COPY ./ZMQHelper.py ./
-COPY ./Publisher/PublishData.py ./
+COPY ./SamplePubSubWorker/PublishData.py ./
 
 CMD ["python", "./PublishData.py"]
 

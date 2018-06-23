@@ -10,10 +10,9 @@ class Scheduler:
         self.db = db
         self.workers_col = mg.get_col(self.db, workers_col_name)
 
-    def check_resources(self, core_request):
+    def check_resources(self, core_request, mem_request):
         '''
         Check if we have enough capacity to deploy a job
-        :param workers_col: workers information collection
         :param core_request: amount of cores requested by the job
         :param mem_request: amount of memory requested by the job
         :return: a list of nodes or None ($task_name, $worker_name, [$core])
@@ -23,7 +22,7 @@ class Scheduler:
         available_workers = {}
         for worker in self.workers_col.find({}):
             available_workers.update({worker['hostname']: []})
-            for cpu in worker['CPUs']:
+            for cpu in worker['CPUs'].keys():
                 if worker['CPUs'][cpu] is False:
                     available_workers[worker['hostname']].append(cpu)
         requests = core_request.values()
@@ -33,11 +32,20 @@ class Scheduler:
         bf_result = self.best_fit(requests, available)
         result = []
         if bf_result is not None:
-            for item in bf_result:
+            for index, item in enumerate(bf_result):
                 temp = (list(core_request.keys())[item[0]],
                         list(available_workers.keys())[item[1]],
                         list(available_workers.values())[item[1]])
                 result.append(temp)
+
+                # update free memory
+                worker_info = list(self.workers_col.find({'hostname': available_workers.keys()[item[1]]}))[0]
+                new_free_mem = int(worker_info['MemFree'].split()[0])
+                request_mem = int(mem_request[index].split()[0])
+                new_free_mem -= request_mem
+                new_free_mem = str(new_free_mem) + ' kB'
+                mg.update_doc(self.workers_col, 'hostname', available_workers.keys()[item[1]], 'MemFree', new_free_mem)
+
             return result
         else:
             return None
@@ -61,7 +69,7 @@ class Scheduler:
         Best fit algorithm for scheduling resources
         :param request: a list of requested resources (cpu cores)
         :param available: a list of free resources
-        :return: A list of tuples, best fit result ($request_index: $resource_index) if scheduling successful, or None if failed
+        :return: A list of tuples, best fit result [($request_index: $resource_index)] if scheduling successful, or None if failed
         '''
         result = []
         for j, req in enumerate(request):

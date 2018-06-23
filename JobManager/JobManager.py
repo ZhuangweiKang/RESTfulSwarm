@@ -50,10 +50,12 @@ def doMigrate(data):
         mHelper.update_doc(job_col, filter_key=filter_key, filter_value=container,
                            target_key=target_key, target_value=dest_node)
 
-        # get cores id from old node
+        # get cores id from source node
         job_info = list(job_col.find({}))[0]
         cores = job_info['job_info']['tasks'][container]['cpuset_cpus']
         cores = cores.split(',')
+        mem_limits = job_info['job_info']['tasks'][container]['mem_limit']
+        mem_limits = int(mem_limits.split()[0])
 
         # get available cores from destination node
         free_cores = []
@@ -68,13 +70,26 @@ def doMigrate(data):
         mHelper.update_doc(job_col, filter_key=filter_key, filter_value=container,
                            target_key=target_key, target_value=','.join(free_cores))
 
-        # mark those cores in old node as free
-        old_node = scheduler.find_container(data['container'])
+        # mark those cores in source node as free
+        src_node = scheduler.find_container(data['container'])
         for core in cores:
             target_key = 'CPUs.%s' % core
-            mHelper.update_doc(workers_col, 'hostname', old_node, target_key, False)
-            # mark those core in new node as busy
+            mHelper.update_doc(workers_col, 'hostname', src_node, target_key, False)
+
+        # mark those cores in new node as busy
+        for core in free_cores:
+            target_key = 'CPUs.%s' % core
             mHelper.update_doc(workers_col, 'hostname', dest_node, target_key, True)
+
+        src_worker_info = list(workers_col.find({'hostname': src_node}))[0]
+        src_free_mem = int(src_worker_info['MemFree'].split()[0])
+        new_free_mem = int(dest_node_info['MemFree'].split()[0])
+
+        update_old_mem = str(src_free_mem + mem_limits) + ' kB'
+        update_new_mem = str(new_free_mem - mem_limits) + ' kB'
+
+        mHelper.update_doc(workers_col, 'hostname', src_node, 'MemFree', update_old_mem)
+        mHelper.update_doc(workers_col, 'hostname', dest_node, 'MemFree', update_new_mem)
 
         data.update({'from': data['from'].split('@')[1]})
         data.update({'to': data['to'].split('@')[1]})
@@ -85,46 +100,75 @@ def doMigrate(data):
         return True
 
 
-# ----------------------------------START FROM HERE---------------------------------
-
 # Update container resources(cpu & mem)
 def updateContainer(data):
-    url = 'http://%s:%s/RESTfulSwarm/GM/requestUpdateContainer' % (gm_addr, gm_port)
-    print(requests.post(url=url, json=data).content)
-
-    # TODO: Update db (cpuset_cpus & mem_limits) --- Need to debug
+    # Update Job Info collection
     new_cpu = data['cpuset_cpus']
     new_mem = data['mem_limits']
+    node = data['node']
     container_name = data['container']
     job = data['job']
 
-    col = mHelper.get_col(db, job)
+    job_col = db[job]
     filter_key = 'job_info.tasks.%s.container_name' % container_name
     filter_value = container_name
+
+    # get current cpu info
+    container_info = list(job_col.find({}))[0]
+    current_cpu = container_info['job_info']['tasks'][container_name]['cpuset_cpus']
+    current_mem = container_info['job_info']['tasks'][container_name]['mem_limit']
 
     # update cpu
     target_key = 'job_info.tasks.%s.cpuset_cpus' % container_name
     target_value = new_cpu
-    mHelper.update_doc(col, filter_key, filter_value, target_key, target_value)
+    mHelper.update_doc(job_col, filter_key, filter_value, target_key, target_value)
 
     # update memory
     target_key = 'job_info.tasks.%s.mem_limits' % container_name
     target_value = new_mem
-    mHelper.update_doc(col, filter_key, filter_value, target_key, target_value)
+    mHelper.update_doc(job_col, filter_key, filter_value, target_key, target_value)
+
+    # Update WorkersInfo Collection
+    # update cpu
+    workersInfo_col = db['WorkersInfo']
+    current_cpu = current_cpu.split(',')
+    for core in current_cpu:
+        key = 'CPUs.%s' % core
+        mHelper.update_doc(workersInfo_col, 'hostname', node, key, True)
+    new_cpu = new_cpu.split(',')
+    for core in new_cpu:
+        key = 'CPUs.%s' % core
+        mHelper.update_doc(workersInfo_col, 'hostname', node, key, False)
+
+    # update memory, and we assuming memory unit is always kB
+    current_mem = int(current_mem.split()[0])
+    worker_info = list(workersInfo_col.find({'hostname': node}))[0]
+    free_mem = int(worker_info['MemFree'].split()[0])
+    current_mem = free_mem + current_mem
+    new_mem = int(new_mem.split()[0])
+    current_mem -= new_mem
+    current_mem = str(current_mem) + ' kB'
+    mHelper.update_doc(workersInfo_col, 'hostname', node, 'MemFree', current_mem)
+
+    url = 'http://%s:%s/RESTfulSwarm/GM/requestUpdateContainer' % (gm_addr, gm_port)
+    print(requests.post(url=url, json=data).content)
 
 
 # Leave Swarm
 def leaveSwarm(hostname):
+    col_names = mHelper.get_all_cols(db)
+    cols = []
+    for col_name in col_names:
+        cols.append(mHelper.get_col(db, col_name))
+    mHelper.update_tasks(cols, hostname)
+
+    workers_info_col = db['WorkersInfo']
+    # remove the node(document) from WorkersInfo collection
+    mHelper.delete_document(workers_info_col, 'hostname', hostname)
+
     data = {'hostname': hostname}
     url = 'http://%s:%s/RESTfulSwarm/GM/requestLeave' % (gm_addr, gm_port)
     print(requests.post(url=url, json=data).content)
-
-    # TODO: update db (delete all jobs & tasks on the node) --- Need to debug
-    col_names = mHelper.get_all_cols(db)
-    cols = []
-    for col in col_names:
-        cols.append(mHelper.get_col(db, col))
-    mHelper.update_tasks(cols, hostname)
 
 
 def dumpContainer(data):
@@ -145,12 +189,14 @@ def newJobNotify(manager_addr, manager_port):
         col_data = list(mHelper.find_col(job_col))[0]
 
         core_requests = []
+        mem_requests = []
         for task in col_data['job_info']['tasks']:
             core_requests.append(task['cpu_count'])
+            mem_requests.append(task['mem_limit'])
 
         # !!! Assuming we have enough capacity to hold any job
         # check resources
-        res_check = scheduler.check_resources(core_request=core_requests)
+        res_check = scheduler.check_resources(core_request=core_requests, mem_request=mem_requests)
         if res_check is not None:
             scheduler.update_job_info(job_col_name, res_check)
             # update WorkersInfo collection

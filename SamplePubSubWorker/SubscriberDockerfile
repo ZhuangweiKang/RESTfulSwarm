@@ -16,4 +16,4 @@ RUN pip install pyzmq
 WORKDIR /home
 
 COPY ./ZMQHelper.py ./
-COPY ./Subscriber/SubscribeData.py ./
+COPY ./SamplePubSubWorker/SubscribeData.py ./
