@@ -6,12 +6,13 @@
 
 import os
 import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from flask import *
 import MongoDBHelper as mhelper
 import time
 import ZMQHelper as zmq
 import argparse
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 app = Flask(__name__)
 
@@ -44,13 +45,13 @@ def requestNewJob():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-ma', '--maddr', type=str, help='MongoDB node address.')
-    parser.add_argument('-mp', '--mport', type=str, help='MongoDB node port number.')
+    parser.add_argument('-a', '--mongo_addr', type=str, help='MongoDB node address.')
+    parser.add_argument('-p', '--mongo_port', type=int, default=27017, help='MongoDB node port number.')
     args = parser.parse_args()
 
     # db
-    m_addr = args.maddr
-    m_port = args.mport
+    m_addr = args.mongo_addr
+    m_port = args.mongo_port
     m_client = mhelper.get_client(address=m_addr, port=m_port)
     m_db = mhelper.get_db(m_client, m_db)
     socket = zmq.csConnect(m_addr, m_port)
