@@ -18,7 +18,7 @@ def newJob(data):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-a', '--address', type=str, help='Front end node address.')
-    parser.add_argument('-p', '--port', type=str, help='Front end node port number.')
+    parser.add_argument('-p', '--port', type=str, default='5000', help='Front end node port number.')
     args = parser.parse_args()
     fe_addr = args.address
     fe_port = args.port

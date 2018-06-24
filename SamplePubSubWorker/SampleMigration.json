@@ -4,7 +4,7 @@
   "from": "kang2@10.52.0.136",
   "to": "kang3@10.52.0.132",
   "info": {
-    "container_name": "Publisher",
+    "container_name": "kang_Publisher",
     "image": "zhuangweikang/publisher",
     "detach": true,
     "network": "kangNetwork",

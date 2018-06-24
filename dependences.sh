@@ -6,7 +6,7 @@ apt-get update
 apt-get install -y python3-pip python3-dev python3-setuptools xmlto asciidoc
 
 # install docker sdk
-pip3 install flask docker pyzmq
+pip3 install flask docker pyzmq pymongo
 
 # check if docker exists
 docker_check=$(which docker)
@@ -56,9 +56,9 @@ then
 fi
 
 # install mongodb 3.2 on ubuntu 16.04
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-sudo apt-get update
-sudo apt-get install -y mongodb-org
-sudo systemctl start mongod
-sudo systemctl status mongod
+apt-get update
+apt-get install -y mongodb-org
+systemctl start mongod
+systemctl status mongod
