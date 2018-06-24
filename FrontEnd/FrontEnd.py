@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 m_addr = None
 m_port = None
-m_db = None
+m_db = 'RESTfulSwarmDB'
 socket = None
 
 
@@ -46,14 +46,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-ma', '--maddr', type=str, help='MongoDB node address.')
     parser.add_argument('-mp', '--mport', type=str, help='MongoDB node port number.')
-    parser.add_argument('-db', '--database', type=str, help='MongoDB database name.')
     args = parser.parse_args()
 
     # db
     m_addr = args.maddr
     m_port = args.mport
-    m_db = args.database
     m_client = mhelper.get_client(address=m_addr, port=m_port)
     m_db = mhelper.get_db(m_client, m_db)
-
     socket = zmq.csConnect(m_addr, m_port)

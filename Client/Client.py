@@ -24,7 +24,7 @@ if __name__ == '__main__':
     fe_port = args.port
     while True:
         try:
-            json_path = input('Job Json file path:')
+            json_path = input('Job Info Json file path:')
             with open(json_path, 'r') as f:
                 data = json.load(f)
             newJob(data)
