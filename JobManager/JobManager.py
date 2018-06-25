@@ -4,6 +4,8 @@
 
 import os
 import sys
+from JobManager import Scheduler
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import requests
@@ -12,7 +14,6 @@ import json
 import threading
 import ZMQHelper as zmq
 import MongoDBHelper as mHelper
-from JobManager import Scheduler
 
 
 class JobManager:
