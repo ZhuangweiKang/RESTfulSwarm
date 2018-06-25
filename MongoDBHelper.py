@@ -7,7 +7,7 @@ import pymongo as mg
 
 # return a mongodb client
 def get_client(address, port=27017):
-    return mg.MongoClient(address, port)
+    return mg.MongoClient(address, username='admin', password='kzw', authSource='RESTfulSwarmDB', authMechanism='SCRAM-SHA-1')
 
 
 # return a database object
