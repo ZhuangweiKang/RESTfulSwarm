@@ -196,12 +196,12 @@ class JobManager:
             col_data = mHelper.find_col(job_col)[0]
 
             # core request format: {$task_name: $core}}
-            core_requests = []
+            core_requests = {}
             # memory request format: {$task_name: $mem}
-            mem_requests = []
+            mem_requests = {}
             for task in col_data['job_info']['tasks'].items():
-                core_requests.append({task[0]: task[1]['cpu_count']})
-                mem_requests.append({task[0]: task[1]['mem_limit']})
+                core_requests.update({task[0]: task[1]['cpu_count']})
+                mem_requests.update({task[0]: task[1]['mem_limit']})
 
             # !!! Assuming we have enough capacity to hold any job
             # check resources
