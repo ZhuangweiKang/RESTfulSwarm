@@ -4,15 +4,17 @@
 
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 import requests
 import argparse
 import json
 import threading
+from .Scheduler import Scheduler
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import ZMQHelper as zmq
 import MongoDBHelper as mHelper
-from JobManager import Scheduler
+
 
 class JobManager:
     def __init__(self, gm_addr, gm_port, db, scheduler):
