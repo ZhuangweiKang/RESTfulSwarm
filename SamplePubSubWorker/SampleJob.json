@@ -4,7 +4,7 @@
     "network": {
       "name": "kangNetwork",
       "driver": "overlay",
-      "subnet": "10.52.0.114/24"
+      "subnet": "10.52.0.34/24"
     },
     "tasks": {
       "kang_Publisher": {
