@@ -4,14 +4,13 @@
 
 import os
 import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import requests
 import argparse
 import json
 import threading
-import Scheduler
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
+from Scheduler import Scheduler
 import ZMQHelper as zmq
 import MongoDBHelper as mHelper
 
