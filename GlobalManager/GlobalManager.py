@@ -17,8 +17,8 @@ import MongoDBHelper as mg
 
 app = Flask(__name__)
 
-host_addr = utl.getHostIP()
-dockerClient = dHelper.setClient()
+host_addr = None
+dockerClient = None
 pubSocket = None
 
 m_addr = None
@@ -223,6 +223,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     g_addr = args.gaddr
     gport = args.gport
+
+    host_addr = utl.getHostIP()
+    dockerClient = dHelper.setClient()
 
     # mongodb
     m_addr = args.maddr

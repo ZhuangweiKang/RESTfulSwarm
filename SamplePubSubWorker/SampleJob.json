@@ -7,8 +7,8 @@
       "subnet": "10.52.0.114/24"
     },
     "tasks": {
-      "Publisher": {
-        "container_name": "Publisher",
+      "kang_Publisher": {
+        "container_name": "kang_Publisher",
         "image": "zhuangweikang/publisher",
         "detach": true,
         "command": "",
@@ -17,8 +17,8 @@
         "ports": {},
         "volumes": {}
       },
-      "Subscriber": {
-        "container_name": "Subscriber",
+      "kang_Subscriber": {
+        "container_name": "kang_Subscriber",
         "image": "zhuangweikang/subscriber",
         "detach": true,
         "command": "python SubscribeData.py -a 10.52.0.2 -p 3000",

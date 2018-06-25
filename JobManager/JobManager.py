@@ -241,12 +241,12 @@ if __name__ == '__main__':
     fe_notify_thr.start()
 
     while True:
-        print('--------------RESTfulSwarmLiveMigration Menu--------------')
+        print('--------------RESTfulSwarm Menu--------------')
         print('1. Init Swarm')
-        print('2. Create Task(one container)')
+        print('2. Create task(one container)')
         print('3. Check point a group containers')
-        print('4. Migrate Container')
-        print('5. Create Job(a group of containers)')
+        print('4. Migrate a container')
+        print('5. Migrate a group of containers')
         print('6. Update Container')
         print('7. Leave Swarm')
         print('8. Describe Workers')
