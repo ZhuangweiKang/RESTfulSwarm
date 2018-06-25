@@ -216,9 +216,9 @@ def describeManager(hostname):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-ga', '--gaddr', type=str, help='The IP address of your Global Manager node.')
-    parser.add_argument('-gp', '--gport', type=int, help='The port number you want to run your manager node.')
+    parser.add_argument('-gp', '--gport', type=int, default=5000, help='The port number you want to run your manager node.')
     parser.add_argument('-ma', '--maddr', type=str, help='MongoDB address.')
-    parser.add_argument('-mp', '--mport', type=int, help='MongoDB port.')
+    parser.add_argument('-mp', '--mport', type=int, default=27017, help='MongoDB port.')
     args = parser.parse_args()
     g_addr = args.gaddr
     gport = args.gport

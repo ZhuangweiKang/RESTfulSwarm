@@ -2,6 +2,10 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import requests
 import argparse
 import json
@@ -215,7 +219,7 @@ class JobManager:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-ga', '--gaddr', type=str, help='Global manager node address.')
-    parser.add_argument('-gp', '--gport', type=str, help='Global manager node port number.')
+    parser.add_argument('-gp', '--gport', type=str, default='3100', help='Global manager node port number.')
     parser.add_argument('-ma', '--maddr', type=str, help='MongoDB node address.')
     parser.add_argument('-mp', '--mport', type=int, default=27017, help='MongoDB port number.')
     args = parser.parse_args()
