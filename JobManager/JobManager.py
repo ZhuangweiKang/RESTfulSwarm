@@ -8,7 +8,7 @@ import requests
 import argparse
 import json
 import threading
-from JobManager.Scheduler import Scheduler
+from JobManager import Scheduler
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
