@@ -236,7 +236,7 @@ if __name__ == '__main__':
 
     job_manager = JobManager(gm_addr=gm_addr, gm_port=gm_port, db=db, scheduler=scheduler)
 
-    fe_notify_thr = threading.Thread(target=job_manager.newJobNotify, args=(mongo_addr, mongo_port, ))
+    fe_notify_thr = threading.Thread(target=job_manager.newJobNotify, args=())
     fe_notify_thr.setDaemon(True)
     fe_notify_thr.start()
 
