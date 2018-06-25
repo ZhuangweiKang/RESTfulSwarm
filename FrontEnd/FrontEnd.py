@@ -38,6 +38,8 @@ def requestNewJob():
     socket.send_string(msg)
     socket.recv_string()
 
+    return 'OK'
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
