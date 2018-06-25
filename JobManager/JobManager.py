@@ -201,6 +201,7 @@ class JobManager:
             mem_requests = {}
             for task in col_data['job_info']['tasks'].items():
                 core_requests.update({task[0]: task[1]['cpu_count']})
+                core_requests.update({task[0]: task[1]['cpu_count']})
                 mem_requests.update({task[0]: task[1]['mem_limit']})
 
             # !!! Assuming we have enough capacity to hold any job

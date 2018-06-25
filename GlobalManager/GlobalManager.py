@@ -36,7 +36,7 @@ def init():
     try:
         pubSocket = zmq.bind('3100')
         initSwarmEnv()
-        response = 'OK: Initialize Swarm environment and create network succeed.'
+        response = 'OK: Initialize Swarm environment succeed.'
     except Exception as ex:
         response = 'Error: %s' % ex
     return response
