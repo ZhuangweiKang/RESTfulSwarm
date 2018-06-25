@@ -154,10 +154,10 @@ class Worker:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-ma', '--manager_addr', type=str, help='Manager IP address.')
+    parser.add_argument('-ga', '--gaddr', type=str, help='Global Manager IP address.')
     parser.add_argument('-sa', '--self_addr', type=str, help='Self IP address')
     args = parser.parse_args()
-    manager_addr = args.manager_addr
+    manager_addr = args.gaddr
     self_addr = args.self_addr
     worker = Worker(manager_addr, self_addr)
     worker.main()
