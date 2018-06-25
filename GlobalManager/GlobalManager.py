@@ -9,6 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import json
 from flask import *
 import time
+import utl
 import argparse
 import DockerHelper as dHelper
 import ZMQHelper as zmq
@@ -16,7 +17,7 @@ import MongoDBHelper as mg
 
 app = Flask(__name__)
 
-host_addr = None
+host_addr = utl.getHostIP()
 dockerClient = dHelper.setClient()
 pubSocket = None
 
