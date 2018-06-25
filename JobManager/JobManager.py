@@ -226,7 +226,7 @@ if __name__ == '__main__':
     gm_addr = args.gaddr
     gm_port = args.gport
 
-    mongo_addr = args.mmaddr
+    mongo_addr = args.maddr
     mongo_port = args.mport
 
     db_name = 'RESTfulSwarmDB'
