@@ -8,6 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import requests
 import argparse
+import utl
 import json
 import threading
 from Scheduler import Scheduler
@@ -59,9 +60,10 @@ class JobManager:
             job_info = list(job_col.find({}))[0]
             cores = job_info['job_info']['tasks'][container]['cpuset_cpus']
             cores = cores.split(',')
+
             # get memory info from source node
             mem_limits = job_info['job_info']['tasks'][container]['mem_limit']
-            mem_limits = int(mem_limits.split()[0])
+            mem_limits = utl.memory_size_translator(mem_limits)
 
             # get free cores from destination node
             free_cores = []
@@ -89,12 +91,12 @@ class JobManager:
 
             # get free memory from both source node and destination node
             src_worker_info = list(self.workersInfoCol.find({'hostname': src_node_name}))[0]
-            src_free_mem = int(src_worker_info['MemFree'].split()[0])
-            new_free_mem = int(dest_node_info['MemFree'].split()[0])
+            src_free_mem = src_worker_info['MemFree']
+            new_free_mem = dest_node_info['MemFree']
 
             # update memory field in both source node and destination node
-            update_src_mem = str(src_free_mem + mem_limits) + ' kB'
-            update_dest_mem = str(new_free_mem - mem_limits) + ' kB'
+            update_src_mem = str(utl.memory_size_translator(src_free_mem) + utl.memory_size_translator(mem_limits)) + 'm'
+            update_dest_mem = str(utl.memory_size_translator(new_free_mem) - utl.memory_size_translator(mem_limits)) + 'm'
 
             mHelper.update_doc(self.workersInfoCol, 'hostname', src_node_name, 'MemFree', update_src_mem)
             mHelper.update_doc(self.workersInfoCol, 'hostname', dest_node_name, 'MemFree', update_dest_mem)
@@ -151,14 +153,14 @@ class JobManager:
             key = 'CPUs.%s' % core
             mHelper.update_doc(self.workersInfoCol, 'hostname', node, key, True)
 
-        # update memory, and we assuming memory unit is always kB
-        current_mem = int(current_mem.split()[0])
+        # update memory, and we assuming memory unit is always m
+        current_mem = utl.memory_size_translator(current_mem)
         worker_info = list(self.workersInfoCol.find({'hostname': node}))[0]
-        free_mem = int(worker_info['MemFree'].split()[0])
+        free_mem = utl.memory_size_translator(worker_info['MemFree'])
         current_mem = free_mem + current_mem
-        new_mem = int(new_mem.split()[0])
+        new_mem = utl.memory_size_translator(new_mem)
         current_mem -= new_mem
-        current_mem = str(current_mem) + ' kB'
+        current_mem = str(current_mem) + 'm'
         mHelper.update_doc(self.workersInfoCol, 'hostname', node, 'MemFree', current_mem)
 
         url = 'http://%s:%s/RESTfulSwarm/GM/requestUpdateContainer' % (self.gm_addr, self.gm_port)

@@ -81,9 +81,9 @@ class Worker:
                 newInfo = json.loads(' '.join(msg[1:]))
                 container_name = newInfo['container_name']
                 cpuset_cpus = newInfo['cpuset_cpus']
-                mem_limits = newInfo['mem_limits']
-                dHelper.updateContainer(self.dockerClient, container_name=container_name, cpuset_cpus=cpuset_cpus, mem_limit=mem_limits)
-                self.logger.info('Updated cpuset_cpus to %s, mem_limits to %s' % (cpuset_cpus, mem_limits))
+                mem_limit = newInfo['mem_limit']
+                dHelper.updateContainer(self.dockerClient, container_name=container_name, cpuset_cpus=cpuset_cpus, mem_limit=mem_limit)
+                self.logger.info('Updated cpuset_cpus to %s, mem_limits to %s' % (cpuset_cpus, mem_limit))
             elif msg_type == 'leave':
                 dHelper.leaveSwarm(self.dockerClient)
                 self.logger.info('Leave Swarm environment.')

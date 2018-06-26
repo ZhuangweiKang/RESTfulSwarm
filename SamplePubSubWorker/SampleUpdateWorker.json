@@ -3,5 +3,5 @@
   "node": "kang2",
   "container": "kang_Publisher",
   "cpuset_cpus": "1,2",
-  "mem_limits": "20m"
+  "mem_limit": "20m"
 }

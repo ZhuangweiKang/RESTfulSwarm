@@ -148,4 +148,26 @@ def get_total_cores():
 def get_total_mem():
     meminfo = open('/proc/meminfo').read()
     memfree = re.search('MemFree:\s+(\d+)', meminfo)
-    return memfree.group(0).split()[1]
+    memfree = memfree.group(0).split()[1]
+    return memory_size_translator(memfree)
+
+
+# convert memory size to mB
+def memory_size_translator(mem_size):
+    '''
+    :param mem_size: b/k/m/g
+    :return: mem_size: m
+    '''
+    # remove 'B' and blank from input str
+    mem_size = mem_size.replace(' ', '')
+    mem_size = mem_size.replace('B', '')
+    num = float(re.findall(r"\d+\.?\d*", mem_size)[0])
+    unit = mem_size[-1]
+    if unit == 'm':
+        return num
+    elif unit == 'k':
+        return num / 1000
+    elif unit == 'b':
+        return num / 1000 / 1000
+    elif unit == 'g':
+        return num * 1000
