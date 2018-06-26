@@ -89,6 +89,7 @@ class Scheduler:
         :param free_cores: a list of free resources
         :return: A list of tuples, best fit result [($request_index: $resource_index)] if scheduling successful, or None if failed
         '''
+        print(req_cores, free_cores)
         result = []
         for j, req in enumerate(req_cores):
             temp = []
