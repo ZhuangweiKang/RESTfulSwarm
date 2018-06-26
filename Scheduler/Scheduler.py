@@ -37,7 +37,7 @@ class Scheduler:
         bf_result = self.best_fit(req_cores, free_cores)
 
         result = []
-        mem_request_arr = mem_request.values()
+        mem_request_arr = list(mem_request.values())
         if bf_result is not None:
             for index, item in enumerate(bf_result):
                 # get any n cores from all free cores because the amount of free cores may be more than requested cores
