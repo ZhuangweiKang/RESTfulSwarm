@@ -9,20 +9,24 @@
     "tasks": {
       "kang_Publisher": {
         "container_name": "kang_Publisher",
+        "node": "",
         "image": "zhuangweikang/publisher",
         "detach": true,
         "command": "",
         "cpu_count": 3,
+        "cpuset_cpus": "",
         "mem_limit": "10m",
         "ports": {},
         "volumes": {}
       },
       "kang_Subscriber": {
         "container_name": "kang_Subscriber",
+        "node": "",
         "image": "zhuangweikang/subscriber",
         "detach": true,
         "command": "python SubscribeData.py -a 10.52.0.2 -p 3000",
         "cpu_count": 2,
+        "cpuset_cpus": "",
         "mem_limit": "10m",
         "ports": {},
         "volumes": {}
