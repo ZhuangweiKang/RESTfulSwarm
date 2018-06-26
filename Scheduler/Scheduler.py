@@ -27,7 +27,7 @@ class Scheduler:
                     available_workers[worker['hostname']].append(cpu)
 
         # request cores number for each task, etc. [2, 3, 1]
-        req_cores = core_request.values()
+        req_cores = list(core_request.values())
 
         # the amount of free cores of each worker node
         free_cores = []
