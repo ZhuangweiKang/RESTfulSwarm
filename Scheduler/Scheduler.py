@@ -26,6 +26,8 @@ class Scheduler:
                 if worker['CPUs'][cpu] is False:
                     available_workers[worker['hostname']].append(cpu)
 
+        print(available_workers)
+
         # request cores number for each task, etc. [2, 3, 1]
         req_cores = list(core_request.values())
 
@@ -40,16 +42,19 @@ class Scheduler:
 
         result = []
         mem_request_arr = list(mem_request.values())
+
         if bf_result is not None:
             for index, item in enumerate(bf_result):
+                '''
                 # get any n cores from all free cores because the amount of free cores may be more than requested cores
                 temp1 = []
                 for j in range(list(core_request.values())[item[0]]):
                     temp1.append(list(available_workers.values())[item[1]][j])
+                '''
 
                 temp = (list(core_request.keys())[item[0]],
                         list(available_workers.keys())[item[1]],
-                        temp1)
+                        list(available_workers.values())[item[1]])
                 result.append(temp)
 
                 # update free memory
@@ -65,7 +70,6 @@ class Scheduler:
             return None
 
     def update_job_info(self, job_name, schedule):
-        print(schedule)
         for item in schedule:
             job_col = mg.get_col(self.db, job_name)
             job_filter = 'job_info.tasks.%s.name' % item[0]
@@ -79,7 +83,6 @@ class Scheduler:
             job_col.update({job_filter: item[0]}, {target: ','.join(item[2])})
 
     def update_workers_info(self, schedule):
-        print(schedule)
         for item in schedule:
             for core in item[2]:
                 self.workers_col.update({'hostname': item[1]}, {('CPUs.' + str(core)): True})
@@ -89,7 +92,7 @@ class Scheduler:
         Best fit algorithm for scheduling resources
         :param req_cores: a list of requested resources (cpu cores)
         :param free_cores: a list of free resources
-        :return: A list of tuples, best fit result [($request_index: $resource_index)] if scheduling successful, or None if failed
+        :return: A list of tuples, best fit result [($request_index, $resource_index)] if scheduling successful, or None if failed
         '''
         print(req_cores, free_cores)
         result = []
