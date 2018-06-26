@@ -63,6 +63,7 @@ class Scheduler:
             return None
 
     def update_job_info(self, job_name, schedule):
+        print(schedule)
         for item in schedule:
             job_col = mg.get_col(self.db, job_name)
             job_filter = 'job_info.tasks.%s.name' % item[0]
@@ -75,8 +76,9 @@ class Scheduler:
             target = 'job_info.tasks.%s.cpuset_cpus' % item[0]
             job_col.update({job_filter: item[0]}, {target: ','.join(item[2])})
 
-    def update_workers_info(self, resource_check_result):
-        for item in resource_check_result:
+    def update_workers_info(self, schedule):
+        print(schedule)
+        for item in schedule:
             for core in item[2]:
                 self.workers_col.update({'hostname': item[1]}, {('CPUs.' + str(core)): True})
 
