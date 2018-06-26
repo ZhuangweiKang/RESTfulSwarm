@@ -43,18 +43,18 @@ class Scheduler:
         result = []
         mem_request_arr = list(mem_request.values())
 
+        flag = 0
         if bf_result is not None:
             for index, item in enumerate(bf_result):
-                '''
                 # get any n cores from all free cores because the amount of free cores may be more than requested cores
                 temp1 = []
                 for j in range(list(core_request.values())[item[0]]):
-                    temp1.append(list(available_workers.values())[item[1]][j])
-                '''
+                    temp1.append(list(available_workers.values())[item[1]][flag])
+                    flag += 1
 
                 temp = (list(core_request.keys())[item[0]],
                         list(available_workers.keys())[item[1]],
-                        list(available_workers.values())[item[1]])
+                        temp1)
                 result.append(temp)
 
                 # update free memory
