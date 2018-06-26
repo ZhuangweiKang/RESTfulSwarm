@@ -149,7 +149,7 @@ def get_total_mem():
     meminfo = open('/proc/meminfo').read()
     memfree = re.search('MemFree:\s+(\d+)', meminfo)
     memfree = memfree.group(0).split()[1]
-    return memory_size_translator(memfree)
+    return str(memory_size_translator(memfree)) + 'm'
 
 
 # convert memory size to mB
