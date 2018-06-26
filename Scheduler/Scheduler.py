@@ -69,16 +69,16 @@ class Scheduler:
 
             # add node filed
             target = 'job_info.tasks.%s.node' % item[0]
-            job_col.update({job_filter: item[0]}, {'$set': {target: item[1]}})
+            job_col.update({job_filter: item[0]}, {target: item[1]})
 
             # add cpuset_cpus field
             target = 'job_info.tasks.%s.cpuset_cpus' % item[0]
-            job_col.update({job_filter: item[0]}, {'$set': {target: ','.join(item[2])}})
+            job_col.update({job_filter: item[0]}, {target: ','.join(item[2])})
 
     def update_workers_info(self, resource_check_result):
         for item in resource_check_result:
             for core in item[2]:
-                self.workers_col.update({'hostname': item[1]}, {'CPUs.' + str(core): True})
+                self.workers_col.update({'hostname': item[1]}, {('CPUs.' + str(core)): True})
 
     def best_fit(self, req_cores, free_cores):
         '''
