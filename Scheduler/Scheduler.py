@@ -78,7 +78,7 @@ class Scheduler:
     def update_workers_info(self, resource_check_result):
         for item in resource_check_result:
             for core in item[2]:
-                self.workers_col.update({'hostname': item[1]}, {str(core): True})
+                self.workers_col.update({'hostname': item[1]}, {'CPUs.' + str(core): True})
 
     def best_fit(self, req_cores, free_cores):
         '''

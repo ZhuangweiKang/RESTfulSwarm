@@ -206,9 +206,14 @@ class JobManager:
                 core_requests.update({task[0]: task[1]['cpu_count']})
                 mem_requests.update({task[0]: task[1]['mem_limit']})
 
+            print(col_data)
+
             # !!! Assuming we have enough capacity to hold any job
             # check resources
             schedule = scheduler.schedule_resources(core_request=core_requests, mem_request=mem_requests)
+
+            print(schedule)
+
             if schedule is not None:
                 self.scheduler.update_job_info(job_name, schedule)
 
