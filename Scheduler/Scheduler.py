@@ -87,7 +87,8 @@ class Scheduler:
         print(schedule)
         for item in schedule:
             for core in item[2]:
-                self.workers_col.update({'hostname': item[1]}, {('CPUs.' + str(core)): True})
+                target = 'CPUs.%s' % str(core)
+                self.workers_col.update({'hostname': item[1]}, {target: True})
 
     def best_fit(self, req_cores, free_cores):
         '''
