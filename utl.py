@@ -148,7 +148,7 @@ def get_total_cores():
 def get_total_mem():
     meminfo = open('/proc/meminfo').read()
     memfree = re.search("MemFree:\s+(\d+)", meminfo)
-    memfree = memfree.group(0).split()[1]
+    memfree = str(memfree.group(0).split()[1]) + 'k'
     return str(memory_size_translator(memfree)) + 'm'
 
 
