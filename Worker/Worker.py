@@ -145,6 +145,7 @@ class Worker:
             'CPUs': utl.get_total_cores(),
             'MemFree': utl.get_total_mem()
         }
+        print(json_info)
         print(requests.post(url=url, json=json_info).content)
 
     def requestLeaveSwarm(self):

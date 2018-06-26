@@ -80,7 +80,6 @@ def init_worker_info(hostname, cpus, memfree):
         'CPUs': cores,
         'MemFree': memfree
     }
-    print(worker_info)
     # Write initial worker information into database
     mg.insert_doc(worker_col, worker_info)
 
