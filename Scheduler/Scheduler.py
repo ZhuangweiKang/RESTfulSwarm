@@ -77,18 +77,18 @@ class Scheduler:
 
             # add node filed
             target = 'job_info.tasks.%s.node' % item[0]
-            job_col.update({job_filter: item[0]}, {target: item[1]})
+            mg.update_doc(job_col, job_filter, item[0], target, item[1])
 
             # add cpuset_cpus field
             target = 'job_info.tasks.%s.cpuset_cpus' % item[0]
-            job_col.update({job_filter: item[0]}, {target: ','.join(item[2])})
+            mg.update_doc(job_col, job_filter, item[0], target, ','.join(item[2]))
 
     def update_workers_info(self, schedule):
         print(schedule)
         for item in schedule:
             for core in item[2]:
                 target = 'CPUs.%s' % str(core)
-                self.workers_col.update({'hostname': item[1]}, {target: True})
+                mg.update_doc(self.workers_col, 'hostname', item[1], target, True)
 
     def best_fit(self, req_cores, free_cores):
         '''
