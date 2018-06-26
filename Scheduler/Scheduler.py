@@ -37,6 +37,7 @@ class Scheduler:
         bf_result = self.best_fit(req_cores, free_cores)
 
         result = []
+        mem_request_arr = mem_request.values()
         if bf_result is not None:
             for index, item in enumerate(bf_result):
                 # get any n cores from all free cores because the amount of free cores may be more than requested cores
@@ -52,7 +53,7 @@ class Scheduler:
                 # update free memory
                 worker_info = list(self.workers_col.find({'hostname': list(available_workers.keys())[item[1]]}))[0]
                 new_free_mem = utl.memory_size_translator(worker_info['MemFree'])
-                request_mem = utl.memory_size_translator(mem_request[index])
+                request_mem = utl.memory_size_translator(mem_request_arr[index])
                 new_free_mem -= request_mem
                 new_free_mem = str(new_free_mem) + 'm'
                 mg.update_doc(self.workers_col, 'hostname', list(available_workers.keys())[item[1]], 'MemFree', new_free_mem)
