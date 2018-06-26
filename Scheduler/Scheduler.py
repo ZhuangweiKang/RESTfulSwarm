@@ -69,11 +69,11 @@ class Scheduler:
 
             # add node filed
             target = 'job_info.tasks.%s.node' % item[0]
-            job_col.update({job_filter: item[0]}, {'$set': {target: item[1]}}, upsert=True)
+            job_col.update({job_filter: item[0]}, {'$set': {target: item[1]}})
 
             # add cpuset_cpus field
             target = 'job_info.tasks.%s.cpuset_cpus' % item[0]
-            job_col.update({job_filter: item[0]}, {'$set': {target: ','.join(item[2])}}, upsert=True)
+            job_col.update({job_filter: item[0]}, {'$set': {target: ','.join(item[2])}})
 
     def update_workers_info(self, resource_check_result):
         for item in resource_check_result:
