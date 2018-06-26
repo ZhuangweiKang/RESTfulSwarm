@@ -196,7 +196,7 @@ class JobManager:
             job_name = msg[1]
             job_col = mHelper.get_col(self.db, job_name)
             col_data = mHelper.find_col(job_col)[0]
-
+            print(col_data)
             # core request format: {$task_name: $core}}
             core_requests = {}
             # memory request format: {$task_name: $mem}
