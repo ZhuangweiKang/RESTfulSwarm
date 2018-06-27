@@ -95,8 +95,8 @@ class JobManager:
             new_free_mem = dest_node_info['MemFree']
 
             # update memory field in both source node and destination node
-            update_src_mem = str(utl.memory_size_translator(src_free_mem) + utl.memory_size_translator(mem_limit)) + 'm'
-            update_dest_mem = str(utl.memory_size_translator(new_free_mem) - utl.memory_size_translator(mem_limit)) + 'm'
+            update_src_mem = str(utl.memory_size_translator(src_free_mem) + mem_limit) + 'm'
+            update_dest_mem = str(utl.memory_size_translator(new_free_mem) - mem_limit) + 'm'
 
             mHelper.update_doc(self.workersInfoCol, 'hostname', src_node_name, 'MemFree', update_src_mem)
             mHelper.update_doc(self.workersInfoCol, 'hostname', dest_node_name, 'MemFree', update_dest_mem)
