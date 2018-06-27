@@ -9,7 +9,7 @@ import argparse
 
 def main(address, port):
     logger = doLog()
-    socket = zmq.connect(address, port)
+    socket = zmq.multicast_consumer(address, port)
     zmq.subscribeTopic(socket, 'number')
     while True:
         data = socket.recv()
@@ -40,7 +40,7 @@ def doLog():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-a', '--address', type=str, help='IP address of publisher container.')
-    parser.add_argument('-p', '--port', type=str, help='Port number of publisher container.')
+    parser.add_argument('-p', '--port', type=str, default='3000', help='Port number of publisher container.')
     args = parser.parse_args()
     address = args.address
     port = args.port

@@ -9,9 +9,10 @@ import ZMQHelper as zmq
 GlobalManager publishes numbers like a busybox container
 '''
 def main():
+    broadcast_addr = '10.52.3.255'
     port = '3000'
     topic = 'number'
-    socket = zmq.bind(port)
+    socket = zmq.multicast_producer(broadcast_addr, port)
     i = 0
     while True:
         socket.send('%s %s' % (topic, str(i)))
