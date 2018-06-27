@@ -116,7 +116,7 @@ class Scheduler:
         :param container_name:
         :return: return node hostname
         '''
-        collections = self.db.list_all_collection_names()
+        collections = self.db.collection_names(include_system_collections=False)
         temp = []
         for collection in collections:
             filter_key = 'job_info.tasks.%s.container_name' % container_name
