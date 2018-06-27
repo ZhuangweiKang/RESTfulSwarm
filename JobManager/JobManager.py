@@ -282,7 +282,7 @@ if __name__ == '__main__':
                 with open(migrate_json, 'r') as f:
                     data = json.load(f)
                 for item in data:
-                    job_manager.doMigrate(data)
+                    job_manager.doMigrate(item)
             elif get_input == 6:
                 json_path = input('New resource configuration Json file:')
                 with open(json_path, 'r') as f:
