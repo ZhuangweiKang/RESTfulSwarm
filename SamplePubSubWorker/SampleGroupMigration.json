@@ -9,6 +9,7 @@
         "node": "kang4",
         "image": "zhuangweikang/publisher",
         "detach": true,
+        "network": "kangNetwork",
         "command": "",
         "cpu_count": 3,
         "cpuset_cpus": "28,0,22",
@@ -25,6 +26,7 @@
     "info": {
         "container_name": "kang_Subscriber",
         "node": "kang4",
+        "network": "kangNetwork",
         "image": "zhuangweikang/subscriber",
         "detach": true,
         "command": "",
