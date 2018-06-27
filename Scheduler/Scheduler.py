@@ -68,7 +68,7 @@ class Scheduler:
     def update_job_info(self, job_name, schedule):
         for item in schedule:
             job_col = mg.get_col(self.db, job_name)
-            job_filter = 'job_info.tasks.%s.name' % item[0]
+            job_filter = 'job_info.tasks.%s.container_name' % item[0]
 
             print(job_filter)
 
@@ -122,7 +122,7 @@ class Scheduler:
         collections = self.db.list_all_collection_names()
         temp = []
         for collection in collections:
-            filter_key = 'job_info.tasks.%s.name' % container_name
+            filter_key = 'job_info.tasks.%s.container_name' % container_name
             jobs_col = mg.get_col(self.db, collection)
             temp = list(jobs_col.find({filter_key: container_name}))
             if len(temp) != 0:
