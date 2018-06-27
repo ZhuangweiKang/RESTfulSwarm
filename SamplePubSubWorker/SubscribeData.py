@@ -9,7 +9,7 @@ import argparse
 
 def main(address, port):
     logger = doLog()
-    socket = zmq.multicast_consumer(address, port)
+    socket = zmq.connect(address, port)
     zmq.subscribeTopic(socket, 'number')
     while True:
         data = socket.recv()
