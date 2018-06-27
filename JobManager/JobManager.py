@@ -40,7 +40,7 @@ class JobManager:
     # Migrate a container
     # !!!Note: Assuming destination node always has enough cores to hold the migrated container
     def doMigrate(self, data):
-        dest_node_name = data['to'].split('@')[0]
+        dest_node_name = (data['to'].split('@'))[0]
         dest_node_info = self.scheduler.get_node_info(dest_node_name)
         if dest_node_info is None:
             print('Migration failed, because node %s is not in Swarm environment.')
