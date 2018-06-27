@@ -196,7 +196,6 @@ class JobManager:
             job_name = msg[1]
             job_col = mHelper.get_col(self.db, job_name)
             col_data = mHelper.find_col(job_col)[0]
-            print(col_data)
             # core request format: {$task_name: $core}}
             core_requests = {}
             # memory request format: {$task_name: $mem}
@@ -219,7 +218,7 @@ class JobManager:
 
                 col_data = mHelper.find_col(job_col)[0]
                 del col_data['_id']
-                print(col_data)
+
                 print(requests.post(url=url, json=col_data).content)
 
 

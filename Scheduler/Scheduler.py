@@ -36,8 +36,6 @@ class Scheduler:
 
         bf_result = self.best_fit(req_cores, free_cores)
 
-        print(bf_result)
-
         result = []
         mem_request_arr = list(mem_request.values())
 
