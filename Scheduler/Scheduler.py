@@ -70,8 +70,6 @@ class Scheduler:
             job_col = mg.get_col(self.db, job_name)
             job_filter = 'job_info.tasks.%s.container_name' % item[0]
 
-            print(job_filter)
-
             # add node filed
             target = 'job_info.tasks.%s.node' % item[0]
             mg.update_doc(job_col, job_filter, item[0], target, item[1])
@@ -93,7 +91,6 @@ class Scheduler:
         :param free_cores: a list of free resources
         :return: A list of tuples, best fit result [($request_index, $resource_index)] if scheduling successful, or None if failed
         '''
-        print(req_cores, free_cores)
         result = []
         for j, req in enumerate(req_cores):
             temp = []
