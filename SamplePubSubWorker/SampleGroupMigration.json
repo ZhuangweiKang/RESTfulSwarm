@@ -2,8 +2,8 @@
   {
     "job": "kang",
     "container": "kang_Publisher",
-    "from": "kang4@10.52.0.115",
-    "to": "kang6@10.52.0.231",
+    "from": "kang6@10.52.0.231",
+    "to": "kang4@10.52.0.115",
     "info": {
         "container_name": "kang_Publisher",
         "node": "kang4",
@@ -12,7 +12,7 @@
         "network": "kangNetwork",
         "command": "",
         "cpu_count": 3,
-        "cpuset_cpus": "28,0,22",
+        "cpuset_cpus": "46,32,22",
         "mem_limit": "10m",
         "ports": {},
         "volumes": {}
@@ -21,8 +21,8 @@
   {
     "job": "kang",
     "container": "kang_Subscriber",
-    "from": "kang4@10.52.0.115",
-    "to": "kang6@10.52.0.231",
+    "from": "kang6@10.52.0.231",
+    "to": "kang4@10.52.0.115",
     "info": {
         "container_name": "kang_Subscriber",
         "node": "kang4",
@@ -31,7 +31,7 @@
         "detach": true,
         "command": "",
         "cpu_count": 2,
-        "cpuset_cpus": "44,13",
+        "cpuset_cpus": "25,24",
         "mem_limit": "10m",
         "ports": {},
         "volumes": {}
