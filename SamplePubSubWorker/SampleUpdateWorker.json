@@ -1,6 +1,6 @@
 {
   "job": "kang",
-  "node": "kang2",
+  "node": "kang4",
   "container": "kang_Publisher",
   "cpuset_cpus": "1,2",
   "mem_limit": "20m"
