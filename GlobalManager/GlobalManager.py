@@ -106,14 +106,16 @@ def requestNewContainer():
 def requestNewJob():
     data = request.get_json()
     # create overlay network if not exists
-    if dHelper.verifyNetwork(dockerClient, data['job_info']['network']):
+    if dHelper.verifyNetwork(dockerClient, data['job_info']['network']['name']):
         createOverlayNetwork(data['job_info']['network']['name'], data['job_info']['network']['subnet'])
+
     time.sleep(1)
 
     for task in list(data['job_info']['tasks'].keys()):
         data['job_info']['tasks'][task].update({'network': data['job_info']['network']['name']})
 
     print(data)
+
     # deploy job
     for item in data['job_info']['tasks'].values():
         newContainer(item)
