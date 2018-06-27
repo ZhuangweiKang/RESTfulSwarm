@@ -116,7 +116,7 @@ class JobManager:
         new_cpu = data['cpuset_cpus']
         new_mem = data['mem_limit']
         node = data['node']
-        container_name = data['container']
+        container_name = data['container_name']
         job = data['job']
 
         job_col = self.db[job]
