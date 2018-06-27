@@ -41,7 +41,7 @@ def insert_doc(col, data):
 
 
 def update_doc(col, filter_key, filter_value, target_key, target_value):
-    return col.update_one({filter_key: filter_value}, {"$set": {target_key: target_value}}, upsert=True)
+    return col.update_one({filter_key: filter_value}, {"$set": {target_key: target_value}})
 
 
 def delete_document(col, filter_key, filter_val):
