@@ -62,8 +62,8 @@ class JobManager:
             cores = cores.split(',')
 
             # get memory info from source node
-            mem_limits = job_info['job_info']['tasks'][container]['mem_limit']
-            mem_limits = utl.memory_size_translator(mem_limits)
+            mem_limit = job_info['job_info']['tasks'][container]['mem_limit']
+            mem_limit = utl.memory_size_translator(mem_limit)
 
             # get free cores from destination node
             free_cores = []
@@ -95,8 +95,8 @@ class JobManager:
             new_free_mem = dest_node_info['MemFree']
 
             # update memory field in both source node and destination node
-            update_src_mem = str(utl.memory_size_translator(src_free_mem) + utl.memory_size_translator(mem_limits)) + 'm'
-            update_dest_mem = str(utl.memory_size_translator(new_free_mem) - utl.memory_size_translator(mem_limits)) + 'm'
+            update_src_mem = str(utl.memory_size_translator(src_free_mem) + utl.memory_size_translator(mem_limit)) + 'm'
+            update_dest_mem = str(utl.memory_size_translator(new_free_mem) - utl.memory_size_translator(mem_limit)) + 'm'
 
             mHelper.update_doc(self.workersInfoCol, 'hostname', src_node_name, 'MemFree', update_src_mem)
             mHelper.update_doc(self.workersInfoCol, 'hostname', dest_node_name, 'MemFree', update_dest_mem)
@@ -114,7 +114,7 @@ class JobManager:
     def updateContainer(self, data):
         # Update Job Info collection
         new_cpu = data['cpuset_cpus']
-        new_mem = data['mem_limits']
+        new_mem = data['mem_limit']
         node = data['node']
         container_name = data['container']
         job = data['job']
@@ -136,7 +136,7 @@ class JobManager:
         mHelper.update_doc(job_col, filter_key, filter_value, target_key, target_value)
 
         # update memory
-        target_key = 'job_info.tasks.%s.mem_limits' % container_name
+        target_key = 'job_info.tasks.%s.mem_limit' % container_name
         target_value = new_mem
         mHelper.update_doc(job_col, filter_key, filter_value, target_key, target_value)
 
