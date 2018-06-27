@@ -53,7 +53,7 @@ def publish(socket, msg):
 def multicast_producer(broadcast_addr, port):
     context = zmq.Context()
     socket = context.socket(zmq.PUB)
-    connect_str = 'epgm://%s:%s' % (broadcast_addr, port)
+    connect_str = 'pgm://%s:%s' % (broadcast_addr, port)
     socket.connect(connect_str)
     return socket
 
@@ -61,6 +61,6 @@ def multicast_producer(broadcast_addr, port):
 def multicast_consumer(broadcast_addr, port):
     context = zmq.Context()
     socket = context.socket(zmq.SUB)
-    connect_str = 'epgm://%s:%s' % (broadcast_addr, port)
+    connect_str = 'pgm://%s:%s' % (broadcast_addr, port)
     socket.connect(connect_str)
     return socket
