@@ -124,7 +124,7 @@ class LiveMigration:
             tarFile = self.recvTar()
             time.sleep(1)
             checkpoint = tarFile.split('.')[0]
-            container_name = checkpoint.split('_')[0]
+            container_name = checkpoint.split('_')[0] + '_' + checkpoint.split('_')[1]
             if tarFile is not None:
                 self.unTarCheckpoint(fileName=tarFile)
                 self.restoreContainer(checkpoint, container_name, newImage, detail['network'], command=command)
