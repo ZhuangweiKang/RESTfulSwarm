@@ -171,5 +171,3 @@ def memory_size_translator(mem_size):
         return num / 1000 / 1000
     elif unit == 'g':
         return num * 1000
-    else:
-        print(num)

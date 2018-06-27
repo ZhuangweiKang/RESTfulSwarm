@@ -218,6 +218,7 @@ class JobManager:
                 url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (self.gm_addr, self.gm_port)
 
                 col_data = mHelper.find_col(job_col)[0]
+                del col_data['_id']
                 print(col_data)
                 print(requests.post(url=url, json=col_data).content)
 

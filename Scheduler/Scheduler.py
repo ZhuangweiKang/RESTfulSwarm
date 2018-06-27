@@ -26,8 +26,6 @@ class Scheduler:
                 if worker['CPUs'][cpu] is False:
                     available_workers[worker['hostname']].append(cpu)
 
-        print(available_workers)
-
         # request cores number for each task, etc. [2, 3, 1]
         req_cores = list(core_request.values())
 
@@ -70,7 +68,6 @@ class Scheduler:
             return None
 
     def update_job_info(self, job_name, schedule):
-        print(schedule)
         for item in schedule:
             job_col = mg.get_col(self.db, job_name)
             job_filter = 'job_info.tasks.%s.name' % item[0]
@@ -84,7 +81,6 @@ class Scheduler:
             mg.update_doc(job_col, job_filter, item[0], target, ','.join(item[2]))
 
     def update_workers_info(self, schedule):
-        print(schedule)
         for item in schedule:
             for core in item[2]:
                 target = 'CPUs.%s' % str(core)
