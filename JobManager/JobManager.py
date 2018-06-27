@@ -217,7 +217,8 @@ class JobManager:
                 self.scheduler.update_workers_info(schedule)
                 url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (self.gm_addr, self.gm_port)
 
-                # col_data格式有错
+                col_data = mHelper.find_col(job_col)[0]
+                print(col_data)
                 print(requests.post(url=url, json=col_data).content)
 
 
