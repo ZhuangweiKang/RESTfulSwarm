@@ -111,7 +111,7 @@ def requestNewJob():
     time.sleep(1)
 
     for task in list(data['job_info']['tasks'].keys()):
-        data['job_info']['tasks'][task].update({'network': data['job_info']['network']})
+        data['job_info']['tasks'][task].update({'network': data['job_info']['network']['name']})
 
     print(data)
     # deploy job
