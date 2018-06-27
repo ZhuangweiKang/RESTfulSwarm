@@ -110,7 +110,7 @@ def requestNewJob():
         createOverlayNetwork(data['job_info']['network']['name'], data['job_info']['network']['subnet'])
     time.sleep(1)
 
-    for task in data['job_info']['tasks'].keys():
+    for task in list(data['job_info']['tasks'].keys()):
         data['job_info']['tasks'][task].update({'network': data['job_info']['network']})
 
     print(data)
