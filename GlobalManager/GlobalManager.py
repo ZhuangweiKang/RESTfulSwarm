@@ -110,6 +110,9 @@ def requestNewJob():
         createOverlayNetwork(data['job_info']['network']['name'], data['job_info']['network']['subnet'])
     time.sleep(1)
 
+    for task in data['job_info']['tasks'].keys():
+        data['job_info']['tasks'][task].update({'network': data['job_info']['network']})
+
     # deploy job
     for item in data['job_info']['tasks'].values():
         newContainer(item)
