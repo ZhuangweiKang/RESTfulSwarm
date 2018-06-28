@@ -9,23 +9,26 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import requests
 import argparse
 import utl
+import time
 import json
 import threading
-from Scheduler import Scheduler
+from Scheduler import BestFitScheduler
 import ZMQHelper as zmq
 import MongoDBHelper as mHelper
 
 
 class JobManager:
-    def __init__(self, gm_addr, gm_port, db, scheduler):
+    def __init__(self, gm_addr, gm_port, db, scheduler, wait):
         self.gm_addr = gm_addr
         self.gm_port = gm_port
         self.db = db
         self.scheduler = scheduler
         self.workersInfoCol = self.db['WorkersInfo']
+        self.wait = wait
 
         # listening msg from FrontEnd
         self.socket = zmq.csBind(port='2990')
+        self.socket.RCVTIMEO = 5000
 
     # Initialize global manager(Swarm manager node)
     def init_gm(self):
@@ -187,11 +190,17 @@ class JobManager:
         print(requests.post(url=url, json=data).content)
 
     def newJobNotify(self):
+        job_queue = []
+        timer = time.time()
         while True:
             msg = self.socket.recv_string()
             self.socket.send_string('Ack')
             msg = msg.split()
+            job_queue.append(msg)
+            if time.time() - timer >= self.wait:
+                break
 
+        def preprocess_job(msg):
             # read db, parse job resources request
             job_name = msg[1]
             job_col = mHelper.get_col(self.db, job_name)
@@ -204,22 +213,33 @@ class JobManager:
                 core_requests.update({task[0]: task[1]['cpu_count']})
                 core_requests.update({task[0]: task[1]['cpu_count']})
                 mem_requests.update({task[0]: task[1]['mem_limit']})
+            return core_requests, mem_requests
 
+        def schedule_resource(jobs_details):
             # !!! Assuming we have enough capacity to hold any job
-            # check resources
-            schedule = scheduler.schedule_resources(core_request=core_requests, mem_request=mem_requests)
+            core_requests = [(job[0], job[1][0]) for job in jobs_details]
+            mem_requests = [(job[0], job[1][1]) for job in jobs_details]
+
+            schedule = scheduler.schedule_resources(core_requests, mem_requests)
 
             if schedule is not None:
-                self.scheduler.update_job_info(job_name, schedule)
+                self.scheduler.update_job_info(schedule)
 
                 # update WorkersInfo collection
                 self.scheduler.update_workers_info(schedule)
-                url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (self.gm_addr, self.gm_port)
 
-                col_data = mHelper.find_col(job_col)[0]
-                del col_data['_id']
+        jobs_details = []
+        for msg in job_queue:
+            jobs_details.append((msg[1], preprocess_job(msg)))
+        schedule_resource(jobs_details)
 
-                print(requests.post(url=url, json=col_data).content)
+        for msg in job_queue:
+            url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (self.gm_addr, self.gm_port)
+            job_name = msg[1]
+            job_col = mHelper.get_col(self.db, job_name)
+            col_data = mHelper.find_col(job_col)[0]
+            del col_data['_id']
+            print(requests.post(url=url, json=col_data).content)
 
 
 if __name__ == '__main__':
@@ -228,6 +248,7 @@ if __name__ == '__main__':
     parser.add_argument('-gp', '--gport', type=str, default='3100', help='Global manager node port number.')
     parser.add_argument('-ma', '--maddr', type=str, help='MongoDB node address.')
     parser.add_argument('-mp', '--mport', type=int, default=27017, help='MongoDB port number.')
+    parser.add_argument('-w', '--wait', type=int, default=3, help='Waiting time for Job Manager in seconds.')
     args = parser.parse_args()
     gm_addr = args.gaddr
     gm_port = args.gport
@@ -238,9 +259,11 @@ if __name__ == '__main__':
     db_name = 'RESTfulSwarmDB'
     db_client = mHelper.get_client(mongo_addr, mongo_port)
     db = mHelper.get_db(db_client, db_name)
-    scheduler = Scheduler.Scheduler(db, 'WorkersInfo')
+    scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo')
 
-    job_manager = JobManager(gm_addr=gm_addr, gm_port=gm_port, db=db, scheduler=scheduler)
+    wait = args.wait
+
+    job_manager = JobManager(gm_addr=gm_addr, gm_port=gm_port, db=db, scheduler=scheduler, wait=wait)
 
     fe_notify_thr = threading.Thread(target=job_manager.newJobNotify, args=())
     fe_notify_thr.setDaemon(True)
