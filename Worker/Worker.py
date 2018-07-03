@@ -119,6 +119,7 @@ class Worker:
         detach = containerInfo['detach']
         ports = containerInfo['ports']
         volumes = containerInfo['volumes']
+        environment = containerInfo['environment']
         container = dHelper.runContainer(self.dockerClient,
                                          image=image_name,
                                          name=container_name,
@@ -128,7 +129,8 @@ class Worker:
                                          cpuset_cpus=cpuset_cpus,
                                          mem_limit=mem_limit,
                                          ports=ports,
-                                         volumes=volumes)
+                                         volumes=volumes,
+                                         environment=environment)
         self.logger.info('Container %s is running.' % container_name)
         return container
 

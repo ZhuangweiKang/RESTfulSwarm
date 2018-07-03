@@ -21,7 +21,7 @@ def pullImage(client, repository):
     client.images.pull(repository)
 
 
-def runContainer(client, image, name, detach=True, network=None, command=None, cpuset_cpus=None, mem_limit=None, ports=None, volumes=None):
+def runContainer(client, image, name, detach=True, network=None, command=None, cpuset_cpus=None, mem_limit=None, ports=None, volumes=None, environment=None):
     return client.containers.run(
         image=image,
         name=name,
@@ -31,7 +31,9 @@ def runContainer(client, image, name, detach=True, network=None, command=None, c
         mem_limit=mem_limit,
         ports=ports,
         volumes=volumes,
-        command=command)
+        command=command,
+        environment=environment
+    )
 
 
 def updateContainer(client, container_name, cpuset_cpus, mem_limit):
@@ -183,6 +185,7 @@ def getNodeInfo(client, name):
         return json.dumps(node.attrs)
     except Exception as ex:
         return None
+
 
 def removeNode(name):
     cmd = 'docker node rm -f %s' % name

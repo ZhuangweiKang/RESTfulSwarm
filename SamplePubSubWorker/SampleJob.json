@@ -16,8 +16,9 @@
         "cpu_count": 3,
         "cpuset_cpus": "",
         "mem_limit": "10m",
-        "ports": {},
-        "volumes": {}
+        "ports": {"3000/tcp": 3000},
+        "volumes": {},
+        "environment": {}
       },
       "kang_Subscriber": {
         "container_name": "kang_Subscriber",
@@ -29,7 +30,8 @@
         "cpuset_cpus": "",
         "mem_limit": "10m",
         "ports": {},
-        "volumes": {}
+        "volumes": {},
+        "environment": {}
       }
     }
   },
