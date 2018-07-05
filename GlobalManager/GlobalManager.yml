@@ -1,0 +1,296 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: RESTfulSwarm Global Manager
+  description: A RESTful application supporting some basic Docker Swarm operations.
+
+schemes:
+  - http
+host: 129.114.108.37
+basePath: /GM
+
+paths:
+  /init:
+    get:
+      summary: Initialize the Docker Swarm environment.
+      description: Master node in Swarm environment generates the worker join token and initialize ZMQ socket used for message forwarding.
+      responses:
+        200:
+          description: All things good, 200
+          schema:
+            type: string
+            example: Initialize Swarm environment succeed.
+        500:
+          description: Internal error, 500
+          schema:
+            type: string
+            example: This node already the master node of another swarm cluster.
+
+  /getWorkerList:
+    get:
+      summary: Get worker list in the cluster.
+      responses:
+        200:
+          description: OK
+  
+  /{hostname}/describeWorker:
+    get:
+      summary: Describe a worker node.
+      description: Display details of the worker node.
+      parameters:
+        - name: hostname
+          in: path
+          required: true
+          description: The hostname of the worker node.
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad request
+          schema:
+            type: string
+            example: Requested node is not in the cluster.
+  
+  /{hostname}/describeManager:
+    get:
+      summary: Describe the master node(Global manager)
+      description: Display details of the master node.
+      parameters:
+        - name: hostname
+          in: path
+          required: true
+          description: The hostname of master node.
+          type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad request
+          schema:
+            type: string
+            example: Requested node is not in the cluster.
+            
+  /requestJoin:
+    post:
+      summary: Worker node requests to join the Swarm cluster.
+      description: Worker node requestes the worker join token and master node address.
+      parameters:
+        - name: worker_info
+          in: body
+          description: Worker information, including hostname, total cores and total free memory.
+          schema:
+            type: object
+            example: {
+              "hostname": "kang2",
+              "CPUs": 38,
+              "MemFree": 22245426 KB
+            }
+      responses:
+        200: 
+          description: Good, 200
+          schema:
+            type: string
+            example: OK, Join token and remote address have been sent to worker node.
+        400:
+          description: Bad request, 400
+          schema:
+            type: string
+            example: The worker node already in the Swarm cluster.
+        406:
+          description: Request is not acceptable, 406
+          schema:
+            type: string
+            example: Your request is not acceptablle due to missing values.
+
+  /requestNewContainer:
+    post:
+      summary: Launch a new container in the cluster.
+      parameters:
+        - name: container_info
+          in: body
+          description: Similar to a task, but scheduler doesn't apply scheduling algorithm on it.
+          schema:
+            type: object
+            example: {
+              "container_name": "your container name",
+              "node": "node hostname",
+              "image": "container image",
+              "detach": true,
+              "command": "python example.py",
+              "cpu_count": 2,
+              "cpuset_cpus": "2,5,9",
+              "mem_limit": "10m",
+              "ports": {},
+              "volumes": {},
+              "environment": {}
+            }
+      responses:
+        200:
+          description: OK
+          schema:
+            type: string
+            example: Container has been submitted to launch.
+        400:
+          description: Bad request
+          schema:
+            type: string
+            example: Container information has error.
+  
+  /checkpointCons:
+    post:
+      summary: Checkpoints a list of container running in the cluster.
+      parameters:
+        - name: checkpoints_info
+          in: body
+          schema:
+            type: object
+            example: [
+              {
+                "node": "node1",
+                "containers": ["container1", "container2"]
+              },
+              {
+                "node": "node2",
+                "containers": ["container3", "container4"]
+              }
+            ]
+      responses:
+        200:
+          description: OK
+          schema:
+            type: string
+            example: Has created snapshots for those containers you submitted. Checkpoint information has been stored into the container Checkpoints directory.
+        400:
+          description: Bad request
+          schema:
+            type: string
+            example: Can't find the node name node2.
+            
+  /requestMigrate:
+    post:
+      summary: Migrate a single container.
+      parameters:
+        - name: migration_info
+          in: body
+          schema:
+            type: object
+            example: {
+              "job": "job name",
+              "container": "container name",
+              "from": "host1@10.0.x.x",
+              "to": "host2@10.1.x.x",
+              "info": {
+                "container_name": "container name",
+                "image": "container image",
+                "detach": true,
+                "network": "network name",
+                "command": "",
+                "cpuset_cpus": "3,4,5",
+                "mem_limit": "10m",
+                "ports": {},
+                "volumes": {}
+              }
+            }
+      responses:
+        200:
+          description: Container is migrating.
+        400:
+          description: Submitted migration information has error.
+  
+  /requestGroupMigration:
+    post:
+      summary: Migration a group of containers.
+      description: Migration a group of containers that may be from different worker nodes.
+      parameters:
+        - name: group_migration_info
+          in: body
+          schema:
+            type: object
+            example: [
+              {
+                "job": "job1",
+                "container": "job1_container1",
+                "from": "node2@10.52.0.1",
+                "to": "node2@10.52.0.2",
+                "info": {
+                    "container_name": "job1_container1",
+                    "node": "node2",
+                    "image": "container1 image",
+                    "detach": true,
+                    "network": "network name",
+                    "command": "",
+                    "cpu_count": 3,
+                    "cpuset_cpus": "46,32,22",
+                    "mem_limit": "10m",
+                    "ports": {},
+                    "volumes": {}
+                  }
+              },
+              {
+                "job": "job2",
+                "container": "job2_container2",
+                "from": "node3@10.52.0.3",
+                "to": "node2@10.52.0.2",
+                "info": {
+                    "container_name": "job2_container2",
+                    "node": "node2",
+                    "network": "network name",
+                    "image": "container2 image",
+                    "detach": true,
+                    "command": "",
+                    "cpu_count": 2,
+                    "cpuset_cpus": "25,24",
+                    "mem_limit": "10m",
+                    "ports": {},
+                    "volumes": {}
+                  }
+              }
+            ]
+      responses:
+        200:
+          description: Containers are migrating.
+        400:
+          description: Submitted group migration information has error.
+  
+  /requestUpdateContainer:
+    post:
+      summary: Update a container.
+      description: Update cpuset_cpus and mem_limit.
+      parameters:
+        - name: update_info
+          in: body
+          schema:
+            type: object
+            example: {
+              "job": "job1",
+              "node": "node1",
+              "container_name": "job1_container1",
+              "cpuset_cpus": "1,2",
+              "mem_limit": "20m"
+            }
+      responses:
+        200:
+          description: Container has been updated.
+        400:
+          description: Update info you submitted has error.
+          schema:
+            type: string
+            example: The node name you specified is not in the cluster.
+  
+  /requestLeave:
+    post:
+      summary: Worker node requests to leave the cluster.
+      description: The worker node will be completely removed from the cluster, not only make its status as Down.
+      parameters:
+        - name: leave_info
+          in: body
+          schema:
+            type: object
+            example: {'hostname': node1}
+      responses:
+        200:
+          description: OK, worker node has left.
+        400:
+          description: Worker information you provided has error.

@@ -40,14 +40,12 @@ class JobManager:
         url = 'http://%s:%s/RESTfulSwarm/GM/newtask' % (self.gm_addr, self.gm_port)
         print(requests.post(url=url, json=data).content)
 
-    # Migrate a container
-    # !!!Note: Assuming destination node always has enough cores to hold the migrated container
-    def doMigrate(self, data):
+    def containerMigration(self, data):
         dest_node_name = (data['to'].split('@'))[0]
         dest_node_info = self.scheduler.get_node_info(dest_node_name)
         if dest_node_info is None:
-            print('Migration failed, because node %s is not in Swarm environment.')
-            return False
+            er = 'Migration failed, because node %s is not in Swarm environment.'
+            raise Exception(er)
         else:
             # update node name
             job_name = data['job']
@@ -108,10 +106,31 @@ class JobManager:
             data.update({'from': data['from'].split('@')[1]})
             data.update({'to': data['to'].split('@')[1]})
 
+            return data
+
+    # Migrate a container
+    # !!!Note: Assuming destination node always has enough cores to hold the migrated container
+    def doMigrate(self, data):
+        try:
+            data = self.containerMigration(data)
             url = 'http://%s:%s/RESTfulSwarm/GM/requestMigrate' % (self.gm_addr, self.gm_port)
             print(requests.post(url=url, json=data).content)
-
             return True
+        except Exception as ex:
+            print(ex)
+            return False
+
+    def doGroupMigration(self, data):
+        try:
+            for index, item in enumerate(data[:]):
+                new_item = self.containerMigration(item)
+                data[index].update(new_item)
+            url = 'http://%s:%s/RESTfulSwarm/GM/requestGroupMigration' % (self.gm_addr, self.gm_port)
+            print(requests.post(url=url, json=data).content)
+            return True
+        except Exception as ex:
+            print(ex)
+            return False
 
     # Update container resources(cpu & mem)
     def updateContainer(self, data):
@@ -304,8 +323,7 @@ if __name__ == '__main__':
                 migrate_json = input('Group migration Json file: ')
                 with open(migrate_json, 'r') as f:
                     data = json.load(f)
-                for item in data:
-                    job_manager.doMigrate(item)
+                job_manager.doGroupMigration(data)
             elif get_input == 6:
                 json_path = input('New resource configuration Json file:')
                 with open(json_path, 'r') as f:

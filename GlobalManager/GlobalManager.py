@@ -37,9 +37,10 @@ def init():
         pubSocket = zmq.bind('3100')
         initSwarmEnv()
         response = 'OK: Initialize Swarm environment succeed.'
+        return response, 200
     except Exception as ex:
         response = 'Error: %s' % ex
-    return response
+        return response, 500
 
 
 def initSwarmEnv():
@@ -64,11 +65,13 @@ def requestJoin():
             response = '%s join %s %s' % (hostname, remote_addr, join_token)
             pubSocket.send_string(response)
             app.logger.info('Send manager address and join token to worker node.')
+            return response, 200
         else:
             response = 'Error: Node already in Swarm environment.'
+            return response, 400
     else:
         response = 'Error: Please enter the IP address of node.'
-    return response
+        return response, 406
 
 
 def init_worker_info(hostname, cpus, memfree):
@@ -93,13 +96,18 @@ def newContainer(data):
         response = 'OK'
     else:
         response = 'Error: The node you specified is unavailable.'
+        raise Exception(response)
     return response
 
 
 @app.route('/RESTfulSwarm/GM/requestNewContainer', methods=['POST'])
 def requestNewContainer():
-    data = request.get_json()
-    newContainer(data)
+    try:
+        data = request.get_json()
+        newContainer(data)
+        return 'OK', 200
+    except Exception as ex:
+        return ex, 400
 
 
 @app.route('/RESTfulSwarm/GM/requestNewJob', methods=['POST'])
@@ -108,17 +116,17 @@ def requestNewJob():
     # create overlay network if not exists
     if dHelper.verifyNetwork(dockerClient, data['job_info']['network']['name']):
         createOverlayNetwork(data['job_info']['network']['name'], data['job_info']['network']['subnet'])
-
     time.sleep(1)
+    try:
+        for task in list(data['job_info']['tasks'].keys()):
+            data['job_info']['tasks'][task].update({'network': data['job_info']['network']['name']})
 
-    for task in list(data['job_info']['tasks'].keys()):
-        data['job_info']['tasks'][task].update({'network': data['job_info']['network']['name']})
-
-    # deploy job
-    for item in data['job_info']['tasks'].values():
-        newContainer(item)
-
-    return 'OK'
+        # deploy job
+        for item in data['job_info']['tasks'].values():
+            newContainer(item)
+        return 'OK', 200
+    except Exception as ex:
+        return ex, 400
 
 
 @app.route('/RESTfulSwarm/GM/checkpointCons', methods=['POST'])
@@ -126,16 +134,14 @@ def checkpointCons():
     data = request.get_json()
     for item in data:
         if dHelper.checkNodeHostName(dockerClient,  item['node']):
-            return 'Node %s is unavailable.' % item['node']
+            return 'Node %s is unavailable.' % item['node'], 400
         pubContent = '%s checkpoints %s' % (item['node'], json.dumps(item['containers']))
         pubSocket.send_string(pubContent)
         app.logger.info('Checkpoint containers %s on node %s' % (json.dumps(item['containers']), item['node']))
-    return 'OK'
+    return 'OK', 200
 
 
-@app.route('/RESTfulSwarm/GM/requestMigrate', methods=['POST'])
-def requestMigrate():
-    data = request.get_json()
+def containerMigration(data):
     src = data['from']
     dst = data['to']
     container = data['container']
@@ -144,15 +150,37 @@ def requestMigrate():
     checkDst = dHelper.checkNodeIP(dockerClient, dst)
     if checkSrc is False:
         response = 'Error: %s is an invalid address.' % src
+        raise Exception(response)
     elif checkDst is False:
         response = 'Error: %s is an invalid address.' % dst
+        raise Exception(response)
     else:
         jsonForm = {'src': src, 'dst': dst, 'container': container, 'info': info}
         pubContent = '%s migrate %s' % (src, json.dumps(jsonForm))
         pubSocket.send_string(pubContent)
         response = 'OK'
         app.logger.info('Migrate container %s from %s to %s.' % (container, src, dst))
-    return response
+    return response, 200
+
+
+@app.route('/RESTfulSwarm/GM/requestMigrate', methods=['POST'])
+def requestMigrate():
+    try:
+        data = request.get_json()
+        return containerMigration(data)
+    except Exception as ex:
+        return ex, 400
+
+
+@app.route('/RESTfulSwarm/GM/requestGroupMigration', methods=['POST'])
+def requestGroupMigration():
+    try:
+        data = request.get_json()
+        for item in data:
+            containerMigration(item)
+        return 'OK', 200
+    except Exception as ex:
+        return ex, 400
 
 
 @app.route('/RESTfulSwarm/GM/requestLeave', methods=['POST'])
@@ -165,9 +193,9 @@ def requestLeave():
         # force delete the node on Manager side
         dHelper.removeNode(hostname)
         app.logger.info('Node %s left Swarm environment.' % hostname)
-        return 'OK'
+        return 'OK', 200
     else:
-        return 'Error: Host %s is not in Swarm environment.' % hostname
+        return 'Error: Host %s is not in Swarm environment.' % hostname, 400
 
 
 @app.route('/RESTfulSwarm/GM/requestUpdateContainer', methods=['POST'])
@@ -186,9 +214,9 @@ def requestUpdateContainer():
         newInfo = json.dumps(newInfo)
         pubSocket.send_string('%s update %s' % (node, newInfo))
         app.logger.info('%s updated container %s' % (node, container))
-        return 'OK'
+        return 'OK', 200
     else:
-        return 'Error: requested node %s is not in Swarm environment.' % node
+        return 'Error: requested node %s is not in Swarm environment.' % node, 400
 
 
 @app.route('/RESTfulSwarm/GM/getWorkerList', methods=['GET'])
@@ -203,9 +231,9 @@ def getWorkerList():
 def describeNode(hostname):
     nodeinfo = dHelper.getNodeInfo(dockerClient, hostname)
     if nodeinfo is None:
-        return 'The requested node is unavailable.'
+        return 'The requested node is unavailable.', 400
     else:
-        return nodeinfo
+        return nodeinfo, 200
 
 
 @app.route('/RESTfulSwarm/GM/<hostname>/describeWorker', methods=['GET'])
