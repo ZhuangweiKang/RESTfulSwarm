@@ -5,7 +5,7 @@ apt-get update
 # install pip3
 apt-get install -y python3-pip python3-dev python3-setuptools xmlto asciidoc
 
-# install docker sdk
+# install python packages for docker , flask, pyzmq, mongodb, cpuinfo
 pip3 install flask docker pyzmq pymongo py-cpuinfo
 
 # check if docker exists
@@ -13,8 +13,7 @@ docker_check=$(which docker)
 
 if [ "$docker_check" = "" ];
 then
-    # install docker
-    cd /home/cc
+    # install docker 17.03
     wget https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/docker-ce_17.03.0~ce-0~ubuntu-xenial_amd64.deb
     dpkg -i docker-ce_17.03.0~ce-0~ubuntu-xenial_amd64.deb
 
@@ -28,9 +27,9 @@ fi
 docker_version=$(docker version | grep Experimental)
 docker_version=${docker_version:15}
 
-if [ "$docker_version" = "$false" ];
+if [ $docker_version = "false" ];
 then
-    echo "{\"experimental\": true}" >> /etc/docker/daemon.json
+    echo "{\"experimental\": true}" > /etc/docker/daemon.json
     # restart docker daemon
     systemctl restart docker
     systemctl daemon-reload
@@ -62,3 +61,9 @@ apt-get update
 apt-get install -y mongodb-org
 systemctl start mongod
 systemctl status mongod
+
+# install weave plugin and enable multicast feature
+docker plugin install weaveworks/net-plugin:latest_release
+docker plugin disable weaveworks/net-plugin:latest_release
+docker plugin set weaveworks/net-plugin:latest_release WEAVE_MULTICAST=1
+docker plugin enable weaveworks/net-plugin:latest_release

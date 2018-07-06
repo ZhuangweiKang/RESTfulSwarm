@@ -15,10 +15,11 @@ import random
 from LiveMigration import LiveMigration
 import DockerHelper as dHelper
 import ZMQHelper as zmqHelper
+from Worker import TaskMonitor
 
 
 class Worker:
-    def __init__(self, manager_addr, self_addr):
+    def __init__(self, manager_addr, self_addr, discovery_addr, discovery_port, task_monitor_frequency):
         self.logger = utl.doLog('WorkerLogger', 'worker.log')
         self.swarmSocket = zmqHelper.connect(manager_addr, '3100')
         self.dockerClient = dHelper.setClient()
@@ -31,6 +32,10 @@ class Worker:
         # local storage
         # format: {$container : $containerInfo}
         self.storage = {}
+
+        task_monitor_thr = threading.Thread(target=TaskMonitor.monitor,
+                                            args=(discovery_addr, discovery_port, task_monitor_frequency, ))
+        task_monitor_thr.start()
 
     def listenManagerMsg(self):
         while True:
@@ -159,9 +164,15 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-ga', '--gaddr', type=str, help='Global Manager IP address.')
     parser.add_argument('-sa', '--self_addr', type=str, help='Self IP address')
+    parser.add_argument('-da', '--discovery_addr', type=str, help='Discovery server address.')
+    parser.add_argument('-dp', '--discovery_port', type=str, default='4000', help='Discovery server port number.')
+    parser.add_argument('-f', '--frequency', type=int, default=20, help='Worker node task monitor frequency (s).')
     args = parser.parse_args()
     manager_addr = args.gaddr
     self_addr = args.self_addr
-    worker = Worker(manager_addr, self_addr)
+    discovery_addr = args.discovery_addr
+    discovery_port = args.discovery_port
+    frequency = args.frequency
+    worker = Worker(manager_addr, self_addr, discovery_addr, discovery_port, frequency)
     worker.main()
     worker.requestJoinSwarm()

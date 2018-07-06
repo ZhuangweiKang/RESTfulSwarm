@@ -124,6 +124,10 @@ def requestNewJob():
         # deploy job
         for item in data['job_info']['tasks'].values():
             newContainer(item)
+
+        # update job status
+        mg.update_doc(db[data['job_name']], 'job_name', data['job_name'], 'status', 'Deployed')
+
         return 'OK', 200
     except Exception as ex:
         return ex, 400

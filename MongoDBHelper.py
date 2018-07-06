@@ -6,7 +6,7 @@ import pymongo as mg
 
 
 # return a mongodb client
-def get_client(address, port=27017):
+def get_client(address, port='27017'):
     url = 'mongodb://admin:kzw@%s:%s/RESTfulSwarmDB' % (address, port)
     return mg.MongoClient(url)
 
@@ -23,6 +23,10 @@ def get_col(db, col_name):
 
 def find_col(col):
     return list(col.find({}))
+
+
+def filter_col(col, filter_key, filter_value):
+    return list(col.find({filter_key: filter_value}))[0]
 
 
 def get_all_cols(db):

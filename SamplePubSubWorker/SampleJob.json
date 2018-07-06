@@ -3,7 +3,7 @@
   "job_info": {
     "network": {
       "name": "kangNetwork",
-      "driver": "overlay",
+      "driver": "weaveworks/net-plugin:latest_release",
       "subnet": "10.52.0.34/24"
     },
     "tasks": {
