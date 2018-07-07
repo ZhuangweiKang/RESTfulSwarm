@@ -28,7 +28,6 @@ class JobManager:
 
         # listening msg from FrontEnd
         self.socket = zmq.csBind(port='2990')
-        self.socket.RCVTIMEO = 5000
 
     # Initialize global manager(Swarm manager node)
     def init_gm(self):
