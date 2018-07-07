@@ -13,13 +13,13 @@ import json
 from flask import *
 import argparse
 import random
+import time
 from LiveMigration import LiveMigration
 import DockerHelper as dHelper
 import ZMQHelper as zmqHelper
-from Worker.TaskMonitor import TaskMonitor
 
 
-class Worker(TaskMonitor):
+class Worker:
     def __init__(self, manager_addr, self_addr, discovery_addr, discovery_port, task_monitor_frequency):
         self.logger = utl.doLog('WorkerLogger', 'worker.log')
         self.swarmSocket = zmqHelper.connect(manager_addr, '3100')
@@ -34,9 +34,31 @@ class Worker(TaskMonitor):
         # format: {$container : $containerInfo}
         self.storage = {}
 
-        task_monitor_thr = threading.Thread(target=TaskMonitor.monitor,
+        task_monitor_thr = threading.Thread(target=self.monitor,
                                             args=(discovery_addr, discovery_port, task_monitor_frequency, ))
         task_monitor_thr.start()
+
+    def monitor(self, discovery_addr, discovery_port='4000', frequency=20):
+        time_flag = time.time()
+        client = dHelper.setClient()
+        time.sleep(frequency)
+        hostname = utl.getHostName()
+        socket = zmqHelper.csConnect(discovery_addr, discovery_port)
+        while True:
+            events = client.events(since=time_flag, until=time.time(), decode=True)
+            msgs = []
+            for event in events:
+                if event['Type'] == 'container' and event['status'] == 'stop':
+                    msg = hostname + ' ' + event['Actor']['Attributes']['name']
+                    msgs.append(msg)
+
+            # Notify discovery block to update MongoDB
+            for msg in msgs:
+                socket.send_string(msg)
+                socket.recv_string()
+
+            time_flag = time.time()
+            time.sleep(frequency)
 
     def listenManagerMsg(self):
         while True:
