@@ -4,7 +4,6 @@
 
 import os
 import sys
-from Worker import TaskMonitor
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import utl
@@ -17,6 +16,7 @@ import random
 from LiveMigration import LiveMigration
 import DockerHelper as dHelper
 import ZMQHelper as zmqHelper
+from .TaskMonitor import monitor
 
 
 class Worker:
@@ -34,7 +34,7 @@ class Worker:
         # format: {$container : $containerInfo}
         self.storage = {}
 
-        task_monitor_thr = threading.Thread(target=TaskMonitor.monitor,
+        task_monitor_thr = threading.Thread(target=monitor,
                                             args=(discovery_addr, discovery_port, task_monitor_frequency, ))
         task_monitor_thr.start()
 
