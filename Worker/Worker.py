@@ -19,7 +19,7 @@ import ZMQHelper as zmqHelper
 from Worker.TaskMonitor import TaskMonitor
 
 
-class Worker:
+class Worker(TaskMonitor):
     def __init__(self, manager_addr, self_addr, discovery_addr, discovery_port, task_monitor_frequency):
         self.logger = utl.doLog('WorkerLogger', 'worker.log')
         self.swarmSocket = zmqHelper.connect(manager_addr, '3100')
