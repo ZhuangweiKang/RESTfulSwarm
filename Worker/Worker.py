@@ -16,7 +16,7 @@ import random
 from LiveMigration import LiveMigration
 import DockerHelper as dHelper
 import ZMQHelper as zmqHelper
-from Worker.TaskMonitor import *
+from Worker.TaskMonitor import monitor
 
 
 class Worker:
