@@ -7,7 +7,7 @@ from Scheduler.Scheduler import Scheduler
 
 class BestFitScheduler(Scheduler):
     def __init__(self, db, workers_col_name):
-        super(Scheduler, self).__init__(db, workers_col_name)
+        super(BestFitScheduler, self).__init__(db, workers_col_name)
 
     def schedule_resources(self, core_request, mem_request):
         '''
