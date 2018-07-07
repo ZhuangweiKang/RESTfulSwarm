@@ -16,7 +16,7 @@ import random
 from LiveMigration import LiveMigration
 import DockerHelper as dHelper
 import ZMQHelper as zmqHelper
-from Worker.TaskMonitor import monitor
+from Worker.TaskMonitor import TaskMonitor
 
 
 class Worker:
@@ -34,7 +34,7 @@ class Worker:
         # format: {$container : $containerInfo}
         self.storage = {}
 
-        task_monitor_thr = threading.Thread(target=monitor,
+        task_monitor_thr = threading.Thread(target=TaskMonitor.monitor,
                                             args=(discovery_addr, discovery_port, task_monitor_frequency, ))
         task_monitor_thr.start()
 
