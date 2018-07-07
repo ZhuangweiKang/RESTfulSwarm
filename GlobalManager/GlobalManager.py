@@ -33,17 +33,15 @@ worker_col = None
 @app.route('/RESTfulSwarm/GM/init', methods=['GET'])
 def init():
     global pubSocket
-
-    pubSocket = zmq.bind('3100')
-    initSwarmEnv()
-    response = 'OK: Initialize Swarm environment succeed.'
-    return response, 200
-
-    '''
+    try:
+        pubSocket = zmq.bind('3100')
+        initSwarmEnv()
+        response = 'OK: Initialize Swarm environment succeed.'
+        return response, 200
     except Exception as ex:
         response = 'Error: %s' % ex
         return response, 500
-    '''
+
 
 def initSwarmEnv():
     dHelper.initSwarm(dockerClient, advertise_addr=host_addr)
