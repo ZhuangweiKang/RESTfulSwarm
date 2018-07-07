@@ -4,7 +4,7 @@
 
 import os
 import sys
-
+from Worker import TaskMonitor
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import utl
@@ -21,7 +21,6 @@ import ZMQHelper as zmqHelper
 
 class Worker:
     def __init__(self, manager_addr, self_addr, discovery_addr, discovery_port, task_monitor_frequency):
-        from Worker import TaskMonitor
         self.logger = utl.doLog('WorkerLogger', 'worker.log')
         self.swarmSocket = zmqHelper.connect(manager_addr, '3100')
         self.dockerClient = dHelper.setClient()
