@@ -97,8 +97,8 @@
       <file leaf-file-name="Worker.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="14" column="15" lean-forward="true" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+            <state relative-caret-position="315">
+              <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -109,8 +109,8 @@
       <file leaf-file-name="TaskMonitor.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Worker/TaskMonitor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="693">
+              <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -192,7 +192,6 @@
         <option value="$PROJECT_DIR$/SamplePubSubWorker/SampleJob.json" />
         <option value="$PROJECT_DIR$/utl.py" />
         <option value="$PROJECT_DIR$/MongoDBHelper.py" />
-        <option value="$PROJECT_DIR$/Worker/TaskMonitor.py" />
         <option value="$PROJECT_DIR$/Test/FrontEndInit.json" />
         <option value="$PROJECT_DIR$/Test/JobManagerInit.json" />
         <option value="$PROJECT_DIR$/Test/GlobalManagerInit.json" />
@@ -208,6 +207,7 @@
         <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
         <option value="$PROJECT_DIR$/GlobalManager/GlobalManagerInit.json" />
         <option value="$PROJECT_DIR$/JobManager/JobManagerInit.json" />
+        <option value="$PROJECT_DIR$/Worker/TaskMonitor.py" />
         <option value="$PROJECT_DIR$/Worker/Worker.py" />
       </list>
     </option>
@@ -351,27 +351,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00125" summary="Update">
-      <created>1530042364496</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1530042364496</updated>
-    </task>
-    <task id="LOCAL-00126" summary="Update">
-      <created>1530042862058</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
-      <option name="project" value="LOCAL" />
-      <updated>1530042862058</updated>
-    </task>
-    <task id="LOCAL-00127" summary="Update">
-      <created>1530043206601</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1530043206601</updated>
     </task>
     <task id="LOCAL-00128" summary="Update">
       <created>1530043982728</created>
@@ -695,7 +674,28 @@
       <option name="project" value="LOCAL" />
       <updated>1531004769496</updated>
     </task>
-    <option name="localTasksCounter" value="174" />
+    <task id="LOCAL-00174" summary="Update">
+      <created>1531005152718</created>
+      <option name="number" value="00174" />
+      <option name="presentableId" value="LOCAL-00174" />
+      <option name="project" value="LOCAL" />
+      <updated>1531005152718</updated>
+    </task>
+    <task id="LOCAL-00175" summary="Update">
+      <created>1531005230687</created>
+      <option name="number" value="00175" />
+      <option name="presentableId" value="LOCAL-00175" />
+      <option name="project" value="LOCAL" />
+      <updated>1531005230687</updated>
+    </task>
+    <task id="LOCAL-00176" summary="Update">
+      <created>1531005608899</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1531005608899</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1033,15 +1033,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Worker/TaskMonitor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="693">
+          <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="15" lean-forward="true" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+        <state relative-caret-position="315">
+          <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
           </folding>
