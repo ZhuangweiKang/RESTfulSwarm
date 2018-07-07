@@ -161,6 +161,7 @@ class Worker:
 
 
 if __name__ == '__main__':
+    '''
     parser = argparse.ArgumentParser()
     parser.add_argument('-ga', '--gaddr', type=str, help='Global Manager IP address.')
     parser.add_argument('-sa', '--self_addr', type=str, help='Self IP address')
@@ -173,6 +174,20 @@ if __name__ == '__main__':
     discovery_addr = args.discovery_addr
     discovery_port = args.discovery_port
     frequency = args.frequency
+    '''
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--file', type=str, help='Worker node init json file path.')
+    args = parser.parse_args()
+    worker_init_json = args.file
+    with open(worker_init_json) as f:
+        data = json.load(f)
+    manager_addr = data['global_manager_addr']
+    self_addr = data['worker_address']
+    discovery_addr = data['discovery_addr']
+    discovery_port = data['discovery_port']
+    frequency = data['frequency']
+
     worker = Worker(manager_addr, self_addr, discovery_addr, discovery_port, frequency)
     worker.main()
     worker.requestJoinSwarm()

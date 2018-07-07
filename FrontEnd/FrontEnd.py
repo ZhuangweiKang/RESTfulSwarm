@@ -12,6 +12,7 @@ from flask import *
 import MongoDBHelper as mhelper
 import time
 import ZMQHelper as zmq
+import json
 import argparse
 
 app = Flask(__name__)
@@ -42,6 +43,7 @@ def requestNewJob():
 
 
 if __name__ == '__main__':
+    '''
     parser = argparse.ArgumentParser()
     parser.add_argument('-a', '--address', type=str, help='The FrontEnd node IP address.')
     parser.add_argument('-ma', '--mongo_addr', type=str, help='MongoDB node address.')
@@ -53,6 +55,7 @@ if __name__ == '__main__':
     # db
     mongo_addr = args.mongo_addr
     mongo_port = args.mongo_port
+    
     mongo_client = mhelper.get_client(address=mongo_addr, port=mongo_port)
     mongo_db = mhelper.get_db(mongo_client, mongo_db_name)
 
@@ -62,5 +65,20 @@ if __name__ == '__main__':
     socket = zmq.csConnect(jm_addr, jm_port)
 
     fe_address = args.address
+    '''
+    with open('FrontEndInit.json') as f:
+        data = json.load(f)
+
+    mongo_addr = data['mongo_addr']
+    mongo_port = data['mongo_port']
+
+    mongo_client = mhelper.get_client(address=mongo_addr, port=mongo_port)
+    mongo_db = mhelper.get_db(mongo_client, mongo_db_name)
+
+    jm_addr = data['job_manager_addr']
+    jm_port = data['job_manager_port']
+    socket = zmq.csConnect(jm_addr, jm_port)
+
+    fe_address = data['address']
 
     app.run(host=fe_address, port=5000, debug=True)

@@ -8,6 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import MongoDBHelper as mg
 import ZMQHelper as zmq
+import json
 import argparse
 
 
@@ -56,12 +57,18 @@ class Discovery:
 
 
 if __name__ == '__main__':
+    '''
     parser = argparse.ArgumentParser()
     parser.add_argument('-ma', 'mongo_addr', type=str, help='Mongodb server address.')
     parser.add_argument('-mp', 'mongo_port', type=str, default='27017', help='Mongodb server port.')
     args = parser.parse_args()
     mongo_addr = args.mongo_addr
     mongo_port = args.mongo_port
+    '''
+    with open('DiscoveryInit.json') as f:
+        data = json.load(f)
+    mongo_addr = data['mongo_addr']
+    mongo_port = data['mongo_port']
 
     discovery = Discovery(mongo_addr, mongo_port)
     discovery.discovery()
