@@ -17,6 +17,7 @@ from flasgger import Swagger, swag_from
 import argparse
 
 app = Flask(__name__)
+swagger = Swagger(app)
 
 mongo_addr = None
 mongo_port = None
@@ -25,7 +26,7 @@ socket = None
 
 
 @app.route('/RESTfulSwarm/FE/requestNewJob', methods=['POST'])
-@swag_from('FrontEnd.yml')
+@swag_from('FrontEnd.yml', validation=True)
 def requestNewJob():
     # Write job data into MongoDB
     data = request.get_json()
