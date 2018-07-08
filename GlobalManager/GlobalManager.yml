@@ -8,7 +8,7 @@ info:
 schemes:
   - http
 host: 129.114.108.37
-basePath: /GM
+basePath: /RESTfulSwarm/GM
 
 paths:
   /init:

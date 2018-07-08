@@ -8,7 +8,7 @@ info:
 schemes:
   - http
 host: 129.114.108.140
-basePath: /FE
+basePath: /RESTfulSwarm/FE
 
 paths:
   /requestNewJob:
