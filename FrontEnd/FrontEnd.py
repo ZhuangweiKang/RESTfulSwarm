@@ -13,9 +13,11 @@ import MongoDBHelper as mhelper
 import time
 import ZMQHelper as zmq
 import json
+from flasgger import Swagger
 import argparse
 
 app = Flask(__name__)
+swagger = Swagger(app)
 
 mongo_addr = None
 mongo_port = None

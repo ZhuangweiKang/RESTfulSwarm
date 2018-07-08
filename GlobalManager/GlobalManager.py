@@ -11,11 +11,13 @@ from flask import *
 import time
 import utl
 import argparse
+from flasgger import Swagger
 import DockerHelper as dHelper
 import ZMQHelper as zmq
 import MongoDBHelper as mg
 
 app = Flask(__name__)
+swagger = Swagger(app)
 
 host_addr = None
 dockerClient = None

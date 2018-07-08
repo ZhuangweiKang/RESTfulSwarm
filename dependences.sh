@@ -6,7 +6,7 @@ apt-get update
 apt-get install -y python3-pip python3-dev python3-setuptools xmlto asciidoc
 
 # install python packages for docker , flask, pyzmq, mongodb, cpuinfo
-pip3 install flask docker pyzmq pymongo py-cpuinfo
+pip3 install flask docker pyzmq pymongo py-cpuinfo flasgger
 
 # check if docker exists
 docker_check=$(which docker)
