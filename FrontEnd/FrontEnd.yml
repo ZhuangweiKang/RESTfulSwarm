@@ -7,7 +7,7 @@ info:
 
 schemes:
   - http
-host: 10.52.0.30
+host: 129.114.108.140
 basePath: /RESTfulSwarm/FE
 
 paths:
