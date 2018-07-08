@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   version: 1.0.0
-  title: RESTfulSwarm Global Manager
+  title: RESTfulSwarm Front End
   description: A RESTful application supporting some basic Docker Swarm operations.
 
 schemes:
