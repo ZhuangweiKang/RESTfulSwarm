@@ -25,7 +25,7 @@ mongo_db_name = 'RESTfulSwarmDB'
 socket = None
 
 
-# @app.route('/RESTfulSwarm/FE/requestNewJob', methods=['POST'])
+@app.route('/RESTfulSwarm/FE/requestNewJob', methods=['POST'])
 @swag_from('FrontEnd.yml')
 def requestNewJob():
     # Write job data into MongoDB
