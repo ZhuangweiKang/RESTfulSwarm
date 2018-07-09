@@ -1,25 +1,25 @@
+---
 swagger: '2.0'
+
 info:
   version: 1.0.0
   title: RESTfulSwarm Front End
   description: A RESTful application supporting some basic Docker Swarm operations.
+
 schemes:
   - http
 host: 129.114.108.140
 basePath: /RESTfulSwarm/FE
+
 paths:
   /requestNewJob:
     post:
       summary: Job manager node requests to launch new job.
-      description: >-
-        Job manager schedule resources to each job, then notify global manager
-        to lauch jobs in cluster.
+      description: Job manager schedule resources to each job, then notify global manager to lauch jobs in cluster.
       parameters:
         - name: job_info
           in: body
-          description: >-
-            Job information including resources schedule decision conducted by
-            job manager.
+          description: Job information including resources schedule decision conducted by job manager.
           schema:
             type: object
             example:
