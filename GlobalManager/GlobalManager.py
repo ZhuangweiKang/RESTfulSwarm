@@ -245,11 +245,13 @@ def describeNode(hostname):
 
 
 @app.route('/RESTfulSwarm/GM/<hostname>/describeWorker', methods=['GET'])
+@swag_from('./Flasgger/describeWorker.yml')
 def describeWorker(hostname):
     return describeNode(hostname)
 
 
 @app.route('/RESTfulSwarm/GM/<hostname>/describeManager', methods=['GET'])
+@swag_from('./Flasgger/describeManager.yml')
 def describeManager(hostname):
     return describeNode(hostname)
 
