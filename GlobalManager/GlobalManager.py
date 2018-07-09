@@ -17,7 +17,26 @@ import ZMQHelper as zmq
 import MongoDBHelper as mg
 
 app = Flask(__name__)
-swagger = Swagger(app)
+
+template = {
+  "swagger": "2.0",
+  "info": {
+    "title": "RESTfulSwarm",
+    "description": "An RESTful application for Docker Swarm.",
+    "contact": {
+      "responsibleDeveloper": "Zhuangwei Kang",
+      "email": "zhuangwei.kang@vanderbilt.edu"
+    },
+    "version": "0.0.1"
+  },
+  "host": "129.114.108.37",  # overrides localhost:500
+  "basePath": "/RESTfulSwarm/GM",  # base bash for blueprint registration
+  "schemes": [
+    "http",
+  ]
+}
+
+swagger = Swagger(app, template=template)
 
 host_addr = None
 dockerClient = None
