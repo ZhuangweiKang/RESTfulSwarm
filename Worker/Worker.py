@@ -200,7 +200,7 @@ if __name__ == '__main__':
     '''
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--file', type=str, help='Worker node init json file path.')
+    parser.add_argument('-f', '--file', type=str, default='Worker1Init.json', help='Worker node init json file path.')
     args = parser.parse_args()
     worker_init_json = args.file
     with open(worker_init_json) as f:
@@ -213,4 +213,4 @@ if __name__ == '__main__':
 
     worker = Worker(manager_addr, self_addr, discovery_addr, discovery_port, frequency)
     worker.main()
-    worker.requestJoinSwarm()
+    # worker.requestJoinSwarm()
