@@ -30,7 +30,7 @@ template = {
     "version": "0.0.1"
   },
   "host": "129.114.108.140",  # overrides localhost:500
-  "basePath": "/RESTfulSwarm/FE",  # base bash for blueprint registration
+  "basePath": "",  # base bash for blueprint registration
   "schemes": [
     "http",
   ]
