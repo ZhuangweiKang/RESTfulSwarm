@@ -4,7 +4,7 @@ parameters:
   in: body
   description: Similar to a task, but scheduler doesn't apply scheduling algorithm on it.
   schema:
-    $ref: '../FrontEnd/FrontEnd.yml#/definitions/TaskDetail'
+    $ref: '../FrontEnd/FrontEnd.yml/#/definitions/TaskDetail'
 
 responses:
   200:
