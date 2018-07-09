@@ -20,7 +20,7 @@ definitions:
         type: string
         example: "host2@10.0.0.2"
       info:
-        $ref: 'FrontEnd/FrontEnd.yml#/definitions/TaskDetail'
+        $ref: '../../FrontEnd/FrontEnd.yml#/definitions/TaskDetail'
 
 responses:
   200:
