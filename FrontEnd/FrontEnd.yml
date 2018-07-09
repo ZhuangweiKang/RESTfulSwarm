@@ -5,7 +5,7 @@ parameters:
     description: Job information including resources schedule decision conducted by job manager.
     type: object
     schema:
-      $ref: '#definitions/JobInfo'
+      $ref: '#/definitions/JobInfo'
     required: true
     default: all
 definitions:
