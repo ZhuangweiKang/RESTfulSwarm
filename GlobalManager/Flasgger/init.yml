@@ -1,0 +1,14 @@
+---
+summary: Initialize the Docker Swarm environment.
+description: Master node in Swarm environment generates the worker join token and initialize ZMQ socket used for message forwarding.
+responses:
+  200:
+    description: All things good, 200
+    schema:
+      type: string
+      example: Initialize Swarm environment succeed.
+  500:
+    description: Internal error, 500
+    schema:
+      type: string
+      example: This node already the master node of another swarm cluster.

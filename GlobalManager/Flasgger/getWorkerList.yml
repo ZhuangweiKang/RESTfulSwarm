@@ -1,0 +1,7 @@
+---
+summary: Get worker list in the cluster.
+responses:
+  200:
+    schema:
+      type: string
+    description: OK
