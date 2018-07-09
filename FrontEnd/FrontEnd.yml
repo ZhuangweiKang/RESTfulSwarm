@@ -7,7 +7,6 @@ parameters:
     schema:
       $ref: '#/definitions/JobInfo'
     required: true
-    default: all
 
 definitions:
   JobInfo:
@@ -22,21 +21,12 @@ definitions:
             $ref: '#/definitions/Network'
           tasks:
             type: object
-            example: "{{
-              job:
-              container_name: job_task1
-              node: ''
-              image: container1 image
-              detach: true
-              command: ''
-              cpu_count: 3
-              cpuset_cpus: ''
-              mem_limit: 30m
-              ports:
-                3000/tcp: 3000
-              volumes: {}
-              environment: {}
-            }}"
+            schema:
+              $ref: '#/definitions/TasksInfo'
+      status:
+        type: string
+        enum: ['Ready','Deployed']
+
   Network:
     type: object
     properties:
@@ -47,6 +37,44 @@ definitions:
         enum: ['overlay']
       subnet:
         type: string
+
+  TasksInfo:
+    type: object
+    schema:
+      task:
+        properties:
+          $ref: '#/definitions/TaskDetail'
+
+  TaskDetail:
+    type: object
+    properties:
+      container_name:
+        type: string
+      node:
+        type: string
+      image:
+        type: string
+      detach:
+        type: boolean
+      command:
+        type: string
+      cpu_count:
+        type: integer
+      cpuset_cpus:
+        type: string
+        example: ""
+      mem_limit:
+        type: string
+        example: "30m"
+      ports:
+        type: object
+        exmaple: {3000/tcp: 3000}
+      volumes:
+        type: object
+        example: {}
+      environment:
+        type: object
+        example: {}
 responses:
   '200':
     description: OK
