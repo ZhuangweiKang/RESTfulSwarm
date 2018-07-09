@@ -13,6 +13,9 @@ definitions:
         type: string
       containers:
         type: array
+        items:
+          type: string
+        example: ["container1", "container2"]
 
 responses:
   200:
