@@ -8,7 +8,7 @@ parameters:
     schema:
       type: array
       items:
-        $ref: '#/definition/MigrationInfo'
+        $ref: '#/definitions/MigrationInfo'
 
 definitions:
   MigrationInfo:
