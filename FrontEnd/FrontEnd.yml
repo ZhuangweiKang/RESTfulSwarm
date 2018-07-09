@@ -8,6 +8,7 @@ parameters:
       $ref: '#/definitions/JobInfo'
     required: true
     default: all
+
 definitions:
   JobInfo:
     type: object
@@ -21,7 +22,7 @@ definitions:
             $ref: '#/definitions/Network'
           tasks:
             type: object
-            example: {{
+            example: "{{
               job:
               container_name: job_task1
               node: ''
@@ -35,7 +36,7 @@ definitions:
                 3000/tcp: 3000
               volumes: {}
               environment: {}
-            }}
+            }}"
   Network:
     type: object
     properties:
