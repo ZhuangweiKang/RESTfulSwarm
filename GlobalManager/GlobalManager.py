@@ -33,6 +33,7 @@ worker_col = None
 
 
 @app.route('/RESTfulSwarm/GM/init', methods=['GET'])
+@swag_from('./Flasgger/init.yml')
 def init():
     global pubSocket
     try:
