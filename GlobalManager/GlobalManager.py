@@ -227,6 +227,7 @@ def requestUpdateContainer():
 
 
 @app.route('/RESTfulSwarm/GM/getWorkerList', methods=['GET'])
+@swag_from('./Flasgger/getWorkerList.yml')
 def getWorkerList():
     nodes = dHelper.getNodeList(dockerClient)
     response = {}
