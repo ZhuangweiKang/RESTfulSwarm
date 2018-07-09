@@ -3,18 +3,25 @@ parameters:
   - name: job_info
     in: body
     description: Job information including resources schedule decision conducted by job manager.
-    schema:
-      type: object
-      example:
-        job_name: job1
-        job_info:
+    type: object
+    required: true
+    default: all
+definitions:
+  JobInfo:
+    type: object
+    properties:
+      job_name:
+        type: string
+      job_info:
+        type: object
+        properties:
           network:
-            name: network name
-            driver: overlay
-            subnet: 10.x.x.x/24
+            $ref: '#/definitions/Network'
           tasks:
-            jobname_task1:
-              container_name: job1_task1
+            type: object
+            example: {{
+              job:
+              container_name: job_task1
               node: ''
               image: container1 image
               detach: true
@@ -26,20 +33,17 @@ parameters:
                 3000/tcp: 3000
               volumes: {}
               environment: {}
-            jobname_task2:
-              container_name: job1_task2
-              node: ''
-              image: container2 image
-              detach: true
-              command: ''
-              cpu_count: 3
-              cpuset_cpus: ''
-              mem_limit: 30m
-              ports:
-                3000/tcp: 3000
-              volumes: {}
-              environment: {}
-        status: Ready
+            }}
+  Network:
+    type: object
+    properties:
+      name:
+        type: string
+      driver:
+        type: string
+        enum: ['overlay']
+      subnet:
+        type: string
 responses:
   '200':
     description: OK
