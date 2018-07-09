@@ -33,7 +33,8 @@ definitions:
                   "mem_limit": "10m",
                   "ports": {"3000/tcp": 3000},
                   "volumes": {},
-                  "environment": {}
+                  "environment": {},
+                  "status": ""
                 },
                 "task2": {
                   "container_name": "job1_task2",
@@ -46,7 +47,8 @@ definitions:
                   "mem_limit": "10m",
                   "ports": {},
                   "volumes": {},
-                  "environment": {}
+                  "environment": {},
+                  "status": ""
                 }
             }
       status:
@@ -63,6 +65,40 @@ definitions:
         enum: ['overlay']
       subnet:
         type: string
+
+  TaskDetail:
+    type: object
+    properties:
+      "container_name":
+        type: string
+        example: "job1_task1"
+      "node":
+        type: string
+      "image":
+        type: string
+      "detach":
+        type: boolean
+      "command":
+        type: string
+      "cpu_count":
+        type: integer
+      "cpuset_cpus":
+        type: string
+      "mem_limit":
+        type: string
+        example: "10m"
+      "ports":
+        type: object
+        example: {"3000/tcp": 3000}
+      "volumes":
+        type: object
+        example: {}
+      "environment":
+        type: object
+        example: {}
+      "status":
+        type: string
+        enum: [Ready, Deployed, Down]
 
 responses:
   '200':

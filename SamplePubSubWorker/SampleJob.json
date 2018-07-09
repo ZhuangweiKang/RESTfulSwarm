@@ -18,7 +18,8 @@
         "mem_limit": "10m",
         "ports": {"3000/tcp": 3000},
         "volumes": {},
-        "environment": {}
+        "environment": {},
+        "status": "Ready"
       },
       "kang_Subscriber": {
         "container_name": "kang_Subscriber",
@@ -31,7 +32,8 @@
         "mem_limit": "10m",
         "ports": {},
         "volumes": {},
-        "environment": {}
+        "environment": {},
+        "status": "Ready"
       }
     }
   },
