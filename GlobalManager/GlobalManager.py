@@ -260,7 +260,7 @@ def describeNode(hostname):
     if nodeinfo is None:
         return 'The requested node is unavailable.', 400
     else:
-        return jsonify(nodeinfo), 200
+        return nodeinfo, 200
 
 
 @app.route('/RESTfulSwarm/GM/<hostname>/describeWorker', methods=['GET'])
