@@ -18,9 +18,7 @@ definitions:
         type: object
         properties:
           network:
-            type: object
-            schema:
-              $ref: '#/definitions/Network'
+            $ref: '#/definitions/Network'
           tasks:
             type: object
             example: {
