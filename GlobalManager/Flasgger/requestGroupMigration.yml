@@ -8,7 +8,7 @@ parameters:
     schema:
       type: array
       items:
-        $ref: './definitions/MigrationInfo/requestMigrate.yml'
+        $ref: './MigrationInfo/definitions/requestMigrate.yml'
 
 responses:
   200:
