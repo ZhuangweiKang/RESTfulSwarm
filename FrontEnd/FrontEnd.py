@@ -25,68 +25,9 @@ mongo_db_name = 'RESTfulSwarmDB'
 socket = None
 
 
-@app.route('/RESTfulSwarm/FE/requestNewJob', methods=['POST'])
+# @app.route('/RESTfulSwarm/FE/requestNewJob', methods=['POST'])
+@swag_from('FrontEnd.yml')
 def requestNewJob():
-    '''
-    ---
-     parameters:
-        - name: job_info
-          in: body
-          description: Job information including resources schedule decision conducted by job manager.
-          schema:
-            type: object
-            example: {
-              "job_name": "job1",
-              "job_info": {
-                "network": {
-                  "name": "network name",
-                  "driver": "overlay",
-                  "subnet": "10.x.x.x/24"
-                },
-                "tasks": {
-                  "jobname_task1": {
-                    "container_name": "job1_task1",
-                    "node": "",
-                    "image": "container1 image",
-                    "detach": true,
-                    "command": "",
-                    "cpu_count": 3,
-                    "cpuset_cpus": "",
-                    "mem_limit": "30m",
-                    "ports": {"3000/tcp": 3000},
-                    "volumes": {},
-                    "environment": {}
-                  },
-                  "jobname_task2": {
-                    "container_name": "job1_task2",
-                    "node": "",
-                    "image": "container2 image",
-                    "detach": true,
-                    "command": "",
-                    "cpu_count": 3,
-                    "cpuset_cpus": "",
-                    "mem_limit": "30m",
-                    "ports": {"3000/tcp": 3000},
-                    "volumes": {},
-                    "environment": {}
-                  }
-                }
-              },
-              "status": "Ready"
-            }
-      responses:
-        200:
-          description: OK
-          schema:
-            type: string
-            example: Job has been submitted to launch.
-        400:
-          description: Bad request
-          schema:
-            type: string
-            example: Submitted Job info has error.
-    '''
-
     # Write job data into MongoDB
     data = request.get_json()
     data.update({'TimeStamp': time.time()})
