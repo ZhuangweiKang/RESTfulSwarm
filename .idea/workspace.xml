@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GlobalManager/Flasgger/requestGroupMigration.yml" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalManager/Flasgger/requestGroupMigration.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GlobalManager/Flasgger/requestMigrate.yml" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalManager/Flasgger/requestMigrate.yml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="622">
-              <caret line="253" column="42" selection-start-line="253" selection-start-column="42" selection-end-line="253" selection-end-column="42" />
+            <state relative-caret-position="1063">
+              <caret line="244" lean-forward="true" selection-start-line="244" selection-end-line="244" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
                 <element signature="e#678#948#0" />
@@ -87,8 +87,17 @@
       <file leaf-file-name="requestGroupMigration.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/requestGroupMigration.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+            <state relative-caret-position="168">
+              <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="requestMigrate.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/requestMigrate.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -102,15 +111,6 @@
                 <element signature="e#1980#3037#0" />
                 <element signature="e#3041#4079#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="getWorkerList.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/getWorkerList.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -210,15 +210,15 @@
         <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/requestJoin.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/requestNewContainer.yml" />
-        <option value="$PROJECT_DIR$/GlobalManager/Flasgger/requestMigrate.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/requestLeave.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/requestUpdateContainer.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/getWorkerList.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/describeManager.yml" />
-        <option value="$PROJECT_DIR$/GlobalManager/Flasgger/requestGroupMigration.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/describeWorker.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/checkpointCons.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
+        <option value="$PROJECT_DIR$/GlobalManager/Flasgger/requestGroupMigration.yml" />
+        <option value="$PROJECT_DIR$/GlobalManager/Flasgger/requestMigrate.yml" />
       </list>
     </option>
   </component>
@@ -368,13 +368,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00165" summary="Update">
-      <created>1530653971940</created>
-      <option name="number" value="00165" />
-      <option name="presentableId" value="LOCAL-00165" />
-      <option name="project" value="LOCAL" />
-      <updated>1530653971941</updated>
     </task>
     <task id="LOCAL-00166" summary="Add Swagger">
       <created>1530825740813</created>
@@ -712,7 +705,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531164174721</updated>
     </task>
-    <option name="localTasksCounter" value="214" />
+    <task id="LOCAL-00214" summary="Update">
+      <created>1531164286037</created>
+      <option name="number" value="00214" />
+      <option name="presentableId" value="LOCAL-00214" />
+      <option name="project" value="LOCAL" />
+      <updated>1531164286037</updated>
+    </task>
+    <option name="localTasksCounter" value="215" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1023,13 +1023,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/requestMigrate.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/getWorkerList.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1048,13 +1041,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="15" column="59" lean-forward="true" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/requestGroupMigration.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -1099,8 +1085,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="253" column="42" selection-start-line="253" selection-start-column="42" selection-end-line="253" selection-end-column="42" />
+        <state relative-caret-position="1063">
+          <caret line="244" lean-forward="true" selection-start-line="244" selection-end-line="244" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
             <element signature="e#678#948#0" />
@@ -1114,6 +1100,20 @@
             <element signature="e#4567#5351#0" />
             <element signature="e#5444#5573#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/requestGroupMigration.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/requestMigrate.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
         </state>
       </provider>
     </entry>
