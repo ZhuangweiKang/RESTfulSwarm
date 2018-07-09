@@ -57,6 +57,7 @@ def createOverlayNetwork(network, subnet):
 
 
 @app.route('/RESTfulSwarm/GM/requestJoin', methods=['POST'])
+@swag_from('./Flasgger/requestJoin.yml')
 def requestJoin():
     data = request.get_json()
     hostname = data['hostname']
@@ -104,6 +105,7 @@ def newContainer(data):
 
 
 @app.route('/RESTfulSwarm/GM/requestNewContainer', methods=['POST'])
+@swag_from('./Flasgger/requestNewContainer.yml')
 def requestNewContainer():
     try:
         data = request.get_json()
@@ -137,6 +139,7 @@ def requestNewJob():
 
 
 @app.route('/RESTfulSwarm/GM/checkpointCons', methods=['POST'])
+@swag_from('./Flasgger/checkpointCons.yml')
 def checkpointCons():
     data = request.get_json()
     for item in data:
@@ -171,6 +174,7 @@ def containerMigration(data):
 
 
 @app.route('/RESTfulSwarm/GM/requestMigrate', methods=['POST'])
+@swag_from('./Flasgger/requestMigrate.yml')
 def requestMigrate():
     try:
         data = request.get_json()
@@ -180,6 +184,7 @@ def requestMigrate():
 
 
 @app.route('/RESTfulSwarm/GM/requestGroupMigration', methods=['POST'])
+@swag_from('./Flasgger/requestGroupMigration.yml')
 def requestGroupMigration():
     try:
         data = request.get_json()
@@ -191,6 +196,7 @@ def requestGroupMigration():
 
 
 @app.route('/RESTfulSwarm/GM/requestLeave', methods=['POST'])
+@swag_from('./Flasgger/requestLeave.yml')
 def requestLeave():
     hostname = request.get_json()['hostname']
     checkNode = dHelper.checkNodeHostName(client=dockerClient, host=hostname)
@@ -206,17 +212,11 @@ def requestLeave():
 
 
 @app.route('/RESTfulSwarm/GM/requestUpdateContainer', methods=['POST'])
+@swag_from('./Flasgger/requestUpdateContainer.yml')
 def requestUpdateContainer():
     newInfo = request.get_json()
     node = newInfo['node']
     container = newInfo['container_name']
-    '''
-    newInfo data format: 
-    {'node': $node_name,
-    'container_name': $container_name,
-    'cpuset_cpus': $cpuset_cpus,
-    'mem_limit': $mem_limit}
-    '''
     if dHelper.checkNodeHostName(client=dockerClient, host=node) is False:
         newInfo = json.dumps(newInfo)
         pubSocket.send_string('%s update %s' % (node, newInfo))

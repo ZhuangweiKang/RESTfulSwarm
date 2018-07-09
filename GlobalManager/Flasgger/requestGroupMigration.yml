@@ -1,0 +1,17 @@
+---
+summary: Migration a group of containers.
+description: Migration a group of containers that may be from different worker nodes.
+
+parameters:
+  - name: group_migration_info
+    in: body
+    schema:
+      type: array
+      items:
+        $ref: './requestMigrate.yml#/MigrationInfo'
+
+responses:
+  200:
+    description: Containers are migrating.
+  400:
+    description: Submitted group migration information has error.

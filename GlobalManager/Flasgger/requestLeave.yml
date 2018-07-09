@@ -1,0 +1,16 @@
+---
+summary: Worker node requests to leave the cluster.
+description: The worker node will be completely removed from the cluster, not only make its status as Down.
+
+parameters:
+  - name: leave_info
+    in: body
+    schema:
+      type: object
+      example: {'hostname': node1}
+
+responses:
+  200:
+    description: OK, worker node has left.
+  400:
+    description: Worker information you provided has error.

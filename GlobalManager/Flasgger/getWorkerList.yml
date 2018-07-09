@@ -3,5 +3,5 @@ summary: Get worker list in the cluster.
 responses:
   200:
     schema:
-      type: string
+      type: object
     description: OK

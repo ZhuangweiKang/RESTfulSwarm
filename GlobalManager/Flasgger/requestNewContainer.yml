@@ -1,0 +1,19 @@
+---
+parameters:
+- name: container_info
+  in: body
+  description: Similar to a task, but scheduler doesn't apply scheduling algorithm on it.
+  schema:
+    $ref: '../FrontEnd/FrontEnd.yml#/TaskDetail'
+
+responses:
+  200:
+    description: OK
+    schema:
+      type: string
+      example: Container has been submitted to launch.
+  400:
+    description: Bad request
+    schema:
+      type: string
+      example: Container information has error.

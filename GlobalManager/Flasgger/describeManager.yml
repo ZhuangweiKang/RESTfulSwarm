@@ -1,0 +1,17 @@
+---
+summary: Describe the master node(Global manager)
+description: Display details of the master node.
+parameters:
+  - name: hostname
+    in: path
+    required: true
+    description: The hostname of master node.
+    type: string
+responses:
+  200:
+    description: OK
+  400:
+    description: Bad request
+    schema:
+      type: string
+      example: Requested node is not in the cluster.

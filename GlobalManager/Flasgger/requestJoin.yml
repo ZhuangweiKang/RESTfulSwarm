@@ -1,0 +1,36 @@
+---
+parameters:
+  - name: worker_info
+    in: body
+    description: Worker information, including hostname, total cores and total free memory.
+    schema:
+      $ref: WorkerInfo
+
+definitions:
+  WorkerInfo:
+    type: object
+    properties:
+      hostname:
+        type: string
+      CPUs:
+        type: integer
+      MemFree:
+        type: string
+        example: "22245426 KB"
+
+responses:
+  200:
+    description: Good, 200
+    schema:
+      type: string
+      example: OK, Join token and remote address have been sent to worker node.
+  400:
+    description: Bad request, 400
+    schema:
+      type: string
+      example: The worker node already in the Swarm cluster.
+  406:
+    description: Request is not acceptable, 406
+    schema:
+      type: string
+      example: Your request is not acceptablle due to missing values.

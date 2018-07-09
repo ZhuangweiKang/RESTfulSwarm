@@ -1,0 +1,27 @@
+---
+parameters:
+  - name: checkpoints_info
+    in: body
+    schema:
+      $ref: '#/definitions/CheckpointInfo'
+
+definitions:
+  CheckpointInfo:
+    type: object
+    properties:
+      node:
+        type: string
+      containers:
+        type: array
+
+responses:
+  200:
+    description: OK
+    schema:
+      type: string
+      example: Has created snapshots for those containers you submitted. Checkpoint information has been stored into the container Checkpoints directory.
+  400:
+    description: Bad request
+    schema:
+      type: string
+      example: Can't find the node name node2.

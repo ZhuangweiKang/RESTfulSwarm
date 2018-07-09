@@ -1,0 +1,29 @@
+---
+parameters:
+  - name: migration_info
+    in: body
+    schema:
+      $ref: '#/definitions/MigrationInfo'
+
+definitions:
+  MigrationInfo:
+    type: object
+    properties:
+      job:
+        type: string
+      container:
+        type: string
+      from:
+        type: string
+        example: "host1@10.0.0.1"
+      to:
+        type: string
+        example: "host2@10.0.0.2"
+      info:
+        $ref: '../FrontEnd/FrontEnd.yml/TaskDetail'
+
+responses:
+  200:
+    description: Container is migrating.
+  400:
+    description: Submitted migration information has error.

@@ -1,0 +1,34 @@
+---
+summary: Update a container.
+description: Update cpuset_cpus and mem_limit.
+parameters:
+  - name: update_info
+    in: body
+    schema:
+      $ref: '#/definitions/UpdateInfo'
+
+definitions:
+  UpdateInfo:
+    type: object
+    properties:
+      job:
+        type: string
+      node:
+        type: string
+      container_name:
+        type: string
+      cpuset_cpus:
+        type: string
+        example: "1,2"
+      mem_limit:
+        type: string
+        example: "20m"
+
+responses:
+  200:
+    description: Container has been updated.
+  400:
+    description: Update info you submitted has error.
+    schema:
+      type: string
+      example: The node name you specified is not in the cluster.

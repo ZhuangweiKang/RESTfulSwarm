@@ -1,0 +1,21 @@
+---
+summary: Describe a worker node.
+description: Display details of the worker node.
+parameters:
+  - name: hostname
+    in: path
+    required: true
+    description: The hostname of the worker node.
+    type: string
+
+
+responses:
+  200:
+    description: OK
+    schema:
+      type: object
+  400:
+    description: Bad request
+    schema:
+      type: string
+      example: Requested node is not in the cluster.
