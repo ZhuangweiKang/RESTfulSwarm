@@ -1,70 +1,53 @@
 ---
-swagger: '2.0'
-
-info:
-  version: 1.0.0
-  title: RESTfulSwarm Front End
-  description: A RESTful application supporting some basic Docker Swarm operations.
-
-schemes:
-  - http
-host: 129.114.108.140
-basePath: /RESTfulSwarm/FE
-
-paths:
-  /requestNewJob:
-    post:
-      summary: Job manager node requests to launch new job.
-      description: Job manager schedule resources to each job, then notify global manager to lauch jobs in cluster.
-      parameters:
-        - name: job_info
-          in: body
-          description: Job information including resources schedule decision conducted by job manager.
-          schema:
-            type: object
-            example:
-              job_name: job1
-              job_info:
-                network:
-                  name: network name
-                  driver: overlay
-                  subnet: 10.x.x.x/24
-                tasks:
-                  jobname_task1:
-                    container_name: job1_task1
-                    node: ''
-                    image: container1 image
-                    detach: true
-                    command: ''
-                    cpu_count: 3
-                    cpuset_cpus: ''
-                    mem_limit: 30m
-                    ports:
-                      3000/tcp: 3000
-                    volumes: {}
-                    environment: {}
-                  jobname_task2:
-                    container_name: job1_task2
-                    node: ''
-                    image: container2 image
-                    detach: true
-                    command: ''
-                    cpu_count: 3
-                    cpuset_cpus: ''
-                    mem_limit: 30m
-                    ports:
-                      3000/tcp: 3000
-                    volumes: {}
-                    environment: {}
-              status: Ready
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: string
-            example: Job has been submitted to launch.
-        '400':
-          description: Bad request
-          schema:
-            type: string
-            example: Submitted Job info has error.
+parameters:
+  - name: job_info
+    in: body
+    description: Job information including resources schedule decision conducted by job manager.
+    schema:
+      type: object
+      example:
+        job_name: job1
+        job_info:
+          network:
+            name: network name
+            driver: overlay
+            subnet: 10.x.x.x/24
+          tasks:
+            jobname_task1:
+              container_name: job1_task1
+              node: ''
+              image: container1 image
+              detach: true
+              command: ''
+              cpu_count: 3
+              cpuset_cpus: ''
+              mem_limit: 30m
+              ports:
+                3000/tcp: 3000
+              volumes: {}
+              environment: {}
+            jobname_task2:
+              container_name: job1_task2
+              node: ''
+              image: container2 image
+              detach: true
+              command: ''
+              cpu_count: 3
+              cpuset_cpus: ''
+              mem_limit: 30m
+              ports:
+                3000/tcp: 3000
+              volumes: {}
+              environment: {}
+        status: Ready
+responses:
+  '200':
+    description: OK
+    schema:
+      type: string
+      example: Job has been submitted to launch.
+  '400':
+    description: Bad request
+    schema:
+      type: string
+      example: Submitted Job info has error.
