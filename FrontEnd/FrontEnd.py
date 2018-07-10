@@ -61,7 +61,7 @@ def requestNewJob():
     socket.send_string(msg)
     socket.recv_string()
 
-    return 'OK'
+    return 'OK', 200
 
 
 if __name__ == '__main__':
