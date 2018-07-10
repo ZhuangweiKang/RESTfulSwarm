@@ -210,13 +210,6 @@ class JobManager:
     def newJobNotify(self):
         job_queue = []
         timer = time.time()
-        while True:
-            msg = self.socket.recv_string()
-            self.socket.send_string('Ack')
-            msg = msg.split()
-            job_queue.append(msg)
-            if time.time() - timer >= self.wait:
-                break
 
         def preprocess_job(msg):
             # read db, parse job resources request
@@ -246,18 +239,25 @@ class JobManager:
                 # update WorkersInfo collection
                 self.scheduler.update_workers_info(schedule)
 
-        jobs_details = []
-        for msg in job_queue:
-            jobs_details.append((msg[1], preprocess_job(msg)))
-        schedule_resource(jobs_details)
+        while True:
+            msg = self.socket.recv_string()
+            self.socket.send_string('Ack')
+            msg = msg.split()
+            job_queue.append(msg)
+            if time.time() - timer >= self.wait:
+                timer = time.time()
+                jobs_details = []
+                for msg in job_queue:
+                    jobs_details.append((msg[1], preprocess_job(msg)))
+                schedule_resource(jobs_details)
 
-        for msg in job_queue:
-            url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (self.gm_addr, self.gm_port)
-            job_name = msg[1]
-            job_col = mHelper.get_col(self.db, job_name)
-            col_data = mHelper.find_col(job_col)[0]
-            del col_data['_id']
-            print(requests.post(url=url, json=col_data).content)
+                for msg in job_queue:
+                    url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (self.gm_addr, self.gm_port)
+                    job_name = msg[1]
+                    job_col = mHelper.get_col(self.db, job_name)
+                    col_data = mHelper.find_col(job_col)[0]
+                    del col_data['_id']
+                    print(requests.post(url=url, json=col_data).content)
 
 
 if __name__ == '__main__':
