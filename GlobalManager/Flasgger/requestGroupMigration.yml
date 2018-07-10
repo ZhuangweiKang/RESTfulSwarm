@@ -63,6 +63,10 @@ definitions:
 
 responses:
   200:
+    schema:
+      type: string
     description: Containers are migrating.
   400:
+    schema:
+      type: string
     description: Submitted group migration information has error.

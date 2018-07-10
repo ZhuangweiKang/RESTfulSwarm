@@ -199,7 +199,7 @@ def requestMigrate():
         data = request.get_json()
         return containerMigration(data)
     except Exception as ex:
-        return ex, 400
+        return str(ex), 400
 
 
 @app.route('/RESTfulSwarm/GM/requestGroupMigration', methods=['POST'])
@@ -211,7 +211,7 @@ def requestGroupMigration():
             containerMigration(item)
         return 'OK', 200
     except Exception as ex:
-        return ex, 400
+        return str(ex), 400
 
 
 @app.route('/RESTfulSwarm/GM/requestLeave', methods=['POST'])
