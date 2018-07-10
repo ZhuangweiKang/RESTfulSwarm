@@ -63,7 +63,7 @@ definitions:
         type: string
       driver:
         type: string
-        enum: ['overlay']
+        enum: ['overlay', 'weaveworks/net-plugin:latest_release']
       subnet:
         type: string
     example: {

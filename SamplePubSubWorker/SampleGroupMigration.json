@@ -2,7 +2,7 @@
   {
     "job": "kang",
     "container": "kang_Publisher",
-    "from": "kang6@10.52.0.231",
+    "from": "kang7@10.52.0.52",
     "to": "kang4@10.52.0.115",
     "info": {
         "container_name": "kang_Publisher",
@@ -21,7 +21,7 @@
   {
     "job": "kang",
     "container": "kang_Subscriber",
-    "from": "kang6@10.52.0.231",
+    "from": "kang7@10.52.0.52",
     "to": "kang4@10.52.0.115",
     "info": {
         "container_name": "kang_Subscriber",
