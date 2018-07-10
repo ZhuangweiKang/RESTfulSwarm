@@ -15,10 +15,10 @@ definitions:
         type: string
       from:
         type: string
-        example: "host1@10.0.0.1"
+        example: "10.0.0.1"
       to:
         type: string
-        example: "host2@10.0.0.2"
+        example: "10.0.0.2"
       info:
         $ref: '#/definitions/TaskDetail'
 
