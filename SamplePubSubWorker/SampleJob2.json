@@ -1,0 +1,36 @@
+{
+  "job_info": {
+    "tasks": {
+      "zhuangwei_task1": {
+        "command": "",
+        "container_name": "zhuangwei_task1",
+        "cpu_count": 13,
+        "cpuset_cpus": "",
+        "detach": true,
+        "environment": {},
+        "image": "busybox",
+        "mem_limit": "10m",
+        "node": "",
+        "ports": {},
+        "status": "Ready",
+        "volumes": {}
+      },
+      "zhuangwei_task2": {
+        "command": "",
+        "container_name": "zhuangwei_task2",
+        "cpu_count": 2,
+        "cpuset_cpus": "",
+        "detach": true,
+        "environment": {},
+        "image": "busybox",
+        "mem_limit": "10m",
+        "node": "",
+        "ports": {},
+        "status": "Ready",
+        "volumes": {}
+      }
+    }
+  },
+  "job_name": "zhuangwei",
+  "status": "Ready"
+}
