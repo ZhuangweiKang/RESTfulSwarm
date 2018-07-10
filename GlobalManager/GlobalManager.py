@@ -70,8 +70,8 @@ def initSwarmEnv():
     app.logger.info('Init Swarm environment.')
 
 
-def createOverlayNetwork(network, subnet):
-    dHelper.createNetwork(dockerClient, name=network, driver='overlay', subnet=subnet)
+def createOverlayNetwork(network, driver, subnet):
+    dHelper.createNetwork(dockerClient, name=network, driver=driver, subnet=subnet)
     app.logger.info('Build overlay network: %s.' % network)
 
 
@@ -139,7 +139,9 @@ def requestNewJob():
     data = request.get_json()
     # create overlay network if not exists
     if dHelper.verifyNetwork(dockerClient, data['job_info']['network']['name']):
-        createOverlayNetwork(data['job_info']['network']['name'], data['job_info']['network']['subnet'])
+        createOverlayNetwork(network=data['job_info']['network']['name'],
+                             driver=data['job_info']['network']['driver'],
+                             subnet=data['job_info']['network']['subnet'])
     time.sleep(1)
     try:
         for task in list(data['job_info']['tasks'].keys()):
