@@ -52,7 +52,7 @@ worker_col = None
 
 
 @app.route('/RESTfulSwarm/GM/init', methods=['GET'])
-@swag_from('./Flasgger/init.yml', validation=True)
+@swag_from('./Flasgger/init.yml')
 def init():
     global pubSocket
     try:
@@ -246,7 +246,7 @@ def requestUpdateContainer():
 
 
 @app.route('/RESTfulSwarm/GM/getWorkerList', methods=['GET'])
-@swag_from('./Flasgger/getWorkerList.yml', validation=True)
+@swag_from('./Flasgger/getWorkerList.yml')
 def getWorkerList():
     nodes = dHelper.getNodeList(dockerClient)
     response = {}
