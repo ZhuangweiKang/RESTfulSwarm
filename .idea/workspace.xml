@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JobManager/JobManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/JobManager/JobManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="229">
-              <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+              <caret line="143" column="32" lean-forward="true" selection-start-line="143" selection-start-column="32" selection-end-line="143" selection-end-column="32" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -92,11 +92,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="775">
-              <caret line="261" lean-forward="true" selection-start-line="261" selection-end-line="261" />
+            <state relative-caret-position="82">
+              <caret line="226" column="46" lean-forward="true" selection-start-line="226" selection-start-column="46" selection-end-line="226" selection-end-column="46" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
                 <element signature="e#8675#9344#0" />
@@ -196,11 +196,11 @@
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/requestMigrate.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/requestGroupMigration.yml" />
         <option value="$PROJECT_DIR$/SamplePubSubWorker/SampleGroupMigration.json" />
-        <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
         <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.yml" />
         <option value="$PROJECT_DIR$/SamplePubSubWorker/SampleJob2.json" />
         <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
         <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
+        <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
       </list>
     </option>
   </component>
@@ -452,13 +452,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00226" summary="Update">
-      <created>1531166311430</created>
-      <option name="number" value="00226" />
-      <option name="presentableId" value="LOCAL-00226" />
-      <option name="project" value="LOCAL" />
-      <updated>1531166311430</updated>
     </task>
     <task id="LOCAL-00227" summary="Update">
       <created>1531166482066</created>
@@ -796,7 +789,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531255478090</updated>
     </task>
-    <option name="localTasksCounter" value="275" />
+    <task id="LOCAL-00275" summary="Update">
+      <created>1531256177444</created>
+      <option name="number" value="00275" />
+      <option name="presentableId" value="LOCAL-00275" />
+      <option name="project" value="LOCAL" />
+      <updated>1531256177444</updated>
+    </task>
+    <option name="localTasksCounter" value="276" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1168,16 +1168,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SamplePubSubWorker/SampleJob2.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
@@ -1214,12 +1204,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="775">
-          <caret line="261" lean-forward="true" selection-start-line="261" selection-end-line="261" />
+        <state relative-caret-position="82">
+          <caret line="226" column="46" lean-forward="true" selection-start-line="226" selection-start-column="46" selection-end-line="226" selection-end-column="46" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
             <element signature="e#8675#9344#0" />
             <element signature="e#9403#9891#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="143" column="32" lean-forward="true" selection-start-line="143" selection-start-column="32" selection-end-line="143" selection-end-column="32" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
           </folding>
         </state>
       </provider>

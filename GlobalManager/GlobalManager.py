@@ -156,7 +156,7 @@ def requestNewJob():
 
         return 'OK', 200
     except Exception as ex:
-        return ex, 400
+        return str(ex), 400
 
 
 @app.route('/RESTfulSwarm/GM/checkpointCons', methods=['POST'])
