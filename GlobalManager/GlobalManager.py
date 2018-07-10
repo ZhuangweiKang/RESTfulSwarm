@@ -52,7 +52,7 @@ worker_col = None
 
 
 @app.route('/RESTfulSwarm/GM/init', methods=['GET'])
-@swag_from('./Flasgger/init.yml')
+@swag_from('./Flasgger/init.yml', validation=True)
 def init():
     global pubSocket
     try:
@@ -76,7 +76,7 @@ def createOverlayNetwork(network, subnet):
 
 
 @app.route('/RESTfulSwarm/GM/requestJoin', methods=['POST'])
-@swag_from('./Flasgger/requestJoin.yml')
+@swag_from('./Flasgger/requestJoin.yml', validation=True)
 def requestJoin():
     data = request.get_json()
     hostname = data['hostname']
@@ -124,7 +124,7 @@ def newContainer(data):
 
 
 @app.route('/RESTfulSwarm/GM/requestNewContainer', methods=['POST'])
-@swag_from('./Flasgger/requestNewContainer.yml')
+@swag_from('./Flasgger/requestNewContainer.yml', validation=True)
 def requestNewContainer():
     try:
         data = request.get_json()
@@ -158,7 +158,7 @@ def requestNewJob():
 
 
 @app.route('/RESTfulSwarm/GM/checkpointCons', methods=['POST'])
-@swag_from('./Flasgger/checkpointCons.yml')
+@swag_from('./Flasgger/checkpointCons.yml', validation=True)
 def checkpointCons():
     data = request.get_json()
     for item in data:
@@ -193,7 +193,7 @@ def containerMigration(data):
 
 
 @app.route('/RESTfulSwarm/GM/requestMigrate', methods=['POST'])
-@swag_from('./Flasgger/requestMigrate.yml')
+@swag_from('./Flasgger/requestMigrate.yml', validation=True)
 def requestMigrate():
     try:
         data = request.get_json()
@@ -203,7 +203,7 @@ def requestMigrate():
 
 
 @app.route('/RESTfulSwarm/GM/requestGroupMigration', methods=['POST'])
-@swag_from('./Flasgger/requestGroupMigration.yml')
+@swag_from('./Flasgger/requestGroupMigration.yml', validation=True)
 def requestGroupMigration():
     try:
         data = request.get_json()
@@ -215,7 +215,7 @@ def requestGroupMigration():
 
 
 @app.route('/RESTfulSwarm/GM/requestLeave', methods=['POST'])
-@swag_from('./Flasgger/requestLeave.yml')
+@swag_from('./Flasgger/requestLeave.yml', validation=True)
 def requestLeave():
     hostname = request.get_json()['hostname']
     checkNode = dHelper.checkNodeHostName(client=dockerClient, host=hostname)
@@ -231,7 +231,7 @@ def requestLeave():
 
 
 @app.route('/RESTfulSwarm/GM/requestUpdateContainer', methods=['POST'])
-@swag_from('./Flasgger/requestUpdateContainer.yml')
+@swag_from('./Flasgger/requestUpdateContainer.yml', validation=True)
 def requestUpdateContainer():
     newInfo = request.get_json()
     node = newInfo['node']
@@ -246,7 +246,7 @@ def requestUpdateContainer():
 
 
 @app.route('/RESTfulSwarm/GM/getWorkerList', methods=['GET'])
-@swag_from('./Flasgger/getWorkerList.yml')
+@swag_from('./Flasgger/getWorkerList.yml', validation=True)
 def getWorkerList():
     nodes = dHelper.getNodeList(dockerClient)
     response = {}
@@ -264,13 +264,13 @@ def describeNode(hostname):
 
 
 @app.route('/RESTfulSwarm/GM/<hostname>/describeWorker', methods=['GET'])
-@swag_from('./Flasgger/describeWorker.yml')
+@swag_from('./Flasgger/describeWorker.yml', validation=True)
 def describeWorker(hostname):
     return describeNode(hostname)
 
 
 @app.route('/RESTfulSwarm/GM/<hostname>/describeManager', methods=['GET'])
-@swag_from('./Flasgger/describeManager.yml')
+@swag_from('./Flasgger/describeManager.yml', validation=True)
 def describeManager(hostname):
     return describeNode(hostname)
 
