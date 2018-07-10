@@ -3,10 +3,9 @@ parameters:
   - name: job_info
     in: body
     description: Job information including resources schedule decision conducted by job manager.
-    type: object
+    required: true
     schema:
       $ref: '#/definitions/JobInfo'
-    required: true
 
 definitions:
   JobInfo:
