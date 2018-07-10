@@ -16,7 +16,8 @@ definitions:
         type: integer
       MemFree:
         type: string
-        example: "22245426 KB"
+        description: Unit of free memory must be kB
+        example: "22245426 kB"
 
 responses:
   200:
