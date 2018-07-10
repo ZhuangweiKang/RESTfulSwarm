@@ -26,8 +26,8 @@ if __name__ == '__main__':
     '''
     with open('ClientInit.json') as f:
         data = json.load(f)
-    fe_addr = data['address']
-    fe_port = data['port']
+    fe_addr = data['front_end_addr']
+    fe_port = data['front_end_port']
 
     while True:
         try:
