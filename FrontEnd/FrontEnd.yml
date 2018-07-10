@@ -107,12 +107,12 @@ definitions:
         enum: [Ready, Deployed, Down]
 
 responses:
-  '200':
+  200:
     description: OK
     schema:
       type: string
       example: Job has been submitted to launch.
-  '400':
+  400:
     description: Bad request
     schema:
       type: string
