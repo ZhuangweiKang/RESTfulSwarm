@@ -182,7 +182,7 @@ def checkNodeHostName(client, host):
 def getNodeInfo(client, name):
     try:
         node = client.nodes.get(name)
-        return json.dumps(node.attrs)
+        return node.attrs
     except Exception as ex:
         return None
 
