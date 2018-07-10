@@ -47,6 +47,7 @@ socket = None
 @app.route('/RESTfulSwarm/FE/requestNewJob', methods=['POST'])
 @swag_from('FrontEnd.yml', validation=True)
 def requestNewJob():
+    global socket
     # Write job data into MongoDB
     data = request.get_json()
     data.update({'TimeStamp': time.time()})
