@@ -9,6 +9,8 @@ parameters:
     type: string
 responses:
   200:
+    schema:
+      type: object
     description: OK
   400:
     description: Bad request
