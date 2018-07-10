@@ -72,6 +72,7 @@ if __name__ == '__main__':
     mongo_addr = args.mongo_addr
     mongo_port = args.mongo_port
     '''
+
     with open('DiscoveryInit.json') as f:
         data = json.load(f)
     mongo_addr = data['mongo_addr']
