@@ -16,4 +16,4 @@ responses:
     description: Bad request
     schema:
       type: string
-      example: Requested node is not i nn the cluster.
+      example: Requested node is not in the cluster.
