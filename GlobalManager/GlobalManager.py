@@ -251,8 +251,7 @@ def getWorkerList():
     nodes = dHelper.getNodeList(dockerClient)
     response = {}
     for node in nodes:
-        print(node.attrs)
-        response.update(json.dumps(node.attrs))
+        response.update(node.attrs)
     return jsonify(response)
 
 
