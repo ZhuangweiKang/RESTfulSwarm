@@ -40,6 +40,7 @@ class Scheduler(object):
                 if index == len(core_request[job_index][1].items()):
                     job_index += 1
 
+                # Bug!!!!!!!!!!!!!
                 for j in range(list(core_request[job_index][1].values())[item[0]]):
                     temp1.append(list(available_workers.values())[item[1]][flag])
                     flag += 1
