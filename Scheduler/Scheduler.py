@@ -52,12 +52,10 @@ class Scheduler(object):
 
                 # update free memory
                 worker_info = list(self.workers_col.find({'hostname': list(available_workers.keys())[item[1]]}))[0]
-                print('new free mem: ', worker_info['MemFree'])
-                print('request mem: ', mem_request_arr[index])
+
                 new_free_mem = utl.memory_size_translator(worker_info['MemFree'])
                 request_mem = utl.memory_size_translator(mem_request_arr[index])
-                print('free mem ', new_free_mem)
-                print('request ', request_mem)
+
                 new_free_mem -= request_mem
                 new_free_mem = str(new_free_mem) + 'm'
                 mg.update_doc(self.workers_col, 'hostname', list(available_workers.keys())[item[1]], 'MemFree',
