@@ -2,6 +2,8 @@
 
 apt-get update
 
+apt-get install libltdl7
+
 # install pip3
 apt-get install -y python3-pip python3-dev python3-setuptools xmlto asciidoc
 
