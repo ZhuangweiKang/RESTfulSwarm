@@ -1,7 +1,7 @@
 {
-  "address": "10.52.0.30",
-  "mongo_addr": "10.52.0.117",
+  "address": "10.10.26.176",
+  "mongo_addr": "10.10.26.180",
   "mongo_port": 27017,
-  "job_manager_addr": "10.52.0.60",
+  "job_manager_addr": "10.10.26.177",
   "job_manager_port": "2990"
 }

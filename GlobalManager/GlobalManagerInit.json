@@ -1,6 +1,6 @@
 {
-  "global_manager_addr": "10.52.0.34",
+  "global_manager_addr": "10.10.26.178",
   "global_manager_port": "5000",
-  "mongo_addr": "10.52.0.117",
+  "mongo_addr": "10.10.26.180",
   "mongo_port": 27017
 }
