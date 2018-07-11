@@ -213,4 +213,4 @@ if __name__ == '__main__':
 
     worker = Worker(manager_addr, self_addr, discovery_addr, discovery_port, frequency)
     worker.main()
-    # worker.requestJoinSwarm()
+    worker.requestJoinSwarm()
