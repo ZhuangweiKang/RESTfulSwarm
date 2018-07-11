@@ -1,14 +1,14 @@
 {
-  "job_name": "kang",
+  "job_name": "job1",
   "job_info": {
     "network": {
       "name": "kangNetwork",
       "driver": "weaveworks/net-plugin:latest_release",
-      "subnet": "10.52.0.34/24"
+      "subnet": "10.10.26.178/24"
     },
     "tasks": {
-      "kang_Publisher": {
-        "container_name": "kang_Publisher",
+      "job1_task1": {
+        "container_name": "job1_task1",
         "node": "",
         "image": "zhuangweikang/publisher",
         "detach": true,
@@ -21,8 +21,8 @@
         "environment": {},
         "status": "Ready"
       },
-      "kang_Subscriber": {
-        "container_name": "kang_Subscriber",
+      "job1_task2": {
+        "container_name": "job1_task2",
         "node": "",
         "image": "zhuangweikang/subscriber",
         "detach": true,

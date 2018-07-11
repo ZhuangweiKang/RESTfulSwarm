@@ -1,36 +1,41 @@
 {
+  "job_name": "job2",
   "job_info": {
+    "network": {
+      "name": "kangNetwork",
+      "driver": "weaveworks/net-plugin:latest_release",
+      "subnet": "10.10.26.178/24"
+    },
     "tasks": {
-      "zhuangwei_task1": {
-        "command": "",
-        "container_name": "zhuangwei_task1",
-        "cpu_count": 13,
-        "cpuset_cpus": "",
-        "detach": true,
-        "environment": {},
-        "image": "busybox",
-        "mem_limit": "10m",
+      "job2_task1": {
+        "container_name": "job2_task1",
         "node": "",
-        "ports": {},
-        "status": "Ready",
-        "volumes": {}
+        "image": "busybox",
+        "detach": true,
+        "command": "",
+        "cpu_count": 3,
+        "cpuset_cpus": "",
+        "mem_limit": "10m",
+        "ports": {"3000/tcp": 3000},
+        "volumes": {},
+        "environment": {},
+        "status": "Ready"
       },
-      "zhuangwei_task2": {
-        "command": "",
-        "container_name": "zhuangwei_task2",
-        "cpu_count": 2,
-        "cpuset_cpus": "",
-        "detach": true,
-        "environment": {},
-        "image": "busybox",
-        "mem_limit": "10m",
+      "job2_task2": {
+        "container_name": "job2_task2",
         "node": "",
+        "image": "busybox",
+        "detach": true,
+        "command": "",
+        "cpu_count": 12,
+        "cpuset_cpus": "",
+        "mem_limit": "30m",
         "ports": {},
-        "status": "Ready",
-        "volumes": {}
+        "volumes": {},
+        "environment": {},
+        "status": "Ready"
       }
     }
   },
-  "job_name": "zhuangwei",
   "status": "Ready"
 }
