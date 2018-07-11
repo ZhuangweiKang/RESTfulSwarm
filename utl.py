@@ -38,7 +38,7 @@ def getHostName():
 
 
 def getHostIP():
-    host_addr = os.popen('ip addr show dev eno1 | grep -w inet | awk \'{print $2}\'', 'r').read()
+    host_addr = os.popen('ip addr show dev ens3 | grep -w inet | awk \'{print $2}\'', 'r').read()
     host_addr = host_addr.split('/')[0]
     return host_addr
 
