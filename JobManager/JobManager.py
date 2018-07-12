@@ -254,6 +254,9 @@ class JobManager:
                         temp_job_queue.append(msg)
                         job_queue.remove(msg)
 
+                    print('Job details: ')
+                    print(jobs_details)
+
                     schedule_resource(jobs_details)
 
                     for msg in temp_job_queue:
