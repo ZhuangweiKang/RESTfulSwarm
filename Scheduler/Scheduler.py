@@ -39,6 +39,12 @@ class Scheduler(object):
         print('Core Requests:')
         print(core_request)
 
+        print('Memory request array:')
+        print(mem_request_arr)
+
+        print('Available Workers:')
+        print(available_workers)
+
         if schedule is not None:
             step = 0
             step_flag = False
@@ -50,6 +56,8 @@ class Scheduler(object):
                 # of free cores may be more than requested cores
                 temp1 = []
 
+                # 错误原因：item[0] 是0，1，2，3...但是core_request的第二个元素的子元素数量仅代表每个task所需的core数量
+                # IndexError
                 for j in range(list(core_request[job_index][1].values())[item[0]]):
                     temp1.append(list(available_workers.values())[item[1]][flag])
                     flag += 1
@@ -71,6 +79,7 @@ class Scheduler(object):
                 mg.update_doc(self.workers_col, 'hostname', list(available_workers.keys())[item[1]], 'MemFree',
                               new_free_mem)
 
+                # update job index
                 if index == step:
                     job_index += 1
                     step_flag = False

@@ -231,12 +231,6 @@ class JobManager:
             core_requests = [(job[0], job[1][0]) for job in jobs_details]
             mem_requests = [(job[0], job[1][1]) for job in jobs_details]
 
-            print('core requests:')
-            print(core_requests)
-
-            print('memory requests:')
-            print(mem_requests)
-
             schedule = scheduler.schedule_resources(core_requests, mem_requests)
 
             if schedule is not None:
@@ -254,14 +248,10 @@ class JobManager:
                 elif time.time() - timer >= self.wait:
                     jobs_details = []
                     temp_job_queue = []
-                    print(job_queue)
                     for index, msg in enumerate(job_queue[:]):
                         jobs_details.append((msg[1], preprocess_job(msg)))
                         temp_job_queue.append(msg)
                         job_queue.remove(msg)
-
-                    print('Job details: ')
-                    print(jobs_details)
 
                     schedule_resource(jobs_details)
 
@@ -271,7 +261,6 @@ class JobManager:
                         job_col = mHelper.get_col(self.db, job_name)
                         col_data = mHelper.find_col(job_col)[0]
                         del col_data['_id']
-                        print(col_data)
                         print(requests.post(url=url, json=col_data).content)
 
                     timer = time.time()
