@@ -241,6 +241,7 @@ class JobManager:
 
         def execute():
             nonlocal timer
+            nonlocal job_queue
             while True:
                 if len(job_queue) == 0:
                     continue
