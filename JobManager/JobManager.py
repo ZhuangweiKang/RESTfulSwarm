@@ -231,6 +231,12 @@ class JobManager:
             core_requests = [(job[0], job[1][0]) for job in jobs_details]
             mem_requests = [(job[0], job[1][1]) for job in jobs_details]
 
+            print('core requests:')
+            print(core_requests)
+
+            print('memory requests:')
+            print(mem_requests)
+
             schedule = scheduler.schedule_resources(core_requests, mem_requests)
 
             if schedule is not None:
