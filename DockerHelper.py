@@ -157,10 +157,11 @@ def getTags(client, imageName):
 
 
 def verifyNetwork(client, network):
+    # get a list of network objects
     networks = client.networks.list()
-    print('Available network list: ')
+    # get a list of network name
+    networks = [network.name for network in networks]
     if network in networks:
-        print(network)
         return False
     return True
 
