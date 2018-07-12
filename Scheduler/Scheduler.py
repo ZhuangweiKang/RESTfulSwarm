@@ -57,8 +57,6 @@ class Scheduler(object):
                 # of free cores may be more than requested cores
                 temp1 = []
 
-                # 错误原因：item[0] 是0，1，2，3...但是core_request的第二个元素的子元素数量仅代表每个task所需的core数量
-                # IndexError
                 for j in range(list(core_request[job_index][1].values())[task_step]):
                     temp1.append(list(available_workers.values())[item[1]][flag])
                     flag += 1
@@ -85,6 +83,7 @@ class Scheduler(object):
                     job_index += 1
                     step_flag = False
                     task_step = 0
+                    flag = 0
                 else:
                     task_step += 1
             return result
