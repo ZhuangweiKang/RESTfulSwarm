@@ -33,6 +33,7 @@ class Scheduler(object):
         job_index = 0
         result = []
 
+        '''
         print('Schedule:')
         print(schedule)
 
@@ -44,6 +45,7 @@ class Scheduler(object):
 
         print('Available Workers:')
         print(available_workers)
+        '''
 
         if schedule is not None:
             steps = -1
