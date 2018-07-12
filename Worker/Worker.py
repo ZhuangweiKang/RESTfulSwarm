@@ -34,9 +34,9 @@ class Worker:
         # format: {$container : $containerInfo}
         self.storage = {}
 
-        task_monitor_thr = threading.Thread(target=self.monitor,
-                                            args=(discovery_addr, discovery_port, task_monitor_frequency, ))
-        task_monitor_thr.start()
+        self.discovery_addr = discovery_addr
+        self.discovery_port = discovery_port
+        self.task_monitor_frequency = task_monitor_frequency
 
     def monitor(self, discovery_addr, discovery_port='4000', frequency=20):
         time_flag = time.time()
@@ -166,6 +166,9 @@ class Worker:
     def main(self):
         migrateThr = threading.Thread(target=self.listenManagerMsg, args=())
         notMigrateThr = threading.Thread(target=self.listenWorkerMessage, args=())
+        task_monitor_thr = threading.Thread(target=self.monitor,
+                                            args=(self.discovery_addr, self.discovery_port, self.task_monitor_frequency,))
+        task_monitor_thr.start()
         migrateThr.start()
         notMigrateThr.start()
 
