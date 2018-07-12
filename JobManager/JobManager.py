@@ -239,26 +239,41 @@ class JobManager:
                 # update WorkersInfo collection
                 self.scheduler.update_workers_info(schedule)
 
+        def execute():
+            global timer
+            while True:
+                if len(job_queue) == 0:
+                    continue
+                if time.time() - timer >= self.wait:
+                    jobs_details = []
+                    temp_job_queue = []
+                    for index, msg in enumerate(job_queue[:]):
+                        jobs_details.append((msg[1], preprocess_job(msg)))
+                        temp_job_queue.append(msg)
+                        del job_queue[index]
+
+                    schedule_resource(jobs_details)
+
+                    for msg in temp_job_queue:
+                        url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (self.gm_addr, self.gm_port)
+                        job_name = msg[1]
+                        job_col = mHelper.get_col(self.db, job_name)
+                        col_data = mHelper.find_col(job_col)[0]
+                        del col_data['_id']
+                        print(col_data)
+                        print(requests.post(url=url, json=col_data).content)
+
+                    timer = time.time()
+
+        execute_thr = threading.Thread(target=execute, args=())
+        execute_thr.setDaemon(True)
+        execute_thr.start()
+
         while True:
             msg = self.socket.recv_string()
             self.socket.send_string('Ack')
             msg = msg.split()
             job_queue.append(msg)
-            if time.time() - timer >= self.wait:
-                timer = time.time()
-                jobs_details = []
-                for msg in job_queue:
-                    jobs_details.append((msg[1], preprocess_job(msg)))
-                schedule_resource(jobs_details)
-
-                for msg in job_queue:
-                    url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (self.gm_addr, self.gm_port)
-                    job_name = msg[1]
-                    job_col = mHelper.get_col(self.db, job_name)
-                    col_data = mHelper.find_col(job_col)[0]
-                    del col_data['_id']
-                    print(col_data)
-                    print(requests.post(url=url, json=col_data).content)
 
 
 if __name__ == '__main__':
