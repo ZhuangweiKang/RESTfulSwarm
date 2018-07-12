@@ -240,7 +240,7 @@ class JobManager:
                 self.scheduler.update_workers_info(schedule)
 
         def execute():
-            global timer
+            nonlocal timer
             while True:
                 if len(job_queue) == 0:
                     continue
