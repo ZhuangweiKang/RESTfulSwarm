@@ -252,7 +252,7 @@ class JobManager:
                     for index, msg in enumerate(job_queue[:]):
                         jobs_details.append((msg[1], preprocess_job(msg)))
                         temp_job_queue.append(msg)
-                        del job_queue[index]
+                        job_queue.remove(msg)
 
                     schedule_resource(jobs_details)
 
