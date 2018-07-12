@@ -245,7 +245,7 @@ class JobManager:
             while True:
                 if len(job_queue) == 0:
                     continue
-                if time.time() - timer >= self.wait:
+                elif time.time() - timer >= self.wait:
                     jobs_details = []
                     temp_job_queue = []
                     print(job_queue)
