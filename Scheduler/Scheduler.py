@@ -46,11 +46,12 @@ class Scheduler(object):
         print(available_workers)
 
         if schedule is not None:
-            step = 0
+            steps = 0
             step_flag = False
+            task_step = 0
             for index, item in enumerate(schedule):
                 if step_flag is False:
-                    step += len(core_request[job_index][1].items()) - 1
+                    steps += len(core_request[job_index][1].items()) - 1
                     step_flag = True
                 # get the first n cores from all free cores because the amount
                 # of free cores may be more than requested cores
@@ -58,12 +59,12 @@ class Scheduler(object):
 
                 # 错误原因：item[0] 是0，1，2，3...但是core_request的第二个元素的子元素数量仅代表每个task所需的core数量
                 # IndexError
-                for j in range(list(core_request[job_index][1].values())[item[0]]):
+                for j in range(list(core_request[job_index][1].values())[task_step]):
                     temp1.append(list(available_workers.values())[item[1]][flag])
                     flag += 1
 
                 temp = (core_request[job_index][0],
-                        list(core_request[job_index][1].keys())[item[0]],
+                        list(core_request[job_index][1].keys())[task_step],
                         list(available_workers.keys())[item[1]],
                         temp1)
                 result.append(temp)
@@ -80,9 +81,12 @@ class Scheduler(object):
                               new_free_mem)
 
                 # update job index
-                if index == step:
+                if index == steps:
                     job_index += 1
                     step_flag = False
+                    task_step = 0
+                else:
+                    task_step += 1
             return result
         else:
             return None
