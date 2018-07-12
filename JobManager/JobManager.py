@@ -257,6 +257,7 @@ class JobManager:
                     job_col = mHelper.get_col(self.db, job_name)
                     col_data = mHelper.find_col(job_col)[0]
                     del col_data['_id']
+                    print(col_data)
                     print(requests.post(url=url, json=col_data).content)
 
 
