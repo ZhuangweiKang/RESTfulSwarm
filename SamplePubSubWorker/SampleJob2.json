@@ -16,7 +16,7 @@
         "cpu_count": 1,
         "cpuset_cpus": "",
         "mem_limit": "10m",
-        "ports": {"3000/tcp": 3000},
+        "ports": {},
         "volumes": {},
         "environment": {},
         "status": "Ready"
