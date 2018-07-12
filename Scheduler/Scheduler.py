@@ -40,14 +40,16 @@ class Scheduler(object):
         print(core_request)
 
         if schedule is not None:
+            step = 0
+            step_flag = False
             for index, item in enumerate(schedule):
+                if step_flag is False:
+                    step += len(core_request[job_index][1].items()) - 1
+                    step_flag = True
                 # get the first n cores from all free cores because the amount
                 # of free cores may be more than requested cores
                 temp1 = []
-                if index == len(core_request[job_index][1].items()):
-                    job_index += 1
 
-                # Bug!!!!!!!!!!!!!
                 for j in range(list(core_request[job_index][1].values())[item[0]]):
                     temp1.append(list(available_workers.values())[item[1]][flag])
                     flag += 1
@@ -68,6 +70,10 @@ class Scheduler(object):
                 new_free_mem = str(new_free_mem) + 'm'
                 mg.update_doc(self.workers_col, 'hostname', list(available_workers.keys())[item[1]], 'MemFree',
                               new_free_mem)
+
+                if index == step:
+                    job_index += 1
+                    step_flag = False
             return result
         else:
             return None
