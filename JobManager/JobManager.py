@@ -248,6 +248,7 @@ class JobManager:
                 if time.time() - timer >= self.wait:
                     jobs_details = []
                     temp_job_queue = []
+                    print(job_queue)
                     for index, msg in enumerate(job_queue[:]):
                         jobs_details.append((msg[1], preprocess_job(msg)))
                         temp_job_queue.append(msg)
