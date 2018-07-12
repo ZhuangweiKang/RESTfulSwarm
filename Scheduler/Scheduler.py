@@ -46,12 +46,12 @@ class Scheduler(object):
         print(available_workers)
 
         if schedule is not None:
-            steps = 0
+            steps = -1
             step_flag = False
             task_step = 0
             for index, item in enumerate(schedule):
                 if step_flag is False:
-                    steps += len(core_request[job_index][1].items()) - 1
+                    steps += len(core_request[job_index][1].items())
                     step_flag = True
                 # get the first n cores from all free cores because the amount
                 # of free cores may be more than requested cores
