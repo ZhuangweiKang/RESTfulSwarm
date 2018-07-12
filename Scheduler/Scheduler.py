@@ -79,7 +79,10 @@ class Scheduler(object):
                               new_free_mem)
 
                 # update job index
+                print('index = ', index)
+                print('steps = ', steps)
                 if index == steps:
+                    print('index == steps')
                     job_index += 1
                     step_flag = False
                     task_step = 0
