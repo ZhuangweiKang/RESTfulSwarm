@@ -37,6 +37,9 @@ class BestFitScheduler(Scheduler):
         for item in mem_request:
             mem_request_arr.extend(list(item[1].values()))
 
+        print('Best fit result:')
+        print(bf_result)
+
         # process schedule result
         return self.process_schedule_result(bf_result, core_request, mem_request_arr, available_workers)
 
