@@ -32,6 +32,8 @@ class Scheduler(object):
         flag = 0
         job_index = 0
         result = []
+        print('Schedule is:')
+        print(schedule)
         if schedule is not None:
             for index, item in enumerate(schedule):
                 # get the first n cores from all free cores because the amount
