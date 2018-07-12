@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scheduler/Scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scheduler/Scheduler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobManager/JobManagerInit.json" beforeDir="false" afterPath="$PROJECT_DIR$/JobManager/JobManagerInit.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,11 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Scheduler.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Scheduler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="651">
-              <caret line="73" column="32" selection-start-line="73" selection-start-column="32" selection-end-line="73" selection-end-column="32" />
+            <state relative-caret-position="280">
+              <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -41,8 +41,8 @@
       <file leaf-file-name="BestFitScheduler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scheduler/BestFitScheduler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="43" column="29" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
+            <state relative-caret-position="82">
+              <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -62,8 +62,8 @@
       <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="239" column="41" selection-start-line="239" selection-start-column="41" selection-end-line="239" selection-end-column="41" />
+            <state relative-caret-position="397">
+              <caret line="222" column="62" lean-forward="true" selection-start-line="222" selection-start-column="62" selection-end-line="222" selection-end-column="62" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -71,7 +71,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JobManagerInit.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="JobManagerInit.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/JobManager/JobManagerInit.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -214,10 +214,10 @@
         <option value="$PROJECT_DIR$/SamplePubSubWorker/SampleJob2.json" />
         <option value="$PROJECT_DIR$/SamplePubSubWorker/SampleJob1.json" />
         <option value="$PROJECT_DIR$/DockerHelper.py" />
-        <option value="$PROJECT_DIR$/JobManager/JobManagerInit.json" />
-        <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
-        <option value="$PROJECT_DIR$/Scheduler/BestFitScheduler.py" />
         <option value="$PROJECT_DIR$/Scheduler/Scheduler.py" />
+        <option value="$PROJECT_DIR$/Scheduler/BestFitScheduler.py" />
+        <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
+        <option value="$PROJECT_DIR$/JobManager/JobManagerInit.json" />
       </list>
     </option>
   </component>
@@ -231,10 +231,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1912" />
-    <option name="y" value="-8" />
-    <option name="width" value="1696" />
-    <option name="height" value="1026" />
+    <option name="x" value="12" />
+    <option name="y" value="252" />
+    <option name="width" value="1940" />
+    <option name="height" value="1170" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -361,20 +361,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00252" summary="Update Discovery">
-      <created>1531237043802</created>
-      <option name="number" value="00252" />
-      <option name="presentableId" value="LOCAL-00252" />
-      <option name="project" value="LOCAL" />
-      <updated>1531237043803</updated>
-    </task>
-    <task id="LOCAL-00253" summary="Update Discovery">
-      <created>1531237549483</created>
-      <option name="number" value="00253" />
-      <option name="presentableId" value="LOCAL-00253" />
-      <option name="project" value="LOCAL" />
-      <updated>1531237549483</updated>
     </task>
     <task id="LOCAL-00254" summary="Update Discovery">
       <created>1531237782446</created>
@@ -705,11 +691,25 @@
       <option name="project" value="LOCAL" />
       <updated>1531413115621</updated>
     </task>
-    <option name="localTasksCounter" value="301" />
+    <task id="LOCAL-00301" summary="Update">
+      <created>1531414540767</created>
+      <option name="number" value="00301" />
+      <option name="presentableId" value="LOCAL-00301" />
+      <option name="project" value="LOCAL" />
+      <updated>1531414540767</updated>
+    </task>
+    <task id="LOCAL-00302" summary="Update">
+      <created>1531422249946</created>
+      <option name="number" value="00302" />
+      <option name="presentableId" value="LOCAL-00302" />
+      <option name="project" value="LOCAL" />
+      <updated>1531422249946</updated>
+    </task>
+    <option name="localTasksCounter" value="303" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="934" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -719,7 +719,7 @@
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.32205513" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18154034" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19932885" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -1029,13 +1029,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JobManager/JobManagerInit.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="836">
@@ -1090,27 +1083,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scheduler/BestFitScheduler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="239" column="41" selection-start-line="239" selection-start-column="41" selection-end-line="239" selection-end-column="41" />
+        <state relative-caret-position="397">
+          <caret line="222" column="62" lean-forward="true" selection-start-line="222" selection-start-column="62" selection-end-line="222" selection-end-column="62" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Scheduler/BestFitScheduler.py">
+    <entry file="file://$PROJECT_DIR$/JobManager/JobManagerInit.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="43" column="29" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="73" column="32" selection-start-line="73" selection-start-column="32" selection-end-line="73" selection-end-column="32" />
+        <state relative-caret-position="105">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
         </state>
       </provider>
     </entry>

@@ -3,5 +3,5 @@
   "global_manager_port": "5000",
   "mongo_addr": "10.10.26.180",
   "mongo_port": 27017,
-  "wait_time": 20
+  "wait_time": 90
 }
