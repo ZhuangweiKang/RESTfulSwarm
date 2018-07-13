@@ -1,6 +1,6 @@
 [
   {
-    "node": "kang2",
-    "containers": ["Publisher", "Subscriber"]
+    "node": "kang7",
+    "containers": ["job1_task1", "job1_task2"]
   }
 ]

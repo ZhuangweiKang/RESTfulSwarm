@@ -1,40 +1,42 @@
 [
   {
-    "job": "kang",
-    "container": "kang_Publisher",
-    "from": "kang7@10.52.0.52",
-    "to": "kang4@10.52.0.115",
+    "job": "job1",
+    "container": "job1_task1",
+    "from": "10.10.26.182",
+    "to": "10.10.26.179",
     "info": {
-        "container_name": "kang_Publisher",
+        "container_name": "job1_task1",
         "node": "kang4",
         "image": "zhuangweikang/publisher",
         "detach": true,
         "network": "kangNetwork",
         "command": "",
-        "cpu_count": 3,
-        "cpuset_cpus": "46,32,22",
+        "cpu_count": 1,
+        "cpuset_cpus": "1",
         "mem_limit": "10m",
         "ports": {},
-        "volumes": {}
+        "volumes": {},
+        "status": "Deployed"
       }
   },
   {
-    "job": "kang",
-    "container": "kang_Subscriber",
-    "from": "kang7@10.52.0.52",
-    "to": "kang4@10.52.0.115",
+    "job": "job1",
+    "container": "job1_task2",
+    "from": "10.10.26.182",
+    "to": "10.10.26.179",
     "info": {
-        "container_name": "kang_Subscriber",
+        "container_name": "job1_task2",
         "node": "kang4",
         "network": "kangNetwork",
         "image": "zhuangweikang/subscriber",
         "detach": true,
         "command": "",
-        "cpu_count": 2,
-        "cpuset_cpus": "25,24",
+        "cpu_count": 1,
+        "cpuset_cpus": "0",
         "mem_limit": "10m",
         "ports": {},
-        "volumes": {}
+        "volumes": {},
+        "status": "Deployed"
       }
   }
 ]
