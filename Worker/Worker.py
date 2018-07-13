@@ -48,9 +48,13 @@ class Worker:
             events = client.events(since=time_flag, until=time.time(), decode=True)
             msgs = []
             for event in events:
-                if event['Type'] == 'container' and event['status'] == 'stop':
+                if event['Type'] == 'container' and \
+                        (event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die'):
                     msg = hostname + ' ' + event['Actor']['Attributes']['name']
                     msgs.append(msg)
+
+            # 去重
+            msgs = list(set(msgs))
 
             # Notify discovery block to update MongoDB
             for msg in msgs:
