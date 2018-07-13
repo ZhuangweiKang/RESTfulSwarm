@@ -50,8 +50,9 @@ class Worker:
             for event in events:
                 if event['Type'] == 'container' and \
                         (event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die'):
-                    msg = hostname + ' ' + event['Actor']['Attributes']['name']
-                    msgs.append(msg)
+                    if event['Actor']['Attributes']['name'] in self.storage.keys():
+                        msg = hostname + ' ' + event['Actor']['Attributes']['name']
+                        msgs.append(msg)
 
             # 去重
             msgs = list(set(msgs))
@@ -93,12 +94,17 @@ class Worker:
                 container_info = info['info']
                 container_info['node'] = self.hostname
                 try:
-                    lmController = LiveMigration(image=self.storage[container]['image'], name=container,
-                                                 network=self.storage[container]['network'], logger=self.logger,
-                                                 dockerClient=self.dockerClient)
-                    lmController.migrate(dst_addr=dst, port='3200', cmd=self.storage[container]['command'],
-                                         container_detail=container_info)
+                    temp_container = self.storage[container]
                     del self.storage[container]
+                    try:
+                        lmController = LiveMigration(image=temp_container['image'], name=container,
+                                                     network=temp_container['network'], logger=self.logger,
+                                                     dockerClient=self.dockerClient)
+                        lmController.migrate(dst_addr=dst, port='3200', cmd=temp_container['command'],
+                                             container_detail=container_info)
+                    except Exception:
+                        print('Some error happened while migrating container.')
+                        self.storage.update({container: temp_container})
                 except Exception as ex:
                     print(ex)
             elif msg_type == 'new_container':
