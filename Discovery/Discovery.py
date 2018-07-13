@@ -55,8 +55,8 @@ class Discovery:
             # update memory info
             worker_info = mg.filter_col(self.workers_info, 'hostname', worker_host)
             free_memory = worker_info['MemFree']
-            memory = int(memory.split('m')[0])
-            free_memory = int(free_memory.split('m')[0])
+            memory = float(memory.split('m')[0])
+            free_memory = float(free_memory.split('m')[0])
             updated_memory = memory + free_memory
             updated_memory = str(updated_memory) + 'm'
             mg.update_doc(self.workers_info, 'hostname', worker_host, 'MemFree', updated_memory)
