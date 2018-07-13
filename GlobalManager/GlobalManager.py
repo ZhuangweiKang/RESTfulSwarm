@@ -154,6 +154,12 @@ def requestNewJob():
         # update job status
         mg.update_doc(db[data['job_name']], 'job_name', data['job_name'], 'status', 'Deployed')
 
+        # update task status
+        for task in data['job_info']['tasks'].keys():
+            filter_key = 'job_info.tasks.%s.container_name' % task
+            target_key = 'job_info.tasks.%s.status' % task
+            mg.update_doc(db[data['job_name']], filter_key, task, target_key, 'Deployed')
+
         return 'OK', 200
     except Exception as ex:
         return str(ex), 400

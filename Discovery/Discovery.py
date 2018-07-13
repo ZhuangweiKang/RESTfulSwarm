@@ -32,11 +32,20 @@ class Discovery:
             job_name = msg.split('_')[0]
             job_col = mg.get_col(self.db, job_name)
 
-            # update job collection
+            # update job collection -- task status
             filter_key = 'job_info.tasks.%s.container_name' % task_name
-            target_key = 'job_info.tasks.%s.status'
+            target_key = 'job_info.tasks.%s.status' % task_name
             mg.update_doc(job_col, filter_key, task_name, target_key, 'Down')
-            self.logger.info('Updating Job collection.')
+
+            # update job collection -- cpuset_cpus
+            target_key = 'job_info.tasks.%s.cpuset_cpus' % task_name
+            mg.update_doc(job_col, filter_key, task_name, target_key, '')
+
+            # update job collection -- mem_limit
+            target_key = 'job_info.tasks.%s.mem_limit' % task_name
+            mg.update_doc(job_col, filter_key, task_name, target_key, '')
+
+            self.logger.info('Updated Job collection.')
 
             # get the resource utilization of the 'Down' container
             job_info = mg.find_col(job_col)[0]
