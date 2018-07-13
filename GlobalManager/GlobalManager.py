@@ -40,7 +40,7 @@ swagger = Swagger(app, template=template)
 
 host_addr = None
 dockerClient = None
-pubSocket = zmq.bind('3100')
+pubSocket = None
 
 m_addr = None
 m_port = None
@@ -54,7 +54,9 @@ worker_col = None
 @app.route('/RESTfulSwarm/GM/init', methods=['GET'])
 @swag_from('./Flasgger/init.yml')
 def init():
+    global pubSocket
     try:
+        pubSocket = zmq.bind('3100')
         initSwarmEnv()
         response = 'OK: Initialize Swarm environment succeed.'
         return response, 200
