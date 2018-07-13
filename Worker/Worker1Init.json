@@ -1,7 +1,7 @@
 {
   "worker_address": "10.10.26.179",
   "global_manager_addr": "10.10.26.178",
-  "discovery_addr": "10.10.26.178",
+  "discovery_addr": "10.10.26.180",
   "discovery_port": "4000",
   "frequency": 20
 }

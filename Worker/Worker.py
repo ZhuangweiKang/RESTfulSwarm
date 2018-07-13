@@ -58,7 +58,7 @@ class Worker:
 
             # Notify discovery block to update MongoDB
             for msg in msgs:
-                self.logger.info(msg)
+                self.logger.info('Discovery: %s' % msg)
                 socket.send_string(msg)
                 socket.recv_string()
 
