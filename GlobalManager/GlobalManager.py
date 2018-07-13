@@ -170,7 +170,7 @@ def requestNewJob():
 def checkpointCons():
     data = request.get_json()
     for item in data:
-        if dHelper.checkNodeHostName(dockerClient,  item['node']):
+        if dHelper.checkNodeHostName(dockerClient, item['node']):
             return 'Node %s is unavailable.' % item['node'], 400
         pubContent = '%s checkpoints %s' % (item['node'], json.dumps(item['containers']))
         pubSocket.send_string(pubContent)

@@ -3,7 +3,9 @@ parameters:
   - name: checkpoints_info
     in: body
     schema:
-      $ref: '#/definitions/CheckpointInfo'
+      type: array
+      items:
+        $ref: '#/definitions/CheckpointInfo'
 
 definitions:
   CheckpointInfo:
