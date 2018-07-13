@@ -51,7 +51,10 @@ class Worker:
                 if event['Type'] == 'container' and \
                         (event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die'):
                     msg = hostname + ' ' + event['Actor']['Attributes']['name']
-                    msgs.append(msg)
+                    if event['Actor']['Attributes']['name'] in self.storage.keys():
+                        msgs.append(msg)
+                        # remove the container form local storage
+                        del self.storage[event['Actor']['Attributes']['name']]
 
             # 去重
             msgs = list(set(msgs))
@@ -88,7 +91,6 @@ class Worker:
                     thr.start()
             elif msg_type == 'migrate':
                 info = json.loads(' '.join(msg[1:]))
-                print(info)
                 dst = info['dst']
                 container = info['container']
                 container_info = info['info']
