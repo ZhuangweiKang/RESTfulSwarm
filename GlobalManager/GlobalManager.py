@@ -257,10 +257,10 @@ def requestUpdateContainer():
 @swag_from('./Flasgger/getWorkerList.yml')
 def getWorkerList():
     nodes = dHelper.getNodeList(dockerClient)
-    response = {}
+    response = []
     for node in nodes:
-        response.update(node.attrs)
-    return jsonify(response)
+        response.append(node.attrs)
+    return jsonify(response), 200
 
 
 def describeNode(hostname):
@@ -272,13 +272,13 @@ def describeNode(hostname):
 
 
 @app.route('/RESTfulSwarm/GM/<hostname>/describeWorker', methods=['GET'])
-@swag_from('./Flasgger/describeWorker.yml', validation=True)
+@swag_from('./Flasgger/describeWorker.yml')
 def describeWorker(hostname):
     return describeNode(hostname)
 
 
 @app.route('/RESTfulSwarm/GM/<hostname>/describeManager', methods=['GET'])
-@swag_from('./Flasgger/describeManager.yml', validation=True)
+@swag_from('./Flasgger/describeManager.yml')
 def describeManager(hostname):
     return describeNode(hostname)
 
