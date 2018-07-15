@@ -62,6 +62,8 @@ class Scheduler(object):
                 # of free cores may be more than requested cores
                 temp1 = []
                 for j in range(list(core_request[job_index][1].values())[task_step]):
+                    print('item1', item[1])
+                    print('flag', flag)
                     temp1.append(list(available_workers.values())[item[1]][flag])
                     flag += 1
 
