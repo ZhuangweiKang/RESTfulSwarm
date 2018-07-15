@@ -81,8 +81,8 @@
       <file leaf-file-name="Scheduler.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
+            <state relative-caret-position="477">
+              <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
             </state>
           </provider>
         </entry>
@@ -364,13 +364,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00293" summary="Update">
-      <created>1531411940635</created>
-      <option name="number" value="00293" />
-      <option name="presentableId" value="LOCAL-00293" />
-      <option name="project" value="LOCAL" />
-      <updated>1531411940635</updated>
     </task>
     <task id="LOCAL-00294" summary="Update">
       <created>1531412132739</created>
@@ -708,7 +701,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531687819134</updated>
     </task>
-    <option name="localTasksCounter" value="342" />
+    <task id="LOCAL-00342" summary="Update">
+      <created>1531688663786</created>
+      <option name="number" value="00342" />
+      <option name="presentableId" value="LOCAL-00342" />
+      <option name="project" value="LOCAL" />
+      <updated>1531688663786</updated>
+    </task>
+    <option name="localTasksCounter" value="343" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1100,8 +1100,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
+        <state relative-caret-position="477">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
         </state>
       </provider>
     </entry>

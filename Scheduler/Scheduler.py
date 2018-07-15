@@ -33,7 +33,7 @@ class Scheduler(object):
         job_index = 0
         result = []
 
-        '''
+
         print('Schedule:')
         print(schedule)
 
@@ -45,19 +45,13 @@ class Scheduler(object):
 
         print('Available Workers:')
         print(available_workers)
-        '''
+
 
         waiting_plan = []
 
         steps = -1
         step_flag = False
         task_step = 0
-
-        print('Available workers: ')
-        print(available_workers)
-
-        print('Schedule:')
-        print(schedule)
 
         for index, item in enumerate(schedule):
             if step_flag is False:
