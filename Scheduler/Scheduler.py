@@ -29,9 +29,7 @@ class Scheduler(object):
         return available_workers
 
     def process_schedule_result(self, schedule, core_request, mem_request_arr, available_workers):
-        job_index = 0
-        result = []
-
+        '''
         print('Schedule:')
         print(schedule)
 
@@ -43,7 +41,9 @@ class Scheduler(object):
 
         print('Available Workers:')
         print(available_workers)
-
+        '''
+        job_index = 0
+        result = []
         waiting_plan = []
         global_task_index = 0
         next_job = False
