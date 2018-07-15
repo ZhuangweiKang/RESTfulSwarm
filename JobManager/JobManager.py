@@ -254,7 +254,7 @@ class JobManager:
                         job_queue.remove(msg)
 
                     # For debug
-                    # print(jobs_details)
+                    print(jobs_details)
 
                     schedule_resource(jobs_details)
 
