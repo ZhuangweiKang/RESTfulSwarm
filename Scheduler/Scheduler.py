@@ -70,6 +70,8 @@ class Scheduler(object):
                     temp1.append(list(available_workers.values())[item[1]][flag])
                     flag += 1
 
+                print('OK')
+
                 temp = (core_request[job_index][0],
                         list(core_request[job_index][1].keys())[task_step],
                         list(available_workers.keys())[item[1]],
