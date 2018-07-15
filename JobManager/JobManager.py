@@ -255,15 +255,16 @@ class JobManager:
                     temp_job_queue = []
                     for index, msg in enumerate(job_queue[:]):
                         jobs_details.append((msg[1], preprocess_job(msg)))
-                        temp_job_queue.append(msg)
 
                     waiting_decision = schedule_resource(jobs_details)
 
+                    print('Waiting decision:')
                     print(waiting_decision)
 
                     # remove scheduled jobs
                     for index, job in enumerate(job_queue[:]):
                         if job[1] not in waiting_decision:
+                            temp_job_queue.append(job)
                             job_queue.remove(job)
 
                     for msg in temp_job_queue:
