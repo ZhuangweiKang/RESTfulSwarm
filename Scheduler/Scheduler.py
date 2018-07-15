@@ -56,6 +56,9 @@ class Scheduler(object):
         print('Available workers: ')
         print(available_workers)
 
+        print('Schedule:')
+        print(schedule)
+
         for index, item in enumerate(schedule):
             if step_flag is False:
                 steps += len(core_request[job_index][1].items())

@@ -81,8 +81,8 @@
       <file leaf-file-name="Scheduler.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="68" column="39" selection-start-line="68" selection-start-column="39" selection-end-line="68" selection-end-column="39" />
+            <state relative-caret-position="313">
+              <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -364,20 +364,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00291" summary="Update">
-      <created>1531410093318</created>
-      <option name="number" value="00291" />
-      <option name="presentableId" value="LOCAL-00291" />
-      <option name="project" value="LOCAL" />
-      <updated>1531410093318</updated>
-    </task>
-    <task id="LOCAL-00292" summary="Update">
-      <created>1531411375850</created>
-      <option name="number" value="00292" />
-      <option name="presentableId" value="LOCAL-00292" />
-      <option name="project" value="LOCAL" />
-      <updated>1531411375850</updated>
     </task>
     <task id="LOCAL-00293" summary="Update">
       <created>1531411940635</created>
@@ -708,7 +694,21 @@
       <option name="project" value="LOCAL" />
       <updated>1531686234911</updated>
     </task>
-    <option name="localTasksCounter" value="340" />
+    <task id="LOCAL-00340" summary="Update">
+      <created>1531687422321</created>
+      <option name="number" value="00340" />
+      <option name="presentableId" value="LOCAL-00340" />
+      <option name="project" value="LOCAL" />
+      <updated>1531687422321</updated>
+    </task>
+    <task id="LOCAL-00341" summary="Update">
+      <created>1531687819134</created>
+      <option name="number" value="00341" />
+      <option name="presentableId" value="LOCAL-00341" />
+      <option name="project" value="LOCAL" />
+      <updated>1531687819134</updated>
+    </task>
+    <option name="localTasksCounter" value="342" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1100,8 +1100,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="68" column="39" selection-start-line="68" selection-start-column="39" selection-end-line="68" selection-end-column="39" />
+        <state relative-caret-position="313">
+          <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
         </state>
       </provider>
     </entry>
