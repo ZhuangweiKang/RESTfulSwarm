@@ -32,6 +32,9 @@ class BestFitScheduler(Scheduler):
         # apply schedule algorithm on data
         bf_result = self.best_fit(req_cores, free_cores)
 
+        # For debug
+        print(bf_result)
+
         # requested mem_limit for each task
         mem_request_arr = []
         for item in mem_request:
