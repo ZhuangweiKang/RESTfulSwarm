@@ -52,6 +52,10 @@ class Scheduler(object):
         steps = -1
         step_flag = False
         task_step = 0
+
+        print('Available workers: ')
+        print(available_workers)
+
         for index, item in enumerate(schedule):
             if step_flag is False:
                 steps += len(core_request[job_index][1].items())
@@ -62,8 +66,7 @@ class Scheduler(object):
                 # of free cores may be more than requested cores
                 temp1 = []
                 for j in range(list(core_request[job_index][1].values())[task_step]):
-                    print('item1', item[1])
-                    print('flag', flag)
+                    print(item[1], flag)
                     temp1.append(list(available_workers.values())[item[1]][flag])
                     flag += 1
 
