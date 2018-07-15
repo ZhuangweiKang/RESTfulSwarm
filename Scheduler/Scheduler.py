@@ -29,10 +29,8 @@ class Scheduler(object):
         return available_workers
 
     def process_schedule_result(self, schedule, core_request, mem_request_arr, available_workers):
-        flag = 0
         job_index = 0
         result = []
-
 
         print('Schedule:')
         print(schedule)
@@ -46,35 +44,31 @@ class Scheduler(object):
         print('Available Workers:')
         print(available_workers)
 
-
         waiting_plan = []
-
-        steps = -1
-        step_flag = False
-        task_step = 0
+        global_task_index = 0
+        next_job = False
+        task_index = 0
 
         for index, item in enumerate(schedule):
-            print("index--steps", index, steps)
-            if step_flag is False:
-                steps += len(core_request[job_index][1].items())
-                step_flag = True
+            if next_job is False:
+                global_task_index += len(core_request[job_index][1].items())
+                next_job = True
 
             if core_request[job_index][0] not in waiting_plan and item[1] != -1:
                 # get the first n cores from all free cores because the amount
                 # of free cores may be more than requested cores
-                temp1 = []
-                for j in range(list(core_request[job_index][1].values())[task_step]):
-                    print(item[1], flag)
-                    temp1.append(list(available_workers.values())[item[1]][flag])
-                    flag += 1
+                cores = []
+                for j in range(list(core_request[job_index][1].values())[task_index]):
+                    cores.append(list(available_workers.values())[item[1]][j])
+                    # remove used cores
+                    key = list(available_workers.keys())[item[1]]
+                    available_workers[key].pop(0)
 
-                print('OK')
-
-                temp = (core_request[job_index][0],
-                        list(core_request[job_index][1].keys())[task_step],
+                result_item = (core_request[job_index][0],
+                        list(core_request[job_index][1].keys())[task_index],
                         list(available_workers.keys())[item[1]],
-                        temp1)
-                result.append(temp)
+                        cores)
+                result.append(result_item)
 
                 # update free memory
                 worker_info = list(self.workers_col.find({'hostname': list(available_workers.keys())[item[1]]}))[0]
@@ -91,13 +85,12 @@ class Scheduler(object):
                 waiting_plan.append(core_request[job_index][0])
 
             # update job index
-            if index == steps:
+            if index == global_task_index - 1:
                 job_index += 1
-                step_flag = False
-                task_step = 0
-                flag = 0
+                next_job = False
+                task_index = 0
             else:
-                task_step += 1
+                task_index += 1
 
         waiting_plan = list(set(waiting_plan))
 
