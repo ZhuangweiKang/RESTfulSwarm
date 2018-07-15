@@ -54,6 +54,7 @@ class Scheduler(object):
         task_step = 0
 
         for index, item in enumerate(schedule):
+            print("index--steps", index, steps)
             if step_flag is False:
                 steps += len(core_request[job_index][1].items())
                 step_flag = True
