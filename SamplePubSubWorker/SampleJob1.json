@@ -27,7 +27,7 @@
         "image": "zhuangweikang/subscriber",
         "detach": true,
         "command": "python SubscribeData.py -a 10.52.3.255 -p 3000",
-        "cpu_count": 3,
+        "cpu_count": 2,
         "cpuset_cpus": "",
         "mem_limit": "10m",
         "ports": {},
