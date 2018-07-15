@@ -237,10 +237,10 @@ class JobManager:
             waiting_decision = schedule[1]
 
             if len(schedule_decision) > 0:
-                self.scheduler.update_job_info(schedule)
+                self.scheduler.update_job_info(schedule_decision)
 
                 # update WorkersInfo collection
-                self.scheduler.update_workers_info(schedule)
+                self.scheduler.update_workers_info(schedule_decision)
 
             return waiting_decision
 
