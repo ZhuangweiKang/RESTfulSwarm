@@ -47,18 +47,20 @@ class Scheduler(object):
         print(available_workers)
         '''
 
-        if schedule is not None:
-            steps = -1
-            step_flag = False
-            task_step = 0
-            for index, item in enumerate(schedule):
-                if step_flag is False:
-                    steps += len(core_request[job_index][1].items())
-                    step_flag = True
+        waiting_plan = []
+
+        steps = -1
+        step_flag = False
+        task_step = 0
+        for index, item in enumerate(schedule):
+            if step_flag is False:
+                steps += len(core_request[job_index][1].items())
+                step_flag = True
+
+            if core_request[job_index][0] not in waiting_plan and item[1] != -1:
                 # get the first n cores from all free cores because the amount
                 # of free cores may be more than requested cores
                 temp1 = []
-
                 for j in range(list(core_request[job_index][1].values())[task_step]):
                     temp1.append(list(available_workers.values())[item[1]][flag])
                     flag += 1
@@ -79,18 +81,22 @@ class Scheduler(object):
                 new_free_mem = str(new_free_mem) + 'm'
                 mg.update_doc(self.workers_col, 'hostname', list(available_workers.keys())[item[1]], 'MemFree',
                               new_free_mem)
+            else:
+                # if resources are not enough, add the job into waiting list
+                waiting_plan.append(core_request[job_index][0])
 
-                # update job index
-                if index == steps:
-                    job_index += 1
-                    step_flag = False
-                    task_step = 0
-                    flag = 0
-                else:
-                    task_step += 1
-            return result
-        else:
-            return None
+            # update job index
+            if index == steps:
+                job_index += 1
+                step_flag = False
+                task_step = 0
+                flag = 0
+            else:
+                task_step += 1
+
+        waiting_plan = list(set(waiting_plan))
+
+        return result, waiting_plan
 
     def update_job_info(self, schedule):
         for item in schedule:

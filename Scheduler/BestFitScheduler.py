@@ -14,7 +14,7 @@ class BestFitScheduler(Scheduler):
         Check if we have enough capacity to deploy a job
         :param core_request: [($job_name, ${$task: $core_count})]
         :param mem_request: [($job_name, ${$task: $mem})]
-        :return: a list of tuples or None [$($job_name, $task_name, $worker_name, [$core])]
+        :return: [$($job_name, $task_name, $worker_name, [$core])] + [$waiting_job]
         '''
         # get all free cores from every worker node
         available_workers = self.collect_free_cores()
@@ -32,16 +32,10 @@ class BestFitScheduler(Scheduler):
         # apply schedule algorithm on data
         bf_result = self.best_fit(req_cores, free_cores)
 
-        # For debug
-        print(bf_result)
-
         # requested mem_limit for each task
         mem_request_arr = []
         for item in mem_request:
             mem_request_arr.extend(list(item[1].values()))
-
-        # print('Best fit result:')
-        # print(bf_result)
 
         # process schedule result
         return self.process_schedule_result(bf_result, core_request, mem_request_arr, available_workers)
@@ -51,7 +45,7 @@ class BestFitScheduler(Scheduler):
         Best fit algorithm for scheduling resources
         :param req_cores: a list of requested resources (cpu cores)
         :param free_cores: a list of free resources
-        :return: A list of tuples, best fit result [($request_index, $resource_index)] if scheduling successful, or None if failed
+        :return: A list of tuples, best fit result [($request_index, $resource_index)]
         '''
         result = []
         for j, req in enumerate(req_cores):
@@ -69,5 +63,6 @@ class BestFitScheduler(Scheduler):
                 free_cores[min_index] -= req
                 result.append((j, min_index))
             else:
-                return None
+                # cores are not enough
+                result.append((j, -1))
         return result

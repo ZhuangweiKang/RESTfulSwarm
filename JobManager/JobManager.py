@@ -233,11 +233,16 @@ class JobManager:
 
             schedule = scheduler.schedule_resources(core_requests, mem_requests)
 
-            if schedule is not None:
+            schedule_decision = schedule[0]
+            waiting_decision = schedule[1]
+
+            if len(schedule_decision) > 0:
                 self.scheduler.update_job_info(schedule)
 
                 # update WorkersInfo collection
                 self.scheduler.update_workers_info(schedule)
+
+            return waiting_decision
 
         def execute():
             nonlocal timer
@@ -251,12 +256,13 @@ class JobManager:
                     for index, msg in enumerate(job_queue[:]):
                         jobs_details.append((msg[1], preprocess_job(msg)))
                         temp_job_queue.append(msg)
-                        job_queue.remove(msg)
 
-                    # For debug
-                    print(jobs_details)
+                    waiting_decision = schedule_resource(jobs_details)
 
-                    schedule_resource(jobs_details)
+                    # remove scheduled jobs
+                    for index, job in enumerate(job_queue[:]):
+                        if job[1] not in waiting_decision:
+                            job_queue.remove(job)
 
                     for msg in temp_job_queue:
                         url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (self.gm_addr, self.gm_port)
