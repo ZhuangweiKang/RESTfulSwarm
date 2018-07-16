@@ -227,7 +227,6 @@ class JobManager:
             return core_requests, mem_requests
 
         def schedule_resource(jobs_details):
-            # !!! Assuming we have enough capacity to hold any job
             core_requests = [(job[0], job[1][0]) for job in jobs_details]
             mem_requests = [(job[0], job[1][1]) for job in jobs_details]
 
