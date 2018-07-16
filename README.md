@@ -21,3 +21,6 @@ An application for deploying docker containers in Swarm environment.
 ![](./FrontEnd.PNG)
 ### GlobalManager Swagger Interface
 ![](./GlobalManager.PNG)
+### MongoDB Interface
+![](./WorkersInfo.JPG)
+![](./JobInfo.JPG)
