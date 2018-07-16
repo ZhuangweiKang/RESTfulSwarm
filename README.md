@@ -14,3 +14,10 @@ An application for deploying docker containers in Swarm environment.
 ./dependences.sh
 ```
 ## Architecture
+![](./Architecture.jpg)
+### Job statechart
+![](./JobState.jpg)
+### FrontEnd Swagger Interface
+![](./FrontEnd.PNG)
+### GlobalManager Swagger Interface
+![](./GlobalManager.PNG)
