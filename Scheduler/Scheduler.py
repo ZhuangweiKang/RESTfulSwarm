@@ -58,8 +58,7 @@ class Scheduler(object):
                 # of free cores may be more than requested cores
                 cores = []
                 for j in range(list(core_request[job_index][1].values())[task_index]):
-                    print(available_workers)
-                    cores.append(list(available_workers.values())[item[1]][j])
+                    cores.append(list(available_workers.values())[item[1]][0])
                     # remove used cores
                     key = list(available_workers.keys())[item[1]]
                     available_workers[key].pop(0)
