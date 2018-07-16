@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scheduler/Scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scheduler/Scheduler.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -81,8 +80,8 @@
       <file leaf-file-name="Scheduler.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+            <state relative-caret-position="498">
+              <caret line="61" column="78" lean-forward="true" selection-start-line="61" selection-start-column="78" selection-end-line="61" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -234,10 +233,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1168" />
+    <option name="x" value="2041" />
+    <option name="y" value="80" />
+    <option name="width" value="1939" />
+    <option name="height" value="1169" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -364,20 +363,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00296" summary="Update">
-      <created>1531412219849</created>
-      <option name="number" value="00296" />
-      <option name="presentableId" value="LOCAL-00296" />
-      <option name="project" value="LOCAL" />
-      <updated>1531412219849</updated>
-    </task>
-    <task id="LOCAL-00297" summary="Update">
-      <created>1531412345543</created>
-      <option name="number" value="00297" />
-      <option name="presentableId" value="LOCAL-00297" />
-      <option name="project" value="LOCAL" />
-      <updated>1531412345543</updated>
     </task>
     <task id="LOCAL-00298" summary="Update">
       <created>1531412568626</created>
@@ -708,7 +693,21 @@
       <option name="project" value="LOCAL" />
       <updated>1531690461132</updated>
     </task>
-    <option name="localTasksCounter" value="345" />
+    <task id="LOCAL-00345" summary="Update">
+      <created>1531696176779</created>
+      <option name="number" value="00345" />
+      <option name="presentableId" value="LOCAL-00345" />
+      <option name="project" value="LOCAL" />
+      <updated>1531696176779</updated>
+    </task>
+    <task id="LOCAL-00346" summary="Update">
+      <created>1531696274871</created>
+      <option name="number" value="00346" />
+      <option name="presentableId" value="LOCAL-00346" />
+      <option name="project" value="LOCAL" />
+      <updated>1531696274871</updated>
+    </task>
+    <option name="localTasksCounter" value="347" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1100,8 +1099,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+        <state relative-caret-position="498">
+          <caret line="61" column="78" lean-forward="true" selection-start-line="61" selection-start-column="78" selection-end-line="61" selection-end-column="78" />
         </state>
       </provider>
     </entry>
