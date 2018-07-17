@@ -284,7 +284,6 @@ def describeManager(hostname):
 
 
 if __name__ == '__main__':
-    '''
     parser = argparse.ArgumentParser()
     parser.add_argument('-ga', '--gaddr', type=str, help='The IP address of your Global Manager node.')
     parser.add_argument('-gp', '--gport', type=int, default=5000, help='The port number you want to run your manager node.')
@@ -300,6 +299,7 @@ if __name__ == '__main__':
     # mongodb
     m_addr = args.maddr
     m_port = args.mport
+
     '''
     with open('GlobalManagerInit.json') as f:
         data = json.load(f)
@@ -312,6 +312,7 @@ if __name__ == '__main__':
     # mongodb
     m_addr = data['mongo_addr']
     m_port = data['mongo_port']
+    '''
 
     mongo_client = mg.get_client(m_addr, m_port)
     db = mg.get_db(mongo_client, db_name)
