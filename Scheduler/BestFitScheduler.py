@@ -9,38 +9,7 @@ class BestFitScheduler(Scheduler):
     def __init__(self, db, workers_col_name):
         super(BestFitScheduler, self).__init__(db, workers_col_name)
 
-    def schedule_resources(self, core_request, mem_request):
-        '''
-        Check if we have enough capacity to deploy a job
-        :param core_request: [($job_name, ${$task: $core_count})]
-        :param mem_request: [($job_name, ${$task: $mem})]
-        :return: [$($job_name, $task_name, $worker_name, [$core])] + [$waiting_job]
-        '''
-        # get all free cores from every worker node
-        available_workers = self.collect_free_cores()
-
-        # requested cores number for each task, etc. [2, 3, 1]
-        req_cores = []
-        for item in core_request:
-            req_cores.extend(list(item[1].values()))
-
-        # available free cores of each worker node
-        free_cores = []
-        for item in list(available_workers.values()):
-            free_cores.append(len(item))
-
-        # apply schedule algorithm on data
-        bf_result = self.best_fit(req_cores, free_cores)
-
-        # requested mem_limit for each task
-        mem_request_arr = []
-        for item in mem_request:
-            mem_request_arr.extend(list(item[1].values()))
-
-        # process schedule result
-        return self.process_schedule_result(bf_result, core_request, mem_request_arr, available_workers)
-
-    def best_fit(self, req_cores, free_cores):
+    def scheduling_algorithm(self, req_cores, free_cores):
         '''
         Best fit algorithm for scheduling resources
         :param req_cores: a list of requested resources (cpu cores)

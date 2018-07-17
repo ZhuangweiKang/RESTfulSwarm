@@ -15,8 +15,39 @@ class Scheduler(object):
         self.workers_col = mg.get_col(self.db, workers_col_name)
 
     @abstractmethod
+    def scheduling_algorithm(self, req_cores, free_cores):
+        pass
+
     def schedule_resources(self, core_request, mem_request):
-        return
+        '''
+        Check if we have enough capacity to deploy a job
+        :param core_request: [($job_name, ${$task: $core_count})]
+        :param mem_request: [($job_name, ${$task: $mem})]
+        :return: [$($job_name, $task_name, $worker_name, [$core])] + [$waiting_job]
+        '''
+        # get all free cores from every worker node
+        available_workers = self.collect_free_cores()
+
+        # requested cores number for each task, etc. [2, 3, 1]
+        req_cores = []
+        for item in core_request:
+            req_cores.extend(list(item[1].values()))
+
+        # available free cores of each worker node
+        free_cores = []
+        for item in list(available_workers.values()):
+            free_cores.append(len(item))
+
+        # apply schedule algorithm on data
+        bf_result = self.scheduling_algorithm(req_cores, free_cores)
+
+        # requested mem_limit for each task
+        mem_request_arr = []
+        for item in mem_request:
+            mem_request_arr.extend(list(item[1].values()))
+
+        # process schedule result
+        return self.process_schedule_result(bf_result, core_request, mem_request_arr, available_workers)
 
     def collect_free_cores(self):
         # get all free cores from every worker node

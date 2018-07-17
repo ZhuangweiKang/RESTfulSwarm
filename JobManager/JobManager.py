@@ -13,6 +13,7 @@ import time
 import json
 import threading
 from Scheduler import BestFitScheduler
+from Scheduler import FirstFitScheduler
 import ZMQHelper as zmq
 import MongoDBHelper as mHelper
 
@@ -79,7 +80,7 @@ class JobManager:
                                target_key=target_key, target_value=','.join(free_cores))
 
             # release cores in source node
-            src_node_name = scheduler.find_container(data['container'])
+            src_node_name = self.scheduler.find_container(data['container'])
             for core in cores:
                 target_key = 'CPUs.%s' % core
                 mHelper.update_doc(self.workersInfoCol, 'hostname', src_node_name, target_key, False)
@@ -230,7 +231,7 @@ class JobManager:
             core_requests = [(job[0], job[1][0]) for job in jobs_details]
             mem_requests = [(job[0], job[1][1]) for job in jobs_details]
 
-            schedule = scheduler.schedule_resources(core_requests, mem_requests)
+            schedule = self.scheduler.schedule_resources(core_requests, mem_requests)
 
             schedule_decision = schedule[0]
             waiting_decision = schedule[1]
@@ -314,10 +315,22 @@ if __name__ == '__main__':
 
     wait = data['wait_time']
 
+    scheduling_strategy = data['scheduling_strategy']
+    for strategy in scheduling_strategy:
+        if scheduling_strategy[strategy] == 1:
+            scheduling_strategy = strategy
+            break
+
     db_name = 'RESTfulSwarmDB'
     db_client = mHelper.get_client(mongo_addr, mongo_port)
     db = mHelper.get_db(db_client, db_name)
-    scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo')
+
+    # choose scheduler
+    # default scheduling strategy is best-fit
+    if scheduling_strategy == 'first-fit':
+        scheduler = FirstFitScheduler.FirstFitScheduler(db, 'WorkersInfo')
+    else:
+        scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo')
 
     job_manager = JobManager(gm_addr=gm_addr, gm_port=gm_port, db=db, scheduler=scheduler, wait=wait)
 
