@@ -54,6 +54,10 @@ definitions:
       status:
         type: string
         enum: ['Ready','Deployed']
+      start_time:
+        type: number
+      end_time:
+        type: number
 
   Network:
     type: object

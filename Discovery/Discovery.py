@@ -11,6 +11,7 @@ import ZMQHelper as zmq
 import json
 import utl
 import argparse
+import time
 
 
 class Discovery:
@@ -45,6 +46,7 @@ class Discovery:
                     flag = False
             if flag:
                 mg.update_doc(job_col, 'job_name', job_name, 'status', 'Down')
+                mg.update_doc(job_col, 'job_name', job_name, 'end_time', time.time())
 
             self.logger.info('Updating Job collection.')
 
