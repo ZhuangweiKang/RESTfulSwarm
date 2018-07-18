@@ -37,6 +37,15 @@ class Discovery:
             target_key = 'job_info.tasks.%s.status' % task_name
             mg.update_doc(job_col, filter_key, task_name, target_key, 'Down')
 
+            # update job status if necessary
+            job_details = mg.find_col(job_col)
+            flag = True
+            for job in job_details['job_info']['tasks']:
+                if job['status'] != 'Down':
+                    flag = False
+            if flag:
+                mg.update_doc(job_col, 'job_name', job_name, 'status', 'Down')
+
             self.logger.info('Updating Job collection.')
 
             # get the resource utilization of the 'Down' container
