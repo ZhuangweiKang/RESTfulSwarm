@@ -1,0 +1,14 @@
+{
+  "job_name": "",
+  "job_info": {
+    "network": {
+      "name": "RESTfulSwarmNetwork",
+      "driver": "weaveworks/net-plugin:latest_release",
+      "subnet": ""
+    },
+    "tasks": {}
+  },
+  "status": "Ready",
+  "start_time": 0,
+  "end_time": 0
+}
