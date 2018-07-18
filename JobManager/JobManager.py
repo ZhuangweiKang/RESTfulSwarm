@@ -289,6 +289,7 @@ class JobManager:
 
 
 if __name__ == '__main__':
+    '''
     parser = argparse.ArgumentParser()
     parser.add_argument('-ga', '--gaddr', type=str, help='Global manager node address.')
     parser.add_argument('-gp', '--gport', type=str, default='3100', help='Global manager node port number.')
@@ -308,8 +309,8 @@ if __name__ == '__main__':
     scheduling_strategy = args.scheduling
 
     wait = args.wait
-
     '''
+
     with open('JobManagerInit.json') as f:
         data = json.load(f)
     gm_addr = data['global_manager_addr']
@@ -325,7 +326,6 @@ if __name__ == '__main__':
         if scheduling_strategy[strategy] == 1:
             scheduling_strategy = strategy
             break
-    '''
 
     db_name = 'RESTfulSwarmDB'
     db_client = mHelper.get_client(mongo_addr, mongo_port)
