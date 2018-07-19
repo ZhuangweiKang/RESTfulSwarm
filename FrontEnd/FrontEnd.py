@@ -50,7 +50,7 @@ def requestNewJob():
     global socket
     # Write job data into MongoDB
     data = request.get_json()
-    data.update({'TimeStamp': time.time()})
+    data.update({'submit_time': time.time()})
     col_name = data['job_name']
     m_col = mhelper.get_col(mongo_db, col_name)
     mhelper.insert_doc(m_col, data)

@@ -328,7 +328,7 @@ if __name__ == '__main__':
             break
 
     db_name = 'RESTfulSwarmDB'
-    db_client = mHelper.get_client(mongo_addr, mongo_port)
+    db_client = mHelper.get_client(address=mongo_addr, port=mongo_port)
     db = mHelper.get_db(db_client, db_name)
 
     # choose scheduler

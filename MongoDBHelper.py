@@ -6,8 +6,8 @@ import pymongo as mg
 
 
 # return a mongodb client
-def get_client(address, port='27017'):
-    url = 'mongodb://admin:kzw@%s:%s/RESTfulSwarmDB' % (address, port)
+def get_client(usr='admin', pwd='kzw', address='127.0.0.1', port='27017'):
+    url = 'mongodb://%s:%s@%s:%s/RESTfulSwarmDB' % (usr, pwd, address, port)
     return mg.MongoClient(url)
 
 

@@ -16,7 +16,7 @@ import time
 
 class Discovery:
     def __init__(self, db_addr, db_port, discovery_port='4000'):
-        db_client = mg.get_client(db_addr, db_port)
+        db_client = mg.get_client(address=db_addr, port=db_port)
         self.db = mg.get_db(db_client, 'RESTfulSwarmDB')
         self.workers_info = mg.get_col(self.db, 'WorkersInfo')
         self.socket = zmq.csBind(discovery_port)

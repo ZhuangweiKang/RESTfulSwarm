@@ -315,7 +315,7 @@ if __name__ == '__main__':
     m_addr = data['mongo_addr']
     m_port = data['mongo_port']
 
-    mongo_client = mg.get_client(m_addr, m_port)
+    mongo_client = mg.get_client(address=m_addr, port=m_port)
     db = mg.get_db(mongo_client, db_name)
     worker_col = mg.get_col(db, workers_collection_name)
 
