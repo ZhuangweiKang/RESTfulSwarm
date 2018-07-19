@@ -11,7 +11,7 @@ import json
 fe_addr = None
 fe_port = None
 
-
+'''
 class Task:
     def __init__(self, container_name, image, cpu_count, mem_limit, command=""):
         self.container_name = container_name
@@ -121,13 +121,7 @@ class StressClient:
             time += 10
         df = pd.DataFrame(jobs_data, columns=['time', 'job_count'])
         df.to_csv('random.csv')
-
-    def main(self):
-        try:
-            workload_file = r'%s.csv' % self.workload
-            df = pd.read_csv(workload_file)
-        except Exception as ex:
-            print(ex)
+'''
 
 
 def newJob(data):
