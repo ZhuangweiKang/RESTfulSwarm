@@ -66,7 +66,6 @@ def requestNewJob():
 
 
 if __name__ == '__main__':
-    '''
     parser = argparse.ArgumentParser()
     parser.add_argument('-a', '--address', type=str, help='The FrontEnd node IP address.')
     parser.add_argument('-ma', '--mongo_addr', type=str, help='MongoDB node address.')
@@ -88,8 +87,8 @@ if __name__ == '__main__':
     socket = zmq.csConnect(jm_addr, jm_port)
 
     fe_address = args.address
-    '''
 
+    '''
     with open('FrontEndInit.json') as f:
         data = json.load(f)
 
@@ -104,5 +103,6 @@ if __name__ == '__main__':
     socket = zmq.csConnect(jm_addr, jm_port)
 
     fe_address = data['address']
+    '''
 
     app.run(host=fe_address, port=5000, debug=True)

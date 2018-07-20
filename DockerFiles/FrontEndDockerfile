@@ -1,16 +1,13 @@
 FROM ubuntu:16.04
 
 RUN apt-get update
-# Install Python
-RUN apt-get install -y python
 
-# Install pip
-RUN apt-get install -y python-pip python-dev build-essential
-RUN pip install --upgrade pip
-RUN pip install --upgrade virtualenv
-
+# install pip3 and other dependencies
+RUN apt-get install -y libltdl7 python3-pip python3-dev python3-setuptools
 
 # Install app dependencies
-RUN pip install pyzmq
+RUN pip3 install flask pyzmq pymongo py-cpuinfo flasgger
 
-WORKDIR /home
+COPY RESTfulSwarmLM /home/RESTfulSwarmLM
+
+WORKDIR /home/RESTfulSwarmLM/FrontEnd
