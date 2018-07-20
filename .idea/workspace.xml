@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Client.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Discovery/Discovery.py" beforeDir="false" afterPath="$PROJECT_DIR$/Discovery/Discovery.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DockerFiles/ClientDockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DockerFiles/FrontEndDockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DockerFiles/GlobalManagerDockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DockerFiles/JobManagerDockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/FrontEnd.py" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/FrontEnd.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JobManager/JobManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/JobManager/JobManager.py" afterDir="false" />
-    </list>
+    <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +18,7 @@
         <entry file="file://$PROJECT_DIR$/Client/Client.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="401">
-              <caret line="137" column="23" lean-forward="true" selection-start-line="137" selection-start-column="23" selection-end-line="137" selection-end-column="23" />
+              <caret line="137" column="23" selection-start-line="137" selection-start-column="23" selection-end-line="137" selection-end-column="23" />
               <folding>
                 <element signature="e#81#96#0" expanded="true" />
               </folding>
@@ -49,11 +38,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Discovery.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Discovery.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="94" column="7" lean-forward="true" selection-start-line="94" selection-start-column="7" selection-end-line="94" selection-end-column="7" />
+            <state relative-caret-position="326">
+              <caret line="85" selection-start-line="85" selection-end-line="85" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DiscoveryDockerfile" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Dockerfiles/DiscoveryDockerfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -62,7 +60,7 @@
         <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1063">
-              <caret line="373" column="44" lean-forward="true" selection-start-line="373" selection-start-column="44" selection-end-line="373" selection-end-column="44" />
+              <caret line="373" column="44" selection-start-line="373" selection-start-column="44" selection-end-line="373" selection-end-column="44" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -74,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/dependences.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="10" column="67" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="67" />
+              <caret line="10" column="67" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -83,7 +81,7 @@
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="356">
-              <caret line="301" column="23" lean-forward="true" selection-start-line="301" selection-start-column="23" selection-end-line="301" selection-end-column="23" />
+              <caret line="301" column="23" selection-start-line="301" selection-start-column="23" selection-end-line="301" selection-end-column="23" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -229,31 +227,6 @@
               <item name="RESTfulSwarmLM" type="b2602c69:ProjectViewProjectNode" />
               <item name="RESTfulSwarmLM" type="462c0819:PsiDirectoryNode" />
               <item name="Client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RESTfulSwarmLM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RESTfulSwarmLM" type="462c0819:PsiDirectoryNode" />
-              <item name="Discovery" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RESTfulSwarmLM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RESTfulSwarmLM" type="462c0819:PsiDirectoryNode" />
-              <item name="FrontEnd" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RESTfulSwarmLM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RESTfulSwarmLM" type="462c0819:PsiDirectoryNode" />
-              <item name="GlobalManager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RESTfulSwarmLM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RESTfulSwarmLM" type="462c0819:PsiDirectoryNode" />
-              <item name="JobManager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RESTfulSwarmLM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RESTfulSwarmLM" type="462c0819:PsiDirectoryNode" />
-              <item name="Scheduler" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -672,7 +645,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50067115" side_tool="true" weight="0.32330826" />
@@ -680,7 +652,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3283208" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.320802" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" visible="true" weight="0.31951872" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20234375" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
@@ -745,7 +717,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Client/ClientInit.json" />
     <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManagerInit.json" />
     <entry file="file://$PROJECT_DIR$/Worker/TaskMonitor.py" />
     <entry file="file://$PROJECT_DIR$/TestSample/SampleMigration.json" />
@@ -806,10 +777,10 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Discovery/DiscoveryInit.json" />
-    <entry file="file://$PROJECT_DIR$/DockerFiles/JobManagerDockerfile" />
-    <entry file="file://$PROJECT_DIR$/DockerFiles/GlobalManagerDockerfile" />
-    <entry file="file://$PROJECT_DIR$/DockerFiles/ClientDockerfile" />
-    <entry file="file://$PROJECT_DIR$/DockerFiles/FrontEndDockerfile" />
+    <entry file="file://$PROJECT_DIR$/Dockerfiles/JobManagerDockerfile" />
+    <entry file="file://$PROJECT_DIR$/Dockerfiles/GlobalManagerDockerfile" />
+    <entry file="file://$PROJECT_DIR$/Dockerfiles/ClientDockerfile" />
+    <entry file="file://$PROJECT_DIR$/Dockerfiles/FrontEndDockerfile" />
     <entry file="file://$PROJECT_DIR$/TestSample/SampleJob2.json" />
     <entry file="file://$PROJECT_DIR$/TestSample/SampleJob3.json" />
     <entry file="file://$PROJECT_DIR$/TestSample/SampleJob4.json" />
@@ -842,7 +813,7 @@
     <entry file="file://$PROJECT_DIR$/Client/Client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="401">
-          <caret line="137" column="23" lean-forward="true" selection-start-line="137" selection-start-column="23" selection-end-line="137" selection-end-column="23" />
+          <caret line="137" column="23" selection-start-line="137" selection-start-column="23" selection-end-line="137" selection-end-column="23" />
           <folding>
             <element signature="e#81#96#0" expanded="true" />
           </folding>
@@ -862,7 +833,7 @@
     <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="356">
-          <caret line="301" column="23" lean-forward="true" selection-start-line="301" selection-start-column="23" selection-end-line="301" selection-end-column="23" />
+          <caret line="301" column="23" selection-start-line="301" selection-start-column="23" selection-end-line="301" selection-end-column="23" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
           </folding>
@@ -872,14 +843,14 @@
     <entry file="file://$PROJECT_DIR$/dependences.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="10" column="67" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="67" />
+          <caret line="10" column="67" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1063">
-          <caret line="373" column="44" lean-forward="true" selection-start-line="373" selection-start-column="44" selection-end-line="373" selection-end-column="44" />
+          <caret line="373" column="44" selection-start-line="373" selection-start-column="44" selection-end-line="373" selection-end-column="44" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
           </folding>
@@ -888,8 +859,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="94" column="7" lean-forward="true" selection-start-line="94" selection-start-column="7" selection-end-line="94" selection-end-column="7" />
+        <state relative-caret-position="326">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfiles/DiscoveryDockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
