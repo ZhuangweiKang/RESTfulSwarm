@@ -10,7 +10,6 @@ import utl
 import threading
 import requests
 import json
-from flask import *
 import argparse
 import random
 import time
