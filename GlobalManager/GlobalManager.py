@@ -47,8 +47,10 @@ m_port = None
 mongo_client = None
 db_name = 'RESTfulSwarmDB'
 workers_collection_name = 'WorkersInfo'
+workers_resources = 'WorkerResource'
 db = None
 worker_col = None
+worker_resource_col = None
 
 
 @app.route('/RESTfulSwarm/GM/init', methods=['GET'])
@@ -108,6 +110,10 @@ def init_worker_info(hostname, cpus, memfree):
     }
     # Write initial worker information into database
     mg.insert_doc(worker_col, worker_info)
+
+    # Init WorkerResource Collection
+    worker_init_time = int(time.time())
+    # ////////////////////////////////////////////////////////////////////
 
 
 def newContainer(data):
@@ -318,5 +324,6 @@ if __name__ == '__main__':
     mongo_client = mg.get_client(address=m_addr, port=m_port)
     db = mg.get_db(mongo_client, db_name)
     worker_col = mg.get_col(db, workers_collection_name)
+    worker_resource_col = mg.get_col(db, workers_resources)
 
     app.run(host=g_addr, port=gport, debug=True)
