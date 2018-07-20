@@ -5,10 +5,10 @@ apt-get update
 apt-get install libltdl7
 
 # install pip3
-apt-get install -y python3-pip python3-dev python3-setuptools
+apt-get install -y python3-pip python3-dev python3-setuptools wget iptables git
 
 # install python packages for docker , flask, pyzmq, mongodb, cpuinfo, pandas
-pip3 install flask docker pyzmq pymongo py-cpuinfo flasgger, pandas, requests
+pip3 install flask docker pyzmq pymongo py-cpuinfo flasgger pandas requests
 
 # check if docker exists
 docker_check=$(which docker)
@@ -18,10 +18,6 @@ then
     # install docker 17.03
     wget https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/docker-ce_17.03.0~ce-0~ubuntu-xenial_amd64.deb
     dpkg -i docker-ce_17.03.0~ce-0~ubuntu-xenial_amd64.deb
-
-    # run docker without sudo
-    groupadd docker
-    usermod -aG docker $USER
 fi
 
 
@@ -43,13 +39,13 @@ echo $(docker version)
 criu_check=$(which criu)
 if [ "$criu_check" = "" ];
 then
-    apt-get update && sudo apt-get install -y protobuf-c-compiler libprotobuf-c0-dev protobuf-compiler libprotobuf-dev:amd64 gcc build-essential bsdmainutils python git-core asciidoc make htop git curl supervisor cgroup-lite libapparmor-dev libseccomp-dev libprotobuf-dev libprotobuf-c0-dev protobuf-c-compiler protobuf-compiler python-protobuf libnl-3-dev libcap-dev libaio-dev apparmor libnet-dev
-    cd /home/ubuntu
+    apt-get update && apt-get install -y protobuf-c-compiler libprotobuf-c0-dev protobuf-compiler libprotobuf-dev:amd64 gcc build-essential bsdmainutils python git-core asciidoc make htop git curl supervisor cgroup-lite libapparmor-dev libseccomp-dev libprotobuf-dev libprotobuf-c0-dev protobuf-c-compiler protobuf-compiler python-protobuf libnl-3-dev libcap-dev libaio-dev apparmor libnet-dev
     git clone https://github.com/xemul/criu criu
     cd criu
     make clean
     make
     make install
+    cd ../
 
     # check if criu works well
     echo $(criu check)
