@@ -47,7 +47,7 @@ m_port = None
 mongo_client = None
 db_name = 'RESTfulSwarmDB'
 workers_collection_name = 'WorkersInfo'
-workers_resources = 'WorkerResource'
+workers_resources = 'WorkerResourceInfo'
 db = None
 worker_col = None
 worker_resource_col = None
@@ -113,7 +113,18 @@ def init_worker_info(hostname, cpus, memfree):
 
     # Init WorkerResource Collection
     worker_init_time = int(time.time())
-    # ////////////////////////////////////////////////////////////////////
+    filter_result = mg.filter_col(worker_resource_col, 'time', worker_init_time)
+
+    # if the time key is not in collection, insert the document
+    if filter_result is None:
+        init_resource = {
+            'time': worker_init_time,
+            'details': {hostname: [0.0, 1.0, cpus]}
+        }
+        mg.insert_doc(worker_resource_col, init_resource)
+    else:
+        filter_result['details'].update({hostname: [0.0, 1.0, cpus]})
+        mg.update_doc(worker_resource_col, 'time', worker_init_time, 'details', filter_result['details'])
 
 
 def newContainer(data):
@@ -148,7 +159,7 @@ def requestNewJob():
         createOverlayNetwork(network=data['job_info']['network']['name'],
                              driver=data['job_info']['network']['driver'],
                              subnet=data['job_info']['network']['subnet'])
-    time.sleep(1)
+    time.sleep(0.5)
     try:
         for task in list(data['job_info']['tasks'].keys()):
             data['job_info']['tasks'][task].update({'network': data['job_info']['network']['name']})

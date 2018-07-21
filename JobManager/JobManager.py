@@ -237,10 +237,14 @@ class JobManager:
             waiting_decision = schedule[1]
 
             if len(schedule_decision) > 0:
+                # update Job collection
                 self.scheduler.update_job_info(schedule_decision)
 
                 # update WorkersInfo collection
                 self.scheduler.update_workers_info(schedule_decision)
+
+                # update worker resource collection
+                self.scheduler.update_worker_resource_info(schedule_decision)
 
             return waiting_decision
 
@@ -334,9 +338,9 @@ if __name__ == '__main__':
     # choose scheduler
     # default scheduling strategy is best-fit
     if scheduling_strategy == 'first-fit':
-        scheduler = FirstFitScheduler.FirstFitScheduler(db, 'WorkersInfo')
+        scheduler = FirstFitScheduler.FirstFitScheduler(db, 'WorkersInfo', 'WorkerResourceInfo')
     else:
-        scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo')
+        scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo', 'WorkerResourceInfo')
 
     job_manager = JobManager(gm_addr=gm_addr, gm_port=gm_port, db=db, scheduler=scheduler, wait=wait)
 

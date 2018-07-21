@@ -6,8 +6,8 @@ from Scheduler.Scheduler import Scheduler
 
 
 class FirstFitScheduler(Scheduler):
-    def __init__(self, db, workers_col_name):
-        super(FirstFitScheduler, self).__init__(db, workers_col_name)
+    def __init__(self, db, workers_col_name, worker_resource_col_name):
+        super(FirstFitScheduler, self).__init__(db, workers_col_name, worker_resource_col_name)
 
     def scheduling_algorithm(self, req_cores, free_cores):
         '''

@@ -4,15 +4,17 @@
 
 from abc import ABCMeta, abstractmethod
 import MongoDBHelper as mg
+import time
 import utl
 
 
 class Scheduler(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self, db, workers_col_name):
+    def __init__(self, db, workers_col_name, worker_resource_col_name):
         self.db = db
         self.workers_col = mg.get_col(self.db, workers_col_name)
+        self.workers_resource_col = mg.get_col(self.db, worker_resource_col_name)
 
     @abstractmethod
     def scheduling_algorithm(self, req_cores, free_cores):
@@ -144,6 +146,33 @@ class Scheduler(object):
             for core in item[3]:
                 target = 'CPUs.%s' % str(core)
                 mg.update_doc(self.workers_col, 'hostname', item[2], target, True)
+
+    # update worker resource collection
+    def update_worker_resource_info(self, schedule):
+        for item in schedule:
+            target_worker_info = mg.filter_col(self.workers_col, 'hostname', item[2])
+            used_core_num = 0
+            free_core_num = 0
+            for core in target_worker_info['CPUs'].keys():
+                if target_worker_info['CPUs'][core]:
+                    used_core_num += 1
+                else:
+                    free_core_num += 1
+            used_core_ratio = used_core_num / (used_core_num + free_core_num)
+            free_core_ratio = free_core_num / (used_core_num + free_core_num)
+            time_stamp = time.time()
+            filter_result = mg.filter_col(self.workers_resource_col, 'time', time_stamp)
+            if filter_result is None:
+                resource_info = {
+                    'time': time_stamp,
+                    'details': {
+                        item[2]: [used_core_ratio, free_core_ratio, used_core_num + free_core_num]
+                    }
+                }
+                mg.insert_doc(self.workers_resource_col, resource_info)
+            else:
+                filter_result['details'].update({item[2]: [used_core_ratio, free_core_ratio, used_core_num + free_core_num]})
+                mg.update_doc(self.workers_resource_col, 'time', time_stamp, 'details', filter_result['details'])
 
     def find_container(self, container_name):
         '''

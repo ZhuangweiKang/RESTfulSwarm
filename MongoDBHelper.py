@@ -26,8 +26,10 @@ def find_col(col):
 
 
 def filter_col(col, filter_key, filter_value):
-    return list(col.find({filter_key: filter_value}))[0]
-
+    try:
+        return list(col.find({filter_key: filter_value}))[0]
+    except Exception:
+        return None
 
 def get_all_cols(db):
     return db.list_collection_names()
