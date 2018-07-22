@@ -112,19 +112,7 @@ def init_worker_info(hostname, cpus, memfree):
     mg.insert_doc(worker_col, worker_info)
 
     # Init WorkerResource Collection
-    worker_init_time = int(time.time())
-    filter_result = mg.filter_col(worker_resource_col, 'time', worker_init_time)
-
-    # if the time key is not in collection, insert the document
-    if filter_result is None:
-        init_resource = {
-            'time': worker_init_time,
-            'details': {hostname: [0.0, 1.0, cpus]}
-        }
-        mg.insert_doc(worker_resource_col, init_resource)
-    else:
-        filter_result['details'].update({hostname: [0.0, 1.0, cpus]})
-        mg.update_doc(worker_resource_col, 'time', worker_init_time, 'details', filter_result['details'])
+    mg.update_workers_resource_col(worker_col, hostname, worker_resource_col)
 
 
 def newContainer(data):

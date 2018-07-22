@@ -77,29 +77,7 @@ class Discovery:
             self.logger.info('Updating memory resources in WorkersInfo collection.')
 
             # update worker resource collection
-            time_stamp = int(time.time())
-            old_resource_info = mg.filter_col(self.workers_resource_info, 'time', time_stamp)
-            new_cores_info = mg.filter_col(self.workers_info, 'hostname', worker_host)
-            used_core_num = 0
-            free_core_num = 0
-            for core in new_cores_info['CPUs'].keys():
-                if new_cores_info['CPUs'][core]:
-                    used_core_num += 1
-                else:
-                    free_core_num += 1
-            used_core_ratio = used_core_num / (used_core_num + free_core_num)
-            free_core_ratio = free_core_num / (used_core_num + free_core_num)
-            if old_resource_info is None:
-                latest_resource = {
-                    'time': time_stamp,
-                    'details': {
-                        worker_host: [used_core_ratio, free_core_ratio, used_core_num + free_core_num]
-                    }
-                }
-                mg.insert_doc(self.workers_resource_info, latest_resource)
-            else:
-                old_resource_info['details'].update({worker_host: [used_core_ratio, free_core_ratio, used_core_num + free_core_num]})
-                mg.update_doc(self.workers_resource_info, 'time', time_stamp, 'details', old_resource_info['details'])
+            mg.update_workers_resource_col(self.workers_info, worker_host, self.workers_resource_info)
             self.logger.info('Updated WorkersResourceInfo collection, because some cores are released.')
 
             # update job collection -- cpuset_cpus

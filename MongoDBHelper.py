@@ -3,6 +3,7 @@
 # Author: Zhuangwei Kang
 
 import pymongo as mg
+import time
 
 
 # return a mongodb client
@@ -67,3 +68,29 @@ def update_tasks(cols, target_node):
                     cursor_objs.update({task: obj[0]['job_info']['tasks'][task]})
 
         col.replace_one({}, {'job_info.tasks': cursor_objs})
+
+
+def update_workers_resource_col(workers_col, hostname, workers_resource_col):
+    target_worker_info = filter_col(workers_col, 'hostname', hostname)
+    used_core_num = 0
+    free_core_num = 0
+    for core in target_worker_info['CPUs'].keys():
+        if target_worker_info['CPUs'][core]:
+            used_core_num += 1
+        else:
+            free_core_num += 1
+    used_core_ratio = used_core_num / (used_core_num + free_core_num)
+    free_core_ratio = free_core_num / (used_core_num + free_core_num)
+    time_stamp = int(time.time())
+    filter_result = filter_col(workers_resource_col, 'time', time_stamp)
+    if filter_result is None:
+        resource_info = {
+            'time': time_stamp,
+            'details': {
+                hostname: [used_core_ratio, free_core_ratio, used_core_num + free_core_num]
+            }
+        }
+        insert_doc(workers_resource_col, resource_info)
+    else:
+        filter_result['details'].update({hostname: [used_core_ratio, free_core_ratio, used_core_num + free_core_num]})
+        update_doc(workers_resource_col, 'time', time_stamp, 'details', filter_result['details'])

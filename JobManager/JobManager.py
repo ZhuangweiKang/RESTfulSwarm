@@ -25,6 +25,7 @@ class JobManager:
         self.db = db
         self.scheduler = scheduler
         self.workersInfoCol = self.db['WorkersInfo']
+        self.workers_resource_col = self.db['WorkersResourceInfo']
         self.wait = wait
 
         # listening msg from FrontEnd
@@ -106,6 +107,14 @@ class JobManager:
             data.update({'from': data['from'].split('@')[1]})
             data.update({'to': data['to'].split('@')[1]})
 
+            # update worker resource collection for both workers
+            mHelper.update_workers_resource_col(workers_col=self.workersInfoCol,
+                                                hostname=src_node_name,
+                                                workers_resource_col=self.workers_resource_col)
+            mHelper.update_workers_resource_col(workers_col=self.workersInfoCol,
+                                                hostname=dest_node_name,
+                                                workers_resource_col=self.workers_resource_col)
+
             return data
 
     # Migrate a container
@@ -184,6 +193,11 @@ class JobManager:
         current_mem -= new_mem
         current_mem = str(current_mem) + 'm'
         mHelper.update_doc(self.workersInfoCol, 'hostname', node, 'MemFree', current_mem)
+
+        # update worker resource Info collection
+        mHelper.update_workers_resource_col(workers_col=self.workersInfoCol,
+                                            hostname=node,
+                                            workers_resource_col=self.workers_resource_col)
 
         url = 'http://%s:%s/RESTfulSwarm/GM/requestUpdateContainer' % (self.gm_addr, self.gm_port)
         print(requests.post(url=url, json=data).content)
