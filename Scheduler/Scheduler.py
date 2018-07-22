@@ -20,7 +20,7 @@ class Scheduler(object):
     def scheduling_algorithm(self, req_cores, free_cores):
         pass
 
-    def schedule_resources(self, core_request, mem_request):
+    def schedule_resources(self, core_request, mem_request, jobs_details):
         '''
         Check if we have enough capacity to deploy a job
         :param core_request: [($job_name, ${$task: $core_count})]
@@ -31,9 +31,9 @@ class Scheduler(object):
         available_workers = self.collect_free_cores()
 
         # requested cores number for each task, etc. [2, 3, 1]
-        req_cores = []
-        for item in core_request:
-            req_cores.extend(list(item[1].values()))
+        # req_cores = []
+        # for item in core_request:
+        #     req_cores.extend(list(item[1].values()))
 
         # available free cores of each worker node
         free_cores = []
@@ -41,7 +41,7 @@ class Scheduler(object):
             free_cores.append(len(item))
 
         # apply schedule algorithm on data
-        bf_result = self.scheduling_algorithm(req_cores, free_cores)
+        bf_result = self.scheduling_algorithm(req_cores, free_cores, jobs_details)
 
         # requested mem_limit for each task
         mem_request_arr = []
