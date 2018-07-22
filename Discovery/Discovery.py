@@ -43,7 +43,7 @@ class Discovery:
             job_details = mg.find_col(job_col)[0]
             flag = True
             for job in job_details['job_info']['tasks']:
-                if job['status'] != 'Down':
+                if job_details['job_info']['tasks'][job]['status'] != 'Down':
                     flag = False
             if flag:
                 mg.update_doc(job_col, 'job_name', job_name, 'status', 'Down')
