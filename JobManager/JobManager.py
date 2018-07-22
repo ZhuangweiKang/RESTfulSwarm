@@ -336,9 +336,9 @@ if __name__ == '__main__':
     # choose scheduler
     # default scheduling strategy is best-fit
     if scheduling_strategy == 'first-fit':
-        scheduler = FirstFitScheduler.FirstFitScheduler(db, 'WorkersInfo', 'WorkerResourceInfo')
+        scheduler = FirstFitScheduler.FirstFitScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
     else:
-        scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo', 'WorkerResourceInfo')
+        scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
 
     job_manager = JobManager(gm_addr=gm_addr, gm_port=gm_port, db=db, scheduler=scheduler, wait=wait)
 
