@@ -40,7 +40,7 @@ class Discovery:
             mg.update_doc(job_col, filter_key, task_name, target_key, 'Down')
 
             # update job status if necessary
-            job_details = mg.find_col(job_col)
+            job_details = mg.find_col(job_col)[0]
             flag = True
             for job in job_details['job_info']['tasks']:
                 if job['status'] != 'Down':

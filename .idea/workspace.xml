@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JobManager/JobManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/JobManager/JobManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Discovery/Discovery.py" beforeDir="false" afterPath="$PROJECT_DIR$/Discovery/Discovery.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,10 +29,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
+            <state relative-caret-position="289">
               <caret line="339" column="9" lean-forward="true" selection-start-line="339" selection-start-column="9" selection-end-line="339" selection-end-column="9" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
@@ -47,6 +46,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="168">
               <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MongoDBHelper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MongoDBHelper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="483">
+              <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -72,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Discovery.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Discovery.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="20" column="62" lean-forward="true" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
+            <state relative-caret-position="217">
+              <caret line="39" column="77" lean-forward="true" selection-start-line="39" selection-start-column="77" selection-end-line="39" selection-end-column="77" />
             </state>
           </provider>
         </entry>
@@ -84,8 +92,8 @@
       <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+            <state relative-caret-position="289">
+              <caret line="119" column="25" lean-forward="true" selection-start-line="119" selection-start-column="25" selection-end-line="119" selection-end-column="25" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -96,8 +104,8 @@
       <file leaf-file-name="Scheduler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="651">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            <state relative-caret-position="258">
+              <caret line="158" column="21" lean-forward="true" selection-start-line="158" selection-start-column="21" selection-end-line="158" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -125,7 +133,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>find</find>
       <find>global</find>
       <find>Scheduler</find>
       <find>create network</find>
@@ -153,8 +160,9 @@
       <find>status</find>
       <find>flask</find>
       <find>sudo</find>
-      <find>WorkerR</find>
       <find>Worker</find>
+      <find>WorkerR</find>
+      <find>time_ste</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -189,7 +197,6 @@
         <option value="$PROJECT_DIR$/SamplePubSubWorker/SampleJob1.json" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Scheduler/BestFitScheduler.py" />
-        <option value="$PROJECT_DIR$/Scheduler/Scheduler.py" />
         <option value="$PROJECT_DIR$/Scheduler/RandomScheduler.py" />
         <option value="$PROJECT_DIR$/JobManager/JobManagerInit.json" />
         <option value="$PROJECT_DIR$/Scheduler/FirstFitScheduler.py" />
@@ -210,11 +217,12 @@
         <option value="$PROJECT_DIR$/dependences.sh" />
         <option value="$PROJECT_DIR$/TestSample/WorkerResource.json" />
         <option value="$PROJECT_DIR$/Client/Client.py" />
-        <option value="$PROJECT_DIR$/Discovery/Discovery.py" />
         <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
         <option value="$PROJECT_DIR$/Worker/Worker.py" />
         <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
         <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
+        <option value="$PROJECT_DIR$/Scheduler/Scheduler.py" />
+        <option value="$PROJECT_DIR$/Discovery/Discovery.py" />
       </list>
     </option>
   </component>
@@ -228,8 +236,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="30" />
-    <option name="y" value="385" />
+    <option name="x" value="2427" />
+    <option name="y" value="3" />
     <option name="width" value="1035" />
     <option name="height" value="880" />
   </component>
@@ -461,20 +469,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00318" summary="Update">
-      <created>1531493656915</created>
-      <option name="number" value="00318" />
-      <option name="presentableId" value="LOCAL-00318" />
-      <option name="project" value="LOCAL" />
-      <updated>1531493656915</updated>
-    </task>
-    <task id="LOCAL-00319" summary="Update">
-      <created>1531496041937</created>
-      <option name="number" value="00319" />
-      <option name="presentableId" value="LOCAL-00319" />
-      <option name="project" value="LOCAL" />
-      <updated>1531496041937</updated>
     </task>
     <task id="LOCAL-00320" summary="Update">
       <created>1531496445088</created>
@@ -805,11 +799,25 @@
       <option name="project" value="LOCAL" />
       <updated>1532274163521</updated>
     </task>
-    <option name="localTasksCounter" value="367" />
+    <task id="LOCAL-00367" summary="update args for testing WorkersResourceInfo collection">
+      <created>1532275198212</created>
+      <option name="number" value="00367" />
+      <option name="presentableId" value="LOCAL-00367" />
+      <option name="project" value="LOCAL" />
+      <updated>1532275198212</updated>
+    </task>
+    <task id="LOCAL-00368" summary="update">
+      <created>1532275424853</created>
+      <option name="number" value="00368" />
+      <option name="presentableId" value="LOCAL-00368" />
+      <option name="project" value="LOCAL" />
+      <updated>1532275424853</updated>
+    </task>
+    <option name="localTasksCounter" value="369" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="934" extended-state="6" />
+    <frame x="1912" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -819,7 +827,7 @@
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.31829575" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2080537" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18948655" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -874,9 +882,9 @@
     <MESSAGE value="Update" />
     <MESSAGE value="Add FirstFit scheduling algorithm" />
     <MESSAGE value="update job status" />
-    <MESSAGE value="update" />
     <MESSAGE value="update args for testing WorkersResourceInfo collection" />
-    <option name="LAST_COMMIT_MESSAGE" value="update args for testing WorkersResourceInfo collection" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -984,13 +992,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MongoDBHelper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="33" column="10" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/Client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -1035,17 +1036,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="62" lean-forward="true" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
+        <state relative-caret-position="289">
+          <caret line="119" column="25" lean-forward="true" selection-start-line="119" selection-start-column="25" selection-end-line="119" selection-end-column="25" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+        <state relative-caret-position="289">
+          <caret line="339" column="9" lean-forward="true" selection-start-line="339" selection-start-column="9" selection-end-line="339" selection-end-column="9" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
           </folding>
@@ -1054,18 +1058,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="258">
+          <caret line="158" column="21" lean-forward="true" selection-start-line="158" selection-start-column="21" selection-end-line="158" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
+    <entry file="file://$PROJECT_DIR$/MongoDBHelper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="339" column="9" lean-forward="true" selection-start-line="339" selection-start-column="9" selection-end-line="339" selection-end-column="9" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="483">
+          <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="39" column="77" lean-forward="true" selection-start-line="39" selection-start-column="77" selection-end-line="39" selection-end-column="77" />
         </state>
       </provider>
     </entry>
