@@ -24,3 +24,4 @@ An application for deploying docker containers in Swarm environment.
 ### MongoDB Interface
 ![](./WorkersInfo.JPG)
 ![](./JobInfo.JPG)
+![](./WorkersResourceInfo.JPG)
