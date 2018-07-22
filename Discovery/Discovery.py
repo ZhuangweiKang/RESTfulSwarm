@@ -77,7 +77,7 @@ class Discovery:
             self.logger.info('Updating memory resources in WorkersInfo collection.')
 
             # update worker resource collection
-            time_stamp = time.time()
+            time_stamp = int(time.time())
             old_resource_info = mg.filter_col(self.workers_resource_info, 'time', time_stamp)
             new_cores_info = mg.filter_col(self.workers_info, 'hostname', worker_host)
             used_core_num = 0

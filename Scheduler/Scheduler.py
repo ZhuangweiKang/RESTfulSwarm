@@ -160,7 +160,7 @@ class Scheduler(object):
                     free_core_num += 1
             used_core_ratio = used_core_num / (used_core_num + free_core_num)
             free_core_ratio = free_core_num / (used_core_num + free_core_num)
-            time_stamp = time.time()
+            time_stamp = int(time.time())
             filter_result = mg.filter_col(self.workers_resource_col, 'time', time_stamp)
             if filter_result is None:
                 resource_info = {
