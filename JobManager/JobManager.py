@@ -293,27 +293,26 @@ class JobManager:
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-ga', '--gaddr', type=str, help='Global manager node address.')
-    parser.add_argument('-gp', '--gport', type=str, default='3100', help='Global manager node port number.')
-    parser.add_argument('-ma', '--maddr', type=str, help='MongoDB node address.')
-    parser.add_argument('-mp', '--mport', type=int, default=27017, help='MongoDB port number.')
-    parser.add_argument('-w', '--wait', type=int, default=3, help='Waiting time for Job Manager in seconds.')
-    parser.add_argument('-s', '--scheduling', type=str, choices=['first-fit', 'best-fit'], default='best-fit',
-                        help='Scheduling algorithm option.')
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument('-ga', '--gaddr', type=str, help='Global manager node address.')
+    # parser.add_argument('-gp', '--gport', type=str, default='3100', help='Global manager node port number.')
+    # parser.add_argument('-ma', '--maddr', type=str, help='MongoDB node address.')
+    # parser.add_argument('-mp', '--mport', type=int, default=27017, help='MongoDB port number.')
+    # parser.add_argument('-w', '--wait', type=int, default=3, help='Waiting time for Job Manager in seconds.')
+    # parser.add_argument('-s', '--scheduling', type=str, choices=['first-fit', 'best-fit'], default='best-fit',
+    #                     help='Scheduling algorithm option.')
+    #
+    # args = parser.parse_args()
+    # gm_addr = args.gaddr
+    # gm_port = args.gport
+    #
+    # mongo_addr = args.maddr
+    # mongo_port = args.mport
+    #
+    # scheduling_strategy = args.scheduling
+    #
+    # wait = args.wait
 
-    args = parser.parse_args()
-    gm_addr = args.gaddr
-    gm_port = args.gport
-
-    mongo_addr = args.maddr
-    mongo_port = args.mport
-
-    scheduling_strategy = args.scheduling
-
-    wait = args.wait
-
-    '''
     with open('JobManagerInit.json') as f:
         data = json.load(f)
     gm_addr = data['global_manager_addr']
@@ -329,7 +328,6 @@ if __name__ == '__main__':
         if scheduling_strategy[strategy] == 1:
             scheduling_strategy = strategy
             break
-    '''
 
     db_name = 'RESTfulSwarmDB'
     db_client = mHelper.get_client(address=mongo_addr, port=mongo_port)
