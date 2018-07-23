@@ -9,21 +9,28 @@ class FirstFitScheduler(Scheduler):
     def __init__(self, db, workers_col_name, worker_resource_col_name):
         super(FirstFitScheduler, self).__init__(db, workers_col_name, worker_resource_col_name)
 
-    def scheduling_algorithm(self, req_cores, free_cores):
+    def cores_scheduling_algorithm(self, core_requests, free_cores):
+        req_cores = []
+        for item in core_requests:
+            req_cores.extend(list(item[1].values()))
+        self.first_fit(req_cores, free_cores)
+
+    def first_fit(self, requested_resources, free_resources):
         '''
         First fit algorithm for scheduling resources
-        :param req_cores: a list of requested resources (cpu cores)
-        :param free_cores: a list of free resources
+        :param requested_resources: a list of requested resources
+        :param free_resources: a list of free resources
         :return: A list of tuples, best fit result [($request_index, $resource_index)]
         '''
         result = []
-        for i, core in enumerate(req_cores[:]):
+        for i, req in enumerate(requested_resources[:]):
             fit = False
-            for j, free_core in enumerate(free_cores[:]):
-                if core <= free_core:
-                    free_cores[j] -= core
+            for j, free in enumerate(free_resources[:]):
+                if req <= free:
+                    free_resources[j] -= req
                     fit = True
                     result.append((i, j))
+            # free resources are not enough
             if fit is False:
                 result.append((i, -1))
         return result

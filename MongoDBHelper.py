@@ -73,24 +73,22 @@ def update_tasks(cols, target_node):
 def update_workers_resource_col(workers_col, hostname, workers_resource_col):
     target_worker_info = filter_col(workers_col, 'hostname', hostname)
     used_core_num = 0
-    free_core_num = 0
-    for core in target_worker_info['CPUs'].keys():
+    total_cores = len(target_worker_info['CPUs'])
+    for core in target_worker_info['CPUs']:
         if target_worker_info['CPUs'][core]:
             used_core_num += 1
-        else:
-            free_core_num += 1
-    used_core_ratio = used_core_num / (used_core_num + free_core_num)
-    free_core_ratio = free_core_num / (used_core_num + free_core_num)
-    time_stamp = int(time.time())
-    filter_result = filter_col(workers_resource_col, 'time', time_stamp)
+    used_core_ratio = used_core_num / total_cores
+    time_stamp = time.time()
+    filter_result = filter_col(workers_resource_col, 'hostname', hostname)
+    time_stamp = time_stamp - filter_result['init_time']
+    # initial state
     if filter_result is None:
         resource_info = {
-            'time': time_stamp,
-            'details': {
-                hostname: [used_core_ratio, free_core_ratio, used_core_num + free_core_num]
-            }
+            'hostname': hostname,
+            'init_time': time_stamp,
+            'details': [[0, 0]]
         }
         insert_doc(workers_resource_col, resource_info)
     else:
-        filter_result['details'].update({hostname: [used_core_ratio, free_core_ratio, used_core_num + free_core_num]})
-        update_doc(workers_resource_col, 'time', time_stamp, 'details', filter_result['details'])
+        filter_result['details'].append([time_stamp, used_core_ratio])
+        update_doc(workers_resource_col, 'hostname', hostname, 'details', filter_result['details'])

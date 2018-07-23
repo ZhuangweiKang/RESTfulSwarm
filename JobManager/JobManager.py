@@ -14,6 +14,8 @@ import json
 import threading
 from Scheduler import BestFitScheduler
 from Scheduler import FirstFitScheduler
+from Scheduler import BestFitDecreasingScheduler
+from Scheduler import FirstFitDecreasingScheduler
 import ZMQHelper as zmq
 import MongoDBHelper as mHelper
 
@@ -237,15 +239,11 @@ class JobManager:
             mem_requests = {}
             for task in col_data['job_info']['tasks'].items():
                 core_requests.update({task[0]: task[1]['cpu_count']})
-                core_requests.update({task[0]: task[1]['cpu_count']})
                 mem_requests.update({task[0]: task[1]['mem_limit']})
             return core_requests, mem_requests
 
         def schedule_resource(jobs_details):
-            core_requests = [(job[0], job[1][0]) for job in jobs_details]
-            mem_requests = [(job[0], job[1][1]) for job in jobs_details]
-
-            schedule = self.scheduler.schedule_resources(core_requests, mem_requests)
+            schedule = self.scheduler.schedule_resources(jobs_details)
 
             schedule_decision = schedule[0]
             waiting_decision = schedule[1]
@@ -351,8 +349,12 @@ if __name__ == '__main__':
     # default scheduling strategy is best-fit
     if scheduling_strategy == 'first-fit':
         scheduler = FirstFitScheduler.FirstFitScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
-    else:
+    elif scheduling_strategy == 'best-fit':
         scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
+    elif scheduling_strategy == 'first-fit-deceasing':
+        scheduler = FirstFitDecreasingScheduler.FirstFitDecreasingScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
+    else:
+        scheduler = BestFitDecreasingScheduler.BestFitDecreasingScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
 
     job_manager = JobManager(gm_addr=gm_addr, gm_port=gm_port, db=db, scheduler=scheduler, wait=wait)
 
