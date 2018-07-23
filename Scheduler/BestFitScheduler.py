@@ -35,7 +35,7 @@ class BestFitScheduler(Scheduler):
                     if temp[i][1] < min_val:
                         min_index = temp[i][0]
                         min_val = temp[i][1]
-                        free_resources[min_index] -= req
+                free_resources[min_index] -= req
                 result.append((j, min_index))
             else:
                 # free resources are not enough

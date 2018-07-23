@@ -30,6 +30,7 @@ class FirstFitScheduler(Scheduler):
                     free_resources[j] -= req
                     fit = True
                     result.append((i, j))
+                    break
             # free resources are not enough
             if fit is False:
                 result.append((i, -1))
