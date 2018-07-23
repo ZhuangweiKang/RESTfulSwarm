@@ -146,8 +146,13 @@ class Scheduler(object):
 
     # update worker resource collection
     def update_worker_resource_info(self, schedule):
+        hosts = []
         for item in schedule:
-            mg.update_workers_resource_col(self.workers_col, item[2], self.workers_resource_col)
+            # get hostname
+            hosts.append(item[2])
+        hosts = set(hosts)
+        for host in hosts:
+            mg.update_workers_resource_col(self.workers_col, host, self.workers_resource_col)
 
     def find_container(self, container_name):
         '''
