@@ -15,4 +15,4 @@ class BestFitDecreasingScheduler(BestFitScheduler):
             temp = list(item[1].values())
             temp.sort(reverse=True)
             req_cores.extend(temp)
-        self.best_fit(req_cores=req_cores, free_cores=free_cores)
+        return self.best_fit(requested_resources=req_cores, free_resources=free_cores)

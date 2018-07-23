@@ -13,7 +13,7 @@ class BestFitScheduler(Scheduler):
         req_cores = []
         for item in core_requests:
             req_cores.extend(list(item[1].values()))
-        self.best_fit(req_cores, free_cores)
+        return self.best_fit(requested_resources=req_cores, free_resources=free_cores)
 
     def best_fit(self, requested_resources, free_resources):
         '''

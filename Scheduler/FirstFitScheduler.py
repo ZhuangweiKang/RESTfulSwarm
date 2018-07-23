@@ -13,7 +13,7 @@ class FirstFitScheduler(Scheduler):
         req_cores = []
         for item in core_requests:
             req_cores.extend(list(item[1].values()))
-        self.first_fit(req_cores, free_cores)
+        return self.first_fit(requested_resources=req_cores, free_resources=free_cores)
 
     def first_fit(self, requested_resources, free_resources):
         '''
