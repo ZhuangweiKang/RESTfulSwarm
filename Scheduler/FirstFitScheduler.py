@@ -9,7 +9,8 @@ class FirstFitScheduler(Scheduler):
     def __init__(self, db, workers_col_name, worker_resource_col_name):
         super(FirstFitScheduler, self).__init__(db, workers_col_name, worker_resource_col_name)
 
-    def cores_scheduling_algorithm(self, core_requests, free_cores):
+    def cores_scheduling_algorithm(self, jobs_details, free_cores):
+        core_requests = [(job[0], job[1][0]) for job in jobs_details]
         req_cores = []
         for item in core_requests:
             req_cores.extend(list(item[1].values()))

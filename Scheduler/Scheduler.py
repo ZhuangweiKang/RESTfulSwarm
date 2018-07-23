@@ -17,7 +17,7 @@ class Scheduler(object):
         self.workers_resource_col = mg.get_col(self.db, worker_resource_col_name)
 
     @abstractmethod
-    def cores_scheduling_algorithm(self, core_requests, jobs_details):
+    def cores_scheduling_algorithm(self, jobs_details, free_cores):
         pass
 
     def schedule_resources(self, jobs_details):
@@ -38,7 +38,7 @@ class Scheduler(object):
             free_cores.append(len(item))
 
         # apply core scheduling algorithm on data
-        bf_result = self.cores_scheduling_algorithm(core_requests, free_cores)
+        bf_result = self.cores_scheduling_algorithm(jobs_details=jobs_details, free_cores=free_cores)
 
         # requested mem_limit for each task
         mem_request_arr = []
