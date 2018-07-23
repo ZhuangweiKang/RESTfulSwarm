@@ -132,8 +132,8 @@
       <find>CPU</find>
       <find>storage</find>
       <find>del</find>
-      <find>The node you</find>
-      <find>For debug</find>
+      <find />
+      <find />
       <find>scheduler</find>
       <find>STATUS</find>
       <find>status</find>
