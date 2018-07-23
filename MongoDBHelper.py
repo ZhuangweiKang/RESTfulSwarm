@@ -80,7 +80,6 @@ def update_workers_resource_col(workers_col, hostname, workers_resource_col):
     used_core_ratio = used_core_num / total_cores
     time_stamp = time.time()
     filter_result = filter_col(workers_resource_col, 'hostname', hostname)
-    time_stamp = time_stamp - filter_result['init_time']
     # initial state
     if filter_result is None:
         resource_info = {
@@ -90,5 +89,6 @@ def update_workers_resource_col(workers_col, hostname, workers_resource_col):
         }
         insert_doc(workers_resource_col, resource_info)
     else:
+        time_stamp = time_stamp - filter_result['init_time']
         filter_result['details'].append([time_stamp, used_core_ratio])
         update_doc(workers_resource_col, 'hostname', hostname, 'details', filter_result['details'])
