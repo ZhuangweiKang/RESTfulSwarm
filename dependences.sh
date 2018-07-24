@@ -4,10 +4,8 @@ apt-get update
 
 apt-get install libltdl7
 
-# apt-get install xmlto asciidoc
-
 # install pip3
-apt-get install -y python3-pip python3-dev python3-setuptools
+apt-get install -y python3-pip python3-dev python3-setuptools xmlto asciidoc
 
 # install python packages for docker , flask, pyzmq, mongodb, cpuinfo, pandas
 pip3 install flask docker pyzmq pymongo py-cpuinfo flasgger pandas

@@ -21,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/dependences.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="147">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+              <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -231,13 +231,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00334" summary="Update">
-      <created>1531684024475</created>
-      <option name="number" value="00334" />
-      <option name="presentableId" value="LOCAL-00334" />
-      <option name="project" value="LOCAL" />
-      <updated>1531684024475</updated>
     </task>
     <task id="LOCAL-00335" summary="Update">
       <created>1531684610865</created>
@@ -575,7 +568,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532383035629</updated>
     </task>
-    <option name="localTasksCounter" value="383" />
+    <task id="LOCAL-00383" summary="update">
+      <created>1532443094114</created>
+      <option name="number" value="00383" />
+      <option name="presentableId" value="LOCAL-00383" />
+      <option name="project" value="LOCAL" />
+      <updated>1532443094114</updated>
+    </task>
+    <option name="localTasksCounter" value="384" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -896,7 +896,7 @@
     <entry file="file://$PROJECT_DIR$/dependences.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
         </state>
       </provider>
     </entry>
