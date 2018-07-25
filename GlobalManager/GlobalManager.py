@@ -311,7 +311,7 @@ if __name__ == '__main__':
     g_addr = data['global_manager_addr']
     gport = data['global_manager_port']
 
-    host_addr = utl.getHostIP()
+    host_addr = g_addr
     dockerClient = dHelper.setClient()
 
     # mongodb
