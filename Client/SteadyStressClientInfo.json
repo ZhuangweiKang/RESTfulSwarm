@@ -1,0 +1,9 @@
+{
+  "subnet": "",
+  "image_name": "",
+  "task_count": 0,
+  "task_cores": 0,
+  "task_mem": 0,
+  "time_interval": 0,
+  "feed_constant": 0
+}
