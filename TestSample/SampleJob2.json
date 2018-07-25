@@ -4,7 +4,7 @@
     "network": {
       "name": "kangNetwork",
       "driver": "weaveworks/net-plugin:latest_release",
-      "subnet": "10.10.26.178/24"
+      "subnet": "10.52.1.0/24"
     },
     "tasks": {
       "job2_task1": {
