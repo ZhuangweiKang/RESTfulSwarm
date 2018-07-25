@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/ClientInit.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/ClientInit.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/FrontEnd.py" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/FrontEnd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,11 +18,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="29" column="22" lean-forward="true" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+              <folding>
+                <element signature="e#81#90#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FrontEnd.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClientInit.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/ClientInit.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="34" lean-forward="true" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Worker1Init.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Worker/Worker1Init.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="39" lean-forward="true" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Worker2Init.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Worker/Worker2Init.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="39" lean-forward="true" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Client.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/Client.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3003">
-              <caret line="143" column="36" lean-forward="true" selection-start-line="143" selection-start-column="36" selection-end-line="143" selection-end-column="36" />
+            <state relative-caret-position="-1557">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
               <folding>
                 <element signature="e#81#96#0" expanded="true" />
               </folding>
@@ -30,29 +78,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientInit.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Client/ClientInit.json">
+      <file leaf-file-name="Worker.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+            <state relative-caret-position="441">
+              <caret line="181" lean-forward="true" selection-start-line="181" selection-end-line="181" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FrontEnd.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
+      <file leaf-file-name="DockerHelper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DockerHelper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1491">
-              <caret line="105" column="38" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
+            <state relative-caret-position="233">
+              <caret line="97" column="11" selection-start-line="97" selection-start-column="11" selection-end-line="97" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
+      <file leaf-file-name="SampleWorker1.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TestSample/SampleWorker1.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="269" column="37" selection-start-line="269" selection-start-column="37" selection-end-line="269" selection-end-column="37" />
+            <state relative-caret-position="30">
+              <caret line="2" column="32" lean-forward="true" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MongoDBHelper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MongoDBHelper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -111,15 +168,10 @@
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/describeWorker.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/describeManager.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/requestMigrate.yml" />
-        <option value="$PROJECT_DIR$/Discovery/DiscoveryInit.json" />
-        <option value="$PROJECT_DIR$/FrontEnd/FrontEndInit.json" />
-        <option value="$PROJECT_DIR$/GlobalManager/GlobalManagerInit.json" />
         <option value="$PROJECT_DIR$/SamplePubSubWorker/SampleJob.json" />
         <option value="$PROJECT_DIR$/utl.py" />
         <option value="$PROJECT_DIR$/DockerHelper.py" />
         <option value="$PROJECT_DIR$/SamplePubSubWorker/SampleJob2.json" />
-        <option value="$PROJECT_DIR$/Worker/Worker2Init.json" />
-        <option value="$PROJECT_DIR$/Worker/Worker1Init.json" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/checkpointCons.yml" />
         <option value="$PROJECT_DIR$/GlobalManager/Flasgger/requestGroupMigration.yml" />
         <option value="$PROJECT_DIR$/SamplePubSubWorker/SampleGroupMigration.json" />
@@ -127,11 +179,8 @@
         <option value="$PROJECT_DIR$/SamplePubSubWorker/SampleMigration.json" />
         <option value="$PROJECT_DIR$/SamplePubSubWorker/SampleJob1.json" />
         <option value="$PROJECT_DIR$/Scheduler/RandomScheduler.py" />
-        <option value="$PROJECT_DIR$/JobManager/JobManagerInit.json" />
         <option value="$PROJECT_DIR$/DockerFiles/FrontEndDockerfile" />
         <option value="$PROJECT_DIR$/DockerFiles/ClientDockerfile" />
-        <option value="$PROJECT_DIR$/TestSample/SampleJob1.json" />
-        <option value="$PROJECT_DIR$/TestSample/SampleJob2.json" />
         <option value="$PROJECT_DIR$/TestSample/SampleJob3.json" />
         <option value="$PROJECT_DIR$/TestSample/SampleJob4.json" />
         <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.yml" />
@@ -143,7 +192,6 @@
         <option value="$PROJECT_DIR$/Worker/Worker.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Discovery/Discovery.py" />
-        <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
         <option value="$PROJECT_DIR$/Client/SampleJob.json" />
         <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
         <option value="$PROJECT_DIR$/TestSample/WorkerResource.json" />
@@ -157,8 +205,17 @@
         <option value="$PROJECT_DIR$/GraphBook.ipynb" />
         <option value="$PROJECT_DIR$/MongoDBHelper.py" />
         <option value="$PROJECT_DIR$/dependences.sh" />
-        <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
         <option value="$PROJECT_DIR$/Client/ClientInit.json" />
+        <option value="$PROJECT_DIR$/Discovery/DiscoveryInit.json" />
+        <option value="$PROJECT_DIR$/FrontEnd/FrontEndInit.json" />
+        <option value="$PROJECT_DIR$/GlobalManager/GlobalManagerInit.json" />
+        <option value="$PROJECT_DIR$/JobManager/JobManagerInit.json" />
+        <option value="$PROJECT_DIR$/TestSample/SampleJob2.json" />
+        <option value="$PROJECT_DIR$/TestSample/SampleJob1.json" />
+        <option value="$PROJECT_DIR$/Worker/Worker1Init.json" />
+        <option value="$PROJECT_DIR$/Worker/Worker2Init.json" />
+        <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
+        <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
       </list>
     </option>
   </component>
@@ -212,7 +269,27 @@
             <path>
               <item name="RESTfulSwarmLM" type="b2602c69:ProjectViewProjectNode" />
               <item name="RESTfulSwarmLM" type="462c0819:PsiDirectoryNode" />
+              <item name="GlobalManager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RESTfulSwarmLM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RESTfulSwarmLM" type="462c0819:PsiDirectoryNode" />
               <item name="JobManager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RESTfulSwarmLM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RESTfulSwarmLM" type="462c0819:PsiDirectoryNode" />
+              <item name="Scheduler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RESTfulSwarmLM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RESTfulSwarmLM" type="462c0819:PsiDirectoryNode" />
+              <item name="TestSample" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RESTfulSwarmLM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RESTfulSwarmLM" type="462c0819:PsiDirectoryNode" />
+              <item name="Worker" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -233,6 +310,118 @@
       <recent name="C:\Users\kangz1\Google Drive\Summer\RESTfulSwarmLM\GlobalManager" />
       <recent name="C:\Users\kangz1\Google Drive\Summer\RESTfulSwarmLM\JobManager" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Client/ClientInit.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/FrontEnd/FrontEnd.py</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -282,13 +471,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00336" summary="Update">
-      <created>1531684943031</created>
-      <option name="number" value="00336" />
-      <option name="presentableId" value="LOCAL-00336" />
-      <option name="project" value="LOCAL" />
-      <updated>1531684943031</updated>
     </task>
     <task id="LOCAL-00337" summary="Update">
       <created>1531685046485</created>
@@ -626,11 +808,18 @@
       <option name="project" value="LOCAL" />
       <updated>1532443464771</updated>
     </task>
-    <option name="localTasksCounter" value="385" />
+    <task id="LOCAL-00385" summary="update">
+      <created>1532542966287</created>
+      <option name="number" value="00385" />
+      <option name="presentableId" value="LOCAL-00385" />
+      <option name="project" value="LOCAL" />
+      <updated>1532542966287</updated>
+    </task>
+    <option name="localTasksCounter" value="386" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -639,44 +828,58 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3283208" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.31756756" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20232274" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.31724137" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22294022" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32869786" />
-    </layout>
-    <layout-to-restore>
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20536913" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20232274" />
+      <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3283208" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50067115" side_tool="true" weight="0.32330826" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32869786" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.31756756" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
+    </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20536913" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.31829575" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50067115" side_tool="true" weight="0.32330826" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3283208" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32869786" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -706,13 +909,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TestSample/SampleJob4.json" />
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.yml" />
-    <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/describeManager.yml" />
-    <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/checkpointCons.yml" />
-    <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/describeWorker.yml" />
-    <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/getWorkerList.yml" />
-    <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/init.yml" />
     <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/requestGroupMigration.yml" />
     <entry file="file://$PROJECT_DIR$/GlobalManager/Flasgger/requestJoin.yml" />
     <entry file="file://$PROJECT_DIR$/JobManager/JobLifecycleViewer.py" />
@@ -727,7 +923,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DockerFiles/DiscoveryDockerfile">
+    <entry file="file://$PROJECT_DIR$/Dockerfiles/DiscoveryDockerfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
@@ -741,7 +937,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DockerFiles/GlobalManagerDockerfile">
+    <entry file="file://$PROJECT_DIR$/Dockerfiles/GlobalManagerDockerfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="7" selection-start-line="7" selection-end-line="7" />
@@ -752,13 +948,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="8" column="15" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="218" column="27" lean-forward="true" selection-start-line="218" selection-start-column="27" selection-end-line="218" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -783,20 +972,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
           <caret line="79" column="36" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5334">
-          <caret line="281" column="29" selection-start-line="281" selection-start-column="29" selection-end-line="281" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestSample/SampleJob1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="21" lean-forward="true" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -836,55 +1011,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/JobLifecycle" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/seaborn/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8190">
-          <caret line="404" lean-forward="true" selection-start-line="404" selection-end-line="404" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/pandas/core/frame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4011">
-          <caret line="281" column="17" selection-start-line="281" selection-start-column="17" selection-end-line="281" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1128788601/numpy/random/mtrand.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4704">
-          <caret line="228" column="4" selection-start-line="228" selection-start-column="4" selection-end-line="228" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1128788601/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93177">
-          <caret line="4437" column="16" selection-start-line="4437" selection-start-column="16" selection-end-line="4437" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/numpy/core/numeric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="2876" column="6" selection-start-line="2876" selection-start-column="6" selection-end-line="2876" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1128788601/numpy/core/umath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="31" column="12" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1128788601/numpy/core/multiarray.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="2359" column="35" selection-start-line="2359" selection-start-column="35" selection-end-line="2359" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/seaborn/utils.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/pandas/core/frame.py" />
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1128788601/numpy/random/mtrand.py" />
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1128788601/builtins.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/numpy/core/numeric.py" />
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1128788601/numpy/core/umath.py" />
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1128788601/numpy/core/multiarray.py" />
     <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
@@ -909,57 +1042,137 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEndInit.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="31" lean-forward="true" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Discovery/DiscoveryInit.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MongoDBHelper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WorkersInfo.JPG">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/WorkersResourceInfo.JPG">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
+    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1491">
-          <caret line="105" column="38" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
+        <state relative-caret-position="5100">
+          <caret line="341" column="17" selection-start-line="341" selection-start-column="17" selection-end-line="341" selection-end-column="17" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
+    <entry file="file://$PROJECT_DIR$/Discovery/DiscoveryInit.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="269" column="37" selection-start-line="269" selection-start-column="37" selection-end-line="269" selection-end-column="37" />
+        <state relative-caret-position="15">
+          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEndInit.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManagerInit.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JobManager/JobManagerInit.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestSample/SampleJob2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestSample/SampleJob1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Worker/Worker2Init.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="39" lean-forward="true" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/ClientInit.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="34" lean-forward="true" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/Client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3003">
-          <caret line="143" column="36" lean-forward="true" selection-start-line="143" selection-start-column="36" selection-end-line="143" selection-end-column="36" />
+        <state relative-caret-position="-1557">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#81#96#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/ClientInit.json">
+    <entry file="file://$PROJECT_DIR$/MongoDBHelper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+        <state relative-caret-position="120">
+          <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestSample/SampleWorker1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="32" lean-forward="true" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Worker/Worker1Init.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="39" lean-forward="true" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DockerHelper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="97" column="11" selection-start-line="97" selection-start-column="11" selection-end-line="97" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="181" lean-forward="true" selection-start-line="181" selection-end-line="181" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="22" lean-forward="true" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
         </state>
       </provider>
     </entry>

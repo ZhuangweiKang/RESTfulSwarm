@@ -29,7 +29,7 @@ template = {
     },
     "version": "0.0.1"
   },
-  "host": "129.59.107.143:5000",
+  "host": "129.114.108.18:5001",
   "basePath": "",  # base bash for blueprint registration
   "schemes": [
     "http",
