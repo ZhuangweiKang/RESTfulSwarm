@@ -5,7 +5,7 @@
 import json
 import random
 import math
-from Client.Client import StressClient
+from Client.StressClient import StressClient
 
 
 class BurstyStressClient(StressClient):

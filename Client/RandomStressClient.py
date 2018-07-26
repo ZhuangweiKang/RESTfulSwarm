@@ -4,7 +4,7 @@
 
 import json
 import random
-from Client.Client import StressClient
+from Client.StressClient import StressClient
 
 
 class RandomStressClient(StressClient):

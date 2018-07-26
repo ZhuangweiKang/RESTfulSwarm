@@ -3,7 +3,7 @@
 # Author: Zhuangwei Kang
 
 import json
-from Client.Client import StressClient
+from Client.StressClient import StressClient
 
 
 class SteadyStressClient(StressClient):
