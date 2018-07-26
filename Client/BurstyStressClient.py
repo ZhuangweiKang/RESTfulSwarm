@@ -13,7 +13,7 @@ from Client.StressClient import StressClient
 
 class BurstyStressClient(StressClient):
     def __init__(self, lmda):
-        super(StressClient).__init__()
+        super(StressClient, self).__init__()
         self.lmda = lmda
 
     def feed_func(self, time_stamp):

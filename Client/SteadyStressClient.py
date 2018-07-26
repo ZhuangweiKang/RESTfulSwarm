@@ -11,7 +11,7 @@ from Client.StressClient import StressClient
 
 class SteadyStressClient(StressClient):
     def __init__(self, feed_constant):
-        super(StressClient).__init__()
+        super(StressClient, self).__init__()
         self.feed_constant = feed_constant
 
     def feed_func(self, time_stamp):

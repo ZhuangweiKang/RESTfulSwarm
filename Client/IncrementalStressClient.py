@@ -11,7 +11,7 @@ from Client.StressClient import StressClient
 
 class IncrementalStressClient(StressClient):
     def __init__(self, coefficient, constant):
-        super(StressClient).__init__()
+        super(StressClient, self).__init__()
         self.coefficient = coefficient
         self.constant = constant
 

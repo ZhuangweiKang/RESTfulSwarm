@@ -12,7 +12,7 @@ from Client.StressClient import StressClient
 
 class RandomStressClient(StressClient):
     def __init__(self, lower_bound, upper_bound):
-        super(StressClient).__init__()
+        super(StressClient, self).__init__()
         self.lower_bound = lower_bound
         self.upper_bound = upper_bound
 
