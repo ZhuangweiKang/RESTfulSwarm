@@ -8,31 +8,30 @@ import time
 import json
 
 
-class Task:
-    def __init__(self, container_name, image, cpu_count, mem_limit, command=""):
-        self.container_name = container_name
-        self.image = image
-        self.command = command
-        self.cpu_count = cpu_count
-        self.mem_limit = mem_limit
-
-    def generate_task(self):
-        task = {"container_name": self.container_name,
-                "node": "",
-                "image": self.image,
-                "detach": True,
-                "command": self.command,
-                "cpu_count": self.cpu_count,
-                "cpuset_cpus": "",
-                "mem_limit": self.mem_limit,
-                "ports": {},
-                "volumes": {},
-                "environment": {},
-                "status": "Ready"}
-        return task
-
-
 class StressClient(object):
+    class Task:
+        def __init__(self, container_name, image, cpu_count, mem_limit, command=""):
+            self.container_name = container_name
+            self.image = image
+            self.command = command
+            self.cpu_count = cpu_count
+            self.mem_limit = mem_limit
+
+        def generate_task(self):
+            task = {"container_name": self.container_name,
+                    "node": "",
+                    "image": self.image,
+                    "detach": True,
+                    "command": self.command,
+                    "cpu_count": self.cpu_count,
+                    "cpuset_cpus": "",
+                    "mem_limit": self.mem_limit,
+                    "ports": {},
+                    "volumes": {},
+                    "environment": {},
+                    "status": "Ready"}
+            return task
+
     __metaclass__ = ABCMeta
 
     def __init__(self):
