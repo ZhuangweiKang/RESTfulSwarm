@@ -60,7 +60,7 @@ class StressClient(object):
             image = self.image_name
             cpu_count = self.task_cores
             mem_limit = str(self.task_mem) + 'm'
-            task = Task(task_name, image, cpu_count, mem_limit)
+            task = self.Task(task_name, image, cpu_count, mem_limit)
             task = task.generate_task()
             job['job_info']['tasks'].update({task_name: task})
         return job
