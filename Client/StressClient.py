@@ -37,7 +37,7 @@ class StressClient(object):
     def __init__(self):
         with open('StressClientInfo.json', 'r') as f:
             data = json.load(f)
-
+        print(data)
         self.subnet = data['subnet']
         self.image_name = data['image_name']
         self.task_count = data['task_count']
