@@ -35,13 +35,16 @@ class Task:
 class StressClient(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self, subnet, image_name, task_count, task_cores, task_mem, time_interval):
-        self.subnet = subnet
-        self.image_name = image_name
-        self.task_count = task_count
-        self.task_cores = task_cores
-        self.task_mem = task_mem
-        self.time_interval = time_interval
+    def __init__(self):
+        with open('StressClientInfo.json', 'r') as f:
+            data = json.load(f)
+
+        self.subnet = data['subnet']
+        self.image_name = data['image_name']
+        self.task_count = data['task_count']
+        self.task_cores = data['task_cores']
+        self.task_mem = data['task_mem']
+        self.time_interval = data['time_interval']
 
         with open('ClientInit.json') as f:
             data = json.load(f)
