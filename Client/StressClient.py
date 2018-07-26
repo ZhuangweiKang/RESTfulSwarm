@@ -34,7 +34,7 @@ class StressClient(object):
 
     __metaclass__ = ABCMeta
 
-    def __init__(self):
+    def init_fields(self):
         with open('StressClientInfo.json', 'r') as f:
             data = json.load(f)
         print(data)

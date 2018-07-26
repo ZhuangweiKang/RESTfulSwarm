@@ -33,6 +33,7 @@ if __name__ == '__main__':
         with open(json_path, 'r') as f:
             data = json.load(f)
         client = BurstyStressClient(lmda=data['lambda'])
+        client.init_fields()
         client.feed_jobs()
     except ValueError as er:
         print(er)

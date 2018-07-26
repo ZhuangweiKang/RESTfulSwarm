@@ -31,6 +31,7 @@ if __name__ == '__main__':
         with open(json_path, 'r') as f:
             data = json.load(f)
         client = SteadyStressClient(feed_constant=data['feed_constant'])
+        client.init_fields()
         client.feed_jobs()
     except ValueError as er:
         print(er)

@@ -33,6 +33,7 @@ if __name__ == '__main__':
         with open(json_path, 'r') as f:
             data = json.load(f)
         client = RandomStressClient(lower_bound=data['lower_bound'], upper_bound=data['upper_bound'])
+        client.init_fields()
         client.feed_jobs()
     except ValueError as er:
         print(er)
