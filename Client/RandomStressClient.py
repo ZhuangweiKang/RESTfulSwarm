@@ -7,6 +7,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import json
 import random
+import utl
 from Client.StressClient import StressClient
 
 
@@ -20,13 +21,15 @@ class RandomStressClient(StressClient):
         return random.randint(self.lower_bound, self.upper_bound)
 
 
-if __name__ == '__main__':
+def main():
     # parser = argparse.ArgumentParser()
     # parser.add_argument('-a', '--address', type=str, help='Front end node address.')
     # parser.add_argument('-p', '--port', type=str, default='5001', help='Front end node port number.')
     # args = parser.parse_args()
     # fe_addr = args.address
     # fe_port = args.port
+
+    os.chdir('/home/%s/RESTfulSwarmLM/Client' % utl.getHostName())
 
     try:
         json_path = 'RandomStressClientInfo.json'
@@ -37,3 +40,7 @@ if __name__ == '__main__':
         client.feed_jobs()
     except ValueError as er:
         print(er)
+
+
+if __name__ == '__main__':
+    main()

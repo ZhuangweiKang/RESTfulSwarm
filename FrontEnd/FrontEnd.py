@@ -13,6 +13,7 @@ import MongoDBHelper as mhelper
 import time
 import ZMQHelper as zmq
 import json
+import utl
 from flasgger import Swagger, swag_from
 import argparse
 
@@ -66,6 +67,8 @@ def requestNewJob():
 
 
 def main():
+    os.chdir('/home/%s/RESTfulSwarmLM/FrontEnd' % utl.getHostName())
+
     global mongo_addr
     global mongo_port
     global socket

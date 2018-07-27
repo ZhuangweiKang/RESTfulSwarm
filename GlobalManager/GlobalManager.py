@@ -290,6 +290,8 @@ def describeManager(hostname):
 
 
 def main():
+    os.chdir('/home/%s/RESTfulSwarmLM/GlobalManager' % utl.getHostName())
+
     global m_addr
     global m_port
     global mongo_client

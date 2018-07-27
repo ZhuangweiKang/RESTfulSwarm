@@ -6,6 +6,7 @@ import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import json
+import utl
 from Client.StressClient import StressClient
 
 
@@ -18,7 +19,7 @@ class SteadyStressClient(StressClient):
         return self.feed_constant
 
 
-if __name__ == '__main__':
+def main():
     # parser = argparse.ArgumentParser()
     # parser.add_argument('-a', '--address', type=str, help='Front end node address.')
     # parser.add_argument('-p', '--port', type=str, default='5001', help='Front end node port number.')
@@ -26,6 +27,8 @@ if __name__ == '__main__':
     # fe_addr = args.address
     # fe_port = args.port
 
+    os.chdir('/home/%s/RESTfulSwarmLM/Client' % utl.getHostName())
+    
     try:
         json_path = 'SteadyStressClientInfo.json'
         with open(json_path, 'r') as f:
@@ -35,3 +38,7 @@ if __name__ == '__main__':
         client.feed_jobs()
     except ValueError as er:
         print(er)
+
+
+if __name__ == '__main__':
+    main()

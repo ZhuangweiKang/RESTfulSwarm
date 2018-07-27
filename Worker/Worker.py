@@ -212,6 +212,8 @@ def main(worker_init):
     frequency = args.frequency
     '''
 
+    os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.getHostName())
+
     with open(worker_init) as f:
         data = json.load(f)
     manager_addr = data['global_manager_addr']

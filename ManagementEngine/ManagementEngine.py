@@ -11,6 +11,11 @@ from JobManager import JobManager as jm
 from GlobalManager import GlobalManager as gm
 from Discovery import Discovery as dc
 
+from Client import BurstyStressClient as bursty_client
+from Client import IncrementalStressClient as incremental_client
+from Client import RandomStressClient as random_client
+from Client import SteadyStressClient as steay_client
+
 import multiprocessing
 import paramiko as pk
 import MongoDBHelper as mg
@@ -96,6 +101,16 @@ class ManagementEngine:
             self.ssh_exec_cmd(worker['address'], worker['user'], worker['launch_worker'])
         print('Launched all workers.')
 
+    def launch_client(self):
+        client_proc = multiprocessing.Process(
+            name='Client',
+            target=bursty_client.main
+        )
+        client_proc.daemon = True
+        client_proc.start()
+        print('Launched Client.')
+        return client_proc
+
     def shutdown_fe(self, fe_pro):
         fe_pro.terminate()
         print('Shutdown FrontEnd.')
@@ -117,6 +132,10 @@ class ManagementEngine:
             self.ssh_exec_cmd(worker['address'], worker['user'], worker['kill_worker'])
         print('Shutdown all workers.')
 
+    def shutdown_client(self, client_pro):
+        client_pro.terminate()
+        print('Shutdown Client.')
+
     def launch_system(self):
         print('Start launching system.')
         self.clear_master()
@@ -126,10 +145,12 @@ class ManagementEngine:
         jm_proc = self.launch_jm()
         dc_proc = self.launch_discovery()
         self.launch_workers()
-        return fe_proc, jm_proc, gm_proc, dc_proc
+        client_proc = self.launch_client()
+        return fe_proc, jm_proc, gm_proc, dc_proc, client_proc
 
-    def shutdown_system(self, fe_proc, jm_proc, gm_proc, dc_proc):
+    def shutdown_system(self, fe_proc, jm_proc, gm_proc, dc_proc, client_proc):
         print('Start shutting down system.')
+        self.shutdown_client(client_proc)
         self.shutdown_fe(fe_proc)
         self.shutdown_jm(jm_proc)
         self.clear_master()
@@ -146,7 +167,7 @@ class ManagementEngine:
                 while True:
                     switch_off = input('Would you like to shutdown RESTfulSwarm system?(y/n) ')
                     if switch_off == 'y':
-                        self.shutdown_system(processes[0], processes[1], processes[2], processes[3])
+                        self.shutdown_system(processes[0], processes[1], processes[2], processes[3], processes[4])
                         break
 
 

@@ -325,6 +325,8 @@ def main():
     #
     # wait = args.wait
 
+    os.chdir('/home/%s/RESTfulSwarmLM/JobManager' % utl.getHostName())
+
     with open('JobManagerInit.json') as f:
         data = json.load(f)
     gm_addr = data['global_manager_addr']
