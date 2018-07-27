@@ -151,7 +151,7 @@ class ManagementEngine:
 
 
 if __name__ == '__main__':
-    with open('DBInfo.json') as f:
+    with open('DBinfo.json') as f:
         db_packet = json.load(f)
 
     with open('WorkersInfo.json') as f:
