@@ -87,7 +87,8 @@ class ManagementEngine:
         return dc_pro
 
     def ssh_exec_cmd(self, addr, usr, cmd):
-        key = pk.RSAKey.from_private_key(self.private_key_file)
+        with open(self.private_key_file) as f:
+            key = pk.RSAKey.from_private_key(f)
         transport = pk.Transport(addr, 22)
         transport.connect(username=usr, pkey=key)
         ssh = pk.SSHClient()
