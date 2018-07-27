@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -109,8 +110,8 @@
       <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="89" column="46" lean-forward="true" selection-start-line="89" selection-start-column="46" selection-end-line="89" selection-end-column="46" />
+            <state relative-caret-position="582">
+              <caret line="178" column="24" selection-start-line="178" selection-start-column="24" selection-end-line="178" selection-end-column="24" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -381,20 +382,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00357" summary="update">
-      <created>1531928352291</created>
-      <option name="number" value="00357" />
-      <option name="presentableId" value="LOCAL-00357" />
-      <option name="project" value="LOCAL" />
-      <updated>1531928352291</updated>
-    </task>
-    <task id="LOCAL-00358" summary="update job status">
-      <created>1531929190017</created>
-      <option name="number" value="00358" />
-      <option name="presentableId" value="LOCAL-00358" />
-      <option name="project" value="LOCAL" />
-      <updated>1531929190017</updated>
     </task>
     <task id="LOCAL-00359" summary="update job status">
       <created>1531929832418</created>
@@ -725,7 +712,21 @@
       <option name="project" value="LOCAL" />
       <updated>1532727430812</updated>
     </task>
-    <option name="localTasksCounter" value="406" />
+    <task id="LOCAL-00406" summary="update">
+      <created>1532727606432</created>
+      <option name="number" value="00406" />
+      <option name="presentableId" value="LOCAL-00406" />
+      <option name="project" value="LOCAL" />
+      <updated>1532727606432</updated>
+    </task>
+    <task id="LOCAL-00407" summary="update">
+      <created>1532727826682</created>
+      <option name="number" value="00407" />
+      <option name="presentableId" value="LOCAL-00407" />
+      <option name="project" value="LOCAL" />
+      <updated>1532727826682</updated>
+    </task>
+    <option name="localTasksCounter" value="408" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1159,8 +1160,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="89" column="46" lean-forward="true" selection-start-line="89" selection-start-column="46" selection-end-line="89" selection-end-column="46" />
+        <state relative-caret-position="582">
+          <caret line="178" column="24" selection-start-line="178" selection-start-column="24" selection-end-line="178" selection-end-column="24" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
           </folding>
