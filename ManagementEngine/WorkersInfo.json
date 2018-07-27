@@ -1,20 +1,14 @@
 [
   {
-    "address": "",
-    "user": "",
-    "launch_worker": "",
-    "kill_worker": ""
+    "address": "10.52.0.13",
+    "user": "cc",
+    "launch_worker": "cd /home/cc/RESTfulSwarmDB/Worker && sudo python3 Worker.py",
+    "kill_worker": "cd /home/cc/RESTfulSwarmDB/Worker && sudo python3 TerminateWorker.py"
   },
   {
-    "address": "",
-    "user": "",
-    "launch_worker": "",
-    "kill_worker": ""
-  },
-  {
-    "address": "",
-    "user": "",
-    "launch_worker": "",
-    "kill_worker": ""
+    "address": "10.52.0.184",
+    "user": "cc",
+    "launch_worker": "cd /home/cc/RESTfulSwarmDB/Worker && sudo python3 Worker.py -f Worker2Init.json",
+    "kill_worker": "cd /home/cc/RESTfulSwarmDB/Worker && sudo python3 TerminateWorker.py"
   }
 ]
