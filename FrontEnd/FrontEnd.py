@@ -67,7 +67,7 @@ def requestNewJob():
 
 
 def main():
-    os.chdir('/home/%s/RESTfulSwarmLM/FrontEnd' % utl.getHostName())
+    os.chdir('/home/%s/RESTfulSwarmLM/FrontEnd' % utl.getUserName())
 
     global mongo_addr
     global mongo_port

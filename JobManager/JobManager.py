@@ -325,7 +325,7 @@ def main():
     #
     # wait = args.wait
 
-    os.chdir('/home/%s/RESTfulSwarmLM/JobManager' % utl.getHostName())
+    os.chdir('/home/%s/RESTfulSwarmLM/JobManager' % utl.getUserName())
 
     with open('JobManagerInit.json') as f:
         data = json.load(f)

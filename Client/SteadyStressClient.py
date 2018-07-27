@@ -27,8 +27,8 @@ def main():
     # fe_addr = args.address
     # fe_port = args.port
 
-    os.chdir('/home/%s/RESTfulSwarmLM/Client' % utl.getHostName())
-    
+    os.chdir('/home/%s/RESTfulSwarmLM/Client' % utl.getUserName())
+
     try:
         json_path = 'SteadyStressClientInfo.json'
         with open(json_path, 'r') as f:

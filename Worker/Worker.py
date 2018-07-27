@@ -212,7 +212,7 @@ def main(worker_init):
     frequency = args.frequency
     '''
 
-    os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.getHostName())
+    os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.getUserName())
 
     with open(worker_init) as f:
         data = json.load(f)

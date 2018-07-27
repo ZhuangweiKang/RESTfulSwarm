@@ -92,7 +92,7 @@ class Discovery:
 
 
 def main():
-    os.chdir('/home/%s/RESTfulSwarmLM/Discovery/' % utl.getHostName())
+    os.chdir('/home/%s/RESTfulSwarmLM/Discovery' % utl.getUserName())
     with open('DiscoveryInit.json') as f:
         data = json.load(f)
     mongo_addr = data['mongo_addr']

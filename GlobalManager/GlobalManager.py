@@ -290,7 +290,7 @@ def describeManager(hostname):
 
 
 def main():
-    os.chdir('/home/%s/RESTfulSwarmLM/GlobalManager' % utl.getHostName())
+    os.chdir('/home/%s/RESTfulSwarmLM/GlobalManager' % utl.getUserName())
 
     global m_addr
     global m_port

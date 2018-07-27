@@ -37,6 +37,10 @@ def getHostName():
     return os.popen(cmd).read().strip()
 
 
+def getUserName():
+    return os.getlogin().strip()
+
+
 def getHostIP():
     host_addr = os.popen('ip addr show dev ens3 | grep -w inet | awk \'{print $2}\'', 'r').read()
     host_addr = host_addr.split('/')[0]
