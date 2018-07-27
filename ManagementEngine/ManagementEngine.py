@@ -18,6 +18,7 @@ from Client import SteadyStressClient as steay_client
 
 import multiprocessing
 import paramiko as pk
+import time
 import MongoDBHelper as mg
 import DockerHelper as dh
 import json
@@ -137,24 +138,39 @@ class ManagementEngine:
     def launch_system(self):
         print('Start launching system.')
         self.clear_master()
+        time.sleep(1)
         self.clear_db()
+        time.sleep(1)
         fe_proc = self.launch_fe()
+        time.sleep(1)
         gm_proc = self.launch_gm()
+        time.sleep(1)
         jm_proc = self.launch_jm()
+        time.sleep(1)
         dc_proc = self.launch_discovery()
+        time.sleep(1)
         self.launch_workers()
+        time.sleep(1)
         client_proc = self.launch_client()
+        time.sleep(1)
         return fe_proc, jm_proc, gm_proc, dc_proc, client_proc
 
     def shutdown_system(self, fe_proc, jm_proc, gm_proc, dc_proc, client_proc):
         print('Start shutting down system.')
         self.shutdown_client(client_proc)
+        time.sleep(1)
         self.shutdown_fe(fe_proc)
+        time.sleep(1)
         self.shutdown_jm(jm_proc)
+        time.sleep(1)
         self.clear_master()
+        time.sleep(1)
         self.shutdown_gm(gm_proc)
+        time.sleep(1)
         self.shutdown_workers()
+        time.sleep(1)
         self.shutdown_discovery(dc_proc)
+        time.sleep(1)
         self.clear_db()
 
     def main(self):
