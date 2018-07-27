@@ -1,0 +1,7 @@
+{
+  "address": "",
+  "pwd": "kzw",
+  "port": "27017",
+  "user": "admin",
+  "database": "RESTfulSwarmDB"
+}

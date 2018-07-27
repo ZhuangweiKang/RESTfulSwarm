@@ -91,14 +91,7 @@ class Discovery:
             self.logger.info('Updated Job collection. Released used memory.')
 
 
-if __name__ == '__main__':
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('-ma', '--mongo_addr', type=str, help='Mongodb server address.')
-    # parser.add_argument('-mp', '--mongo_port', type=str, default='27017', help='Mongodb server port.')
-    # args = parser.parse_args()
-    # mongo_addr = args.mongo_addr
-    # mongo_port = args.mongo_port
-
+def main():
     with open('DiscoveryInit.json') as f:
         data = json.load(f)
     mongo_addr = data['mongo_addr']
@@ -108,3 +101,14 @@ if __name__ == '__main__':
     discovery.logger.info('Initialized Discovery block.')
 
     discovery.discovery()
+
+
+if __name__ == '__main__':
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument('-ma', '--mongo_addr', type=str, help='Mongodb server address.')
+    # parser.add_argument('-mp', '--mongo_port', type=str, default='27017', help='Mongodb server port.')
+    # args = parser.parse_args()
+    # mongo_addr = args.mongo_addr
+    # mongo_port = args.mongo_port
+
+    main()

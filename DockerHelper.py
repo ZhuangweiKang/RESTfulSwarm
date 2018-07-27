@@ -100,8 +100,10 @@ def joinSwarm(client, token, address):
 
 
 def leaveSwarm(client):
-    client.swarm.leave()
-
+    try:
+        client.swarm.leave(force=True)
+    except Exception:
+        pass
 
 def getNodeList(client):
     return client.nodes.list(filters={'role': 'worker'})

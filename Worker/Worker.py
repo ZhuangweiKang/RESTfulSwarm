@@ -7,6 +7,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import utl
+import multiprocessing
 import threading
 import requests
 import json
@@ -195,7 +196,7 @@ class Worker:
         print(requests.post(url=url, json={'hostname': self.hostname}).content)
 
 
-if __name__ == '__main__':
+def main(worker_init):
     '''
     parser = argparse.ArgumentParser()
     parser.add_argument('-ga', '--gaddr', type=str, help='Global Manager IP address.')
@@ -211,11 +212,7 @@ if __name__ == '__main__':
     frequency = args.frequency
     '''
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--file', type=str, default='Worker1Init.json', help='Worker node init json file path.')
-    args = parser.parse_args()
-    worker_init_json = args.file
-    with open(worker_init_json) as f:
+    with open(worker_init) as f:
         data = json.load(f)
     manager_addr = data['global_manager_addr']
     self_addr = data['worker_address']
@@ -226,3 +223,18 @@ if __name__ == '__main__':
     worker = Worker(manager_addr, self_addr, discovery_addr, discovery_port, frequency)
     worker.main()
     worker.requestJoinSwarm()
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--file', type=str, default='Worker1Init.json', help='Worker node init json file path.')
+    args = parser.parse_args()
+    worker_init_json = args.file
+
+    pro = multiprocessing.Process(
+        name='Worker',
+        target=main,
+        args=(worker_init_json, )
+    )
+    pro.daemon = True
+    pro.start()

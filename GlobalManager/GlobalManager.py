@@ -289,22 +289,15 @@ def describeManager(hostname):
     return describeNode(hostname)
 
 
-if __name__ == '__main__':
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('-ga', '--gaddr', type=str, help='The IP address of your Global Manager node.')
-    # parser.add_argument('-gp', '--gport', type=int, default=5000, help='The port number you want to run your manager node.')
-    # parser.add_argument('-ma', '--maddr', type=str, help='MongoDB address.')
-    # parser.add_argument('-mp', '--mport', type=int, default=27017, help='MongoDB port.')
-    # args = parser.parse_args()
-    # g_addr = args.gaddr
-    # gport = args.gport
-    #
-    # host_addr = utl.getHostIP()
-    # dockerClient = dHelper.setClient()
-    #
-    # # mongodb
-    # m_addr = args.maddr
-    # m_port = args.mport
+def main():
+    global m_addr
+    global m_port
+    global mongo_client
+    global db
+    global worker_col
+    global worker_resource_col
+    global host_addr
+    global dockerClient
 
     with open('GlobalManagerInit.json') as f:
         data = json.load(f)
@@ -324,3 +317,23 @@ if __name__ == '__main__':
     worker_resource_col = mg.get_col(db, workers_resources)
 
     app.run(host=g_addr, port=gport, debug=True)
+
+
+if __name__ == '__main__':
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument('-ga', '--gaddr', type=str, help='The IP address of your Global Manager node.')
+    # parser.add_argument('-gp', '--gport', type=int, default=5000, help='The port number you want to run your manager node.')
+    # parser.add_argument('-ma', '--maddr', type=str, help='MongoDB address.')
+    # parser.add_argument('-mp', '--mport', type=int, default=27017, help='MongoDB port.')
+    # args = parser.parse_args()
+    # g_addr = args.gaddr
+    # gport = args.gport
+    #
+    # host_addr = utl.getHostIP()
+    # dockerClient = dHelper.setClient()
+    #
+    # # mongodb
+    # m_addr = args.maddr
+    # m_port = args.mport
+
+    main()

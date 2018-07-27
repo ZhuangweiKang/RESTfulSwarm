@@ -65,6 +65,30 @@ def requestNewJob():
     return 'OK', 200
 
 
+def main():
+    global mongo_addr
+    global mongo_port
+    global socket
+    global mongo_db
+
+    with open('FrontEndInit.json') as f:
+        data = json.load(f)
+
+    mongo_addr = data['mongo_addr']
+    mongo_port = data['mongo_port']
+
+    mongo_client = mhelper.get_client(address=mongo_addr, port=mongo_port)
+    mongo_db = mhelper.get_db(mongo_client, mongo_db_name)
+
+    jm_addr = data['job_manager_addr']
+    jm_port = data['job_manager_port']
+    socket = zmq.csConnect(jm_addr, jm_port)
+
+    fe_address = data['address']
+
+    app.run(host=fe_address, port=5001, debug=True)
+
+
 if __name__ == '__main__':
     # parser = argparse.ArgumentParser()
     # parser.add_argument('-a', '--address', type=str, help='The FrontEnd node IP address.')
@@ -88,19 +112,4 @@ if __name__ == '__main__':
     #
     # fe_address = args.address
 
-    with open('FrontEndInit.json') as f:
-        data = json.load(f)
-
-    mongo_addr = data['mongo_addr']
-    mongo_port = data['mongo_port']
-
-    mongo_client = mhelper.get_client(address=mongo_addr, port=mongo_port)
-    mongo_db = mhelper.get_db(mongo_client, mongo_db_name)
-
-    jm_addr = data['job_manager_addr']
-    jm_port = data['job_manager_port']
-    socket = zmq.csConnect(jm_addr, jm_port)
-
-    fe_address = data['address']
-
-    app.run(host=fe_address, port=5001, debug=True)
+    main()

@@ -210,7 +210,7 @@ class JobManager:
         cols = []
         # get collection cursor objs
         for col_name in col_names:
-            cols.append(mHelper.get_col(db, col_name))
+            cols.append(mHelper.get_col(self.db, col_name))
         mHelper.update_tasks(cols, hostname)
 
         # remove the node(document) from WorkersInfo collection
@@ -304,7 +304,7 @@ class JobManager:
             job_queue.append(msg)
 
 
-if __name__ == '__main__':
+def main():
     # parser = argparse.ArgumentParser()
     # parser.add_argument('-ga', '--gaddr', type=str, help='Global manager node address.')
     # parser.add_argument('-gp', '--gport', type=str, default='3100', help='Global manager node port number.')
@@ -376,7 +376,7 @@ if __name__ == '__main__':
         print('10. Exit')
         try:
             get_input = int(input('Please enter your choice: '))
-            if get_input == 1:
+            if get_input == 1 or get_input == 'GM_Ack':
                 job_manager.init_gm()
             elif get_input == 2:
                 json_path = input('Task Json file path: ')
@@ -419,3 +419,7 @@ if __name__ == '__main__':
                 break
         except ValueError as er:
             print(er)
+
+
+if __name__ == '__main__':
+    main()
