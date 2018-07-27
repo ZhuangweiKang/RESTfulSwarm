@@ -89,12 +89,10 @@ class ManagementEngine:
     def ssh_exec_cmd(self, addr, usr, cmd):
         with open(self.private_key_file) as f:
             key = pk.RSAKey.from_private_key(f)
-        transport = pk.Transport(addr, 22)
-        transport.connect(username=usr, pkey=key)
-        ssh = pk.SSHClient()
-        ssh._transport = transport
-        ssh.exec_command(cmd)
-        transport.close()
+        con = pk.SSHClient()
+        con.set_missing_host_key_policy(pk.AutoAddPolicy)
+        con.connect(hostname=addr, username=usr, pkey=key)
+        con.exec_command(cmd)
         print('Executed command %s on worker %s' % (cmd, addr))
 
     def launch_workers(self):
