@@ -1,12 +1,12 @@
 [
   {
-    "address": "129.114.109.191",
+    "address": "129.114.109.19",
     "user": "cc",
     "launch_worker": "cd /home/cc/RESTfulSwarmDB/Worker && sudo python3 Worker.py",
     "kill_worker": "cd /home/cc/RESTfulSwarmDB/Worker && sudo python3 TerminateWorker.py"
   },
   {
-    "address": "129.114.109.219",
+    "address": "129.114.109.21",
     "user": "cc",
     "launch_worker": "cd /home/cc/RESTfulSwarmDB/Worker && sudo python3 Worker.py -f Worker2Init.json",
     "kill_worker": "cd /home/cc/RESTfulSwarmDB/Worker && sudo python3 TerminateWorker.py"
