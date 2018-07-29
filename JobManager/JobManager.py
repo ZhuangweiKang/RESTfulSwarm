@@ -279,6 +279,8 @@ class JobManager:
 
                     time.sleep(1)
 
+                    print(job_queue)
+
                     # remove scheduled jobs
                     for index, job in enumerate(job_queue[:]):
                         if job[1] not in waiting_decision:
@@ -290,10 +292,6 @@ class JobManager:
                         job_name = msg[1]
                         job_col = mHelper.get_col(self.db, job_name)
                         col_data = mHelper.find_col(job_col)[0]
-
-                        print('______________________________________________')
-                        print(col_data)
-                        print('______________________________________________')
 
                         del col_data['_id']
                         print(requests.post(url=url, json=col_data).content)
