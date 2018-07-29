@@ -277,6 +277,8 @@ class JobManager:
                     print('Waiting decision:')
                     print(waiting_decision)
 
+                    time.sleep(1)
+
                     # remove scheduled jobs
                     for index, job in enumerate(job_queue[:]):
                         if job[1] not in waiting_decision:
