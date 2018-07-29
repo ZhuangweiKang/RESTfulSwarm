@@ -275,10 +275,8 @@ class JobManager:
 
                     waiting_decision = schedule_resource(jobs_details)
 
-                    print('Waiting decision:')
-                    print(waiting_decision)
-
-                    time.sleep(1)
+                    # print('Waiting decision:')
+                    # print(waiting_decision)
 
                     # remove scheduled jobs
                     for index, job in enumerate(job_queue_snap_shoot[:]):
@@ -287,8 +285,8 @@ class JobManager:
                             job_queue.remove(job)
                             job_queue_snap_shoot.remove(job)
 
-                    print('____________________Temp job queue_______________')
-                    print(temp_job_queue)
+                    # print('____________________Temp job queue_______________')
+                    # print(temp_job_queue)
 
                     for msg in temp_job_queue:
                         url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (self.gm_addr, self.gm_port)
