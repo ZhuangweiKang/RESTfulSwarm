@@ -144,6 +144,8 @@ class ManagementEngine:
         print('Start launching system.')
         self.clear_master()
         time.sleep(1)
+        self.shutdown_workers()
+        time.sleep(1)
         self.clear_db()
         time.sleep(1)
         fe_proc = self.launch_fe()
