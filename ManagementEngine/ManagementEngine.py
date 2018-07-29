@@ -99,6 +99,7 @@ class ManagementEngine:
     def launch_workers(self):
         for worker in self.workers_info:
             self.ssh_exec_cmd(worker['address'], worker['user'], worker['launch_worker'])
+            time.sleep(2)
         print('Launched all workers.')
 
     def launch_client(self):
