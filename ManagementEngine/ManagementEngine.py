@@ -171,9 +171,9 @@ class ManagementEngine:
             self.shutdown_jm(jm_proc)
             self.shutdown_gm(gm_proc)
             self.shutdown_workers()
+            self.clear_master()
             while len(dh.getNodeList(dh.setClient())) != 0:
                 pass
-            self.clear_master()
             self.shutdown_discovery(dc_proc)
             self.clear_db()
         except Exception:
