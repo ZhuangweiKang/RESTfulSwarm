@@ -238,5 +238,3 @@ if __name__ == '__main__':
         args=(worker_init_json, )
     )
     pro.start()
-    while True:
-        pass
