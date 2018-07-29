@@ -93,8 +93,7 @@ class ManagementEngine:
         con = pk.SSHClient()
         con.set_missing_host_key_policy(pk.AutoAddPolicy)
         con.connect(hostname=addr, username=usr, pkey=key)
-        stdin, stdout, stderr = con.exec_command(cmd)
-        print(stdin, stdout, stderr)
+        con.exec_command(cmd)
         print('Executed command %s on worker %s' % (cmd, addr))
 
     def launch_workers(self):
