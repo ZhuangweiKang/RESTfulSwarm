@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Discovery/Discovery.py" beforeDir="false" afterPath="$PROJECT_DIR$/Discovery/Discovery.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GraphBook.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/GraphBook.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worker/TerminateWorker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/TerminateWorker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/Worker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/Worker.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,7 +23,7 @@
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="115">
-              <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+              <caret line="119" column="22" selection-start-line="119" selection-start-column="22" selection-end-line="119" selection-end-column="22" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
                 <element signature="e#1221#1491#0" />
@@ -48,17 +48,17 @@
       <file leaf-file-name="Discovery.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="41" column="44" lean-forward="true" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
+            <state relative-caret-position="-1203">
+              <caret line="29" column="42" lean-forward="true" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="175" column="49" selection-start-line="175" selection-start-column="49" selection-end-line="175" selection-end-column="49" />
+            <state relative-caret-position="271">
+              <caret line="174" column="31" lean-forward="true" selection-start-line="174" selection-start-column="31" selection-end-line="174" selection-end-column="31" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -69,8 +69,8 @@
       <file leaf-file-name="BurstyStressClient.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/BurstyStressClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+            <state relative-caret-position="294">
+              <caret line="14" column="39" lean-forward="true" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -93,11 +93,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Worker.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="589">
+              <caret line="242" column="21" selection-start-line="242" selection-start-column="21" selection-end-line="242" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="TerminateWorker.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Worker/TerminateWorker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="4" column="9" lean-forward="true" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+            <state relative-caret-position="378">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+              <folding>
+                <element signature="e#81#90#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,8 +117,8 @@
       <file leaf-file-name="DockerHelper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DockerHelper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="101" column="23" lean-forward="true" selection-start-line="101" selection-start-column="23" selection-end-line="101" selection-end-column="23" />
+            <state relative-caret-position="250">
+              <caret line="178" column="4" selection-start-line="178" selection-start-column="4" selection-end-line="178" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -211,17 +223,17 @@
         <option value="$PROJECT_DIR$/Client/IncrementalStressClient.py" />
         <option value="$PROJECT_DIR$/Client/RandomStressClient.py" />
         <option value="$PROJECT_DIR$/Client/SteadyStressClient.py" />
-        <option value="$PROJECT_DIR$/Discovery/Discovery.py" />
         <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
         <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
         <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
         <option value="$PROJECT_DIR$/ManagementEngine/WorkersInfo.json" />
-        <option value="$PROJECT_DIR$/Worker/Worker.py" />
         <option value="$PROJECT_DIR$/JobManager/JobManagerInit.json" />
         <option value="$PROJECT_DIR$/Client/StressClientInfo.json" />
         <option value="$PROJECT_DIR$/Client/IncrementalStressClientInfo.json" />
         <option value="$PROJECT_DIR$/Worker/TerminateWorker.py" />
         <option value="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" />
+        <option value="$PROJECT_DIR$/Discovery/Discovery.py" />
+        <option value="$PROJECT_DIR$/Worker/Worker.py" />
       </list>
     </option>
   </component>
@@ -360,20 +372,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00381" summary="update">
-      <created>1532382977755</created>
-      <option name="number" value="00381" />
-      <option name="presentableId" value="LOCAL-00381" />
-      <option name="project" value="LOCAL" />
-      <updated>1532382977757</updated>
-    </task>
-    <task id="LOCAL-00382" summary="update">
-      <created>1532383035629</created>
-      <option name="number" value="00382" />
-      <option name="presentableId" value="LOCAL-00382" />
-      <option name="project" value="LOCAL" />
-      <updated>1532383035629</updated>
     </task>
     <task id="LOCAL-00383" summary="update">
       <created>1532443094114</created>
@@ -704,7 +702,21 @@
       <option name="project" value="LOCAL" />
       <updated>1532891400518</updated>
     </task>
-    <option name="localTasksCounter" value="430" />
+    <task id="LOCAL-00430" summary="update">
+      <created>1532892188349</created>
+      <option name="number" value="00430" />
+      <option name="presentableId" value="LOCAL-00430" />
+      <option name="project" value="LOCAL" />
+      <updated>1532892188349</updated>
+    </task>
+    <task id="LOCAL-00431" summary="update">
+      <created>1532892971488</created>
+      <option name="number" value="00431" />
+      <option name="presentableId" value="LOCAL-00431" />
+      <option name="project" value="LOCAL" />
+      <updated>1532892971488</updated>
+    </task>
+    <option name="localTasksCounter" value="432" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1016,13 +1028,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="228" column="12" lean-forward="true" selection-start-line="228" selection-start-column="12" selection-end-line="228" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JobManager/JobManagerInit.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1040,39 +1045,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-            <element signature="e#1221#1491#0" />
-            <element signature="e#1518#1622#0" />
-            <element signature="e#1680#1819#0" />
-            <element signature="e#2785#3178#0" />
-            <element signature="e#5462#5905#0" />
-            <element signature="e#5942#6726#0" />
-            <element signature="e#6880#7014#0" />
-            <element signature="e#7189#7371#0" />
-            <element signature="e#7519#8017#0" />
-            <element signature="e#8195#8658#0" />
-            <element signature="e#8791#8943#0" />
-            <element signature="e#8978#9162#0" />
-            <element signature="e#9317#9346#0" />
-            <element signature="e#9504#9533#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ManagementEngine/private_key.pem">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/BurstyStressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ManagementEngine/DBinfo.json">
       <provider selected="true" editor-type-id="text-editor">
@@ -1095,17 +1069,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="41" column="44" lean-forward="true" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ManagementEngine/WorkersInfo.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Worker/TerminateWorker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/BurstyStressClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" column="39" lean-forward="true" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -1116,27 +1100,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DockerHelper.py">
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="101" column="23" lean-forward="true" selection-start-line="101" selection-start-column="23" selection-end-line="101" selection-end-column="23" />
+        <state relative-caret-position="115">
+          <caret line="119" column="22" selection-start-line="119" selection-start-column="22" selection-end-line="119" selection-end-column="22" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+            <element signature="e#1221#1491#0" />
+            <element signature="e#1518#1622#0" />
+            <element signature="e#1680#1819#0" />
+            <element signature="e#2785#3178#0" />
+            <element signature="e#5462#5905#0" />
+            <element signature="e#5942#6726#0" />
+            <element signature="e#6880#7014#0" />
+            <element signature="e#7189#7371#0" />
+            <element signature="e#7519#8017#0" />
+            <element signature="e#8195#8658#0" />
+            <element signature="e#8791#8943#0" />
+            <element signature="e#8978#9162#0" />
+            <element signature="e#9317#9346#0" />
+            <element signature="e#9504#9533#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/TerminateWorker.py">
+    <entry file="file://$PROJECT_DIR$/DockerHelper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="9" lean-forward="true" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+        <state relative-caret-position="250">
+          <caret line="178" column="4" selection-start-line="178" selection-start-column="4" selection-end-line="178" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="175" column="49" selection-start-line="175" selection-start-column="49" selection-end-line="175" selection-end-column="49" />
+        <state relative-caret-position="271">
+          <caret line="174" column="31" lean-forward="true" selection-start-line="174" selection-start-column="31" selection-end-line="174" selection-end-column="31" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1203">
+          <caret line="29" column="42" lean-forward="true" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="242" column="21" selection-start-line="242" selection-start-column="21" selection-end-line="242" selection-end-column="21" />
         </state>
       </provider>
     </entry>
