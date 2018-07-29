@@ -225,7 +225,6 @@ def main(worker_init):
     worker = Worker(manager_addr, self_addr, discovery_addr, discovery_port, frequency)
     worker.main()
     worker.requestJoinSwarm()
-    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
 
 
 if __name__ == '__main__':
