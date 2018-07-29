@@ -108,7 +108,7 @@ class ManagementEngine:
     def launch_client(self):
         client_proc = multiprocessing.Process(
             name='Client',
-            target=bursty_client.main
+            target=incremental_client.main
         )
         client_proc.daemon = True
         client_proc.start()
