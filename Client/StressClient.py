@@ -75,7 +75,7 @@ class StressClient(object):
         while time_index <= max_time:
             job_count = self.feed_func(time_index)
             for i in range(job_count):
-                job_name = 'job' + str(int(time.time()))
+                job_name = 'job' + str(int(time.time() * 1000))
                 self.newJob(self.generate_job(job_name))
                 time.sleep(1)
             time.sleep(self.time_interval)
