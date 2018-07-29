@@ -89,9 +89,9 @@ def main():
 
     fe_address = data['address']
 
-    app.run(host=fe_address, port=5001, debug=True)
-
     os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+
+    app.run(host=fe_address, port=5001, debug=False)
 
 
 if __name__ == '__main__':

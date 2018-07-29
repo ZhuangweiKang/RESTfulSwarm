@@ -318,9 +318,9 @@ def main():
     worker_col = mg.get_col(db, workers_collection_name)
     worker_resource_col = mg.get_col(db, workers_resources)
 
-    app.run(host=g_addr, port=gport, debug=True)
-
     os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+
+    app.run(host=g_addr, port=gport, debug=False)
 
 
 if __name__ == '__main__':

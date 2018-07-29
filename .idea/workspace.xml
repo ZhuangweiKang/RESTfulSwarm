@@ -3,18 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/BurstyStressClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/BurstyStressClient.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/IncrementalStressClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/IncrementalStressClient.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/RandomStressClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/RandomStressClient.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/SteadyStressClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/SteadyStressClient.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Discovery/Discovery.py" beforeDir="false" afterPath="$PROJECT_DIR$/Discovery/Discovery.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/FrontEnd.py" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/FrontEnd.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JobManager/JobManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/JobManager/JobManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestSample/SampleJob1.json" beforeDir="false" afterPath="$PROJECT_DIR$/TestSample/SampleJob1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestSample/WorkerResource.json" beforeDir="false" afterPath="$PROJECT_DIR$/TestSample/WorkerResource.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worker/Worker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/Worker.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -61,17 +51,22 @@
       <file leaf-file-name="FrontEnd.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="626">
-              <caret line="94" selection-start-line="94" selection-end-line="94" />
+            <state relative-caret-position="421">
+              <caret line="92" selection-start-line="92" selection-end-line="92" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GlobalManager.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.yml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="322" column="76" selection-start-line="322" selection-start-column="76" selection-end-line="322" selection-end-column="76" />
+            <state relative-caret-position="400">
+              <caret line="319" lean-forward="true" selection-start-line="319" selection-end-line="319" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
                 <element signature="e#1221#1491#0" />
@@ -109,11 +104,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Worker.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Worker.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="456">
               <caret line="227" column="76" selection-start-line="227" selection-start-column="76" selection-end-line="227" selection-end-column="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TerminateWorker.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Worker/TerminateWorker.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="8" column="13" lean-forward="true" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <folding>
+                <element signature="e#81#90#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -126,24 +133,6 @@
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IncrementalStressClient.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/IncrementalStressClient.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
-              <caret line="43" selection-start-line="43" selection-end-line="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RandomStressClient.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/RandomStressClient.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
-              <caret line="44" selection-start-line="44" selection-end-line="44" />
             </state>
           </provider>
         </entry>
@@ -246,10 +235,10 @@
         <option value="$PROJECT_DIR$/Client/RandomStressClient.py" />
         <option value="$PROJECT_DIR$/Client/SteadyStressClient.py" />
         <option value="$PROJECT_DIR$/Discovery/Discovery.py" />
-        <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
-        <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
         <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
         <option value="$PROJECT_DIR$/Worker/Worker.py" />
+        <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
+        <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
       </list>
     </option>
   </component>
@@ -398,13 +387,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00363" summary="update">
-      <created>1532014495830</created>
-      <option name="number" value="00363" />
-      <option name="presentableId" value="LOCAL-00363" />
-      <option name="project" value="LOCAL" />
-      <updated>1532014495830</updated>
     </task>
     <task id="LOCAL-00364" summary="update">
       <created>1532015566893</created>
@@ -742,7 +724,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532728252428</updated>
     </task>
-    <option name="localTasksCounter" value="412" />
+    <task id="LOCAL-00412" summary="update">
+      <created>1532878964577</created>
+      <option name="number" value="00412" />
+      <option name="presentableId" value="LOCAL-00412" />
+      <option name="project" value="LOCAL" />
+      <updated>1532878964577</updated>
+    </task>
+    <option name="localTasksCounter" value="413" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -822,13 +811,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dependences.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Discovery/DiscoveryInit.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -1052,16 +1034,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/TerminateWorker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="33" lean-forward="true" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestSample/WorkersInfo.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -1131,41 +1103,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="626">
-          <caret line="94" selection-start-line="94" selection-end-line="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="322" column="76" selection-start-line="322" selection-start-column="76" selection-end-line="322" selection-end-column="76" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-            <element signature="e#1221#1491#0" />
-            <element signature="e#1518#1622#0" />
-            <element signature="e#1680#1819#0" />
-            <element signature="e#1964#2731#0" />
-            <element signature="e#2785#3178#0" />
-            <element signature="e#3209#3627#0" />
-            <element signature="e#3796#3937#0" />
-            <element signature="e#4028#5308#0" />
-            <element signature="e#5462#5905#0" />
-            <element signature="e#5942#6726#0" />
-            <element signature="e#6880#7014#0" />
-            <element signature="e#7189#7371#0" />
-            <element signature="e#7519#8017#0" />
-            <element signature="e#8195#8658#0" />
-            <element signature="e#8791#8943#0" />
-            <element signature="e#8978#9162#0" />
-            <element signature="e#9317#9346#0" />
-            <element signature="e#9504#9533#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -1190,6 +1127,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
           <caret line="227" column="76" selection-start-line="227" selection-start-column="76" selection-end-line="227" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Worker/TerminateWorker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="13" lean-forward="true" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="319" lean-forward="true" selection-start-line="319" selection-end-line="319" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+            <element signature="e#1221#1491#0" />
+            <element signature="e#1518#1622#0" />
+            <element signature="e#1680#1819#0" />
+            <element signature="e#1964#2731#0" />
+            <element signature="e#2785#3178#0" />
+            <element signature="e#3209#3627#0" />
+            <element signature="e#3796#3937#0" />
+            <element signature="e#4028#5308#0" />
+            <element signature="e#5462#5905#0" />
+            <element signature="e#5942#6726#0" />
+            <element signature="e#6880#7014#0" />
+            <element signature="e#7189#7371#0" />
+            <element signature="e#7519#8017#0" />
+            <element signature="e#8195#8658#0" />
+            <element signature="e#8791#8943#0" />
+            <element signature="e#8978#9162#0" />
+            <element signature="e#9317#9346#0" />
+            <element signature="e#9504#9533#0" />
+          </folding>
         </state>
       </provider>
     </entry>
