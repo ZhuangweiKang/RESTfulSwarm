@@ -237,5 +237,5 @@ if __name__ == '__main__':
         target=main,
         args=(worker_init_json, )
     )
-    pro.daemon = True
+    pro.daemon = False
     pro.start()

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ManagementEngine/WorkersInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/ManagementEngine/WorkersInfo.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Worker/Worker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/Worker.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -85,8 +86,8 @@
       <file leaf-file-name="Worker.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="215" column="24" selection-start-line="215" selection-start-column="24" selection-end-line="215" selection-end-column="24" />
+            <state relative-caret-position="358">
+              <caret line="227" lean-forward="true" selection-start-line="227" selection-end-line="227" />
             </state>
           </provider>
         </entry>
@@ -94,8 +95,8 @@
       <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-338">
-              <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
+            <state relative-caret-position="355">
+              <caret line="112" column="26" lean-forward="true" selection-start-line="112" selection-start-column="26" selection-end-line="112" selection-end-column="26" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -106,8 +107,8 @@
       <file leaf-file-name="WorkersInfo.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ManagementEngine/WorkersInfo.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+            <state relative-caret-position="168">
+              <caret line="8" column="33" lean-forward="true" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -380,20 +381,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00368" summary="update">
-      <created>1532275424853</created>
-      <option name="number" value="00368" />
-      <option name="presentableId" value="LOCAL-00368" />
-      <option name="project" value="LOCAL" />
-      <updated>1532275424853</updated>
-    </task>
-    <task id="LOCAL-00369" summary="update">
-      <created>1532276110173</created>
-      <option name="number" value="00369" />
-      <option name="presentableId" value="LOCAL-00369" />
-      <option name="project" value="LOCAL" />
-      <updated>1532276110173</updated>
     </task>
     <task id="LOCAL-00370" summary="update">
       <created>1532276828693</created>
@@ -724,7 +711,21 @@
       <option name="project" value="LOCAL" />
       <updated>1532880676321</updated>
     </task>
-    <option name="localTasksCounter" value="417" />
+    <task id="LOCAL-00417" summary="update">
+      <created>1532882012979</created>
+      <option name="number" value="00417" />
+      <option name="presentableId" value="LOCAL-00417" />
+      <option name="project" value="LOCAL" />
+      <updated>1532882012979</updated>
+    </task>
+    <task id="LOCAL-00418" summary="update">
+      <created>1532882432053</created>
+      <option name="number" value="00418" />
+      <option name="presentableId" value="LOCAL-00418" />
+      <option name="project" value="LOCAL" />
+      <updated>1532882432053</updated>
+    </task>
+    <option name="localTasksCounter" value="419" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1078,16 +1079,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1149">
-          <caret line="370" column="15" lean-forward="true" selection-start-line="370" selection-start-column="15" selection-end-line="370" selection-end-column="15" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/SteadyStressClient.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="798">
@@ -1109,25 +1100,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ManagementEngine/WorkersInfo.json">
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        <state relative-caret-position="673">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
+    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-338">
-          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
+        <state relative-caret-position="1149">
+          <caret line="370" column="15" lean-forward="true" selection-start-line="370" selection-start-column="15" selection-end-line="370" selection-end-column="15" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.yml">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1157,17 +1148,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
+    <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
+        <state relative-caret-position="355">
+          <caret line="112" column="26" lean-forward="true" selection-start-line="112" selection-start-column="26" selection-end-line="112" selection-end-column="26" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ManagementEngine/WorkersInfo.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="33" lean-forward="true" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="215" column="24" selection-start-line="215" selection-start-column="24" selection-end-line="215" selection-end-column="24" />
+        <state relative-caret-position="358">
+          <caret line="227" lean-forward="true" selection-start-line="227" selection-end-line="227" />
         </state>
       </provider>
     </entry>
