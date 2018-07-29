@@ -8,12 +8,15 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import psutil
 import DockerHelper as dh
+import utl
 
 PROCNAME = 'Worker'
 docker_client = dh.setClient()
 
 
 def kill_worker():
+    os.chdir('/home/%s/RESTfulSwarmLM/Client' % utl.getUserName())
+
     # leave swarm
     dh.leaveSwarm(docker_client)
     # clean containers

@@ -173,7 +173,8 @@ class ManagementEngine:
         self.shutdown_gm(gm_proc)
         time.sleep(1)
         self.shutdown_workers()
-        time.sleep(1)
+        while len(dh.getNodeList(dh.setClient())) != 0:
+            pass
         self.shutdown_discovery(dc_proc)
         time.sleep(1)
         self.clear_db()
