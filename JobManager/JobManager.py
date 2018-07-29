@@ -279,17 +279,14 @@ class JobManager:
 
                     time.sleep(1)
 
-                    print('_____________________old job queue_________________')
-                    print(job_queue)
-
                     # remove scheduled jobs
                     for index, job in enumerate(job_queue[:]):
                         if job[1] not in waiting_decision:
                             temp_job_queue.append(job)
                             job_queue.remove(job)
 
-                    print('____________________new job queue_______________')
-                    print(job_queue)
+                    print('____________________Temp job queue_______________')
+                    print(temp_job_queue)
 
                     for msg in temp_job_queue:
                         url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (self.gm_addr, self.gm_port)
