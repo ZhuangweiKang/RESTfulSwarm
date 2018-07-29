@@ -264,12 +264,13 @@ class JobManager:
             nonlocal timer
             nonlocal job_queue
             while True:
-                if len(job_queue) == 0:
+                job_queue_snap_shoot = job_queue[:]
+                if len(job_queue_snap_shoot) == 0:
                     continue
                 elif time.time() - timer >= self.wait:
                     jobs_details = []
                     temp_job_queue = []
-                    for index, msg in enumerate(job_queue[:]):
+                    for index, msg in enumerate(job_queue_snap_shoot[:]):
                         jobs_details.append((msg[1], preprocess_job(msg)))
 
                     waiting_decision = schedule_resource(jobs_details)
@@ -280,10 +281,10 @@ class JobManager:
                     time.sleep(1)
 
                     # remove scheduled jobs
-                    for index, job in enumerate(job_queue[:]):
+                    for index, job in enumerate(job_queue_snap_shoot[:]):
                         if job[1] not in waiting_decision:
                             temp_job_queue.append(job)
-                            job_queue.remove(job)
+                            job_queue_snap_shoot.remove(job)
 
                     print('____________________Temp job queue_______________')
                     print(temp_job_queue)
