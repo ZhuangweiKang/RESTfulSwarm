@@ -103,6 +103,8 @@ def main():
 
     discovery.discovery()
 
+    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+
 
 if __name__ == '__main__':
     # parser = argparse.ArgumentParser()

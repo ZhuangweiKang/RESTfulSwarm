@@ -364,63 +364,68 @@ def main():
     fe_notify_thr.setDaemon(True)
     fe_notify_thr.start()
 
+    job_manager.init_gm()
+
+    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+
     while True:
-        print('--------------RESTfulSwarm Menu--------------')
-        print('1. Init Swarm')
-        print('2. Create task(one container)')
-        print('3. Check point a group containers')
-        print('4. Migrate a container')
-        print('5. Migrate a group of containers')
-        print('6. Update Container')
-        print('7. Leave Swarm')
-        print('8. Describe Workers')
-        print('9. Describe Manager')
-        print('10. Exit')
-        try:
-            get_input = int(input('Please enter your choice: '))
-            if get_input == 1 or get_input == 'GM_Ack':
-                job_manager.init_gm()
-            elif get_input == 2:
-                json_path = input('Task Json file path: ')
-                with open(json_path, 'r') as f:
-                    data = json.load(f)
-                job_manager.new_task(data)
-            elif get_input == 3:
-                json_path = input('Checkpoint Json file path: ')
-                with open(json_path, 'r') as f:
-                    data = json.load(f)
-                job_manager.dumpContainer(data)
-            elif get_input == 4:
-                json_path = input('Migration Json file path: ')
-                with open(json_path, 'r') as f:
-                    data = json.load(f)
-                job_manager.doMigrate(data)
-            elif get_input == 5:
-                migrate_json = input('Group migration Json file: ')
-                with open(migrate_json, 'r') as f:
-                    data = json.load(f)
-                job_manager.doGroupMigration(data)
-            elif get_input == 6:
-                json_path = input('New resource configuration Json file:')
-                with open(json_path, 'r') as f:
-                    data = json.load(f)
-                job_manager.updateContainer(data)
-            elif get_input == 7:
-                hostname = input('Node hostname: ')
-                job_manager.leaveSwarm(hostname)
-            elif get_input == 8:
-                hostname = input('Node hostname: ')
-                url = 'http://%s:%s/RESTfulSwarm/GM/%s/describeWorker' % (gm_addr, gm_port, hostname)
-                print(requests.get(url=url).content.decode('utf-8'))
-            elif get_input == 9:
-                hostname = input('Node hostname: ')
-                url = 'http://%s:%s/RESTfulSwarm/GM/%s/describeManager' % (gm_addr, gm_port, hostname)
-                print(requests.get(url=url).content.decode('utf-8'))
-            elif get_input == 10:
-                print('Thanks for using RESTfulSwarmLM, bye.')
-                break
-        except ValueError as er:
-            print(er)
+        pass
+        # print('--------------RESTfulSwarm Menu--------------')
+        # print('1. Init Swarm')
+        # print('2. Create task(one container)')
+        # print('3. Check point a group containers')
+        # print('4. Migrate a container')
+        # print('5. Migrate a group of containers')
+        # print('6. Update Container')
+        # print('7. Leave Swarm')
+        # print('8. Describe Workers')
+        # print('9. Describe Manager')
+        # print('10. Exit')
+        # try:
+        #     get_input = int(input('Please enter your choice: '))
+        #     if get_input == 1:
+        #         job_manager.init_gm()
+        #     elif get_input == 2:
+        #         json_path = input('Task Json file path: ')
+        #         with open(json_path, 'r') as f:
+        #             data = json.load(f)
+        #         job_manager.new_task(data)
+        #     elif get_input == 3:
+        #         json_path = input('Checkpoint Json file path: ')
+        #         with open(json_path, 'r') as f:
+        #             data = json.load(f)
+        #         job_manager.dumpContainer(data)
+        #     elif get_input == 4:
+        #         json_path = input('Migration Json file path: ')
+        #         with open(json_path, 'r') as f:
+        #             data = json.load(f)
+        #         job_manager.doMigrate(data)
+        #     elif get_input == 5:
+        #         migrate_json = input('Group migration Json file: ')
+        #         with open(migrate_json, 'r') as f:
+        #             data = json.load(f)
+        #         job_manager.doGroupMigration(data)
+        #     elif get_input == 6:
+        #         json_path = input('New resource configuration Json file:')
+        #         with open(json_path, 'r') as f:
+        #             data = json.load(f)
+        #         job_manager.updateContainer(data)
+        #     elif get_input == 7:
+        #         hostname = input('Node hostname: ')
+        #         job_manager.leaveSwarm(hostname)
+        #     elif get_input == 8:
+        #         hostname = input('Node hostname: ')
+        #         url = 'http://%s:%s/RESTfulSwarm/GM/%s/describeWorker' % (gm_addr, gm_port, hostname)
+        #         print(requests.get(url=url).content.decode('utf-8'))
+        #     elif get_input == 9:
+        #         hostname = input('Node hostname: ')
+        #         url = 'http://%s:%s/RESTfulSwarm/GM/%s/describeManager' % (gm_addr, gm_port, hostname)
+        #         print(requests.get(url=url).content.decode('utf-8'))
+        #     elif get_input == 10:
+        #         print('Thanks for using RESTfulSwarmLM, bye.')
+        #         break
+        # except ValueError as er:
+        #     print(er)
 
 
 if __name__ == '__main__':

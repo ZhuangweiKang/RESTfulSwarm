@@ -39,5 +39,6 @@
   },
   "status": "Ready",
   "start_time": 0,
-  "end_time": 0
+  "end_time": 0,
+  "session": 1
 }

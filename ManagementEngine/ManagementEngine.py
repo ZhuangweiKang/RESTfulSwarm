@@ -56,7 +56,6 @@ class ManagementEngine:
         fe_pro.daemon = True
         fe_pro.start()
         print('Launched FrontEnd.')
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
         return fe_pro
 
     def launch_jm(self):
@@ -67,7 +66,6 @@ class ManagementEngine:
         jm_pro.daemon = True
         jm_pro.start()
         print('Launched JobManager.')
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
         return jm_pro
 
     def launch_gm(self):
@@ -78,7 +76,6 @@ class ManagementEngine:
         gm_pro.daemon = True
         gm_pro.start()
         print('Launched GlobalManager.')
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
         return gm_pro
 
     def launch_discovery(self):
@@ -89,7 +86,6 @@ class ManagementEngine:
         dc_pro.daemon = True
         dc_pro.start()
         print('Launched Discovery.')
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
         return dc_pro
 
     def ssh_exec_cmd(self, addr, usr, cmd):
@@ -103,7 +99,6 @@ class ManagementEngine:
     def launch_workers(self):
         for worker in self.workers_info:
             self.ssh_exec_cmd(worker['address'], worker['user'], worker['launch_worker'])
-            os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
         print('Launched all workers.')
 
     def launch_client(self):
@@ -114,28 +109,23 @@ class ManagementEngine:
         client_proc.daemon = True
         client_proc.start()
         print('Launched Client.')
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
         return client_proc
 
     def shutdown_fe(self, fe_pro):
         fe_pro.terminate()
         print('Shutdown FrontEnd.')
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
 
     def shutdown_jm(self, jm_pro):
         jm_pro.terminate()
         print('Shutdown JobManager.')
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
 
     def shutdown_gm(self, gm_pro):
         gm_pro.terminate()
         print('Shutdown GlobalManager.')
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
 
     def shutdown_discovery(self, dc_pro):
         dc_pro.terminate()
         print('Shutdown Discovery.')
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
 
     def shutdown_workers(self):
         for worker in self.workers_info:
@@ -145,7 +135,6 @@ class ManagementEngine:
     def shutdown_client(self, client_pro):
         client_pro.terminate()
         print('Shutdown Client.')
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
 
     def launch_system(self):
         print('Start launching system.')

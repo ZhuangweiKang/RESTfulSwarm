@@ -40,6 +40,8 @@ def main():
     except ValueError as er:
         print(er)
 
+    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+
 
 if __name__ == '__main__':
     main()

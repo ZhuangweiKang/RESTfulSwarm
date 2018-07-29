@@ -91,6 +91,8 @@ def main():
 
     app.run(host=fe_address, port=5001, debug=True)
 
+    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+
 
 if __name__ == '__main__':
     # parser = argparse.ArgumentParser()
