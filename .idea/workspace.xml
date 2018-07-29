@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GraphBook.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/GraphBook.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JobManager/JobManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/JobManager/JobManager.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-371">
-              <caret line="118" column="23" lean-forward="true" selection-start-line="118" selection-start-column="23" selection-end-line="118" selection-end-column="23" />
+            <state relative-caret-position="281">
+              <caret line="32" column="44" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="44" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
                 <element signature="e#1221#1491#0" />
@@ -42,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="370" column="56" selection-start-line="370" selection-start-column="56" selection-end-line="370" selection-end-column="56" />
+            <state relative-caret-position="171">
+              <caret line="278" column="45" selection-start-line="278" selection-start-column="45" selection-end-line="278" selection-end-column="45" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -76,7 +76,6 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>name</find>
-      <find>print</find>
       <find>mem_limit</find>
       <find>detail</find>
       <find>thre</find>
@@ -105,6 +104,7 @@
       <find>the node you</find>
       <find>node</find>
       <find>the node</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -303,13 +303,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00397" summary="update">
-      <created>1532620724361</created>
-      <option name="number" value="00397" />
-      <option name="presentableId" value="LOCAL-00397" />
-      <option name="project" value="LOCAL" />
-      <updated>1532620724361</updated>
     </task>
     <task id="LOCAL-00398" summary="update">
       <created>1532624743360</created>
@@ -647,7 +640,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532906390031</updated>
     </task>
-    <option name="localTasksCounter" value="446" />
+    <task id="LOCAL-00446" summary="update">
+      <created>1532906950133</created>
+      <option name="number" value="00446" />
+      <option name="presentableId" value="LOCAL-00446" />
+      <option name="project" value="LOCAL" />
+      <updated>1532906950133</updated>
+    </task>
+    <option name="localTasksCounter" value="447" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1036,26 +1036,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="370" column="56" selection-start-line="370" selection-start-column="56" selection-end-line="370" selection-end-column="56" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-371">
-          <caret line="118" column="23" lean-forward="true" selection-start-line="118" selection-start-column="23" selection-end-line="118" selection-end-column="23" />
+        <state relative-caret-position="281">
+          <caret line="32" column="44" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="44" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
             <element signature="e#1221#1491#0" />
             <element signature="e#1518#1622#0" />
             <element signature="e#1680#1819#0" />
             <element signature="e#2785#3178#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="278" column="45" selection-start-line="278" selection-start-column="45" selection-end-line="278" selection-end-column="45" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
           </folding>
         </state>
       </provider>

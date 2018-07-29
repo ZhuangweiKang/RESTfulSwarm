@@ -59,17 +59,17 @@ class Scheduler(object):
         return available_workers
 
     def process_cores_scheduling_result(self, schedule, core_request, mem_request_arr, available_workers):
-        print('Schedule:')
-        print(schedule)
-
-        print('Core Requests:')
-        print(core_request)
-
-        print('Memory request array:')
-        print(mem_request_arr)
-
-        print('Available Workers:')
-        print(available_workers)
+        # print('Schedule:')
+        # print(schedule)
+        #
+        # print('Core Requests:')
+        # print(core_request)
+        #
+        # print('Memory request array:')
+        # print(mem_request_arr)
+        #
+        # print('Available Workers:')
+        # print(available_workers)
 
         job_index = 0
         result = []
