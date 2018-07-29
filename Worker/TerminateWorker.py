@@ -10,7 +10,7 @@ import psutil
 import DockerHelper as dh
 import utl
 
-PROCNAME = 'Worker'
+PROCNAME = 'python3'
 docker_client = dh.setClient()
 
 
@@ -24,8 +24,7 @@ def kill_worker():
 
     # kill process
     for proc in psutil.process_iter():
-        print(proc.name)
-        if proc.name == PROCNAME:
+        if proc.name() == PROCNAME:
             proc.kill()
 
 
