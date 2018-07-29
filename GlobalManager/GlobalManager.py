@@ -123,7 +123,7 @@ def newContainer(data):
         app.logger.info('Create a new container in node %s.' % node)
         response = 'OK'
     else:
-        response = 'Error: The node you specified is unavailable.'
+        response = 'Error: The node %s you specified is unavailable.' % node
         raise Exception(response)
     return response
 
