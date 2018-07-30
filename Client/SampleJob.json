@@ -3,7 +3,7 @@
   "job_info": {
     "network": {
       "name": "RESTfulSwarmNetwork",
-      "driver": "weaveworks/net-plugin:latest_release",
+      "driver": "overlay",
       "subnet": ""
     },
     "tasks": {}
