@@ -63,8 +63,7 @@ class Discovery:
                 # update cores info
                 for core in cores:
                     target_key = 'CPUs.%s' % core
-                    res = mg.update_doc(self.workers_info, 'hostname', worker_host, target_key, False)
-                    print(res)
+                    mg.update_doc(self.workers_info, 'hostname', worker_host, target_key, False)
                     self.logger.info('Release core %s status in worker %s' % (target_key, worker_host))
 
                 # update memory info
