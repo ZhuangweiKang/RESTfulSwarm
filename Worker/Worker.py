@@ -53,9 +53,10 @@ class Worker:
                 for event in events:
                     if event['Type'] == 'container' and \
                             (event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die'):
-                        # if event['Actor']['Attributes']['name'] in self.storage.keys():
-                        msg = hostname + ' ' + event['Actor']['Attributes']['name']
-                        msgs.append(msg)
+                        if event['Actor']['Attributes']['name'] in self.storage.keys():
+                            msg = hostname + ' ' + event['Actor']['Attributes']['name']
+                            msgs.append(msg)
+                        self.logger.debug(event['Actor']['Attributes']['name'])
 
                 # 去重
                 msgs = list(set(msgs))
