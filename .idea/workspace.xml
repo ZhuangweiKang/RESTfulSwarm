@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/StressClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/StressClient.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +19,8 @@
       <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="107" column="12" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="12" />
+            <state relative-caret-position="163">
+              <caret line="102" column="14" lean-forward="true" selection-start-line="102" selection-start-column="14" selection-end-line="102" selection-end-column="14" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
                 <element signature="e#1221#1491#0" />
@@ -35,8 +34,8 @@
       <file leaf-file-name="StressClient.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Client/StressClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="77" column="29" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
+            <state relative-caret-position="792">
+              <caret line="65" column="18" lean-forward="true" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
               <folding>
                 <element signature="e#81#120#0" expanded="true" />
               </folding>
@@ -100,8 +99,8 @@
       <file leaf-file-name="Discovery.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="32" column="36" lean-forward="true" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
+            <state relative-caret-position="313">
+              <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -162,10 +161,10 @@
       <find>remove</find>
       <find>DEBUG</find>
       <find>decision</find>
-      <find>cpu</find>
       <find>cpuset</find>
       <find>job_qu</find>
       <find>cpuset_cpus</find>
+      <find>cpu</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -488,20 +487,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00437" summary="update">
-      <created>1532897138407</created>
-      <option name="number" value="00437" />
-      <option name="presentableId" value="LOCAL-00437" />
-      <option name="project" value="LOCAL" />
-      <updated>1532897138407</updated>
-    </task>
-    <task id="LOCAL-00438" summary="update">
-      <created>1532897907649</created>
-      <option name="number" value="00438" />
-      <option name="presentableId" value="LOCAL-00438" />
-      <option name="project" value="LOCAL" />
-      <updated>1532897907649</updated>
     </task>
     <task id="LOCAL-00439" summary="update">
       <created>1532898161179</created>
@@ -832,7 +817,21 @@
       <option name="project" value="LOCAL" />
       <updated>1532981092063</updated>
     </task>
-    <option name="localTasksCounter" value="486" />
+    <task id="LOCAL-00486" summary="update">
+      <created>1532981946663</created>
+      <option name="number" value="00486" />
+      <option name="presentableId" value="LOCAL-00486" />
+      <option name="project" value="LOCAL" />
+      <updated>1532981946663</updated>
+    </task>
+    <task id="LOCAL-00487" summary="update">
+      <created>1532982429019</created>
+      <option name="number" value="00487" />
+      <option name="presentableId" value="LOCAL-00487" />
+      <option name="project" value="LOCAL" />
+      <updated>1532982429019</updated>
+    </task>
+    <option name="localTasksCounter" value="488" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -875,29 +874,6 @@
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.31704262" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
     </layout>
-    <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20536913" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.31829575" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50067115" side_tool="true" weight="0.32330826" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3283208" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32869786" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -1167,19 +1143,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="107" column="12" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="12" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-            <element signature="e#1221#1491#0" />
-            <element signature="e#1518#1622#0" />
-            <element signature="e#1680#1819#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
@@ -1225,8 +1188,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="32" column="36" lean-forward="true" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
+        <state relative-caret-position="313">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -1237,10 +1200,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="102" column="14" lean-forward="true" selection-start-line="102" selection-start-column="14" selection-end-line="102" selection-end-column="14" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+            <element signature="e#1221#1491#0" />
+            <element signature="e#1518#1622#0" />
+            <element signature="e#1680#1819#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Client/StressClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="77" column="29" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
+        <state relative-caret-position="792">
+          <caret line="65" column="18" lean-forward="true" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
           <folding>
             <element signature="e#81#120#0" expanded="true" />
           </folding>
