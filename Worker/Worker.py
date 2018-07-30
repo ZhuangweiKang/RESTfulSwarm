@@ -54,6 +54,8 @@ class Worker:
                             (event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die'):
                         if event['Actor']['Attributes']['name'] in self.storage.keys():
                             msg = hostname + ' ' + event['Actor']['Attributes']['name']
+                            container = dHelper.getContainer(self.dockerClient, event['Actor']['Attributes']['name'])
+                            dHelper.deleteContainer(container)
                             msgs.append(msg)
 
                 # 去重
