@@ -18,7 +18,7 @@ class IncrementalStressClient(StressClient):
         self.constant = constant
 
     def feed_func(self, time_stamp):
-        return abs(self.coefficient * time_stamp + self.constant)
+        return self.coefficient * time_stamp + self.constant
 
 
 def main():

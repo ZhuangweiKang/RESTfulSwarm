@@ -77,7 +77,7 @@ class StressClient(object):
             for i in range(job_count):
                 job_name = 'job' + str(int(time.time()))
                 self.newJob(self.generate_job(job_name))
-                time.sleep(1)
+                # time.sleep(1)
             time.sleep(self.time_interval)
             time_index += self.time_interval
 
