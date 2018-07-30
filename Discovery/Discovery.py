@@ -62,7 +62,7 @@ class Discovery:
             # update cores info
             for core in cores:
                 target_key = 'CPUs.%s' % core
-                # print(target_key)
+                print(target_key)
                 mg.update_doc(self.workers_info, 'hostname', worker_host, target_key, False)
             self.logger.info('Updating core resources in WorkersInfo collection.')
 
@@ -93,18 +93,21 @@ class Discovery:
 
 def main():
     os.chdir('/home/%s/RESTfulSwarmLM/Discovery' % utl.getUserName())
-    with open('DiscoveryInit.json') as f:
-        data = json.load(f)
-    mongo_addr = data['mongo_addr']
-    mongo_port = data['mongo_port']
 
-    discovery = Discovery(mongo_addr, mongo_port)
-    discovery.logger.info('Initialized Discovery block.')
+    try:
+        with open('DiscoveryInit.json') as f:
+            data = json.load(f)
+        mongo_addr = data['mongo_addr']
+        mongo_port = data['mongo_port']
 
-    discovery.discovery()
+        discovery = Discovery(mongo_addr, mongo_port)
+        discovery.logger.info('Initialized Discovery block.')
 
-    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+        discovery.discovery()
 
+        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+    except Exception as ex:
+        sys.stdout(ex)
 
 if __name__ == '__main__':
     # parser = argparse.ArgumentParser()
