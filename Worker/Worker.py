@@ -223,12 +223,13 @@ def main(worker_init):
         frequency = data['frequency']
 
         worker = Worker(manager_addr, self_addr, discovery_addr, discovery_port, frequency)
+
         worker.main()
         worker.requestJoinSwarm()
         while True:
             pass
     except Exception as ex:
-        sys.stdout(ex)
+        worker.logger.error(ex)
 
 
 if __name__ == '__main__':
