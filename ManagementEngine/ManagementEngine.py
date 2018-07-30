@@ -157,9 +157,8 @@ class ManagementEngine:
         dc_proc = self.launch_discovery()
         time.sleep(1)
         self.launch_workers()
-        time.sleep(1)
+        time.sleep(5)
         client_proc = self.launch_client()
-        time.sleep(1)
         return fe_proc, jm_proc, gm_proc, dc_proc, client_proc
 
     def shutdown_system(self, fe_proc, jm_proc, gm_proc, dc_proc, client_proc):

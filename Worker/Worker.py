@@ -46,15 +46,15 @@ class Worker:
         time_end = time.time()
         while True:
             try:
-                time_start = time.time()
-                events = client.events(since=time_end, until=time_start, filters={'type': 'container'}, decode=True)
-                time_end = time_start
+                events = client.events(since=time_end, filters={'type': 'container'}, decode=True)
                 msgs = []
                 for event in events:
                     if event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die':
                         if event['Actor']['Attributes']['name'] in self.storage.keys():
                             msg = hostname + ' ' + event['Actor']['Attributes']['name']
                             msgs.append(msg)
+
+                time_end = time.time()
 
                 # 去重
                 msgs = list(set(msgs))
