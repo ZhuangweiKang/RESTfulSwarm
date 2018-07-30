@@ -67,7 +67,7 @@ class Worker:
                     socket.send_string(msg)
                     socket.recv_string()
 
-                time.sleep(frequency)
+                # time.sleep(frequency)
             except Exception as ex:
                 self.logger.error(ex)
 
