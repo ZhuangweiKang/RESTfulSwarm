@@ -47,7 +47,9 @@ class Worker:
         while True:
             try:
                 time_start = time.time()
-                events = client.events(since=time_end, until=time_start, decode=True)
+                # events = client.events(since=time_end, until=time_start, decode=True)
+                events = client.events(decode=True)
+
                 time_end = time.time()
                 msgs = []
                 for event in events:
