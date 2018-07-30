@@ -47,12 +47,11 @@ class Worker:
         while True:
             try:
                 time_start = time.time()
-                events = client.events(since=time_end, until=time_start, decode=True)
+                events = client.events(since=time_end, until=time_start, filter={'type': 'container'}, decode=True)
                 time_end = time_start
                 msgs = []
                 for event in events:
-                    if event['Type'] == 'container' and \
-                            (event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die'):
+                    if event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die':
                         if event['Actor']['Attributes']['name'] in self.storage.keys():
                             msg = hostname + ' ' + event['Actor']['Attributes']['name']
                             msgs.append(msg)
