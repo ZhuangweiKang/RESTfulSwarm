@@ -115,7 +115,7 @@ class Worker:
                 container_name = info['container_name']
                 del info['node']
                 self.storage.update({container_name: info})
-                self.deleteOldContainer(container_name)
+                # self.deleteOldContainer(container_name)
                 # self.pullImage(self.storage[container_name]['image'])
                 self.runContainer(self.storage[container_name])
             elif msg_type == 'update':
