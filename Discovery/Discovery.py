@@ -90,7 +90,7 @@ class Discovery:
                 mg.update_doc(job_col, filter_key, task_name, target_key, '')
                 self.logger.info('Updated Job collection. Released used memory.')
             except Exception as ex:
-                self.logger.error(ex)
+                self.logger.debug(ex)
 
 
 def main():

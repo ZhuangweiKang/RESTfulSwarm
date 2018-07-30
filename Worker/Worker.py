@@ -71,7 +71,7 @@ class Worker:
 
                 time.sleep(frequency)
             except Exception as ex:
-                self.logger.error(ex)
+                self.logger.debug(ex)
 
     def listenManagerMsg(self):
         while True:
@@ -134,7 +134,7 @@ class Worker:
                     dHelper.leaveSwarm(self.dockerClient)
                     self.logger.info('Leave Swarm environment.')
             except Exception as ex:
-                self.logger.error(ex)
+                self.logger.debug(ex)
 
     def listenWorkerMessage(self, port='3200'):
         lmController = LiveMigration(logger=self.logger, dockerClient=self.dockerClient, storage=self.storage)
