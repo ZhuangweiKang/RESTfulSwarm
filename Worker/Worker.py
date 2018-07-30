@@ -211,22 +211,24 @@ def main(worker_init):
     discovery_port = args.discovery_port
     frequency = args.frequency
     '''
+    try:
+        os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.getUserName())
 
-    os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.getUserName())
+        with open(worker_init) as f:
+            data = json.load(f)
+        manager_addr = data['global_manager_addr']
+        self_addr = data['worker_address']
+        discovery_addr = data['discovery_addr']
+        discovery_port = data['discovery_port']
+        frequency = data['frequency']
 
-    with open(worker_init) as f:
-        data = json.load(f)
-    manager_addr = data['global_manager_addr']
-    self_addr = data['worker_address']
-    discovery_addr = data['discovery_addr']
-    discovery_port = data['discovery_port']
-    frequency = data['frequency']
-
-    worker = Worker(manager_addr, self_addr, discovery_addr, discovery_port, frequency)
-    worker.main()
-    worker.requestJoinSwarm()
-    while True:
-        pass
+        worker = Worker(manager_addr, self_addr, discovery_addr, discovery_port, frequency)
+        worker.main()
+        worker.requestJoinSwarm()
+        while True:
+            pass
+    except Exception as ex:
+        sys.stdout(ex)
 
 
 if __name__ == '__main__':
