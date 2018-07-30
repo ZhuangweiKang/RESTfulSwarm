@@ -71,63 +71,66 @@ class Worker:
 
     def listenManagerMsg(self):
         while True:
-            msg = self.swarmSocket.recv_string()
-            msg = msg.split()[1:]
-            msg_type = msg[0]
-            if msg_type == 'join':
-                remote_addr = msg[1]
-                join_token = msg[2]
-                self.joinSwarm(remote_addr, join_token)
-            elif msg_type == 'checkpoints':
-                data = json.loads(' '.join(msg[1:]))
-                threads = []
-                for i in range(0, len(data)):
-                    checkpoint_name = data[i] + '_' + str(random.randint(1, 1000))
-                    container_id = dHelper.getContainerID(self.dockerClient, data[i])
-                    thr = threading.Thread(target=dHelper.checkpoint, args=(checkpoint_name, container_id, True, ))
-                    thr.setDaemon(True)
-                    threads.append(thr)
+            try:
+                msg = self.swarmSocket.recv_string()
+                msg = msg.split()[1:]
+                msg_type = msg[0]
+                if msg_type == 'join':
+                    remote_addr = msg[1]
+                    join_token = msg[2]
+                    self.joinSwarm(remote_addr, join_token)
+                elif msg_type == 'checkpoints':
+                    data = json.loads(' '.join(msg[1:]))
+                    threads = []
+                    for i in range(0, len(data)):
+                        checkpoint_name = data[i] + '_' + str(random.randint(1, 1000))
+                        container_id = dHelper.getContainerID(self.dockerClient, data[i])
+                        thr = threading.Thread(target=dHelper.checkpoint, args=(checkpoint_name, container_id, True, ))
+                        thr.setDaemon(True)
+                        threads.append(thr)
 
-                for thr in threads:
-                    thr.start()
-            elif msg_type == 'migrate':
-                info = json.loads(' '.join(msg[1:]))
-                dst = info['dst']
-                container = info['container']
-                container_info = info['info']
-                container_info['node'] = self.hostname
-                try:
-                    temp_container = self.storage[container]
-                    del self.storage[container]
+                    for thr in threads:
+                        thr.start()
+                elif msg_type == 'migrate':
+                    info = json.loads(' '.join(msg[1:]))
+                    dst = info['dst']
+                    container = info['container']
+                    container_info = info['info']
+                    container_info['node'] = self.hostname
                     try:
-                        lmController = LiveMigration(image=temp_container['image'], name=container,
-                                                     network=temp_container['network'], logger=self.logger,
-                                                     dockerClient=self.dockerClient)
-                        lmController.migrate(dst_addr=dst, port='3200', cmd=temp_container['command'],
-                                             container_detail=container_info)
-                    except Exception:
-                        print('Some error happened while migrating container.')
-                        self.storage.update({container: temp_container})
-                except Exception as ex:
-                    print(ex)
-            elif msg_type == 'new_container':
-                info = json.loads(' '.join(msg[1:]))
-                container_name = info['container_name']
-                del info['node']
-                self.storage.update({container_name: info})
-                # self.deleteOldContainer(container_name)
-                # self.pullImage(self.storage[container_name]['image'])
-                self.runContainer(self.storage[container_name])
-            elif msg_type == 'update':
-                newInfo = json.loads(' '.join(msg[1:]))
-                container_name = newInfo['container_name']
-                cpuset_cpus = newInfo['cpuset_cpus']
-                mem_limit = newInfo['mem_limit']
-                dHelper.updateContainer(self.dockerClient, container_name=container_name, cpuset_cpus=cpuset_cpus, mem_limit=mem_limit)
-                self.logger.info('Updated cpuset_cpus to %s, mem_limits to %s' % (cpuset_cpus, mem_limit))
-            elif msg_type == 'leave':
-                dHelper.leaveSwarm(self.dockerClient)
-                self.logger.info('Leave Swarm environment.')
+                        temp_container = self.storage[container]
+                        del self.storage[container]
+                        try:
+                            lmController = LiveMigration(image=temp_container['image'], name=container,
+                                                         network=temp_container['network'], logger=self.logger,
+                                                         dockerClient=self.dockerClient)
+                            lmController.migrate(dst_addr=dst, port='3200', cmd=temp_container['command'],
+                                                 container_detail=container_info)
+                        except Exception:
+                            print('Some error happened while migrating container.')
+                            self.storage.update({container: temp_container})
+                    except Exception as ex:
+                        print(ex)
+                elif msg_type == 'new_container':
+                    info = json.loads(' '.join(msg[1:]))
+                    container_name = info['container_name']
+                    del info['node']
+                    self.storage.update({container_name: info})
+                    # self.deleteOldContainer(container_name)
+                    # self.pullImage(self.storage[container_name]['image'])
+                    self.runContainer(self.storage[container_name])
+                elif msg_type == 'update':
+                    newInfo = json.loads(' '.join(msg[1:]))
+                    container_name = newInfo['container_name']
+                    cpuset_cpus = newInfo['cpuset_cpus']
+                    mem_limit = newInfo['mem_limit']
+                    dHelper.updateContainer(self.dockerClient, container_name=container_name, cpuset_cpus=cpuset_cpus, mem_limit=mem_limit)
+                    self.logger.info('Updated cpuset_cpus to %s, mem_limits to %s' % (cpuset_cpus, mem_limit))
+                elif msg_type == 'leave':
+                    dHelper.leaveSwarm(self.dockerClient)
+                    self.logger.info('Leave Swarm environment.')
+            except Exception as ex:
+                self.logger.error(ex)
 
     def listenWorkerMessage(self, port='3200'):
         lmController = LiveMigration(logger=self.logger, dockerClient=self.dockerClient, storage=self.storage)

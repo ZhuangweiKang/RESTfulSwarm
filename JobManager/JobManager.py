@@ -248,9 +248,6 @@ class JobManager:
             schedule_decision = schedule[0]
             waiting_decision = schedule[1]
 
-            print('---------------scheduling decision----------------')
-            print(schedule_decision)
-
             if len(schedule_decision) > 0:
                 # update Job collection
                 self.scheduler.update_job_info(schedule_decision)
