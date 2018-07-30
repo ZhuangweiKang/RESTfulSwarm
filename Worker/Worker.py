@@ -48,7 +48,7 @@ class Worker:
             try:
                 time_start = time.time()
                 events = client.events(since=time_end, until=time_start, decode=True)
-                time_end = time.time()
+                time_end = time_start
                 msgs = []
                 for event in events:
                     if event['Type'] == 'container' and \
