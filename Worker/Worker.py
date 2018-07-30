@@ -39,21 +39,22 @@ class Worker:
         self.task_monitor_frequency = task_monitor_frequency
 
     def monitor(self, discovery_addr, discovery_port='4000', frequency=5):
-        time_flag = time.time()
         client = dHelper.setClient()
         time.sleep(frequency)
         hostname = utl.getHostName()
         socket = zmqHelper.csConnect(discovery_addr, discovery_port)
+        time_flag = time.time()
         while True:
             try:
                 events = client.events(since=time_flag, until=time.time(), decode=True)
+                time_flag = time.time()
                 msgs = []
                 for event in events:
                     if event['Type'] == 'container' and \
                             (event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die'):
-                        # if event['Actor']['Attributes']['name'] in self.storage.keys():
-                        msg = hostname + ' ' + event['Actor']['Attributes']['name']
-                        msgs.append(msg)
+                        if event['Actor']['Attributes']['name'] in self.storage.keys():
+                            msg = hostname + ' ' + event['Actor']['Attributes']['name']
+                            msgs.append(msg)
 
                 # 去重
                 msgs = list(set(msgs))
@@ -64,7 +65,6 @@ class Worker:
                     socket.send_string(msg)
                     socket.recv_string()
 
-                time_flag = time.time()
                 time.sleep(frequency)
             except Exception as ex:
                 self.logger.error(ex)
