@@ -38,7 +38,7 @@ class Worker:
         self.discovery_port = discovery_port
         self.task_monitor_frequency = task_monitor_frequency
 
-    def monitor(self, discovery_addr, discovery_port='4000', frequency=20):
+    def monitor(self, discovery_addr, discovery_port='4000', frequency=5):
         time_flag = time.time()
         client = dHelper.setClient()
         time.sleep(frequency)
