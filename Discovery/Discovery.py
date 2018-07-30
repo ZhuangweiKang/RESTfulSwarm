@@ -107,7 +107,9 @@ def main():
 
         os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
     except Exception as ex:
-        sys.stdout(ex)
+        with open('debug.txt', 'w') as f:
+            f.write(ex)
+
 
 if __name__ == '__main__':
     # parser = argparse.ArgumentParser()
