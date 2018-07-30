@@ -43,10 +43,10 @@ class Worker:
         time.sleep(frequency)
         hostname = utl.getHostName()
         socket = zmqHelper.csConnect(discovery_addr, discovery_port)
-        time_flag = time.time()
         while True:
             try:
-                events = client.events(since=time_flag, until=time.time(), decode=True)
+                time_flag = time.time()
+                events = client.events(since=time_flag-5, until=time_flag, decode=True)
                 time_flag = time.time()
                 msgs = []
                 for event in events:
@@ -54,8 +54,6 @@ class Worker:
                             (event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die'):
                         if event['Actor']['Attributes']['name'] in self.storage.keys():
                             msg = hostname + ' ' + event['Actor']['Attributes']['name']
-                            container = dHelper.getContainer(self.dockerClient, event['Actor']['Attributes']['name'])
-                            dHelper.deleteContainer(container)
                             msgs.append(msg)
 
                 # 去重
