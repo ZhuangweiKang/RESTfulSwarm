@@ -6,6 +6,7 @@ import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import json
+import math
 import utl
 from Client.StressClient import StressClient
 
@@ -17,7 +18,7 @@ class IncrementalStressClient(StressClient):
         self.constant = constant
 
     def feed_func(self, time_stamp):
-        return self.coefficient * time_stamp + self.constant
+        return abs(self.coefficient * time_stamp + self.constant)
 
 
 def main():
