@@ -45,26 +45,29 @@ class Worker:
         hostname = utl.getHostName()
         socket = zmqHelper.csConnect(discovery_addr, discovery_port)
         while True:
-            events = client.events(since=time_flag, until=time.time(), decode=True)
-            msgs = []
-            for event in events:
-                if event['Type'] == 'container' and \
-                        (event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die'):
-                    if event['Actor']['Attributes']['name'] in self.storage.keys():
-                        msg = hostname + ' ' + event['Actor']['Attributes']['name']
-                        msgs.append(msg)
+            try:
+                events = client.events(since=time_flag, until=time.time(), decode=True)
+                msgs = []
+                for event in events:
+                    if event['Type'] == 'container' and \
+                            (event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die'):
+                        if event['Actor']['Attributes']['name'] in self.storage.keys():
+                            msg = hostname + ' ' + event['Actor']['Attributes']['name']
+                            msgs.append(msg)
 
-            # 去重
-            msgs = list(set(msgs))
+                # 去重
+                msgs = list(set(msgs))
 
-            # Notify discovery block to update MongoDB
-            for msg in msgs:
-                self.logger.info('Discovery: %s' % msg)
-                socket.send_string(msg)
-                socket.recv_string()
+                # Notify discovery block to update MongoDB
+                for msg in msgs:
+                    self.logger.info('Discovery: %s' % msg)
+                    socket.send_string(msg)
+                    socket.recv_string()
 
-            time_flag = time.time()
-            time.sleep(frequency)
+                time_flag = time.time()
+                time.sleep(frequency)
+            except Exception as ex:
+                self.logger.error(ex)
 
     def listenManagerMsg(self):
         while True:
@@ -211,25 +214,22 @@ def main(worker_init):
     discovery_port = args.discovery_port
     frequency = args.frequency
     '''
-    try:
-        os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.getUserName())
+    os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.getUserName())
 
-        with open(worker_init) as f:
-            data = json.load(f)
-        manager_addr = data['global_manager_addr']
-        self_addr = data['worker_address']
-        discovery_addr = data['discovery_addr']
-        discovery_port = data['discovery_port']
-        frequency = data['frequency']
+    with open(worker_init) as f:
+        data = json.load(f)
+    manager_addr = data['global_manager_addr']
+    self_addr = data['worker_address']
+    discovery_addr = data['discovery_addr']
+    discovery_port = data['discovery_port']
+    frequency = data['frequency']
 
-        worker = Worker(manager_addr, self_addr, discovery_addr, discovery_port, frequency)
+    worker = Worker(manager_addr, self_addr, discovery_addr, discovery_port, frequency)
 
-        worker.main()
-        worker.requestJoinSwarm()
-        while True:
-            pass
-    except Exception as ex:
-        worker.logger.error(ex)
+    worker.main()
+    worker.requestJoinSwarm()
+    while True:
+        pass
 
 
 if __name__ == '__main__':
