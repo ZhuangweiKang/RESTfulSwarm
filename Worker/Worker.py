@@ -13,6 +13,7 @@ import requests
 import json
 import argparse
 import random
+import math
 import time
 from LiveMigration import LiveMigration
 import DockerHelper as dHelper
@@ -43,18 +44,18 @@ class Worker:
         time.sleep(frequency)
         hostname = utl.getHostName()
         socket = zmqHelper.csConnect(discovery_addr, discovery_port)
-        time_end = time.time()
+        time_end = math.floor(time.time())
         while True:
             try:
-                events = client.events(since=time_end, filters={'type': 'container'}, decode=True)
+                time_start = math.ceil(time.time())
+                events = client.events(since=time_end, until=time_start, filters={'type': 'container'}, decode=True)
+                time_end = math.floor(time.time())
                 msgs = []
                 for event in events:
                     if event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die':
                         if event['Actor']['Attributes']['name'] in self.storage.keys():
                             msg = hostname + ' ' + event['Actor']['Attributes']['name']
                             msgs.append(msg)
-
-                time_end = time.time()
 
                 # 去重
                 msgs = list(set(msgs))
