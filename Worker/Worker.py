@@ -56,7 +56,6 @@ class Worker:
                         if event['Actor']['Attributes']['name'] in self.storage.keys():
                             msg = hostname + ' ' + event['Actor']['Attributes']['name']
                             msgs.append(msg)
-                        self.logger.debug(event['Actor']['Attributes']['name'])
 
                 # 去重
                 msgs = list(set(msgs))
@@ -67,7 +66,7 @@ class Worker:
                     socket.send_string(msg)
                     socket.recv_string()
 
-                # time.sleep(frequency)
+                time.sleep(frequency)
             except Exception as ex:
                 self.logger.error(ex)
 
