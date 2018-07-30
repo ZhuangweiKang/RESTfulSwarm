@@ -187,6 +187,10 @@ class Worker:
         notMigrateThr = threading.Thread(target=self.listenWorkerMessage, args=())
         task_monitor_thr = threading.Thread(target=self.monitor,
                                             args=(self.discovery_addr, self.discovery_port, self.task_monitor_frequency,))
+        task_monitor_thr.daemon = True
+        migrateThr.daemon = True
+        notMigrateThr.daemon = True
+
         task_monitor_thr.start()
         migrateThr.start()
         notMigrateThr.start()
