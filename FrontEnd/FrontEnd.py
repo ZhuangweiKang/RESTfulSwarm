@@ -56,8 +56,6 @@ def requestNewJob():
     m_col = mhelper.get_col(mongo_db, col_name)
     mhelper.insert_doc(m_col, data)
 
-    time.sleep(1)
-
     # Notify job manager
     msg = 'newJob %s' % col_name
     socket.send_string(msg)
