@@ -64,11 +64,6 @@ class Discovery:
                 for core in cores:
                     target_key = 'CPUs.%s' % core
                     mg.update_doc(self.workers_info, 'hostname', worker_host, target_key, False)
-                    debug = mg.find_col(self.workers_info)[0]
-                    if debug['CPUs'][core] is False:
-                        self.logger.debug('----------------------------------')
-                        self.logger.debug('Update core status successfully.')
-                        self.logger.debug('-----------------------------------')
                     self.logger.info('Release core %s status in worker %s' % (target_key, worker_host))
 
                 # update memory info
