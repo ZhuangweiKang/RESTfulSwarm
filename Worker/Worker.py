@@ -43,11 +43,12 @@ class Worker:
         time.sleep(frequency)
         hostname = utl.getHostName()
         socket = zmqHelper.csConnect(discovery_addr, discovery_port)
+        time_end = time.time()
         while True:
             try:
-                time_flag = time.time()
-                events = client.events(since=time_flag-5, until=time_flag, decode=True)
-                time_flag = time.time()
+                time_start = time.time()
+                events = client.events(since=time_end, until=time_start, decode=True)
+                time_end = time.time()
                 msgs = []
                 for event in events:
                     if event['Type'] == 'container' and \
