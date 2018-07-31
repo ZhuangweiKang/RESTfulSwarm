@@ -159,9 +159,9 @@ def requestNewJob():
         mg.update_doc(db[data['job_name']], 'job_name', data['job_name'], 'status', 'Deployed')
         mg.update_doc(db[data['job_name']], 'job_name', data['job_name'], 'start_time', time.time())
 
-        print('------------------------------')
-        print(data['job_name'])
-        print('------------------------------')
+        # print('------------------------------')
+        # print(data['job_name'])
+        # print('------------------------------')
 
         # update task status
         for task in data['job_info']['tasks'].keys():

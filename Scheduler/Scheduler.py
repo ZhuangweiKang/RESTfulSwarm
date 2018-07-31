@@ -82,7 +82,7 @@ class Scheduler(object):
         task_index = 0
         temp_result = []
 
-        print(schedule)
+        # print(schedule)
         for index, item in enumerate(schedule):
             if next_job is False:
                 global_task_index += len(core_request[job_index][1].items())
@@ -141,8 +141,6 @@ class Scheduler(object):
         for item in schedule:
             job_col = mg.get_col(self.db, item[0])
             job_filter = 'job_info.tasks.%s.container_name' % item[1]
-
-            print(item[1])
 
             # add node filed
             target = 'job_info.tasks.%s.node' % item[1]
