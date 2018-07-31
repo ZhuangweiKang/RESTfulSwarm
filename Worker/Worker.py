@@ -62,12 +62,12 @@ class Worker:
 
                 # 去重
                 msgs = list(set(msgs))
-                msgs = ','.join(msgs)
-
-                # Notify discovery block to update MongoDB
-                self.logger.info('Discovery: %s' % msgs)
-                socket.send_string(msgs)
-                socket.recv_string()
+                if len(msgs) != 0:
+                    msgs = ','.join(msgs)
+                    # Notify discovery block to update MongoDB
+                    self.logger.info('Discovery: %s' % msgs)
+                    socket.send_string(msgs)
+                    socket.recv_string()
 
                 time.sleep(frequency)
             except Exception as ex:
