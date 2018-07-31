@@ -24,6 +24,7 @@ class Discovery:
         self.logger = utl.doLog('DiscoveryLogger', 'DiscoveryLog.log')
 
     def discovery(self):
+        deployed_tasks = []
         while True:
             try:
                 msg_pack = self.socket.recv_string()
@@ -34,6 +35,10 @@ class Discovery:
                     worker_host = msg.split()[0]
                     msg = msg.split()[1]
                     task_name = msg
+                    if task_name in deployed_tasks:
+                        continue
+                    else:
+                        deployed_tasks.append(task_name)
                     job_name = msg.split('_')[0]
                     job_col = mg.get_col(self.db, job_name)
 
