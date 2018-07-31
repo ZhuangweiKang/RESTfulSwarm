@@ -3,5 +3,5 @@
   "global_manager_addr": "10.52.0.124",
   "discovery_addr": "10.52.0.124",
   "discovery_port": "4000",
-  "frequency": 5
+  "frequency": 10
 }

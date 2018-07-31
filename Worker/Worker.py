@@ -60,8 +60,6 @@ class Worker:
                             deployed_jobs.append(event['Actor']['Attributes']['name'])
                             msgs.append(msg)
 
-                time.sleep(frequency)
-
                 # 去重
                 msgs = list(set(msgs))
                 if len(msgs) != 0:
@@ -70,6 +68,8 @@ class Worker:
                     self.logger.info('Discovery: %s' % msgs)
                     socket.send_string(msgs)
                     socket.recv_string()
+
+                time.sleep(frequency)
 
             except Exception as ex:
                 self.logger.debug(ex)
