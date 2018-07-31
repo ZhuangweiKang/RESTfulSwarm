@@ -297,8 +297,6 @@ class JobManager:
 
                     timer = time.time()
 
-                time.sleep(2)
-
         execute_thr = threading.Thread(target=execute, args=())
         execute_thr.setDaemon(True)
         execute_thr.start()
@@ -308,7 +306,6 @@ class JobManager:
             self.socket.send_string('Ack')
             msg = msg.split()
             job_queue.append(msg)
-            time.sleep(1)
 
 
 def main():

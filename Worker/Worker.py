@@ -49,7 +49,7 @@ class Worker:
         while True:
             try:
                 time_start = math.ceil(time.time())
-                events = client.events(since=time_end, until=time_start, filters={'type': 'container'}, decode=True)
+                events = client.events(until=time.time(), filters={'type': 'container'}, decode=True)
                 time_end = math.floor(time.time())
                 msgs = []
                 for event in events:

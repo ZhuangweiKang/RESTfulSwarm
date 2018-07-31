@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GraphBook.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/GraphBook.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JobManager/JobManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/JobManager/JobManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/Worker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/Worker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/Worker1Init.json" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/Worker1Init.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/Worker2Init.json" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/Worker2Init.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,15 +19,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3066">
-              <caret line="146" column="31" selection-start-line="146" selection-start-column="31" selection-end-line="146" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="StressClientInfo.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/StressClientInfo.json">
           <provider selected="true" editor-type-id="text-editor">
@@ -66,26 +58,44 @@
       <file leaf-file-name="Discovery.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="729">
-              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+            <state relative-caret-position="204">
+              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Worker.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Worker1Init.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Worker/Worker1Init.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Worker2Init.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Worker/Worker2Init.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Worker.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
+            <state relative-caret-position="211">
               <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="298" column="16" lean-forward="true" selection-start-line="298" selection-start-column="16" selection-end-line="298" selection-end-column="16" />
+            <state relative-caret-position="458">
+              <caret line="307" column="33" selection-start-line="307" selection-start-column="33" selection-end-line="307" selection-end-column="33" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
                 <element signature="e#6231#8790#0" />
@@ -204,9 +214,9 @@
         <option value="$PROJECT_DIR$/Discovery/Discovery.py" />
         <option value="$PROJECT_DIR$/Client/StressClientInfo.json" />
         <option value="$PROJECT_DIR$/Worker/Worker.py" />
+        <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
         <option value="$PROJECT_DIR$/Worker/Worker1Init.json" />
         <option value="$PROJECT_DIR$/Worker/Worker2Init.json" />
-        <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
       </list>
     </option>
   </component>
@@ -350,13 +360,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00452" summary="update">
-      <created>1532909960137</created>
-      <option name="number" value="00452" />
-      <option name="presentableId" value="LOCAL-00452" />
-      <option name="project" value="LOCAL" />
-      <updated>1532909960137</updated>
     </task>
     <task id="LOCAL-00453" summary="update">
       <created>1532910420920</created>
@@ -694,7 +697,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533051323554</updated>
     </task>
-    <option name="localTasksCounter" value="501" />
+    <task id="LOCAL-00501" summary="update">
+      <created>1533051915345</created>
+      <option name="number" value="00501" />
+      <option name="presentableId" value="LOCAL-00501" />
+      <option name="project" value="LOCAL" />
+      <updated>1533051915345</updated>
+    </task>
+    <option name="localTasksCounter" value="502" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1013,44 +1023,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/Worker1Init.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/Worker2Init.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="729">
-          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="298" column="16" lean-forward="true" selection-start-line="298" selection-start-column="16" selection-end-line="298" selection-end-column="16" />
+        <state relative-caret-position="458">
+          <caret line="307" column="33" selection-start-line="307" selection-start-column="33" selection-end-line="307" selection-end-column="33" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
             <element signature="e#6231#8790#0" />
             <element signature="e#9726#10325#0" />
             <element signature="e#11281#12578#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Worker/Worker1Init.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Worker/Worker2Init.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
         </state>
       </provider>
     </entry>
