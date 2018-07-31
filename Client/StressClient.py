@@ -70,7 +70,7 @@ class StressClient(object):
         return 0
 
     def feed_jobs(self):
-        max_time = 20 * self.time_interval
+        max_time = 100 * self.time_interval
         time_index = 0
         while time_index <= max_time:
             job_count = self.feed_func(time_index)

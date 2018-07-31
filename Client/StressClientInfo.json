@@ -1,7 +1,7 @@
 {
   "subnet": "10.52.1.0/24",
   "image_name": "hello-world",
-  "task_count": 2,
+  "task_count": 4,
   "task_cores": 4,
   "task_mem": 50,
   "time_interval": 5
