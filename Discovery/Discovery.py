@@ -58,6 +58,9 @@ class Discovery:
                     job_info = mg.find_col(job_col)[0]
                     cores = job_info['job_info']['tasks'][task_name]['cpuset_cpus']
                     cores = cores.split(',')
+                    print('*******************Cores**************')
+                    print(cores)
+                    print('**************************************')
                     memory = job_info['job_info']['tasks'][task_name]['mem_limit']
                     self.logger.info('Collecting resources from down containers.')
 
