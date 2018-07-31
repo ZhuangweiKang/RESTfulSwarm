@@ -49,19 +49,23 @@ class Worker:
         while True:
             try:
                 time_start = math.ceil(time.time())
-                events = client.events(since=time_end, until=time_start, filters={'type': 'container'}, decode=True)
+                events = client.events(since=time_end,
+                                       until=time_start,
+                                       filters={'type': 'container',
+                                                'event': 'die'},
+                                       decode=True)
                 time_end = math.floor(time.time())
                 msgs = []
                 for event in events:
-                    if event['status'] == 'stop' or event['status'] == 'destroy' or event['status'] == 'die':
-                        if event['Actor']['Attributes']['name'] in self.storage.keys() and \
-                                event['Actor']['Attributes']['name'] not in deployed_jobs:
-                            msg = hostname + ' ' + event['Actor']['Attributes']['name']
-                            deployed_jobs.append(event['Actor']['Attributes']['name'])
-                            msgs.append(msg)
+                    if event['Actor']['Attributes']['name'] in self.storage.keys() and \
+                            event['Actor']['Attributes']['name'] not in deployed_jobs:
+                        msg = hostname + ' ' + event['Actor']['Attributes']['name']
+                        deployed_jobs.append(event['Actor']['Attributes']['name'])
+                        msgs.append(msg)
 
                 # 去重
-                msgs = list(set(msgs))
+                # msgs = list(set(msgs))
+
                 if len(msgs) != 0:
                     msgs = ','.join(msgs)
                     # Notify discovery block to update MongoDB
