@@ -143,6 +143,7 @@ class Scheduler(object):
             for core in item[3]:
                 target = 'CPUs.%s' % str(core)
                 mg.update_doc(self.workers_col, 'hostname', item[2], target, True)
+                print('Set CPU %s as busy in worker %s.' % (target, item[2]))
 
     # update worker resource collection
     def update_worker_resource_info(self, schedule):
