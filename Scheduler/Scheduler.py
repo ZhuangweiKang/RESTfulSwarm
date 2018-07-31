@@ -77,6 +77,7 @@ class Scheduler(object):
         global_task_index = 0
         next_job = False
         task_index = 0
+        temp_result = []
 
         print(schedule)
         for index, item in enumerate(schedule):
@@ -84,7 +85,7 @@ class Scheduler(object):
                 global_task_index += len(core_request[job_index][1].items())
                 next_job = True
 
-            if core_request[job_index][0] not in waiting_plan and item[1] != -1:
+            if item[1] != -1:
                 # get the first n cores from all free cores because the amount
                 # of free cores may be more than requested cores
                 cores = []
@@ -99,8 +100,7 @@ class Scheduler(object):
                         list(available_workers.keys())[item[1]],
                         cores)
 
-                if index == global_task_index - 1:
-                    result.append(result_item)
+                temp_result.append(result_item)
 
                 # update free memory
                 worker_info = list(self.workers_col.find({'hostname': list(available_workers.keys())[item[1]]}))[0]
@@ -118,9 +118,14 @@ class Scheduler(object):
 
             # update job index
             if index == global_task_index - 1:
+                if len(temp_result) == len(core_request[job_index][1]):
+                    result.extend(temp_result)
+                else:
+                    waiting_plan.append(core_request[job_index][0])
                 job_index += 1
                 next_job = False
                 task_index = 0
+                temp_result = []
             else:
                 task_index += 1
 
