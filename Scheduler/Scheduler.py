@@ -26,7 +26,10 @@ class Scheduler(object):
         :param jobs_details: [($job_name, [{$task_name: $cpu_count}, {$task_name: $mem_limit}])]
         :return: [$($job_name, $task_name, $worker_name, [$core])] + [$waiting_job]
         '''
+
+        # core_requests = [(job_name, {task1: cpu_count})]
         core_requests = [(job[0], job[1][0]) for job in jobs_details]
+        # mem_request = [(job_name, {task1: mem_limit})]
         mem_requests = [(job[0], job[1][1]) for job in jobs_details]
 
         # get all free cores from every worker node
@@ -85,6 +88,7 @@ class Scheduler(object):
                 global_task_index += len(core_request[job_index][1].items())
                 next_job = True
 
+            # item=(task_index, assigned_core_id/-1)
             if item[1] != -1:
                 # get the first n cores from all free cores because the amount
                 # of free cores may be more than requested cores
