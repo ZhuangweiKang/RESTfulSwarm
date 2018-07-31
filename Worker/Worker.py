@@ -45,7 +45,7 @@ class Worker:
         hostname = utl.getHostName()
         socket = zmqHelper.csConnect(discovery_addr, discovery_port)
         time_end = math.floor(time.time())
-        deployed_jobs = []
+        deployed_tasks = []
         while True:
             try:
                 time_start = math.ceil(time.time())
@@ -58,10 +58,12 @@ class Worker:
                 msgs = []
                 for event in events:
                     if event['Actor']['Attributes']['name'] in self.storage.keys() and \
-                            event['Actor']['Attributes']['name'] not in deployed_jobs:
+                            event['Actor']['Attributes']['name'] not in deployed_tasks:
                         msg = hostname + ' ' + event['Actor']['Attributes']['name']
-                        deployed_jobs.append(event['Actor']['Attributes']['name'])
+                        deployed_tasks.append(event['Actor']['Attributes']['name'])
                         msgs.append(msg)
+
+                events.close()
 
                 # 去重
                 # msgs = list(set(msgs))
