@@ -78,6 +78,7 @@ class Scheduler(object):
         next_job = False
         task_index = 0
 
+        print(schedule)
         for index, item in enumerate(schedule):
             if next_job is False:
                 global_task_index += len(core_request[job_index][1].items())
