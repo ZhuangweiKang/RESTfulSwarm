@@ -275,10 +275,6 @@ class JobManager:
 
                     waiting_decision = schedule_resource(jobs_details)
 
-                    print('***************************************')
-                    print(waiting_decision)
-                    print('***************************************')
-
                     # remove scheduled jobs
                     for index, job in enumerate(job_queue_snap_shoot[:]):
                         if job[1] not in waiting_decision:
