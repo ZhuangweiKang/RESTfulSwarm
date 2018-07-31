@@ -55,6 +55,7 @@ class Worker:
                                                 'event': 'die'},
                                        decode=True)
                 time_end = math.floor(time.time())
+
                 msgs = []
                 for event in events:
                     if event['Actor']['Attributes']['name'] in self.storage.keys() and \

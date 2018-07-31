@@ -57,7 +57,7 @@ class Discovery:
                         mg.update_doc(job_col, 'job_name', job_name, 'status', 'Down')
                         mg.update_doc(job_col, 'job_name', job_name, 'end_time', time.time())
 
-                    self.logger.info('Updating Job collection.')
+                    self.logger.info('Updating Job collection %s.' % job_name)
 
                     # get the resource utilization of the 'Down' container
                     job_info = mg.find_col(job_col)[0]
