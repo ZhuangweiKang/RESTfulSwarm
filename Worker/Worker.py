@@ -66,8 +66,7 @@ class Worker:
                 events.close()
 
                 # 去重
-                # msgs = list(set(msgs))
-                self.logger.debug(msgs)
+                msgs = list(set(msgs))
 
                 if len(msgs) != 0:
                     msgs = ','.join(msgs)
