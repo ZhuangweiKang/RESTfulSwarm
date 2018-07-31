@@ -130,6 +130,8 @@ class Scheduler(object):
             job_col = mg.get_col(self.db, item[0])
             job_filter = 'job_info.tasks.%s.container_name' % item[1]
 
+            print(item[1])
+
             # add node filed
             target = 'job_info.tasks.%s.node' % item[1]
             mg.update_doc(job_col, job_filter, item[1], target, item[2])
