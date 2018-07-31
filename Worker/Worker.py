@@ -49,7 +49,7 @@ class Worker:
         while True:
             try:
                 time_start = math.ceil(time.time())
-                events = client.events(until=time.time(),
+                events = client.events(until=time_start,
                                        filters={'type': 'container',
                                                 'event': 'die'},
                                        decode=True)
