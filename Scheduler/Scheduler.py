@@ -98,7 +98,9 @@ class Scheduler(object):
                         list(core_request[job_index][1].keys())[task_index],
                         list(available_workers.keys())[item[1]],
                         cores)
-                result.append(result_item)
+
+                if index == global_task_index - 1:
+                    result.append(result_item)
 
                 # update free memory
                 worker_info = list(self.workers_col.find({'hostname': list(available_workers.keys())[item[1]]}))[0]
