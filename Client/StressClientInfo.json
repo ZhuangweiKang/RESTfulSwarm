@@ -4,5 +4,5 @@
   "task_count": 4,
   "task_cores": 4,
   "task_mem": 50,
-  "time_interval": 5
+  "time_interval": 20
 }
