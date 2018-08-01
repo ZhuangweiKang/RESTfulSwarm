@@ -1,0 +1,13 @@
+---
+parameters:
+  - name: new_scheduler
+    in: path
+    description: Switch new scheduler
+    required: true
+    type: string
+    enum: ["best-fit", "first-fit", "best-fit-decreasing", "first-fit-decreasing", "no-scheduler"]
+    default: "best-fit"
+
+responses:
+  200:
+    description: Succesfully switched scheduler

@@ -14,6 +14,7 @@ import json
 import threading
 from Scheduler import BestFitScheduler
 from Scheduler import FirstFitScheduler
+from Scheduler import NoScheduler
 from Scheduler import BestFitDecreasingScheduler
 from Scheduler import FirstFitDecreasingScheduler
 import ZMQHelper as zmq
@@ -307,7 +308,23 @@ class JobManager:
             msg = self.socket.recv_string()
             self.socket.send_string('Ack')
             msg = msg.split()
-            job_queue.append(msg)
+
+            if msg[0] == 'SwitchScheduler':
+                # make sure no job in job queue
+                job_queue = []
+                new_scheduler = msg[1]
+                if new_scheduler == 'first-fit':
+                    self.scheduler = FirstFitScheduler.FirstFitScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
+                elif new_scheduler == 'best-fit':
+                    self.scheduler = BestFitScheduler.BestFitScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
+                elif new_scheduler == 'best-fit-decreasing':
+                    self.scheduler = BestFitDecreasingScheduler.BestFitDecreasingScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
+                elif new_scheduler == 'first-fit-decreasing':
+                    self.scheduler = FirstFitDecreasingScheduler.FirstFitDecreasingScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
+                elif new_scheduler == 'no-scheduler':
+                    self.scheduler = NoScheduler.NoScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
+            else:
+                job_queue.append(msg)
 
 
 def main():
@@ -357,12 +374,14 @@ def main():
     # default scheduling strategy is best-fit
     if scheduling_strategy == 'first-fit':
         scheduler = FirstFitScheduler.FirstFitScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
-    elif scheduling_strategy == 'best-fit':
-        scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
-    elif scheduling_strategy == 'first-fit-deceasing':
+    elif scheduling_strategy == 'first-fit-decreasing':
         scheduler = FirstFitDecreasingScheduler.FirstFitDecreasingScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
-    else:
+    elif scheduling_strategy == 'best-fir-decreasing':
         scheduler = BestFitDecreasingScheduler.BestFitDecreasingScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
+    elif scheduling_strategy == 'no-scheduler':
+        scheduler = NoScheduler.NoScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
+    else:
+        scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
 
     job_manager = JobManager(gm_addr=gm_addr, gm_port=gm_port, db=db, scheduler=scheduler, wait=wait)
 
