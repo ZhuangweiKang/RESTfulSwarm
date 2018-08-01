@@ -38,20 +38,23 @@ class ManagementEngine:
         self.private_key_file = private_key_file
 
     def clear_db(self):
-        # Drop worker resource info collection
-        mg.drop_col(self.mg_client, self.db_name, 'WorkersResourceInfo')
+        all_cols = mg.get_all_cols(self.db)
+        if 'WorkersResourceInfo' in all_cols:
+            # Drop worker resource info collection
+            mg.drop_col(self.mg_client, self.db_name, 'WorkersResourceInfo')
 
-        # Reset worker info collection
-        workers_info_col = mg.get_col(self.db, 'WorkersInfo')
-        workers_info_data = mg.find_col(workers_info_col)[0]
-        for worker in workers_info_data:
-            for cpu in worker['CPUs']:
-                workers_info_data[cpu] = False
-            mg.update_doc(col=workers_info_col,
-                          filter_key='hostname',
-                          filter_value=worker['hostname'],
-                          target_key='CPUs',
-                          target_value=workers_info_data['CPUs'])
+        if 'WorkersInfo' in all_cols:
+            # Reset worker info collection
+            workers_info_col = mg.get_col(self.db, 'WorkersInfo')
+            workers_info_data = mg.find_col(workers_info_col)[0]
+            for worker in workers_info_data:
+                for cpu in worker['CPUs']:
+                    workers_info_data[cpu] = False
+                mg.update_doc(col=workers_info_col,
+                              filter_key='hostname',
+                              filter_value=worker['hostname'],
+                              target_key='CPUs',
+                              target_value=workers_info_data['CPUs'])
         print('Reset MongoDB.')
 
     def clear_master(self):
