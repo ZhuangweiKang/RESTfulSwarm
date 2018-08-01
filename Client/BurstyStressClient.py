@@ -7,6 +7,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import json
 import random
+import time
 import utl
 import math
 from Client.StressClient import StressClient
@@ -21,7 +22,7 @@ class BurstyStressClient(StressClient):
         return math.ceil(random.expovariate(self.lmda))
 
 
-def main():
+def main(session_id):
     # parser = argparse.ArgumentParser()
     # parser.add_argument('-a', '--address', type=str, help='Front end node address.')
     # parser.add_argument('-p', '--port', type=str, default='5001', help='Front end node port number.')
@@ -35,7 +36,7 @@ def main():
             data = json.load(f)
         client = BurstyStressClient(lmda=data['lambda'])
         client.init_fields()
-        client.feed_jobs()
+        client.feed_jobs(session_id)
     except ValueError as er:
         print(er)
 
@@ -43,4 +44,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    _session_id = str(int(time.time()))
+    main(_session_id)

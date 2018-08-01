@@ -7,6 +7,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import json
 import random
+import time
 import utl
 from Client.StressClient import StressClient
 
@@ -21,7 +22,7 @@ class RandomStressClient(StressClient):
         return random.randint(self.lower_bound, self.upper_bound)
 
 
-def main():
+def main(session_id):
     # parser = argparse.ArgumentParser()
     # parser.add_argument('-a', '--address', type=str, help='Front end node address.')
     # parser.add_argument('-p', '--port', type=str, default='5001', help='Front end node port number.')
@@ -37,7 +38,7 @@ def main():
             data = json.load(f)
         client = RandomStressClient(lower_bound=data['lower_bound'], upper_bound=data['upper_bound'])
         client.init_fields()
-        client.feed_jobs()
+        client.feed_jobs(session_id)
     except ValueError as er:
         print(er)
 
@@ -45,4 +46,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    _session_id = str(int(time.time()))
+    main(session_id=_session_id)

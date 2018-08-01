@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/BurstyStressClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/BurstyStressClient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/RandomStressClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/RandomStressClient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/SteadyStressClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/SteadyStressClient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GraphBook.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/GraphBook.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,65 +20,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="StressClient.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/StressClient.py">
+      <file leaf-file-name="IncrementalStressClient.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/IncrementalStressClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
-              <caret line="77" column="44" lean-forward="true" selection-start-line="77" selection-start-column="44" selection-end-line="77" selection-end-column="44" />
+            <state relative-caret-position="708">
+              <caret line="48" column="32" lean-forward="true" selection-start-line="47" selection-start-column="4" selection-end-line="48" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FrontEnd.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
+      <file leaf-file-name="BurstyStressClient.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/BurstyStressClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1044">
-              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+            <state relative-caret-position="798">
+              <caret line="38" column="36" lean-forward="true" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
+      <file leaf-file-name="RandomStressClient.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/RandomStressClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="48" column="37" lean-forward="true" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+            <state relative-caret-position="624">
+              <caret line="49" column="32" lean-forward="true" selection-start-line="48" selection-start-column="4" selection-end-line="49" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WorkersInfo.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestSample/WorkersInfo.json">
+      <file leaf-file-name="SteadyStressClient.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Client/SteadyStressClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WorkersInfo.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ManagementEngine/WorkersInfo.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MongoDBHelper.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MongoDBHelper.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="collection.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/pymongo/collection.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="910" column="8" selection-start-line="910" selection-start-column="8" selection-end-line="910" selection-end-column="8" />
+            <state relative-caret-position="645">
+              <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -160,9 +137,6 @@
         <option value="$PROJECT_DIR$/utl.py" />
         <option value="$PROJECT_DIR$/TestSample/SampleJob1.json" />
         <option value="$PROJECT_DIR$/TestSample/WorkerResource.json" />
-        <option value="$PROJECT_DIR$/Client/BurstyStressClient.py" />
-        <option value="$PROJECT_DIR$/Client/RandomStressClient.py" />
-        <option value="$PROJECT_DIR$/Client/SteadyStressClient.py" />
         <option value="$PROJECT_DIR$/ManagementEngine/WorkersInfo.json" />
         <option value="$PROJECT_DIR$/JobManager/JobManagerInit.json" />
         <option value="$PROJECT_DIR$/Worker/TerminateWorker.py" />
@@ -179,8 +153,11 @@
         <option value="$PROJECT_DIR$/Client/StressClientInfo.json" />
         <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
         <option value="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" />
-        <option value="$PROJECT_DIR$/Client/StressClient.py" />
         <option value="$PROJECT_DIR$/Client/IncrementalStressClient.py" />
+        <option value="$PROJECT_DIR$/Client/StressClient.py" />
+        <option value="$PROJECT_DIR$/Client/BurstyStressClient.py" />
+        <option value="$PROJECT_DIR$/Client/RandomStressClient.py" />
+        <option value="$PROJECT_DIR$/Client/SteadyStressClient.py" />
       </list>
     </option>
   </component>
@@ -329,20 +306,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00486" summary="update">
-      <created>1532981946663</created>
-      <option name="number" value="00486" />
-      <option name="presentableId" value="LOCAL-00486" />
-      <option name="project" value="LOCAL" />
-      <updated>1532981946663</updated>
-    </task>
-    <task id="LOCAL-00487" summary="update">
-      <created>1532982429019</created>
-      <option name="number" value="00487" />
-      <option name="presentableId" value="LOCAL-00487" />
-      <option name="project" value="LOCAL" />
-      <updated>1532982429019</updated>
     </task>
     <task id="LOCAL-00488" summary="update">
       <created>1532983108477</created>
@@ -673,7 +636,21 @@
       <option name="project" value="LOCAL" />
       <updated>1533139685716</updated>
     </task>
-    <option name="localTasksCounter" value="535" />
+    <task id="LOCAL-00535" summary="update">
+      <created>1533140148243</created>
+      <option name="number" value="00535" />
+      <option name="presentableId" value="LOCAL-00535" />
+      <option name="project" value="LOCAL" />
+      <updated>1533140148243</updated>
+    </task>
+    <task id="LOCAL-00536" summary="update">
+      <created>1533140517628</created>
+      <option name="number" value="00536" />
+      <option name="presentableId" value="LOCAL-00536" />
+      <option name="project" value="LOCAL" />
+      <updated>1533140517628</updated>
+    </task>
+    <option name="localTasksCounter" value="537" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -770,13 +747,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/SteadyStressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
@@ -950,13 +920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="67" column="69" lean-forward="true" selection-start-line="67" selection-start-column="69" selection-end-line="67" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/StressClientInfo.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
@@ -968,48 +931,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="910" column="8" selection-start-line="910" selection-start-column="8" selection-end-line="910" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1044">
-          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/BurstyStressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/StressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="77" column="44" lean-forward="true" selection-start-line="77" selection-start-column="44" selection-end-line="77" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MongoDBHelper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/IncrementalStressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/RandomStressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -1031,6 +952,62 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
           <caret line="48" column="37" lean-forward="true" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="736">
+          <caret line="72" column="19" lean-forward="true" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="59" column="78" lean-forward="true" selection-start-line="59" selection-start-column="78" selection-end-line="59" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MongoDBHelper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/StressClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/BurstyStressClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="798">
+          <caret line="38" column="36" lean-forward="true" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/IncrementalStressClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="708">
+          <caret line="48" column="32" lean-forward="true" selection-start-line="47" selection-start-column="4" selection-end-line="48" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/RandomStressClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="49" column="32" lean-forward="true" selection-start-line="48" selection-start-column="4" selection-end-line="49" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/SteadyStressClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
         </state>
       </provider>
     </entry>
