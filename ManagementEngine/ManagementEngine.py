@@ -19,7 +19,6 @@ from Client import SteadyStressClient as steay_client
 import multiprocessing
 import paramiko as pk
 import time
-import utl
 import MongoDBHelper as mg
 import DockerHelper as dh
 import json
@@ -39,8 +38,8 @@ class ManagementEngine:
 
     def clear_db(self):
         all_cols = mg.get_all_cols(self.db)
-        for col in all_cols:
-            mg.drop_col(self.mg_client, self.db_name, col)
+        # for col in all_cols:
+        #     mg.drop_col(self.mg_client, self.db_name, col)
 
         if 'WorkersResourceInfo' in all_cols:
             # Drop worker resource info collection
