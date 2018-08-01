@@ -39,8 +39,7 @@ class ManagementEngine:
 
     def clear_db(self):
         # Drop worker resource info collection
-        resource_info_col = mg.get_col(self.db, 'WorkersResourceInfo')
-        mg.drop_col(self.mg_client, self.db_name, resource_info_col)
+        mg.drop_col(self.mg_client, self.db_name, 'WorkersResourceInfo')
 
         # Reset worker info collection
         workers_info_col = mg.get_col(self.db, 'WorkersInfo')
