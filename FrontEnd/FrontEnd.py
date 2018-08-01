@@ -43,6 +43,7 @@ mongo_addr = None
 mongo_port = None
 mongo_db_name = 'RESTfulSwarmDB'
 socket = None
+session_id = None
 
 
 @app.route('/RESTfulSwarm/FE/requestNewJob', methods=['POST'])
@@ -52,7 +53,7 @@ def requestNewJob():
     # Write job data into MongoDB
     data = request.get_json()
     data.update({'submit_time': time.time()})
-    col_name = data['job_name']
+    col_name = data['job_name'] + '_' + session_id
     m_col = mhelper.get_col(mongo_db, col_name)
     mhelper.insert_doc(m_col, data)
 
@@ -64,13 +65,16 @@ def requestNewJob():
     return 'OK', 200
 
 
-def main():
+def main(_session_id):
     os.chdir('/home/%s/RESTfulSwarmLM/FrontEnd' % utl.getUserName())
 
     global mongo_addr
     global mongo_port
     global socket
     global mongo_db
+    global session_id
+
+    session_id = _session_id
 
     with open('FrontEndInit.json') as f:
         data = json.load(f)

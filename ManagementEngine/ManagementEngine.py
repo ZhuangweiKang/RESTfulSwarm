@@ -38,20 +38,33 @@ class ManagementEngine:
         self.private_key_file = private_key_file
 
     def clear_db(self):
-        cols = mg.get_all_cols(self.db)
-        for col in cols:
-            mg.drop_col(self.mg_client, self.db_name, col)
-        print('Cleaned MongoDB.')
+        # Drop worker resource info collection
+        resource_info_col = mg.get_col(self.db, 'WorkersResourceInfo')
+        mg.drop_col(self.mg_client, self.db_name, resource_info_col)
+
+        # Reset worker info collection
+        workers_info_col = mg.get_col(self.db, 'WorkersInfo')
+        workers_info_data = mg.find_col(workers_info_col)[0]
+        for worker in workers_info_data:
+            for cpu in worker['CPUs']:
+                workers_info_data[cpu] = False
+            mg.update_doc(col=workers_info_col,
+                          filter_key='hostname',
+                          filter_value=worker['hostname'],
+                          target_key='CPUs',
+                          target_value=workers_info_data['CPUs'])
+        print('Reset MongoDB.')
 
     def clear_master(self):
         # let master node leave swarm
         dh.leaveSwarm(dh.setClient())
         print('Master node left swarm.')
 
-    def launch_fe(self):
+    def launch_fe(self, session_id):
         fe_pro = multiprocessing.Process(
             name='FrontEnd',
-            target=fe.main
+            target=fe.main,
+            args=(session_id, )
         )
         fe_pro.daemon = True
         fe_pro.start()
@@ -148,7 +161,8 @@ class ManagementEngine:
         time.sleep(1)
         self.clear_db()
         time.sleep(1)
-        fe_proc = self.launch_fe()
+        session_id = str(int(time.time()))
+        fe_proc = self.launch_fe(session_id=session_id)
         time.sleep(1)
         gm_proc = self.launch_gm()
         time.sleep(1)
