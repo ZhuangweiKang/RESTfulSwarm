@@ -32,6 +32,7 @@ def filter_col(col, filter_key, filter_value):
     except Exception:
         return None
 
+
 def get_all_cols(db):
     return db.list_collection_names()
 
