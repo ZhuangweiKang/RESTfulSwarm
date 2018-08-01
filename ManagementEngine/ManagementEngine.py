@@ -39,6 +39,9 @@ class ManagementEngine:
 
     def clear_db(self):
         all_cols = mg.get_all_cols(self.db)
+        for col in all_cols:
+            mg.drop_col(self.mg_client, self.db_name, col)
+
         if 'WorkersResourceInfo' in all_cols:
             # Drop worker resource info collection
             mg.drop_col(self.mg_client, self.db_name, 'WorkersResourceInfo')
@@ -62,11 +65,10 @@ class ManagementEngine:
         dh.leaveSwarm(dh.setClient())
         print('Master node left swarm.')
 
-    def launch_fe(self, session_id):
+    def launch_fe(self):
         fe_pro = multiprocessing.Process(
             name='FrontEnd',
-            target=fe.main,
-            args=(session_id, )
+            target=fe.main
         )
         fe_pro.daemon = True
         fe_pro.start()
@@ -120,10 +122,11 @@ class ManagementEngine:
             pass
         print('Launched all workers.')
 
-    def launch_client(self):
+    def launch_client(self, session_id):
         client_proc = multiprocessing.Process(
             name='Client',
-            target=incremental_client.main
+            target=incremental_client.main,
+            args=(session_id, )
         )
         client_proc.daemon = True
         client_proc.start()
@@ -163,8 +166,7 @@ class ManagementEngine:
         time.sleep(1)
         self.clear_db()
         time.sleep(1)
-        session_id = str(int(time.time()))
-        fe_proc = self.launch_fe(session_id=session_id)
+        fe_proc = self.launch_fe()
         time.sleep(1)
         gm_proc = self.launch_gm()
         time.sleep(1)
@@ -174,7 +176,8 @@ class ManagementEngine:
         time.sleep(1)
         self.launch_workers()
         time.sleep(5)
-        client_proc = self.launch_client()
+        session_id = str(int(time.time()))
+        client_proc = self.launch_client(session_id=session_id)
         return fe_proc, jm_proc, gm_proc, dc_proc, client_proc
 
     def shutdown_system(self, fe_proc, jm_proc, gm_proc, dc_proc, client_proc):
