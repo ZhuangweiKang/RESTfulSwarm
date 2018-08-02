@@ -97,7 +97,7 @@ class StressClient(object):
         feed(session_id)
         time.sleep(5)
 
-        session_id = time.time()
+        session_id = str(int(time.time()))
         # Switch scheduler
         url = 'http://%s:%s/RESTfulSwarm/FE/switchScheduler/no-scheduler' % (self.fe_addr, self.fe_port)
         print(requests.get(url=url).content)

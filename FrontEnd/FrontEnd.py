@@ -67,7 +67,7 @@ def requestNewJob():
 @swag_from('SwitchScheduler.yml')
 def switchScheduler(new_scheduler):
     # Notify Job Manager to switch scheduler
-    msg = 'switchScheduler %s' % new_scheduler
+    msg = 'SwitchScheduler %s' % new_scheduler
     socket.send_string(msg)
     socket.recv_string()
     return 'OK', 200
