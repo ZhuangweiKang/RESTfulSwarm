@@ -88,7 +88,7 @@ class StressClient(object):
         return 0
 
     def feed_jobs(self, session_id):
-        max_time = 3 * self.time_interval
+        max_time = 5 * self.time_interval
 
         def feed(_session):
             time_index = 0
