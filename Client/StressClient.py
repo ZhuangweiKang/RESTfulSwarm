@@ -58,6 +58,7 @@ class StressClient(object):
             job = json.load(f)
         job['job_name'] = job_name
         job['job_info']['network']['subnet'] = self.subnet
+        job['jon_info']['network']['name'] += '_' + str(random.randint(100000))
 
         core_choices = [str(i) for i in range(48)]
         for i in range(self.task_count):
