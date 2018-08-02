@@ -109,7 +109,8 @@ def init_worker_info(hostname, cpus, memfree):
         'MemFree': memfree
     }
     # Write initial worker information into database
-    mg.insert_doc(worker_col, worker_info)
+    if mg.filter_col(worker_col, 'hostname', hostname) is None:
+        mg.insert_doc(worker_col, worker_info)
 
     # Init WorkerResource Collection
     mg.update_workers_resource_col(worker_col, hostname, worker_resource_col)
