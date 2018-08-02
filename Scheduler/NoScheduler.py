@@ -36,15 +36,13 @@ class NoScheduler(Scheduler):
                         waiting_decision.append(job[0])
                         need_waiting = True
                         break
-                    else:
-                        temp_result.append((job[0],
-                                            job_data['job_info']['tasks'][task]['container_name'],
-                                            target_node,
-                                            target_cores))
                 if need_waiting:
                     break
+                else:
+                    temp_result.append((job[0],
+                                        job_data['job_info']['tasks'][task]['container_name'],
+                                        target_node,
+                                        target_cores))
             if len(job_data['job_info']['tasks']) == len(temp_result):
                 scheduling_decision.extend(temp_result)
-            print(scheduling_decision)
-            print(waiting_decision)
         return scheduling_decision, waiting_decision
