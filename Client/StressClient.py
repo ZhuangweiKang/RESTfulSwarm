@@ -62,7 +62,7 @@ class StressClient(object):
             task_name = job_name + '_task' + str(i+1)
 
             # For testing switch scheduler
-            node_choice = ['testswarm1', 'testswarm2']
+            node_choice = ['testswarmw1', 'testswarmw2']
             node = node_choice[random.randint(0, 1)]
             cores = []
             for i in range(4):

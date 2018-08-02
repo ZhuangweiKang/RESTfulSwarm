@@ -181,20 +181,18 @@ class ManagementEngine:
 
     def shutdown_system(self, fe_proc, jm_proc, gm_proc, dc_proc, client_proc):
         print('Start shutting down system.')
-        try:
-            self.clear_db()
-            self.shutdown_client(client_proc)
-            self.shutdown_fe(fe_proc)
-            self.shutdown_jm(jm_proc)
-            self.shutdown_gm(gm_proc)
-            self.shutdown_discovery(dc_proc)
-            self.shutdown_workers()
-            self.clear_master()
-            while len(dh.getNodeList(dh.setClient())) != 0:
-                pass
-            self.clear_db()
-        except Exception as ex:
-            print(ex)
+        self.clear_db()
+        self.shutdown_client(client_proc)
+        self.shutdown_fe(fe_proc)
+        self.shutdown_jm(jm_proc)
+        self.shutdown_gm(gm_proc)
+        self.shutdown_discovery(dc_proc)
+        self.shutdown_workers()
+        self.clear_master()
+        while len(dh.getNodeList(dh.setClient())) != 0:
+            pass
+        self.clear_db()
+
 
     def main(self):
         while True:
