@@ -63,8 +63,8 @@ def requestNewJob():
     return 'OK', 200
 
 
-@app.route('/RESTfulSwarm/FE/switchScheduler/<new_scheduler>', methods=['POST'])
-@swag_from('SwitchScheduler.yml', validation=True)
+@app.route('/RESTfulSwarm/FE/switchScheduler/<new_scheduler>', methods=['GET'])
+@swag_from('SwitchScheduler.yml')
 def switchScheduler(new_scheduler):
     # Notify Job Manager to switch scheduler
     msg = 'switchScheduler %s' % new_scheduler
