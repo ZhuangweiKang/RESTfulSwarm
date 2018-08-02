@@ -193,7 +193,6 @@ class ManagementEngine:
         self.clear_master()
         self.clear_db()
 
-
     def main(self):
         while True:
             switch_on = input('Would you like to launch RESTfulSwarm system?(y/n) ')

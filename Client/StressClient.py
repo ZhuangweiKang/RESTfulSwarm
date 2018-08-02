@@ -58,6 +58,8 @@ class StressClient(object):
             job = json.load(f)
         job['job_name'] = job_name
         job['job_info']['network']['subnet'] = self.subnet
+
+        core_choices = [str(i) for i in range(48)]
         for i in range(self.task_count):
             task_name = job_name + '_task' + str(i+1)
 
@@ -66,7 +68,10 @@ class StressClient(object):
             node = node_choice[random.randint(0, 1)]
             cores = []
             for i in range(4):
-                cores.append(str(random.randint(0, 47)))
+                _core = core_choices[random.randint(0, len(core_choices)-1)]
+                cores.append(_core)
+                core_choices.remove(_core)
+
             cpuset_cpus = ','.join(cores)
 
             image = self.image_name
