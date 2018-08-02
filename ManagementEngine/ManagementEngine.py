@@ -38,8 +38,8 @@ class ManagementEngine:
 
     def clear_db(self):
         all_cols = mg.get_all_cols(self.db)
-        for col in all_cols:
-            mg.drop_col(self.mg_client, self.db_name, col)
+        # for col in all_cols:
+        #     mg.drop_col(self.mg_client, self.db_name, col)
 
         if 'WorkersResourceInfo' in all_cols:
             # Drop worker resource info collection
@@ -193,8 +193,8 @@ class ManagementEngine:
             while len(dh.getNodeList(dh.setClient())) != 0:
                 pass
             self.clear_db()
-        except Exception:
-            pass
+        except Exception as ex:
+            print(ex)
 
     def main(self):
         while True:
