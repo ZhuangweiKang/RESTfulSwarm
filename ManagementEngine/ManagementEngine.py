@@ -48,8 +48,7 @@ class ManagementEngine:
         if 'WorkersInfo' in all_cols:
             # Reset worker info collection
             workers_info_col = mg.get_col(self.db, 'WorkersInfo')
-            workers_info_data = mg.find_col(workers_info_col)[0]
-            print(workers_info_data)
+            workers_info_data = mg.find_col(workers_info_col)
             for index, worker in enumerate(workers_info_data[:]):
                 for cpu in worker['CPUs']:
                     workers_info_data[index][cpu] = False
