@@ -306,12 +306,12 @@ class JobManager:
 
         while True:
             msg = self.socket.recv_string()
-            self.socket.send_string('Ack')
             msg = msg.split()
 
             if msg[0] == 'SwitchScheduler':
                 # make sure no job in job queue
                 job_queue = []
+                self.socket.send_string('Ack')
                 new_scheduler = msg[1]
                 if new_scheduler == 'first-fit':
                     self.scheduler = FirstFitScheduler.FirstFitScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
@@ -324,6 +324,7 @@ class JobManager:
                 elif new_scheduler == 'no-scheduler':
                     self.scheduler = NoScheduler.NoScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
             else:
+                self.socket.send_string('Ack')
                 job_queue.append(msg)
 
 

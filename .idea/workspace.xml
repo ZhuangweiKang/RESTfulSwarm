@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/StressClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/StressClient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GraphBook.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/GraphBook.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobManager/JobManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/JobManager/JobManager.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6825">
-              <caret line="326" column="37" selection-start-line="326" selection-start-column="37" selection-end-line="326" selection-end-column="37" />
+            <state relative-caret-position="525">
+              <caret line="326" column="46" selection-start-line="326" selection-start-column="46" selection-end-line="326" selection-end-column="46" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -43,8 +46,8 @@
       <file leaf-file-name="StressClient.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/StressClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="105" selection-start-line="105" selection-end-line="105" />
+            <state relative-caret-position="418">
+              <caret line="100" column="26" lean-forward="true" selection-start-line="100" selection-start-column="26" selection-end-line="100" selection-end-column="26" />
               <folding>
                 <element signature="e#81#120#0" expanded="true" />
               </folding>
@@ -55,17 +58,17 @@
       <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+            <state relative-caret-position="231">
+              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MongoDBHelper.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MongoDBHelper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MongoDBHelper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
+            <state relative-caret-position="315">
+              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
             </state>
           </provider>
         </entry>
@@ -73,7 +76,7 @@
       <file leaf-file-name="NoScheduler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scheduler/NoScheduler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
+            <state relative-caret-position="168">
               <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
               <folding>
                 <element signature="e#81#107#0" expanded="true" />
@@ -112,8 +115,8 @@
       <file leaf-file-name="FrontEnd.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="69" column="28" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
+            <state relative-caret-position="589">
+              <caret line="71" column="24" lean-forward="true" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -214,12 +217,12 @@
         <option value="$PROJECT_DIR$/FrontEnd/FrontEndNoScheduler.yml" />
         <option value="$PROJECT_DIR$/JobManager/JobManagerInit.json" />
         <option value="$PROJECT_DIR$/FrontEnd/SwitchScheduler.yml" />
-        <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
-        <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
         <option value="$PROJECT_DIR$/Scheduler/Scheduler.py" />
         <option value="$PROJECT_DIR$/Scheduler/NoScheduler.py" />
-        <option value="$PROJECT_DIR$/Client/StressClient.py" />
         <option value="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" />
+        <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
+        <option value="$PROJECT_DIR$/Client/StressClient.py" />
+        <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
       </list>
     </option>
   </component>
@@ -368,13 +371,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00494" summary="update">
-      <created>1532987680886</created>
-      <option name="number" value="00494" />
-      <option name="presentableId" value="LOCAL-00494" />
-      <option name="project" value="LOCAL" />
-      <updated>1532987680886</updated>
     </task>
     <task id="LOCAL-00495" summary="update">
       <created>1532988086425</created>
@@ -712,7 +708,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533224838898</updated>
     </task>
-    <option name="localTasksCounter" value="543" />
+    <task id="LOCAL-00543" summary="update">
+      <created>1533225315095</created>
+      <option name="number" value="00543" />
+      <option name="presentableId" value="LOCAL-00543" />
+      <option name="project" value="LOCAL" />
+      <updated>1533225315095</updated>
+    </task>
+    <option name="localTasksCounter" value="544" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1041,16 +1044,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6825">
-          <caret line="326" column="37" selection-start-line="326" selection-start-column="37" selection-end-line="326" selection-end-column="37" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/SteadyStressClient.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="777">
@@ -1058,9 +1051,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MongoDBHelper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Scheduler/NoScheduler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
+        <state relative-caret-position="168">
           <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
           <folding>
             <element signature="e#81#107#0" expanded="true" />
@@ -1078,34 +1078,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
+    <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="69" column="28" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
+        <state relative-caret-position="231">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/StressClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
+        <state relative-caret-position="418">
+          <caret line="100" column="26" lean-forward="true" selection-start-line="100" selection-start-column="26" selection-end-line="100" selection-end-column="26" />
           <folding>
             <element signature="e#81#120#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
+    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+        <state relative-caret-position="589">
+          <caret line="71" column="24" lean-forward="true" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MongoDBHelper.py">
+    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
+        <state relative-caret-position="525">
+          <caret line="326" column="46" selection-start-line="326" selection-start-column="46" selection-end-line="326" selection-end-column="46" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

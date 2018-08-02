@@ -84,19 +84,20 @@ class StressClient(object):
     def feed_jobs(self, session_id):
         max_time = 3 * self.time_interval
 
-        def feed():
+        def feed(_session):
             time_index = 0
             while time_index <= max_time:
                 job_count = self.feed_func(time_index)
                 for i in range(job_count):
-                    job_name = 'job' + str(int(time.time() * 1000)) + '-' + session_id
+                    job_name = 'job' + str(int(time.time() * 1000)) + '-' + _session
                     self.newJob(self.generate_job(job_name))
                 time.sleep(self.time_interval)
                 time_index += self.time_interval
 
-        feed()
+        feed(session_id)
         time.sleep(5)
 
+        session_id = time.time()
         # Switch scheduler
         url = 'http://%s:%s/RESTfulSwarm/FE/switchScheduler/no-scheduler' % (self.fe_addr, self.fe_port)
         print(requests.get(url=url).content)
@@ -105,7 +106,7 @@ class StressClient(object):
         print('------------------------------------------------')
 
         time.sleep(5)
-        feed()
+        feed(session_id)
 
     def newJob(self, data):
         url = 'http://%s:%s/RESTfulSwarm/FE/requestNewJob' % (self.fe_addr, self.fe_port)
