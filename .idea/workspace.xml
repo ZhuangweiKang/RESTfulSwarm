@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/FrontEnd/SwitchScheduler.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Scheduler/NoScheduler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/StressClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/StressClient.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/FrontEnd.py" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/FrontEnd.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JobManager/JobManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/JobManager/JobManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JobManager/JobManagerInit.json" beforeDir="false" afterPath="$PROJECT_DIR$/JobManager/JobManagerInit.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,12 +20,10 @@
       <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="326" column="37" lean-forward="true" selection-start-line="326" selection-start-column="37" selection-end-line="326" selection-end-column="37" />
+            <state relative-caret-position="6825">
+              <caret line="326" column="37" selection-start-line="326" selection-start-column="37" selection-end-line="326" selection-end-column="37" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
-                <element signature="e#1408#5194#0" />
-                <element signature="e#6231#8790#0" />
               </folding>
             </state>
           </provider>
@@ -39,8 +32,8 @@
       <file leaf-file-name="Scheduler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="29" column="36" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="36" />
+            <state relative-caret-position="-1575">
+              <caret line="61" column="32" lean-forward="true" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
               <folding>
                 <element signature="e#81#120#0" expanded="true" />
               </folding>
@@ -51,8 +44,11 @@
       <file leaf-file-name="StressClient.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Client/StressClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="708">
-              <caret line="41" column="19" lean-forward="true" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
+            <state relative-caret-position="561">
+              <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
+              <folding>
+                <element signature="e#81#120#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -60,8 +56,8 @@
       <file leaf-file-name="NoScheduler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scheduler/NoScheduler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="29" lean-forward="true" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+            <state relative-caret-position="147">
+              <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
               <folding>
                 <element signature="e#81#107#0" expanded="true" />
               </folding>
@@ -73,7 +69,7 @@
         <entry file="file://$PROJECT_DIR$/TestSample/WorkersInfo.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
-              <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -87,11 +83,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="SteadyStressClient.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/SteadyStressClient.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="777">
+              <caret line="37" column="28" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="FirstFitScheduler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scheduler/FirstFitScheduler.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="294">
-              <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+              <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -108,17 +113,8 @@
       <file leaf-file-name="FrontEnd.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SwitchScheduler.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FrontEnd/SwitchScheduler.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="1" column="11" lean-forward="true" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+            <state relative-caret-position="358">
+              <caret line="69" column="28" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -252,7 +248,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -309,6 +304,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -373,13 +369,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00491" summary="update">
-      <created>1532985986311</created>
-      <option name="number" value="00491" />
-      <option name="presentableId" value="LOCAL-00491" />
-      <option name="project" value="LOCAL" />
-      <updated>1532985986311</updated>
     </task>
     <task id="LOCAL-00492" summary="update">
       <created>1532986893885</created>
@@ -717,7 +706,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533145830644</updated>
     </task>
-    <option name="localTasksCounter" value="540" />
+    <task id="LOCAL-00540" summary="update">
+      <created>1533161077078</created>
+      <option name="number" value="00540" />
+      <option name="presentableId" value="LOCAL-00540" />
+      <option name="project" value="LOCAL" />
+      <updated>1533161077078</updated>
+    </task>
+    <option name="localTasksCounter" value="541" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -731,7 +727,7 @@
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.31704262" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21610738" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21879195" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -949,13 +945,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/SteadyStressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GraphBook.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -1001,13 +990,7 @@
     <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEndInit.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEndNoScheduler.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="86" column="14" lean-forward="true" selection-start-line="86" selection-start-column="14" selection-end-line="86" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEndNoScheduler.yml" />
     <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1019,12 +1002,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2814">
           <caret line="156" selection-start-line="156" selection-end-line="156" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-            <element signature="e#1221#1491#0" />
-            <element signature="e#1518#1622#0" />
-            <element signature="e#1680#1819#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1052,24 +1029,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Scheduler/FirstFitScheduler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
-          <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TestSample/WorkersInfo.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -1080,10 +1050,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6825">
+          <caret line="326" column="37" selection-start-line="326" selection-start-column="37" selection-end-line="326" selection-end-column="37" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/SteadyStressClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="777">
+          <caret line="37" column="28" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Scheduler/NoScheduler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="29" lean-forward="true" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+        <state relative-caret-position="147">
+          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
           <folding>
             <element signature="e#81#107#0" expanded="true" />
           </folding>
@@ -1092,30 +1079,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="29" column="36" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="36" />
+        <state relative-caret-position="-1575">
+          <caret line="61" column="32" lean-forward="true" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
           <folding>
             <element signature="e#81#120#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
+    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="326" column="37" lean-forward="true" selection-start-line="326" selection-start-column="37" selection-end-line="326" selection-end-column="37" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-            <element signature="e#1408#5194#0" />
-            <element signature="e#6231#8790#0" />
-          </folding>
+        <state relative-caret-position="358">
+          <caret line="69" column="28" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/StressClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="708">
-          <caret line="41" column="19" lean-forward="true" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
+        <state relative-caret-position="561">
+          <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
+          <folding>
+            <element signature="e#81#120#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
