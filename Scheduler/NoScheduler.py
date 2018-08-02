@@ -28,6 +28,7 @@ class NoScheduler(Scheduler):
             for task in job_data['job_info']['tasks']:
                 need_waiting = False
                 target_node = job_data['job_info']['tasks'][task]['node']
+                print('The target node is %s' % target_node)
                 target_cores = job_data['job_info']['tasks'][task]['cpuset_cpus'].split(',')
                 worker_data = self.get_node_info(target_node)
                 for core in target_cores:
