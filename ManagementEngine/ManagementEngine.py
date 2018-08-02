@@ -51,7 +51,7 @@ class ManagementEngine:
             workers_info_data = mg.find_col(workers_info_col)
             for index, worker in enumerate(workers_info_data[:]):
                 for cpu in worker['CPUs']:
-                    workers_info_data[index][cpu] = False
+                    workers_info_data[index]['CPUs'][cpu] = False
                 mg.update_doc(col=workers_info_col,
                               filter_key='hostname',
                               filter_value=worker['hostname'],
@@ -189,6 +189,7 @@ class ManagementEngine:
         self.shutdown_discovery(dc_proc)
         self.shutdown_workers()
         self.clear_master()
+        time.sleep(5)
         self.clear_db()
 
     def main(self):
