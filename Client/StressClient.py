@@ -100,6 +100,9 @@ class StressClient(object):
         # Switch scheduler
         url = 'http://%s:%s/RESTfulSwarm/FE/switchScheduler/no-scheduler' % (self.fe_addr, self.fe_port)
         print(requests.post(url=url).content)
+        print('------------------------------------------------')
+        print('Switch Scheduler to No Scheduler')
+        print('------------------------------------------------')
 
         time.sleep(5)
         feed()
