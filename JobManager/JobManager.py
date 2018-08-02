@@ -286,7 +286,8 @@ class JobManager:
                     for index, job in enumerate(job_queue_snap_shoot[:]):
                         if job[1] not in waiting_decision:
                             temp_job_queue.append(job)
-                            job_queue.remove(job)
+                            if job in job_queue:
+                                job_queue.remove(job)
                             job_queue_snap_shoot.remove(job)
 
                     for msg in temp_job_queue:
