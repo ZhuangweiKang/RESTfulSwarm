@@ -45,4 +45,6 @@ class NoScheduler(Scheduler):
                     break
             if len(job_data['job_info']['tasks']) == len(temp_result):
                 scheduling_decision.extend(temp_result)
+            print(scheduling_decision)
+            print(waiting_decision)
         return scheduling_decision, waiting_decision
