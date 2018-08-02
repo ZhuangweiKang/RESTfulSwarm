@@ -49,14 +49,14 @@ class ManagementEngine:
             # Reset worker info collection
             workers_info_col = mg.get_col(self.db, 'WorkersInfo')
             workers_info_data = mg.find_col(workers_info_col)[0]
-            for worker in workers_info_data:
+            for index, worker in enumerate(workers_info_data[:]):
                 for cpu in worker['CPUs']:
-                    workers_info_data[cpu] = False
+                    workers_info_data[index][cpu] = False
                 mg.update_doc(col=workers_info_col,
                               filter_key='hostname',
                               filter_value=worker['hostname'],
                               target_key='CPUs',
-                              target_value=workers_info_data['CPUs'])
+                              target_value=workers_info_data[index]['CPUs'])
         print('Reset MongoDB.')
 
     def clear_master(self):
