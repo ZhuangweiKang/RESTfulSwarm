@@ -6,12 +6,13 @@ from abc import ABCMeta, abstractmethod
 import requests
 import random
 import time
+import utl
 import json
 
 
 class StressClient(object):
     class Task:
-        def __init__(self, container_name, image, cpu_count, mem_limit, command="", node="", cpuset_cpus=""):
+        def __init__(self, container_name, image, cpu_count, mem_limit, command="", node="", cpuset_cpus="", deadline=0):
             self.container_name = container_name
             self.image = image
             self.command = command
@@ -19,6 +20,7 @@ class StressClient(object):
             self.mem_limit = mem_limit
             self.node = node
             self.cpuset_cpus = cpuset_cpus
+            self.deadline = deadline
 
         def generate_task(self):
             task = {"container_name": self.container_name,
@@ -32,6 +34,7 @@ class StressClient(object):
                     "ports": {},
                     "volumes": {},
                     "environment": {},
+                    "deadline": self.deadline,
                     "status": "Ready"}
             return task
 
@@ -52,6 +55,8 @@ class StressClient(object):
             data = json.load(f)
         self.fe_addr = data['front_end_addr']
         self.fe_port = data['front_end_port']
+
+        self.logger = utl.doLog('StressClientLogger', 'StressClient.log')
 
     def generate_job(self, job_name):
         with open('SampleJob.json', 'r') as f:
@@ -78,7 +83,7 @@ class StressClient(object):
             image = self.image_name
             cpu_count = self.task_cores
             mem_limit = str(self.task_mem) + 'm'
-            task = self.Task(task_name, image, cpu_count, mem_limit, node=node, cpuset_cpus=cpuset_cpus)
+            task = self.Task(task_name, image, cpu_count, mem_limit, node=node, cpuset_cpus=cpuset_cpus, deadline=random.randint(0, 20))
             task = task.generate_task()
             job['job_info']['tasks'].update({task_name: task})
         return job
@@ -88,12 +93,18 @@ class StressClient(object):
         return 0
 
     def feed_jobs(self, session_id):
+        total_jobs = 0
+
         max_time = 5 * self.time_interval
+        start_time = time.time()
 
         def feed(_session):
+            nonlocal total_jobs
             time_index = 0
             while time_index <= max_time:
                 job_count = self.feed_func(time_index)
+                self.logger.info('Time Index----%d----Job#----%d' % (time_index, job_count))
+                total_jobs += job_count
                 for i in range(job_count):
                     job_name = 'job' + str(int(time.time() * 1000)) + '-' + _session
                     self.newJob(self.generate_job(job_name))
@@ -101,8 +112,11 @@ class StressClient(object):
                 time_index += self.time_interval
 
         feed(session_id)
+        self.logger.info('Total jobs #: %d' % total_jobs)
+        elapsed_time = time.time() - start_time
+        self.logger.info('Elapsed time: %f' % elapsed_time)
+
         # time.sleep(5)
-        #
         # session_id = str(int(time.time()))
         # # Switch scheduler
         # url = 'http://%s:%s/RESTfulSwarm/FE/switchScheduler/no-scheduler' % (self.fe_addr, self.fe_port)
