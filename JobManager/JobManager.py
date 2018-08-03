@@ -14,7 +14,7 @@ import json
 import threading
 from Scheduler import BestFitScheduler
 from Scheduler import FirstFitScheduler
-from Scheduler import NoScheduler
+from Scheduler import NodeScheduler
 from Scheduler import BestFitDecreasingScheduler
 from Scheduler import FirstFitDecreasingScheduler
 import ZMQHelper as zmq
@@ -323,7 +323,7 @@ class JobManager:
                 elif new_scheduler == 'first-fit-decreasing':
                     self.scheduler = FirstFitDecreasingScheduler.FirstFitDecreasingScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
                 elif new_scheduler == 'no-scheduler':
-                    self.scheduler = NoScheduler.NoScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
+                    self.scheduler = NodeScheduler.NoScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
             else:
                 self.socket.send_string('Ack')
                 job_queue.append(msg)
@@ -381,7 +381,7 @@ def main():
     elif scheduling_strategy == 'best-fir-decreasing':
         scheduler = BestFitDecreasingScheduler.BestFitDecreasingScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
     elif scheduling_strategy == 'no-scheduler':
-        scheduler = NoScheduler.NoScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
+        scheduler = NodeScheduler.NoScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
     else:
         scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
 
