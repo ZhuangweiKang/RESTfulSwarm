@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Scheduler/BinPackingScheduler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Scheduler/PriorityScheduler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Scheduler/SchedulerUnitTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/StressClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/StressClient.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GraphBook.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/GraphBook.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JobManager/JobManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/JobManager/JobManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scheduler/BestFitDecreasingScheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scheduler/BestFitDecreasingScheduler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scheduler/BestFitScheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scheduler/BestFitScheduler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scheduler/FirstFitDecreasingScheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scheduler/FirstFitDecreasingScheduler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scheduler/FirstFitScheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scheduler/FirstFitScheduler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scheduler/NodeScheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scheduler/NodeScheduler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scheduler/RandomScheduler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scheduler/Scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scheduler/Scheduler.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -1330,34 +1317,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
     </task>
-    <task id="LOCAL-00516" summary="update">
-      <created>1533065288729</created>
-      <option name="number" value="00516" />
-      <option name="presentableId" value="LOCAL-00516" />
-      <option name="project" value="LOCAL" />
-      <updated>1533065288729</updated>
-    </task>
-    <task id="LOCAL-00517" summary="update">
-      <created>1533066496087</created>
-      <option name="number" value="00517" />
-      <option name="presentableId" value="LOCAL-00517" />
-      <option name="project" value="LOCAL" />
-      <updated>1533066496087</updated>
-    </task>
-    <task id="LOCAL-00518" summary="update">
-      <created>1533067227743</created>
-      <option name="number" value="00518" />
-      <option name="presentableId" value="LOCAL-00518" />
-      <option name="project" value="LOCAL" />
-      <updated>1533067227744</updated>
-    </task>
-    <task id="LOCAL-00519" summary="update">
-      <created>1533068459008</created>
-      <option name="number" value="00519" />
-      <option name="presentableId" value="LOCAL-00519" />
-      <option name="project" value="LOCAL" />
-      <updated>1533068459008</updated>
-    </task>
     <task id="LOCAL-00520" summary="update">
       <created>1533069138485</created>
       <option name="number" value="00520" />
@@ -1673,7 +1632,35 @@
       <option name="project" value="LOCAL" />
       <updated>1533246255300</updated>
     </task>
-    <option name="localTasksCounter" value="565" />
+    <task id="LOCAL-00565" summary="Add log for StressClient">
+      <created>1533331887759</created>
+      <option name="number" value="00565" />
+      <option name="presentableId" value="LOCAL-00565" />
+      <option name="project" value="LOCAL" />
+      <updated>1533331887759</updated>
+    </task>
+    <task id="LOCAL-00566" summary="Add node list and cpuset list in preprocess_job()">
+      <created>1533331964792</created>
+      <option name="number" value="00566" />
+      <option name="presentableId" value="LOCAL-00566" />
+      <option name="project" value="LOCAL" />
+      <updated>1533331964792</updated>
+    </task>
+    <task id="LOCAL-00567" summary="Encapsulate bin packing scheduling feature into BinPackingScheduler">
+      <created>1533332079359</created>
+      <option name="number" value="00567" />
+      <option name="presentableId" value="LOCAL-00567" />
+      <option name="project" value="LOCAL" />
+      <updated>1533332079359</updated>
+    </task>
+    <task id="LOCAL-00568" summary="Update NodeScheduler(refactor job_detail instead of reading DB)">
+      <created>1533332157210</created>
+      <option name="number" value="00568" />
+      <option name="presentableId" value="LOCAL-00568" />
+      <option name="project" value="LOCAL" />
+      <updated>1533332157210</updated>
+    </task>
+    <option name="localTasksCounter" value="569" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1791,7 +1778,11 @@
     <MESSAGE value="update args for testing WorkersResourceInfo collection" />
     <MESSAGE value="update README" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="Add log for StressClient" />
+    <MESSAGE value="Add node list and cpuset list in preprocess_job()" />
+    <MESSAGE value="Encapsulate bin packing scheduling feature into BinPackingScheduler" />
+    <MESSAGE value="Update NodeScheduler(refactor job_detail instead of reading DB)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update NodeScheduler(refactor job_detail instead of reading DB)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
