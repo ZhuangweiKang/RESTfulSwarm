@@ -238,10 +238,14 @@ class JobManager:
             core_requests = {}
             # memory request format: {$task_name: $mem}
             mem_requests = {}
+            target_nodes = []
+            target_cpuset = []
             for task in col_data['job_info']['tasks'].items():
                 core_requests.update({task[0]: task[1]['cpu_count']})
                 mem_requests.update({task[0]: task[1]['mem_limit']})
-            return core_requests, mem_requests
+                target_nodes.append(task[1]['node'])
+                target_cpuset.append(task[1]['cpuset_cpus'])
+            return core_requests, mem_requests, target_nodes, target_cpuset
 
         def schedule_resource(jobs_details):
             schedule = self.scheduler.schedule_resources(jobs_details)
@@ -323,7 +327,7 @@ class JobManager:
                 elif new_scheduler == 'first-fit-decreasing':
                     self.scheduler = FirstFitDecreasingScheduler.FirstFitDecreasingScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
                 elif new_scheduler == 'no-scheduler':
-                    self.scheduler = NodeScheduler.NoScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
+                    self.scheduler = NodeScheduler.NodeScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
             else:
                 self.socket.send_string('Ack')
                 job_queue.append(msg)
@@ -381,7 +385,7 @@ def main():
     elif scheduling_strategy == 'best-fir-decreasing':
         scheduler = BestFitDecreasingScheduler.BestFitDecreasingScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
     elif scheduling_strategy == 'no-scheduler':
-        scheduler = NodeScheduler.NoScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
+        scheduler = NodeScheduler.NodeScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
     else:
         scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
 
