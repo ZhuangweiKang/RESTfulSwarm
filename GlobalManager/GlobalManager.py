@@ -11,6 +11,7 @@ from flask import *
 import time
 import utl
 import argparse
+import threading
 from flasgger import Swagger, swag_from
 import DockerHelper as dHelper
 import ZMQHelper as zmq
@@ -294,6 +295,15 @@ def describeManager(hostname):
 
 
 def main():
+    def prune_nw():
+        while True:
+            os.system('docker network prune -f')
+            time.sleep(5)
+
+    prune_nw_thr = threading.Thread(target=prune_nw, args=())
+    prune_nw_thr.daemon = True
+    prune_nw_thr.start()
+
     os.chdir('/home/%s/RESTfulSwarmLM/GlobalManager' % utl.getUserName())
 
     global m_addr
