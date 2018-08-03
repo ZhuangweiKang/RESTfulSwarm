@@ -2,10 +2,10 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-from Scheduler.Scheduler import Scheduler
+from Scheduler.BinPackingScheduler import BinPackingScheduler
 
 
-class BestFitScheduler(Scheduler):
+class BestFitScheduler(BinPackingScheduler):
     def __init__(self, db, workers_col_name, worker_resource_col_name):
         super(BestFitScheduler, self).__init__(db, workers_col_name, worker_resource_col_name)
 

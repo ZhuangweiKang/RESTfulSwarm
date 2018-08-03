@@ -7,7 +7,7 @@ from Scheduler.FirstFitScheduler import FirstFitScheduler
 
 class FirstFitDecreasingScheduler(FirstFitScheduler):
     def __init__(self, db, workers_col_name, worker_resource_col_name):
-        super(FirstFitScheduler).__init__(db, workers_col_name, worker_resource_col_name)
+        super(FirstFitScheduler, self).__init__(db, workers_col_name, worker_resource_col_name)
 
     def cores_scheduling_algorithm(self, jobs_details, free_cores):
         core_requests = [(job[0], job[1][0]) for job in jobs_details]
