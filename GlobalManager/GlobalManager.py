@@ -297,7 +297,7 @@ def describeManager(hostname):
 def main():
     def prune_nw():
         while True:
-            os.system('docker network prune -f')
+            os.system('docker network prune -force --filter until=5m')
             time.sleep(5)
 
     prune_nw_thr = threading.Thread(target=prune_nw, args=())
