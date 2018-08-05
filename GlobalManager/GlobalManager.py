@@ -11,6 +11,8 @@ from flask import *
 import time
 import utl
 import argparse
+from datetime import datetime
+from datetime import timedelta
 import threading
 from flasgger import Swagger, swag_from
 import DockerHelper as dHelper
@@ -52,6 +54,7 @@ workers_resources = 'WorkersResourceInfo'
 db = None
 worker_col = None
 worker_resource_col = None
+job_time_list = []
 
 
 @app.route('/RESTfulSwarm/GM/init', methods=['GET'])
@@ -160,6 +163,8 @@ def requestNewJob():
         createOverlayNetwork(network=data['job_info']['network']['name'],
                              driver=data['job_info']['network']['driver'],
                              subnet=data['job_info']['network']['subnet'])
+        job_time_list.append(datetime.now() + timedelta(minutes=5))
+
     try:
         # make directory for nfs
         job_nfs_path = '/var/nfs/RESTfulSwarm/%s' % data['job_name']
@@ -316,10 +321,13 @@ def main():
 
     # periodically collect unused network
     def prune_nw():
+        index = 0
         while True:
-            cmd = 'docker network prune --force --filter until=5m'
-            os.system(cmd)
-            time.sleep(5)
+            if datetime.now() >= job_time_list[index]:
+                cmd = 'docker network prune --force --filter until=5m'
+                os.system(cmd)
+                index += 1
+                time.sleep(5)
 
     prune_nw_thr = threading.Thread(target=prune_nw, args=())
     prune_nw_thr.daemon = True
