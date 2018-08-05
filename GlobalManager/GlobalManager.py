@@ -98,6 +98,8 @@ def requestJoin():
                 os.system('sudo systemctl restart nfs-kernel-server')
 
             configure_nfs()
+            time.sleep(3)
+
             init_worker_info(hostname, data['CPUs'], data['MemFree'])
             remote_addr = host_addr + ':2377'
             join_token = dHelper.getJoinToken()
@@ -166,6 +168,7 @@ def requestNewJob():
         # make directory for nfs
         job_nfs_path = '/var/nfs/RESTfulSwarm/%s' % data['job_name']
         os.mkdir(path=job_nfs_path)
+        time.sleep(0.3)
 
         for task in list(data['job_info']['tasks'].keys()):
             data['job_info']['tasks'][task].update({'network': data['job_info']['network']['name']})
@@ -321,6 +324,7 @@ def main():
 
     prune_nw_thr = threading.Thread(target=prune_nw, args=())
     prune_nw_thr.daemon = True
+    prune_nw_thr.start()
 
     os.chdir('/home/%s/RESTfulSwarmLM/GlobalManager' % utl.getUserName())
 
