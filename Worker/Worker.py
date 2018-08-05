@@ -213,6 +213,7 @@ class Worker:
         }
 
         respond = requests.post(url=url, json=json_info).content
+        self.logger.debug(respond[1])
         # configure nfs
         if respond[1] == 200:
             # mount to the directory on nfs host server(GlobalManager)
