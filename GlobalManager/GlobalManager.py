@@ -165,7 +165,7 @@ def requestNewJob():
                              subnet=data['job_info']['network']['subnet'])
     try:
         # make directory for nfs
-        job_nfs_path = 'var/nfs/RESTfulSwarm/%s' % data['job_name']
+        job_nfs_path = '/var/nfs/RESTfulSwarm/%s' % data['job_name']
         os.mkdir(path=job_nfs_path)
 
         for task in list(data['job_info']['tasks'].keys()):
