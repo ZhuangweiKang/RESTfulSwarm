@@ -91,7 +91,7 @@ def requestJoin():
         if dHelper.checkNodeHostName(dockerClient, hostname):
             # configure nfs setting
             def configure_nfs():
-                with open('/etc/exports', 'w') as f:
+                with open('/etc/exports', 'a') as f:
                     new_worker = '/var/nfs/RESTfulSwarm     %s(rw,sync,no_subtree_check)\n' % worker_addr
                     f.write(new_worker)
                 # restart nfs
@@ -313,12 +313,16 @@ def describeManager(hostname):
 
 
 def main():
+    # clear /etc/exports to avoid duplicated nfs client
+    with open('/etc/exports', 'w') as f:
+        f.write('')
+
     # periodically collect unused network
     def prune_nw():
         while True:
             if inited_master:
                 time.sleep(5)
-                os.system('docker network prune --force --filter until=5m')
+                os.system('docker network prune --force --filter \"until=5m\"')
             time.sleep(5)
 
     prune_nw_thr = threading.Thread(target=prune_nw, args=())
