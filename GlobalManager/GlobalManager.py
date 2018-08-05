@@ -323,11 +323,11 @@ def main():
     def prune_nw():
         index = 0
         while True:
-            if datetime.now() >= job_time_list[index]:
+            if len(job_time_list) > 0 and datetime.now() >= job_time_list[index]:
                 cmd = 'docker network prune --force --filter until=5m'
                 os.system(cmd)
                 index += 1
-                time.sleep(5)
+            time.sleep(5)
 
     prune_nw_thr = threading.Thread(target=prune_nw, args=())
     prune_nw_thr.daemon = True

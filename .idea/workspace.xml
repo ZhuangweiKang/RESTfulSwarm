@@ -24,8 +24,8 @@
       <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="325" column="54" lean-forward="true" selection-start-line="325" selection-start-column="54" selection-end-line="325" selection-end-column="54" />
+            <state relative-caret-position="286">
+              <caret line="324" column="19" lean-forward="true" selection-start-line="324" selection-start-column="19" selection-end-line="324" selection-end-column="19" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -379,13 +379,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
     </task>
-    <task id="LOCAL-00549" summary="update">
-      <created>1533227682364</created>
-      <option name="number" value="00549" />
-      <option name="presentableId" value="LOCAL-00549" />
-      <option name="project" value="LOCAL" />
-      <updated>1533227682364</updated>
-    </task>
     <task id="LOCAL-00550" summary="update">
       <created>1533227892265</created>
       <option name="number" value="00550" />
@@ -722,7 +715,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533447983731</updated>
     </task>
-    <option name="localTasksCounter" value="598" />
+    <task id="LOCAL-00598" summary="update">
+      <created>1533450974886</created>
+      <option name="number" value="00598" />
+      <option name="presentableId" value="LOCAL-00598" />
+      <option name="project" value="LOCAL" />
+      <updated>1533450974886</updated>
+    </task>
+    <option name="localTasksCounter" value="599" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -829,14 +829,14 @@
     <MESSAGE value="Encapsulate bin packing scheduling feature into BinPackingScheduler" />
     <MESSAGE value="Update NodeScheduler(refactor job_detail instead of reading DB)" />
     <MESSAGE value="Update sample task image to a python sleeper image,&#10;sleep time in the range of (30, 60) seconds." />
-    <MESSAGE value="update" />
     <MESSAGE value="Add NFS sharing directory" />
     <MESSAGE value="debug worker" />
     <MESSAGE value="Update" />
     <MESSAGE value="debug network prune" />
     <MESSAGE value="upgrade docker version from 17.03 to 17.02" />
     <MESSAGE value="upgrade" />
-    <option name="LAST_COMMIT_MESSAGE" value="upgrade" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1180,8 +1180,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="325" column="54" lean-forward="true" selection-start-line="325" selection-start-column="54" selection-end-line="325" selection-end-column="54" />
+        <state relative-caret-position="286">
+          <caret line="324" column="19" lean-forward="true" selection-start-line="324" selection-start-column="19" selection-end-line="324" selection-end-column="19" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
           </folding>
