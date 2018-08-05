@@ -195,3 +195,12 @@ def getNodeInfo(client, name):
 def removeNode(name):
     cmd = 'docker node rm -f %s' % name
     print(os.popen(cmd).read())
+
+
+def prun_network(client, filter=None):
+    '''
+    :param force: boolean type
+    :param filter: dictionary type
+    :return:
+    '''
+    client.networks.prune(filters=filter)
