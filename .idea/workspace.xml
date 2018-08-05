@@ -25,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="286">
-              <caret line="324" column="19" lean-forward="true" selection-start-line="324" selection-start-column="19" selection-end-line="324" selection-end-column="19" />
+              <caret line="324" column="77" lean-forward="true" selection-start-line="324" selection-start-column="77" selection-end-line="324" selection-end-column="77" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -379,20 +379,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
     </task>
-    <task id="LOCAL-00550" summary="update">
-      <created>1533227892265</created>
-      <option name="number" value="00550" />
-      <option name="presentableId" value="LOCAL-00550" />
-      <option name="project" value="LOCAL" />
-      <updated>1533227892265</updated>
-    </task>
-    <task id="LOCAL-00551" summary="update">
-      <created>1533227951556</created>
-      <option name="number" value="00551" />
-      <option name="presentableId" value="LOCAL-00551" />
-      <option name="project" value="LOCAL" />
-      <updated>1533227951556</updated>
-    </task>
     <task id="LOCAL-00552" summary="update">
       <created>1533228516584</created>
       <option name="number" value="00552" />
@@ -722,7 +708,21 @@
       <option name="project" value="LOCAL" />
       <updated>1533450974886</updated>
     </task>
-    <option name="localTasksCounter" value="599" />
+    <task id="LOCAL-00599" summary="update">
+      <created>1533451018525</created>
+      <option name="number" value="00599" />
+      <option name="presentableId" value="LOCAL-00599" />
+      <option name="project" value="LOCAL" />
+      <updated>1533451018525</updated>
+    </task>
+    <task id="LOCAL-00600" summary="update">
+      <created>1533451539453</created>
+      <option name="number" value="00600" />
+      <option name="presentableId" value="LOCAL-00600" />
+      <option name="project" value="LOCAL" />
+      <updated>1533451539453</updated>
+    </task>
+    <option name="localTasksCounter" value="601" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -844,13 +844,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Client/IncrementalStressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="39" column="19" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/RandomStressClient.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1029">
@@ -1178,10 +1171,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-35443865/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="3633" column="11" lean-forward="true" selection-start-line="3633" selection-start-column="11" selection-end-line="3633" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
-          <caret line="324" column="19" lean-forward="true" selection-start-line="324" selection-start-column="19" selection-end-line="324" selection-end-column="19" />
+          <caret line="324" column="77" lean-forward="true" selection-start-line="324" selection-start-column="77" selection-end-line="324" selection-end-column="77" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
           </folding>

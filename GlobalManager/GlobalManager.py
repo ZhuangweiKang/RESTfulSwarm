@@ -323,7 +323,7 @@ def main():
     def prune_nw():
         while True:
             if len(job_time_list) > 0 and datetime.now() >= job_time_list[0]:
-                cmd = 'docker network prune --force --filter until=5m'
+                cmd = 'docker network prune --force --filter until=%s' % job_time_list[-1]
                 os.system(cmd)
                 job_time_list.pop(0)
             time.sleep(5)
