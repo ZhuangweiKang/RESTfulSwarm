@@ -317,6 +317,7 @@ def main():
     def prune_nw():
         while True:
             if inited_master:
+                time.sleep(5)
                 os.system('docker network prune --force --filter until=5m')
             time.sleep(5)
 
