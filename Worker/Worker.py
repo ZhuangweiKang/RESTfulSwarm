@@ -216,7 +216,7 @@ class Worker:
         # configure nfs
         if respond[1] == 200:
             # mount to the directory on nfs host server(GlobalManager)
-            cmd = 'sudo mount %s:/var/nfs/RESTfulSwarm /nfs/RESTfulSwarm'
+            cmd = 'sudo mount %s:/var/nfs/RESTfulSwarm /nfs/RESTfulSwarm' % self.manager_addr
             os.system(cmd)
 
     def requestLeaveSwarm(self):
