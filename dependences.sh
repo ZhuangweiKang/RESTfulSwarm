@@ -17,8 +17,8 @@ docker_check=$(which docker)
 if [ "$docker_check" = "" ];
 then
     # install docker 17.12
-    wget https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/docker-ce_17.12.0~ce-0~ubuntu-xenial_amd64.deb
-    dpkg -i docker-ce_17.12.0~ce-0~ubuntu-xenial_amd64.deb
+    wget https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/docker-ce_17.12.0~ce-0~ubuntu_amd64.deb
+    dpkg -i docker-ce_17.12.0~ce-0~ubuntu_amd64.deb
 
     # run docker without sudo
     groupadd docker
