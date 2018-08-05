@@ -345,7 +345,7 @@ def main():
     # periodically collect unused network
     def prune_nw():
         while True:
-            dHelper.prun_network(dockerClient, filter={'until': '5m'})
+            print(dHelper.prun_network(dockerClient, filter={'until': '5m'}))
             time.sleep(5)
 
     prune_nw_thr = threading.Thread(target=prune_nw, args=())
