@@ -163,8 +163,7 @@ def requestNewJob():
         createOverlayNetwork(network=data['job_info']['network']['name'],
                              driver=data['job_info']['network']['driver'],
                              subnet=data['job_info']['network']['subnet'])
-        time.sleep(1)
-        job_time_list.append(datetime.now())
+        job_time_list.append(datetime.now() + timedelta(seconds=1))
 
     try:
         # make directory for nfs

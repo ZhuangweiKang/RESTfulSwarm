@@ -4,7 +4,6 @@
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Temp.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Temp.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,8 +24,8 @@
       <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="327" column="30" lean-forward="true" selection-start-line="327" selection-start-column="30" selection-end-line="327" selection-end-column="30" />
+            <state relative-caret-position="829">
+              <caret line="317" column="55" lean-forward="true" selection-start-line="317" selection-start-column="55" selection-end-line="317" selection-end-column="55" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -113,7 +112,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>CPU</find>
       <find>CPU.</find>
       <find>log</find>
       <find>print</find>
@@ -143,6 +141,7 @@
       <find>export</find>
       <find>inited</find>
       <find>network</find>
+      <find>overlay</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -388,20 +387,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00557" summary="update">
-      <created>1533239308764</created>
-      <option name="number" value="00557" />
-      <option name="presentableId" value="LOCAL-00557" />
-      <option name="project" value="LOCAL" />
-      <updated>1533239308764</updated>
-    </task>
-    <task id="LOCAL-00558" summary="update">
-      <created>1533239629812</created>
-      <option name="number" value="00558" />
-      <option name="presentableId" value="LOCAL-00558" />
-      <option name="project" value="LOCAL" />
-      <updated>1533239629812</updated>
     </task>
     <task id="LOCAL-00559" summary="update">
       <created>1533241396571</created>
@@ -732,7 +717,21 @@
       <option name="project" value="LOCAL" />
       <updated>1533454248146</updated>
     </task>
-    <option name="localTasksCounter" value="606" />
+    <task id="LOCAL-00606" summary="update">
+      <created>1533485023159</created>
+      <option name="number" value="00606" />
+      <option name="presentableId" value="LOCAL-00606" />
+      <option name="project" value="LOCAL" />
+      <updated>1533485023159</updated>
+    </task>
+    <task id="LOCAL-00607" summary="update">
+      <created>1533485889663</created>
+      <option name="number" value="00607" />
+      <option name="presentableId" value="LOCAL-00607" />
+      <option name="project" value="LOCAL" />
+      <updated>1533485889663</updated>
+    </task>
+    <option name="localTasksCounter" value="608" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1190,8 +1189,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="327" column="30" lean-forward="true" selection-start-line="327" selection-start-column="30" selection-end-line="327" selection-end-column="30" />
+        <state relative-caret-position="829">
+          <caret line="317" column="55" lean-forward="true" selection-start-line="317" selection-start-column="55" selection-end-line="317" selection-end-column="55" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
           </folding>
