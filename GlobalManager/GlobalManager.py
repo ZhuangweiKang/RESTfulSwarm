@@ -74,7 +74,7 @@ def initSwarmEnv():
 
 
 def createOverlayNetwork(network, driver, subnet):
-    dHelper.createNetwork(dockerClient, name=network, driver=driver, subnet=subnet, ingress=True)
+    dHelper.createNetwork(dockerClient, name=network, driver=driver, subnet=subnet)
     app.logger.info('Build overlay network: %s.' % network)
 
 
