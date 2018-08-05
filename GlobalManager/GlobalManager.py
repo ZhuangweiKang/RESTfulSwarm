@@ -314,6 +314,17 @@ def main():
     with open('/etc/exports', 'w') as f:
         f.write('')
 
+    # periodically collect unused network
+    def prune_nw():
+        while True:
+            cmd = 'docker network prune --force --filter until=5m'
+            os.system(cmd)
+            time.sleep(5)
+
+    prune_nw_thr = threading.Thread(target=prune_nw, args=())
+    prune_nw_thr.daemon = True
+    prune_nw_thr.start()
+
     os.chdir('/home/%s/RESTfulSwarmLM/GlobalManager' % utl.getUserName())
 
     global m_addr
@@ -341,16 +352,6 @@ def main():
     db = mg.get_db(mongo_client, db_name)
     worker_col = mg.get_col(db, workers_collection_name)
     worker_resource_col = mg.get_col(db, workers_resources)
-
-    # periodically collect unused network
-    def prune_nw():
-        while True:
-            print(dHelper.prun_network(dockerClient, filter={'until': '20m'}))
-            time.sleep(5)
-
-    prune_nw_thr = threading.Thread(target=prune_nw, args=())
-    prune_nw_thr.daemon = True
-    prune_nw_thr.start()
 
     os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
 
