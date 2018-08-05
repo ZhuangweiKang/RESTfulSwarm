@@ -89,7 +89,7 @@ def requestJoin():
             # configure nfs setting
             def configure_nfs():
                 with open('/etc/exports', 'a') as f:
-                    new_worker = '/var/nfs/RESTfulSwarm     %s(rw,sync,no_subtree_check)' % worker_addr
+                    new_worker = '/var/nfs/RESTfulSwarm     %s(rw,sync,no_subtree_check)\n' % worker_addr
                     f.write(new_worker)
                 # restart nfs
                 os.system('sudo systemctl restart nfs-kernel-server')
