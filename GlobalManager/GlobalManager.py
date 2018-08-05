@@ -64,7 +64,6 @@ def init():
         pubSocket = zmq.bind('3100')
         initSwarmEnv()
         response = 'OK: Initialize Swarm environment succeed.'
-        time.sleep(1)
         inited_master = True
         return response, 200
     except Exception as ex:
