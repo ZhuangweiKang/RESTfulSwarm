@@ -92,7 +92,7 @@ def requestJoin():
         if dHelper.checkNodeHostName(dockerClient, hostname):
             # configure nfs setting
             def configure_nfs():
-                with open('/etc/exports', 'a') as f:
+                with open('/etc/exports', 'w') as f:
                     new_worker = '/var/nfs/RESTfulSwarm     %s(rw,sync,no_subtree_check)\n' % worker_addr
                     f.write(new_worker)
                 # restart nfs
