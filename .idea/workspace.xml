@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="" />
+    <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Temp.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Temp.ipynb" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +25,8 @@
       <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="325" column="61" selection-start-line="325" selection-start-column="61" selection-end-line="325" selection-end-column="61" />
+            <state relative-caret-position="86">
+              <caret line="327" column="30" lean-forward="true" selection-start-line="327" selection-start-column="30" selection-end-line="327" selection-end-column="30" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -33,7 +37,7 @@
       <file leaf-file-name="datetime.pyi" pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3/datetime.pyi">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
+            <state relative-caret-position="4840">
               <caret line="225" column="11" selection-start-line="225" selection-start-column="11" selection-end-line="225" selection-end-column="11" />
             </state>
           </provider>
@@ -43,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/dependences.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -51,8 +55,8 @@
       <file leaf-file-name="DockerHelper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DockerHelper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="127" column="35" lean-forward="true" selection-start-line="127" selection-start-column="35" selection-end-line="127" selection-end-column="35" />
+            <state relative-caret-position="2706">
+              <caret line="127" column="35" selection-start-line="127" selection-start-column="35" selection-end-line="127" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -60,7 +64,7 @@
       <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-633">
+            <state relative-caret-position="1936">
               <caret line="89" column="24" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
             </state>
           </provider>
@@ -70,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/GlobalManager/dependences.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
-              <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+              <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -79,7 +83,7 @@
         <entry file="file://$PROJECT_DIR$/Worker/dependences.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="308">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -87,8 +91,8 @@
       <file leaf-file-name="Worker.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="217" column="39" lean-forward="true" selection-start-line="217" selection-start-column="39" selection-end-line="217" selection-end-column="39" />
+            <state relative-caret-position="2530">
+              <caret line="217" column="39" selection-start-line="217" selection-start-column="39" selection-end-line="217" selection-end-column="39" />
               <folding>
                 <element signature="e#1304#2922#0" />
                 <element signature="e#2964#6431#0" />
@@ -384,20 +388,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00555" summary="update">
-      <created>1533233496672</created>
-      <option name="number" value="00555" />
-      <option name="presentableId" value="LOCAL-00555" />
-      <option name="project" value="LOCAL" />
-      <updated>1533233496672</updated>
-    </task>
-    <task id="LOCAL-00556" summary="update">
-      <created>1533238961342</created>
-      <option name="number" value="00556" />
-      <option name="presentableId" value="LOCAL-00556" />
-      <option name="project" value="LOCAL" />
-      <updated>1533238961342</updated>
     </task>
     <task id="LOCAL-00557" summary="update">
       <created>1533239308764</created>
@@ -728,7 +718,21 @@
       <option name="project" value="LOCAL" />
       <updated>1533453833372</updated>
     </task>
-    <option name="localTasksCounter" value="604" />
+    <task id="LOCAL-00604" summary="update">
+      <created>1533454040064</created>
+      <option name="number" value="00604" />
+      <option name="presentableId" value="LOCAL-00604" />
+      <option name="project" value="LOCAL" />
+      <updated>1533454040064</updated>
+    </task>
+    <task id="LOCAL-00605" summary="update">
+      <created>1533454248146</created>
+      <option name="number" value="00605" />
+      <option name="presentableId" value="LOCAL-00605" />
+      <option name="project" value="LOCAL" />
+      <updated>1533454248146</updated>
+    </task>
+    <option name="localTasksCounter" value="606" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -774,7 +778,7 @@
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.31601733" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22121535" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22334754" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -793,24 +797,24 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2080537" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3283208" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3283208" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.31704262" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50067115" side_tool="true" weight="0.32330826" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3283208" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3283208" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -850,6 +854,17 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4774">
+          <caret line="217" column="39" lean-forward="true" selection-start-line="217" selection-start-column="39" selection-end-line="217" selection-end-column="39" />
+          <folding>
+            <element signature="e#1304#2922#0" />
+            <element signature="e#2964#6431#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GraphBook.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -962,11 +977,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="24" column="12" lean-forward="true" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-          <folding>
-            <element signature="e#81#120#0" expanded="true" />
-            <element signature="e#5304#5788#0" />
-            <element signature="e#5843#6027#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1052,9 +1062,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="231" column="12" selection-start-line="231" selection-start-column="12" selection-end-line="231" selection-end-column="12" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1079,9 +1086,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestSample/SampleJob2.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-35443865/nt.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -1091,8 +1095,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="217" column="39" lean-forward="true" selection-start-line="217" selection-start-column="39" selection-end-line="217" selection-end-column="39" />
+        <state relative-caret-position="2530">
+          <caret line="217" column="39" selection-start-line="217" selection-start-column="39" selection-end-line="217" selection-end-column="39" />
           <folding>
             <element signature="e#1304#2922#0" />
             <element signature="e#2964#6431#0" />
@@ -1123,7 +1127,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-633">
+        <state relative-caret-position="1936">
           <caret line="89" column="24" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
         </state>
       </provider>
@@ -1131,14 +1135,14 @@
     <entry file="file://$PROJECT_DIR$/GlobalManager/dependences.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Worker/dependences.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
@@ -1152,7 +1156,7 @@
     <entry file="file://$PROJECT_DIR$/dependences.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
@@ -1165,8 +1169,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DockerHelper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="127" column="35" lean-forward="true" selection-start-line="127" selection-start-column="35" selection-end-line="127" selection-end-column="35" />
+        <state relative-caret-position="2706">
+          <caret line="127" column="35" selection-start-line="127" selection-start-column="35" selection-end-line="127" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -1179,15 +1183,15 @@
     </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3/datetime.pyi">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
+        <state relative-caret-position="4840">
           <caret line="225" column="11" selection-start-line="225" selection-start-column="11" selection-end-line="225" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="325" column="61" selection-start-line="325" selection-start-column="61" selection-end-line="325" selection-end-column="61" />
+        <state relative-caret-position="86">
+          <caret line="327" column="30" lean-forward="true" selection-start-line="327" selection-start-column="30" selection-end-line="327" selection-end-column="30" />
           <folding>
             <element signature="e#81#90#0" expanded="true" />
           </folding>

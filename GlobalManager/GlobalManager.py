@@ -323,7 +323,8 @@ def main():
     def prune_nw():
         while True:
             if len(job_time_list) > 0 and datetime.now() >= job_time_list[0]:
-                cmd = 'docker network prune --force --filter "until=%s"' % str(job_time_list[-1])
+                format_time = job_time_list[-1].strftime("%Y-%m-%dT%H:%M:%S")
+                cmd = 'docker network prune --force --filter "until=%s"' % format_time
                 os.system(cmd)
                 job_time_list.pop(0)
             time.sleep(5)
