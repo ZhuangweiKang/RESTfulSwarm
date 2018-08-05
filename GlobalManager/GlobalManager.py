@@ -83,8 +83,18 @@ def createOverlayNetwork(network, driver, subnet):
 def requestJoin():
     data = request.get_json()
     hostname = data['hostname']
+    worker_addr = data['address']
     if hostname is not None:
         if dHelper.checkNodeHostName(dockerClient, hostname):
+            # configure nfs setting
+            def configure_nfs():
+                with open('/etc/exports', 'a') as f:
+                    new_worker = '/var/nfs/RESTfulSwarm     %s(rw,sync,no_subtree_check)' % worker_addr
+                    f.write(new_worker)
+                # restart nfs
+                os.system('sudo systemctl restart nfs-kernel-server')
+
+            configure_nfs()
             init_worker_info(hostname, data['CPUs'], data['MemFree'])
             remote_addr = host_addr + ':2377'
             join_token = dHelper.getJoinToken()
@@ -150,6 +160,10 @@ def requestNewJob():
                              driver=data['job_info']['network']['driver'],
                              subnet=data['job_info']['network']['subnet'])
     try:
+        # make directory for nfs
+        job_nfs_path = 'var/nfs/RESTfulSwarm/%s' % data['job_name']
+        os.mkdir(path=job_nfs_path)
+
         for task in list(data['job_info']['tasks'].keys()):
             data['job_info']['tasks'][task].update({'network': data['job_info']['network']['name']})
 

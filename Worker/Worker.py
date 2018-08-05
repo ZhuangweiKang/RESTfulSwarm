@@ -207,11 +207,17 @@ class Worker:
         url = 'http://' + self.manager_addr + ':5000/RESTfulSwarm/GM/requestJoin'
         json_info = {
             'hostname': self.hostname,
+            'address': self.host_address,
             'CPUs': utl.get_total_cores(),
             'MemFree': utl.get_total_mem()
         }
 
-        print(requests.post(url=url, json=json_info).content)
+        respond = requests.post(url=url, json=json_info).content
+        # configure nfs
+        if respond[1] == 200:
+            # mount to the directory on nfs host server(GlobalManager)
+            cmd = 'sudo mount %s:/var/nfs/RESTfulSwarm /nfs/RESTfulSwarm'
+            os.system(cmd)
 
     def requestLeaveSwarm(self):
         url = 'http://' + self.manager_addr + ':5000/RESTfulSwarm/GM/requestLeave'
