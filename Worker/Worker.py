@@ -212,10 +212,10 @@ class Worker:
             'MemFree': utl.get_total_mem()
         }
 
-        respond = requests.post(url=url, json=json_info).content
-        self.logger.debug(respond)
+        response = requests.post(url=url, json=json_info)
+
         # configure nfs
-        if respond[1] == 200:
+        if response.status_code == 200:
             # mount to the directory on nfs host server(GlobalManager)
             cmd = 'sudo mount %s:/var/nfs/RESTfulSwarm /nfs/RESTfulSwarm' % self.manager_addr
             os.system(cmd)
