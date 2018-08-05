@@ -324,6 +324,7 @@ def main():
         while True:
             if len(job_time_list) > 0 and datetime.now() >= job_time_list[0]:
                 cmd = 'docker network prune --force --filter until=%s' % str(job_time_list[-1])
+                print(cmd)
                 os.system(cmd)
                 job_time_list.pop(0)
             time.sleep(5)
