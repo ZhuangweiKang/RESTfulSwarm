@@ -203,4 +203,4 @@ def prun_network(client, filter=None):
     :param filter: dictionary type
     :return:
     '''
-    client.networks.prune(filters=filter)
+    return client.networks.prune(filters=filter)
