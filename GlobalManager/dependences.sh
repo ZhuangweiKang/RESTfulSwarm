@@ -61,5 +61,5 @@ docker plugin enable weaveworks/net-plugin:latest_release
 # configure nfs
 apt-get update
 apt-get install nfs-kernel-server
-mkdir /var/nfs/RESTfulSwarmNFS/ -p
-chown nobody:nogroup /var/nfs/RESTfulSwarmNFS
+mkdir /var/nfs/RESTfulSwarm/ -p
+chown nobody:nogroup /var/nfs/RESTfulSwarm
