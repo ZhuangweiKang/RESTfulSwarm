@@ -52,16 +52,20 @@ workers_resources = 'WorkersResourceInfo'
 db = None
 worker_col = None
 worker_resource_col = None
+inited_master = False
 
 
 @app.route('/RESTfulSwarm/GM/init', methods=['GET'])
 @swag_from('./Flasgger/init.yml')
 def init():
     global pubSocket
+    global inited_master
     try:
         pubSocket = zmq.bind('3100')
         initSwarmEnv()
         response = 'OK: Initialize Swarm environment succeed.'
+        time.sleep(1)
+        inited_master = True
         return response, 200
     except Exception as ex:
         response = 'Error: %s' % ex
@@ -309,14 +313,15 @@ def describeManager(hostname):
 
 
 def main():
+    # periodically collect unused network
     def prune_nw():
         while True:
-            os.system('docker network prune --force --filter until=5m')
+            if inited_master:
+                os.system('docker network prune --force --filter until=5m')
             time.sleep(5)
 
     prune_nw_thr = threading.Thread(target=prune_nw, args=())
     prune_nw_thr.daemon = True
-    prune_nw_thr.start()
 
     os.chdir('/home/%s/RESTfulSwarmLM/GlobalManager' % utl.getUserName())
 
