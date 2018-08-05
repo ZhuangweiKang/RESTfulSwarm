@@ -163,7 +163,7 @@ def requestNewJob():
         createOverlayNetwork(network=data['job_info']['network']['name'],
                              driver=data['job_info']['network']['driver'],
                              subnet=data['job_info']['network']['subnet'])
-        job_time_list.append(datetime.now() + timedelta(minutes=5))
+        job_time_list.append(datetime.now() + timedelta(minutes=2))
 
     try:
         # make directory for nfs
@@ -323,7 +323,7 @@ def main():
     def prune_nw():
         while True:
             if len(job_time_list) > 0 and datetime.now() >= job_time_list[0]:
-                cmd = 'docker network prune --force --filter until=%s' % job_time_list[-1]
+                cmd = 'docker network prune --force --filter until=%s' % str(job_time_list[-1])
                 os.system(cmd)
                 job_time_list.pop(0)
             time.sleep(5)
