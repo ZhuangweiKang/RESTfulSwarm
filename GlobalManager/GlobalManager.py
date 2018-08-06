@@ -358,6 +358,7 @@ def main():
                     networks.append(job)
                     job_buffer.remove(job)
             dHelper.rm_networks(dockerClient, networks)
+            time.sleep(10)
 
     prune_nw_thr = threading.Thread(target=prune_nw, args=())
     prune_nw_thr.daemon = True
