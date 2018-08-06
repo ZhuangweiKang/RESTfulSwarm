@@ -54,7 +54,7 @@ workers_resources = 'WorkersResourceInfo'
 db = None
 worker_col = None
 worker_resource_col = None
-job_time_list = []
+job_buffer = []
 
 
 @app.route('/RESTfulSwarm/GM/init', methods=['GET'])
@@ -163,7 +163,6 @@ def requestNewJob():
         createOverlayNetwork(network=data['job_info']['network']['name'],
                              driver=data['job_info']['network']['driver'],
                              subnet=data['job_info']['network']['subnet'])
-        job_time_list.append(datetime.now())
 
     try:
         # make directory for nfs
@@ -190,6 +189,8 @@ def requestNewJob():
             filter_key = 'job_info.tasks.%s.container_name' % task
             target_key = 'job_info.tasks.%s.status' % task
             mg.update_doc(db[data['job_name']], filter_key, task, target_key, 'Deployed')
+
+        job_buffer.append(data['job_name'])
 
         return 'OK', 200
     except Exception as ex:
@@ -319,15 +320,16 @@ def main():
     with open('/etc/exports', 'w') as f:
         f.write('')
 
-    # periodically collect unused network
+    # periodically prune unused network
     def prune_nw():
         while True:
-            if len(job_time_list) > 0 and datetime.now() >= job_time_list[0] + timedelta(minutes=2):
-                format_time = (job_time_list[0] - timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%S")
-                cmd = 'docker network prune --force --filter "until=%s"' % format_time
-                os.system(cmd)
-                job_time_list.pop(0)
-            time.sleep(5)
+            networks = []
+            for job in job_buffer[:]:
+                job_info = mg.filter_col(mg.get_col(db, job), 'job_name', job)
+                if job_info is not None and job_info['status'] == 'Down':
+                    networks.append(job)
+                    job_buffer.remove(job)
+            dHelper.rm_networks(dockerClient, networks)
 
     prune_nw_thr = threading.Thread(target=prune_nw, args=())
     prune_nw_thr.daemon = True

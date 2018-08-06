@@ -204,3 +204,11 @@ def prun_network(client, filter=None):
     :return:
     '''
     return client.networks.prune(filters=filter)
+
+
+def rm_networks(client, networks):
+    # remove a list of networks
+    all_networks = client.networks.list()
+    for nw in all_networks:
+        if nw.name in networks:
+            nw.remove()
