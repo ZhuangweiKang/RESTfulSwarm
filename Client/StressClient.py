@@ -12,13 +12,14 @@ import json
 
 class StressClient(object):
     class Task:
-        def __init__(self, container_name, image, cpu_count, mem_limit, command="", node="", cpuset_cpus="", deadline=0):
+        def __init__(self, container_name, image, cpu_count, mem_limit, volume=None, command="", node="", cpuset_cpus="", deadline=0):
             self.container_name = container_name
             self.image = image
             self.command = command
             self.cpu_count = cpu_count
             self.mem_limit = mem_limit
             self.node = node
+            self.volume = volume
             self.cpuset_cpus = cpuset_cpus
             self.deadline = deadline
 
@@ -32,7 +33,7 @@ class StressClient(object):
                     "cpuset_cpus": self.cpuset_cpus,
                     "mem_limit": self.mem_limit,
                     "ports": {},
-                    "volumes": {},
+                    "volumes": self.volume,
                     "environment": {},
                     "deadline": self.deadline,
                     "status": "Ready"}
@@ -83,7 +84,10 @@ class StressClient(object):
             image = self.image_name
             cpu_count = self.task_cores
             mem_limit = str(self.task_mem) + 'm'
-            task = self.Task(task_name, image, cpu_count, mem_limit, node=node, cpuset_cpus=cpuset_cpus, deadline=random.randint(0, 20))
+
+            host_dir = '/nfs/RESTfulSwarm/%s/%s' % (job_name, task_name)
+            volume = {'/home/volume': {'bind': host_dir, 'mode': 'rw'}}
+            task = self.Task(task_name, image, cpu_count, mem_limit, volume=volume, node=node, cpuset_cpus=cpuset_cpus, deadline=random.randint(0, 20))
             task = task.generate_task()
             job['job_info']['tasks'].update({task_name: task})
         return job

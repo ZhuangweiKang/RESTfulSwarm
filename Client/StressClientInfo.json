@@ -1,6 +1,6 @@
 {
   "subnet": "10.52.1.0/16",
-  "image_name": "navops/python-sleeper",
+  "image_name": "zhuangweikang/sleeper",
   "task_count": 4,
   "task_cores": 4,
   "task_mem": 50,
