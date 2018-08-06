@@ -24,7 +24,7 @@ def kill_worker():
 
     # kill process
     for proc in psutil.process_iter():
-        if proc.name() == PROCNAME:
+        if proc.name() == PROCNAME and proc.pid != os.getpid():
             proc.kill()
 
 
