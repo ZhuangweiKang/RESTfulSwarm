@@ -85,7 +85,7 @@ class StressClient(object):
             cpu_count = self.task_cores
             mem_limit = str(self.task_mem) + 'm'
 
-            host_dir = '/nfs/RESTfulSwarm/%s' % job_name
+            host_dir = '/nfs/RESTfulSwarm/%s/%s' % (job_name, task_name)
             volume = {'/home/volume': {'bind': host_dir, 'mode': 'rw'}}
             task = self.Task(task_name, image, cpu_count, mem_limit, volume=volume, node=node, cpuset_cpus=cpuset_cpus, deadline=random.randint(0, 20))
             task = task.generate_task()
