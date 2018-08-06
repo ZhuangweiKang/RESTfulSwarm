@@ -39,7 +39,7 @@ class Worker:
         self.discovery_port = discovery_port
         self.task_monitor_frequency = task_monitor_frequency
 
-    def monitor(self, discovery_addr, discovery_port='4000', frequency=5):
+    def monitor(self, discovery_addr, discovery_port='4000', frequency=0.1):
         client = dHelper.setClient()
         time.sleep(frequency)
         hostname = utl.getHostName()
