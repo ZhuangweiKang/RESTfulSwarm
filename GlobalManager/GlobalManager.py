@@ -320,21 +320,6 @@ def main():
     with open('/etc/exports', 'w') as f:
         f.write('')
 
-    # periodically prune unused network
-    def prune_nw():
-        while True:
-            networks = []
-            for job in job_buffer[:]:
-                job_info = mg.filter_col(mg.get_col(db, job), 'job_name', job)
-                if job_info is not None and job_info['status'] == 'Down':
-                    networks.append(job)
-                    job_buffer.remove(job)
-            dHelper.rm_networks(dockerClient, networks)
-
-    prune_nw_thr = threading.Thread(target=prune_nw, args=())
-    prune_nw_thr.daemon = True
-    prune_nw_thr.start()
-
     os.chdir('/home/%s/RESTfulSwarmLM/GlobalManager' % utl.getUserName())
 
     global m_addr
@@ -362,6 +347,21 @@ def main():
     db = mg.get_db(mongo_client, db_name)
     worker_col = mg.get_col(db, workers_collection_name)
     worker_resource_col = mg.get_col(db, workers_resources)
+
+    # periodically prune unused network
+    def prune_nw():
+        while True:
+            networks = []
+            for job in job_buffer[:]:
+                job_info = mg.filter_col(mg.get_col(db, job), 'job_name', job)
+                if job_info is not None and job_info['status'] == 'Down':
+                    networks.append(job)
+                    job_buffer.remove(job)
+            dHelper.rm_networks(dockerClient, networks)
+
+    prune_nw_thr = threading.Thread(target=prune_nw, args=())
+    prune_nw_thr.daemon = True
+    prune_nw_thr.start()
 
     os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
 
