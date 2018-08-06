@@ -355,9 +355,10 @@ def main():
             for job in job_buffer[:]:
                 job_info = mg.filter_col(mg.get_col(db, job), 'job_name', job)
                 if job_info is not None and job_info['status'] == 'Down':
-                    networks.append(job)
+                    networks.append(job_info['network']['name'])
                     job_buffer.remove(job)
             dHelper.rm_networks(dockerClient, networks)
+            print('Remove networks:', networks)
             time.sleep(10)
 
     prune_nw_thr = threading.Thread(target=prune_nw, args=())
