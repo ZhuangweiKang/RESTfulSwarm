@@ -132,7 +132,7 @@ class Worker:
                     # self.pullImage(self.storage[container_name]['image'])
                     job_name = container_name.split('_')[0]
                     volume_dir = '/nfs/RESTfulSwarm/%s/%s' % (job_name, container_name)
-                    os.mkdir(volume_dir)
+                    os.mkdir(path=volume_dir, )
                     self.runContainer(self.storage[container_name])
                 elif msg_type == 'update':
                     newInfo = json.loads(' '.join(msg[1:]))
