@@ -3,7 +3,7 @@
   "global_manager_port": "5000",
   "mongo_addr": "10.52.0.124",
   "mongo_port": 27017,
-  "wait_time": 1,
+  "wait_time": 0.1,
   "scheduling_strategy": {
     "best-fit": 1,
     "first-fit": 0,

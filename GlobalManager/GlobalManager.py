@@ -359,7 +359,7 @@ def main():
                     job_buffer.remove(job)
             dHelper.rm_networks(dockerClient, networks)
             print('Remove networks:', networks)
-            time.sleep(10)
+            time.sleep(300)
 
     prune_nw_thr = threading.Thread(target=prune_nw, args=())
     prune_nw_thr.daemon = True
