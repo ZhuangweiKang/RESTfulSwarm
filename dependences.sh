@@ -71,7 +71,7 @@ installDB(){
     systemctl enable mongod
 
     # create user and db
-    mongo RESTfulSwarmDB --eval "db.createUser( { user: $2, pwd: $3, roles: [ { role: \"readWrite\", db: $3 } ] } )"
+    mongo RESTfulSwarmDB --eval "db.createUser( { user: $1, pwd: $2, roles: [ { role: \"readWrite\", db: $3 } ] } )"
     systemctl restart mongod
 
     # reconfigure mongodb to allow remote access
@@ -109,7 +109,7 @@ main(){
     apt-get update && install libltdl7
     if [ "$1" = "DB" ]
     then
-        installDB
+        installDB $2 $3 $4
         return 1
     fi
     installPythonLibs
