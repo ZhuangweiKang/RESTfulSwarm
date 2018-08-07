@@ -122,17 +122,17 @@ class StressClient(object):
 
         time.sleep(5)
 
-        # while True:
-        #     session_id = str(int(time.time()))
-        #     # Switch scheduler
-        #     url = 'http://%s:%s/RESTfulSwarm/FE/switchScheduler/no-scheduler' % (self.fe_addr, self.fe_port)
-        #     print(requests.get(url=url).content)
-        #     print('------------------------------------------------')
-        #     print('Switch Scheduler to No Scheduler')
-        #     print('------------------------------------------------')
-        #
-        #     time.sleep(5)
-        #     feed(session_id)
+        while True:
+            session_id = str(int(time.time()))
+            # Switch scheduler
+            url = 'http://%s:%s/RESTfulSwarm/FE/switchScheduler/no-scheduler' % (self.fe_addr, self.fe_port)
+            print(requests.get(url=url).content)
+            print('------------------------------------------------')
+            print('Switch Scheduler to No Scheduler')
+            print('------------------------------------------------')
+
+            time.sleep(5)
+            feed(session_id)
 
     def newJob(self, data):
         url = 'http://%s:%s/RESTfulSwarm/FE/requestNewJob' % (self.fe_addr, self.fe_port)
