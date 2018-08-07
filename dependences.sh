@@ -71,7 +71,7 @@ installDB(){
     systemctl enable mongod
 
     # create user and db
-    mongo admin --eval "db.createUser( { user: $2, pwd: $3, roles: [ { role: \"readWrite\", db: $3 } ] } )"
+    mongo RESTfulSwarmDB --eval "db.createUser( { user: $2, pwd: $3, roles: [ { role: \"readWrite\", db: $3 } ] } )"
     systemctl restart mongod
 
     # reconfigure mongodb to allow remote access
@@ -107,19 +107,19 @@ installNFSClient(){
 
 main(){
     apt-get update && install libltdl7
-    if [ $1 = "DB" ]
+    if [ "$1" = "DB" ]
     then
         installDB
         return 1
     fi
     installPythonLibs
-    if [ $1 = "GM" ]
+    if [ "$1" = "GM" ]
     then
         installDocker
         installCRIU
         installWeave
         installNFSMaster
-    elif [ $1 = "Worker" ]
+    elif [ "$1" = "Worker" ]
     then
         installDocker
         installCRIU
@@ -129,4 +129,4 @@ main(){
     return 1
 }
 
-main
+main $1 $2 $3 $4
