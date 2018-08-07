@@ -120,17 +120,19 @@ class StressClient(object):
         elapsed_time = time.time() - start_time
         self.logger.info('Elapsed time: %f' % elapsed_time)
 
-        # time.sleep(5)
-        # session_id = str(int(time.time()))
-        # # Switch scheduler
-        # url = 'http://%s:%s/RESTfulSwarm/FE/switchScheduler/no-scheduler' % (self.fe_addr, self.fe_port)
-        # print(requests.get(url=url).content)
-        # print('------------------------------------------------')
-        # print('Switch Scheduler to No Scheduler')
-        # print('------------------------------------------------')
+        time.sleep(5)
+
+        # while True:
+        #     session_id = str(int(time.time()))
+        #     # Switch scheduler
+        #     url = 'http://%s:%s/RESTfulSwarm/FE/switchScheduler/no-scheduler' % (self.fe_addr, self.fe_port)
+        #     print(requests.get(url=url).content)
+        #     print('------------------------------------------------')
+        #     print('Switch Scheduler to No Scheduler')
+        #     print('------------------------------------------------')
         #
-        # time.sleep(5)
-        # feed(session_id)
+        #     time.sleep(5)
+        #     feed(session_id)
 
     def newJob(self, data):
         url = 'http://%s:%s/RESTfulSwarm/FE/requestNewJob' % (self.fe_addr, self.fe_port)
