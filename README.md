@@ -4,7 +4,7 @@ An environment for core simulation based on Docker Swarm
 ![](http://blog.pridybailo.com/wp-content/uploads/sites/2/2015/01/swar-q.png)
 ## [Environment (Prerequisites)](https://github.com/doc-vu/RESTfulSwarm/blob/master/dependences.sh)
 * Ubuntu 16.04
-* Python3
+* Python 3
 * Docker 17.12 (with experimental feature)
 * CRIU
 * Flask
@@ -13,7 +13,20 @@ An environment for core simulation based on Docker Swarm
 * MongoDB
 * NFS
 ```Bash
-./dependences.sh
+# configure SC/FE/JM
+./dependences.sh SC
+./dependences.sh FE
+./dependences.sh JM
+
+# configure GM
+./dependences.sh GM
+
+# configure Worker
+./dependences.sh Worker
+
+# configure DB
+# example: ./dependences.sh DB myusr mypwd mydb
+./dependences.sh DB $usr $pwd $db
 ```
 ## Notion
 * Job: A list of containers with same network 
@@ -39,7 +52,7 @@ An environment for core simulation based on Docker Swarm
   4. Random Stress Client
      * F(t) = a, a is random constant
 
-### FE--FrontEnd(RESTful)
+### FE--FrontEnd (RESTful)
 * Role: Receive data from Stress Client and initialize Job collection in MongoDB
 * Swagger Interface
 ![](./FrontEnd.PNG)
