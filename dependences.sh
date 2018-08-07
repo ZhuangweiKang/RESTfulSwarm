@@ -71,7 +71,8 @@ installDB(){
     systemctl enable mongod
 
     # create user and db
-    mongo RESTfulSwarmDB --eval "db.createUser( { user: $1, pwd: $2, roles: [ { role: \"readWrite\", db: $3 } ] } )"
+    printf "use $3\ndb.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"readWrite\", db: \"$3\" } ] } )" | mongo
+
     systemctl restart mongod
 
     # reconfigure mongodb to allow remote access
