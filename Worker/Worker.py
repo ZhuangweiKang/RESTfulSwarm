@@ -4,9 +4,6 @@
 
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-import utl
 import multiprocessing
 import threading
 import requests
@@ -15,35 +12,38 @@ import argparse
 import random
 import math
 import time
-from LiveMigration import LiveMigration
-import DockerHelper as dHelper
-import ZMQHelper as zmqHelper
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from live_migration import LiveMigration
+import docker_api as docker
+import zmq_api as zmq
+import utl
+import SystemConstants
 
 
 class Worker:
-    def __init__(self, manager_addr, self_addr, discovery_addr, discovery_port, task_monitor_frequency):
-        self.logger = utl.doLog('WorkerLogger', 'worker.log')
-        self.swarmSocket = zmqHelper.connect(manager_addr, '3100')
-        self.dockerClient = dHelper.setClient()
-        self.manager_addr = manager_addr
-        self.host_address = self_addr
-        self.hostname = utl.getHostName()
-        zmqHelper.subscribeTopic(self.swarmSocket, self.hostname)
-        zmqHelper.subscribeTopic(self.swarmSocket, self.host_address)
+    def __init__(self, gm_address, worker_address, dis_address, task_monitor_frequency):
+        self.logger = utl.get_logger('WorkerLogger', 'worker.log')
+        self.swarm_socket = zmq.ps_connect(gm_address, SystemConstants.GM_PUB_PORT)
+        self.docker_client = docker.set_client()
+        self.gm_address = gm_address
+        self.host_address = worker_address
+        self.hostname = utl.get_hostname()
+        zmq.subscribe_topic(self.swarm_socket, self.hostname)
+        zmq.subscribe_topic(self.swarm_socket, self.host_address)
 
         # local storage
         # format: {$container : $containerInfo}
         self.storage = {}
 
-        self.discovery_addr = discovery_addr
-        self.discovery_port = discovery_port
+        self.dis_address = dis_address
         self.task_monitor_frequency = task_monitor_frequency
 
-    def monitor(self, discovery_addr, discovery_port='4000', frequency=0.1):
-        client = dHelper.setClient()
+    def monitor(self, dis_address, frequency=0.1):
+        client = docker.set_client()
         time.sleep(frequency)
-        hostname = utl.getHostName()
-        socket = zmqHelper.csConnect(discovery_addr, discovery_port)
+        hostname = utl.get_hostname()
+        socket = zmq.cs_connect(dis_address, SystemConstants.DISCOVERY_PORT)
         time_end = math.floor(time.time())
         deployed_tasks = []
         while True:
@@ -81,23 +81,23 @@ class Worker:
             except Exception as ex:
                 self.logger.debug(ex)
 
-    def listenManagerMsg(self):
+    def listen_manager_msg(self):
         while True:
             try:
-                msg = self.swarmSocket.recv_string()
+                msg = self.swarm_socket.recv_string()
                 msg = msg.split()[1:]
                 msg_type = msg[0]
                 if msg_type == 'join':
-                    remote_addr = msg[1]
+                    remote_address = msg[1]
                     join_token = msg[2]
-                    self.joinSwarm(remote_addr, join_token)
+                    self.join_swarm(remote_address, join_token)
                 elif msg_type == 'checkpoints':
                     data = json.loads(' '.join(msg[1:]))
                     threads = []
                     for i in range(0, len(data)):
                         checkpoint_name = data[i] + '_' + str(random.randint(1, 1000))
-                        container_id = dHelper.getContainerID(self.dockerClient, data[i])
-                        thr = threading.Thread(target=dHelper.checkpoint, args=(checkpoint_name, container_id, True, ))
+                        container_id = docker.get_container_id(self.docker_client, data[i])
+                        thr = threading.Thread(target=docker.checkpoint, args=(checkpoint_name, container_id, True,))
                         thr.setDaemon(True)
                         threads.append(thr)
 
@@ -113,73 +113,74 @@ class Worker:
                         temp_container = self.storage[container]
                         del self.storage[container]
                         try:
-                            lmController = LiveMigration(image=temp_container['image'], name=container,
-                                                         network=temp_container['network'], logger=self.logger,
-                                                         dockerClient=self.dockerClient)
-                            lmController.migrate(dst_addr=dst, port='3200', cmd=temp_container['command'],
-                                                 container_detail=container_info)
-                        except Exception:
-                            print('Some error happened while migrating container.')
+                            lm_controller = LiveMigration(image=temp_container['image'], name=container,
+                                                          network=temp_container['network'], logger=self.logger,
+                                                          docker_client=self.docker_client)
+                            lm_controller.migrate(dst_address=dst, cmd=temp_container['command'],
+                                                  container_detail=container_info)
+                        except Exception as ex:
+                            self.logger.error(ex)
                             self.storage.update({container: temp_container})
                     except Exception as ex:
-                        print(ex)
+                        self.logger.error(ex)
                 elif msg_type == 'new_container':
                     info = json.loads(' '.join(msg[1:]))
                     container_name = info['container_name']
                     del info['node']
                     self.storage.update({container_name: info})
                     # self.deleteOldContainer(container_name)
-                    # self.pullImage(self.storage[container_name]['image'])
+                    # self.pull_image(self.storage[container_name]['image'])
                     job_name = container_name.split('_')[0]
                     volume_dir = '/nfs/RESTfulSwarm/%s/%s' % (job_name, container_name)
                     os.mkdir(path=volume_dir)
-                    self.runContainer(self.storage[container_name])
+                    self.run_container(self.storage[container_name])
                 elif msg_type == 'update':
-                    newInfo = json.loads(' '.join(msg[1:]))
-                    container_name = newInfo['container_name']
-                    cpuset_cpus = newInfo['cpuset_cpus']
-                    mem_limit = newInfo['mem_limit']
-                    dHelper.updateContainer(self.dockerClient, container_name=container_name, cpuset_cpus=cpuset_cpus, mem_limit=mem_limit)
+                    new_info = json.loads(' '.join(msg[1:]))
+                    container_name = new_info['container_name']
+                    cpuset_cpus = new_info['cpuset_cpus']
+                    mem_limit = new_info['mem_limit']
+                    docker.update_container(self.docker_client, container_name=container_name,
+                                            cpuset_cpus=cpuset_cpus, mem_limit=mem_limit)
                     self.logger.info('Updated cpuset_cpus to %s, mem_limits to %s' % (cpuset_cpus, mem_limit))
                 elif msg_type == 'leave':
-                    dHelper.leaveSwarm(self.dockerClient)
+                    docker.leave_swarm(self.docker_client)
                     self.logger.info('Leave Swarm environment.')
             except Exception as ex:
                 self.logger.debug(ex)
 
-    def listenWorkerMessage(self, port='3200'):
-        lmController = LiveMigration(logger=self.logger, dockerClient=self.dockerClient, storage=self.storage)
-        lmController.notMigrate(port)
+    def listen_worker_message(self):
+        lm_controller = LiveMigration(logger=self.logger, docker_client=self.docker_client, storage=self.storage)
+        lm_controller.not_migrate(SystemConstants.WORKER_PORT)
 
-    def joinSwarm(self, remote_addr, join_token):
-        dHelper.joinSwarm(self.dockerClient, join_token, remote_addr)
+    def join_swarm(self, remote_addr, join_token):
+        docker.join_swarm(self.docker_client, join_token, remote_addr)
         self.logger.info('Worker node join the Swarm environment.')
 
-    def deleteOldContainer(self, name):
-        if dHelper.checkContainer(self.dockerClient, name):
+    def delete_old_container(self, name):
+        if docker.check_container(self.docker_client, name):
             self.logger.info('Old container %s exists, deleting old container.' % name)
-            container = dHelper.getContainer(self.dockerClient, name)
-            dHelper.deleteContainer(container)
+            container = docker.get_container(self.docker_client, name)
+            docker.delete_container(container)
 
-    def pullImage(self, image):
-        if dHelper.checkImage(self.dockerClient, image) is False:
+    def pull_image(self, image):
+        if docker.check_image(self.docker_client, image) is False:
             self.logger.info('Image doesn\'t exist, pulling image.')
-            dHelper.pullImage(self.dockerClient, image)
+            docker.pull_image(self.docker_client, image)
         else:
             self.logger.info('Image already exists.')
 
-    def runContainer(self, containerInfo):
-        container_name = containerInfo['container_name']
-        image_name = containerInfo['image']
-        network = containerInfo['network']
-        command = containerInfo['command']
-        cpuset_cpus = containerInfo['cpuset_cpus']
-        mem_limit = containerInfo['mem_limit']
-        detach = containerInfo['detach']
-        ports = containerInfo['ports']
-        volumes = containerInfo['volumes']
-        environment = containerInfo['environment']
-        container = dHelper.runContainer(self.dockerClient,
+    def run_container(self, container_info):
+        container_name = container_info['container_name']
+        image_name = container_info['image']
+        network = container_info['network']
+        command = container_info['command']
+        cpuset_cpus = container_info['cpuset_cpus']
+        mem_limit = container_info['mem_limit']
+        detach = container_info['detach']
+        ports = container_info['ports']
+        volumes = container_info['volumes']
+        environment = container_info['environment']
+        container = docker.run_container(self.docker_client,
                                          image=image_name,
                                          name=container_name,
                                          detach=detach,
@@ -193,21 +194,21 @@ class Worker:
         self.logger.info('Container %s is running.' % container_name)
         return container
 
-    def main(self):
-        migrateThr = threading.Thread(target=self.listenManagerMsg, args=())
-        notMigrateThr = threading.Thread(target=self.listenWorkerMessage, args=())
-        task_monitor_thr = threading.Thread(target=self.monitor,
-                                            args=(self.discovery_addr, self.discovery_port, self.task_monitor_frequency,))
-        task_monitor_thr.daemon = True
-        migrateThr.daemon = True
-        notMigrateThr.daemon = True
+    def controller(self):
+        manager_monitor_thr = threading.Thread(target=self.listen_manager_msg(), args=())
+        peer_monitor_thr = threading.Thread(target=self.listen_worker_message(), args=())
+        container_monitor_thr = threading.Thread(target=self.monitor,
+                                                 args=(self.dis_address, self.task_monitor_frequency,))
+        container_monitor_thr.daemon = True
+        manager_monitor_thr.daemon = True
+        peer_monitor_thr.daemon = True
 
-        task_monitor_thr.start()
-        migrateThr.start()
-        notMigrateThr.start()
+        container_monitor_thr.start()
+        manager_monitor_thr.start()
+        peer_monitor_thr.start()
 
-    def requestJoinSwarm(self):
-        url = 'http://' + self.manager_addr + ':5000/RESTfulSwarm/GM/requestJoin'
+    def request_join_swarm(self):
+        url = 'http://' + self.gm_address + ':5000/RESTfulSwarm/GM/request_join'
         json_info = {
             'hostname': self.hostname,
             'address': self.host_address,
@@ -220,45 +221,43 @@ class Worker:
         # configure nfs
         if response.status_code == 200:
             # mount to the directory on nfs host server(GlobalManager)
-            cmd = 'sudo mount %s:/var/nfs/RESTfulSwarm /nfs/RESTfulSwarm' % self.manager_addr
+            cmd = 'sudo mount %s:/var/nfs/RESTfulSwarm /nfs/RESTfulSwarm' % self.gm_address
             os.system(cmd)
 
-    def requestLeaveSwarm(self):
-        url = 'http://' + self.manager_addr + ':5000/RESTfulSwarm/GM/requestLeave'
+    def request_leave_swarm(self):
+        url = 'http://' + self.gm_address + ':5000/RESTfulSwarm/GM/request_leave'
         print(requests.post(url=url, json={'hostname': self.hostname}).content)
 
+    @staticmethod
+    def main(worker_init):
+        '''
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--GM', type=str, help='Global Manager IP address.')
+        parser.add_argument('--worker', type=str, help='Self IP address')
+        parser.add_argument('--discovery', type=str, help='Discovery server address.')
+        parser.add_argument('-f', '--frequency', type=int, default=20, help='Worker node task monitor frequency (s).')
+        args = parser.parse_args()
+        gm_address = args.GM
+        worker_address = args.worker
+        dis_address = args.discovery
+        frequency = args.frequency
+        '''
 
-def main(worker_init):
-    '''
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-ga', '--gaddr', type=str, help='Global Manager IP address.')
-    parser.add_argument('-sa', '--self_addr', type=str, help='Self IP address')
-    parser.add_argument('-da', '--discovery_addr', type=str, help='Discovery server address.')
-    parser.add_argument('-dp', '--discovery_port', type=str, default='4000', help='Discovery server port number.')
-    parser.add_argument('-f', '--frequency', type=int, default=20, help='Worker node task monitor frequency (s).')
-    args = parser.parse_args()
-    manager_addr = args.gaddr
-    self_addr = args.self_addr
-    discovery_addr = args.discovery_addr
-    discovery_port = args.discovery_port
-    frequency = args.frequency
-    '''
-    os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.getUserName())
+        os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.get_username())
 
-    with open(worker_init) as f:
-        data = json.load(f)
-    manager_addr = data['global_manager_addr']
-    self_addr = data['worker_address']
-    discovery_addr = data['discovery_addr']
-    discovery_port = data['discovery_port']
-    frequency = data['frequency']
+        with open(worker_init) as f:
+            data = json.load(f)
+        gm_address = data['gm_address']
+        worker_address = data['worker_address']
+        dis_address = data['dis_address']
+        frequency = data['frequency']
 
-    worker = Worker(manager_addr, self_addr, discovery_addr, discovery_port, frequency)
+        worker = Worker(gm_address, worker_address, dis_address, frequency)
 
-    worker.main()
-    worker.requestJoinSwarm()
-    while True:
-        pass
+        worker.controller()
+        worker.request_join_swarm()
+        while True:
+            pass
 
 
 if __name__ == '__main__':
@@ -269,7 +268,7 @@ if __name__ == '__main__':
 
     pro = multiprocessing.Process(
         name='Worker',
-        target=main,
+        target=Worker.main,
         args=(worker_init_json, )
     )
     pro.daemon = True

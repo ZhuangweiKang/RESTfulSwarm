@@ -1,7 +1,3 @@
  {
-  "address": "10.52.0.124",
-  "pwd": "kzw",
-  "port": "27017",
-  "user": "admin",
-  "database": "RESTfulSwarmDB"
+  "address": "10.52.0.124"
 }

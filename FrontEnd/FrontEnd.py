@@ -6,16 +6,17 @@
 
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from flask import *
-import MongoDBHelper as mhelper
-import time
-import ZMQHelper as zmq
 import json
-import utl
-from flasgger import Swagger, swag_from
+from flask import *
+import time
 import argparse
+from flasgger import Swagger, swag_from
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import mongodb_api as mg
+import zmq_api as zmq
+import utl
+import SystemConstants
 
 app = Flask(__name__)
 
@@ -39,89 +40,80 @@ template = {
 
 swagger = Swagger(app, template=template)
 
-mongo_addr = None
-mongo_port = None
-mongo_db_name = 'RESTfulSwarmDB'
-socket = None
+__db_address__ = None
+__db__ = None
+__socket__ = None
 
 
-@app.route('/RESTfulSwarm/FE/requestNewJob', methods=['POST'])
+@app.route('/RESTfulSwarm/FE/request_new_job', methods=['POST'])
 @swag_from('FrontEnd.yml', validation=True)
-def requestNewJob():
-    global socket
+def request_new_job():
+    global __socket__
     # Write job data into MongoDB
     data = request.get_json()
     data.update({'submit_time': time.time()})
     col_name = data['job_name']
-    m_col = mhelper.get_col(mongo_db, col_name)
-    mhelper.insert_doc(m_col, data)
+    m_col = mg.get_col(__db__, col_name)
+    mg.insert_doc(m_col, data)
 
     # Notify job manager
     msg = 'newJob %s' % col_name
-    socket.send_string(msg)
-    socket.recv_string()
+    __socket__.send_string(msg)
+    __socket__.recv_string()
     return 'OK', 200
 
 
-@app.route('/RESTfulSwarm/FE/switchScheduler/<new_scheduler>', methods=['GET'])
+@app.route('/RESTfulSwarm/FE/switch_scheduler/<new_scheduler>', methods=['GET'])
 @swag_from('SwitchScheduler.yml')
-def switchScheduler(new_scheduler):
+def switch_scheduler(new_scheduler):
     # Notify Job Manager to switch scheduler
     msg = 'SwitchScheduler %s' % new_scheduler
-    socket.send_string(msg)
-    socket.recv_string()
+    __socket__.send_string(msg)
+    __socket__.recv_string()
     return 'OK', 200
 
 
 def main():
-    os.chdir('/home/%s/RESTfulSwarmLM/FrontEnd' % utl.getUserName())
+    os.chdir('/home/%s/RESTfulSwarmLM/FrontEnd' % utl.get_username())
 
-    global mongo_addr
-    global mongo_port
-    global socket
-    global mongo_db
+    global __db_address__
+    global __socket__
+    global __db__
 
     with open('FrontEndInit.json') as f:
         data = json.load(f)
 
-    mongo_addr = data['mongo_addr']
-    mongo_port = data['mongo_port']
+    __db_address__ = data['db_address']
 
-    mongo_client = mhelper.get_client(address=mongo_addr, port=mongo_port)
-    mongo_db = mhelper.get_db(mongo_client, mongo_db_name)
+    db_client = mg.get_client(address=__db_address__, port=SystemConstants.MONGODB_PORT)
+    __db__ = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
 
-    jm_addr = data['job_manager_addr']
-    jm_port = data['job_manager_port']
-    socket = zmq.csConnect(jm_addr, jm_port)
+    jm_address = data['jm_address']
+    jm_port = SystemConstants.JM_PORT
+    __socket__ = zmq.cs_connect(jm_address, jm_port)
 
-    fe_address = data['address']
+    fe_address = data['fe_address']
 
-    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.get_username())
 
-    app.run(host=fe_address, port=5001, debug=False)
+    app.run(host=fe_address, port=SystemConstants.FE_PORT, debug=False)
 
 
 if __name__ == '__main__':
     # parser = argparse.ArgumentParser()
-    # parser.add_argument('-a', '--address', type=str, help='The FrontEnd node IP address.')
-    # parser.add_argument('-ma', '--mongo_addr', type=str, help='MongoDB node address.')
-    # parser.add_argument('-mp', '--mongo_port', type=int, default=27017, help='MongoDB node port number.')
-    # parser.add_argument('-ja', '--jm_addr', type=str, help='Job Manager address.')
-    # parser.add_argument('-jp', '--jm_port', type=str, default='2990', help='Job Manager port number that is used to receive job notification.')
+    # parser.add_argument('--FE', type=str, help='The FrontEnd node IP address.')
+    # parser.add_argument('--db', type=str, help='MongoDB node address.')
+    # parser.add_argument('--JM', type=str, help='Job Manager address.')
     # args = parser.parse_args()
     #
     # # db
-    # mongo_addr = args.mongo_addr
-    # mongo_port = args.mongo_port
-    #
-    # mongo_client = mhelper.get_client(address=mongo_addr, port=mongo_port)
-    # mongo_db = mhelper.get_db(mongo_client, mongo_db_name)
+    # db_address = args.db
+    # db_client = mg.get_client(address=db_address, port=SystemConstants.MONGODB_PORT)
+    # db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
     #
     # # socket that is used to send job notification to job manager
-    # jm_addr = args.jm_addr
-    # jm_port = args.jm_port
-    # socket = zmq.csConnect(jm_addr, jm_port)
+    # jm_address = args.JM
+    # socket = zmq.cs_connect(jm_address, SystemConstants.JM_PORT)
+    # fe_address = args.FE
     #
-    # fe_address = args.address
-
     main()

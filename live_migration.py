@@ -6,76 +6,76 @@ import utl
 import time
 import random
 import json
-import DockerHelper as dHelper
-import ZMQHelper as zmqHelper
+import docker_api as docker
+import zmq_api as zmq
 
 
 class LiveMigration:
-    def __init__(self, image=None, name=None, network=None, logger=None, dockerClient=None, storage=None):
+    def __init__(self, image=None, name=None, network=None, logger=None, docker_client=None, storage=None):
         self.image = image
         self.name = name
         self.logger = logger
-        self.dockerClient = dockerClient
+        self.docker_client = docker_client
         self.socket = None
         self.network = network
         self.storage = storage
 
-    def sendImageInfo(self):
+    def send_image_info(self):
         msg = 'image %s' % self.image
         self.socket.send_string(msg)
         self.socket.recv_string()
 
-    def sendSpawnCmd(self, cmd):
+    def send_spawn_cmd(self, cmd):
         msg = 'command %s' % cmd
         self.logger.info('Send init command to destination node: %s' % cmd)
         self.socket.send_string(msg)
         self.socket.recv_string()
 
-    def sendContainerDetail(self, container_detail):
+    def send_container_detail(self, container_detail):
         msg = 'container_detail %s' % json.dumps(container_detail)
         self.logger.info('Send container details to destination node.')
         self.socket.send_string(msg)
         self.socket.recv_string()
 
-    def dumpContainer(self):
+    def dump_container(self):
         checkpoint_name = self.name + '_' + str(random.randint(1, 1000))
-        tarName = checkpoint_name + '.tar'
-        dHelper.checkpoint(checkpoint_name, dHelper.getContainerID(self.dockerClient, self.name))
-        return checkpoint_name, tarName
+        tar_name = checkpoint_name + '.tar'
+        docker.checkpoint(checkpoint_name, docker.get_container_id(self.docker_client, self.name))
+        return checkpoint_name, tar_name
 
-    def tarImage(self, checkpoint_name, tarName):
-        utl.tarFiles(tarName, dHelper.getContainerID(self.dockerClient, self.name), checkpoint_name)
+    def tar_image(self, checkpoint_name, tar_name):
+        utl.tar_files(tar_name, docker.get_container_id(self.docker_client, self.name), checkpoint_name)
         self.logger.info('Tar dumped image files.')
 
-    def transferTar(self, checkpoint_name, dst_addr):
-        fileName = checkpoint_name + '.tar'
+    def transfer_tar(self, checkpoint_name, dst_address):
+        file_name = checkpoint_name + '.tar'
         port = 3300
-        utl.transferFile(fileName, dst_addr, port, self.logger)
+        utl.transfer_file(file_name, dst_address, port, self.logger)
 
-    def commitCon(self, name, imageName, repository):
-        return dHelper.commitContainer(self.dockerClient, name, repository, imageName)
+    def commit_con(self, name, image_name, repository):
+        return docker.commit_container(self.docker_client, name, repository, image_name)
 
-    def migrate(self, dst_addr, port='3200', cmd=None, container_detail=None):
-        self.socket = zmqHelper.csConnect(dst_addr, port)
-        checkpoint_name, tarName = self.dumpContainer()
+    def migrate(self, dst_address, port='3200', cmd=None, container_detail=None):
+        self.socket = zmq.cs_connect(dst_address, port)
+        checkpoint_name, tar_name = self.dump_container()
 
-        self.commitCon(self.name, self.image, self.image)
+        self.commit_con(self.name, self.image, self.image)
         self.logger.info('Container has been committed.')
-        self.sendImageInfo()
-        self.sendSpawnCmd(cmd)
-        self.sendContainerDetail(container_detail)
+        self.send_image_info()
+        self.send_spawn_cmd(cmd)
+        self.send_container_detail(container_detail)
 
-        self.tarImage(checkpoint_name, tarName)
-        self.transferTar(checkpoint_name, dst_addr)
+        self.tar_image(checkpoint_name, tar_name)
+        self.transfer_tar(checkpoint_name, dst_address)
 
-    def recvImageInfo(self):
+    def recv_image_info(self):
         msg = self.socket.recv_string()
         self.socket.send_string('Ack')
         image = msg.split()[1]
-        dHelper.pullImage(self.dockerClient, image)
+        docker.pull_image(self.docker_client, image)
         return image
 
-    def recvSpawnCmd(self):
+    def recv_spawn_cmd(self):
         while True:
             msg = self.socket.recv_string()
             self.socket.send_string('Ack')
@@ -85,9 +85,9 @@ class LiveMigration:
                     self.logger.info('Received init command: %s ' % command)
                     return msg.split()[1]
                 except IndexError as ex:
-                    return
+                    self.logger.error(ex)
 
-    def recvContainerDetail(self):
+    def recv_container_detail(self):
         while True:
             msg = self.socket.recv_string()
             self.socket.send_string('Ack')
@@ -97,37 +97,37 @@ class LiveMigration:
                     self.logger.info('Received container details.')
                     return detail
                 except IndexError as ex:
-                    return
+                    self.logger.error(ex)
 
-    def recvTar(self):
-        return utl.recvFile(self.logger)
+    def recv_tar(self):
+        return utl.recv_file(self.logger)
 
-    def unTarCheckpoint(self, fileName):
-        utl.untarFile(fileName)
+    def untar_checkpoint(self, file_name):
+        utl.untar_file(file_name)
         self.logger.info('Checkpoint has been untared...')
 
-    def restoreContainer(self, checkpoint, new_container_name, newImage, network, command=None):
+    def restore_container(self, checkpoint, new_container_name, new_image, network, command=None):
         checkpoint_dir = '/var/lib/docker/tmp'
 
         # create the new container using base image
-        dHelper.createContainer(self.dockerClient, newImage, new_container_name, network, command)
+        docker.create_container(self.docker_client, new_image, new_container_name, network, command)
 
-        dHelper.restore(new_container_name, checkpoint_dir, checkpoint)
+        docker.restore(new_container_name, checkpoint_dir, checkpoint)
         self.logger.info('Container has been restored...')
 
-    def notMigrate(self, port='3200'):
-        self.socket = zmqHelper.csBind(port)
+    def not_migrate(self, port='3200'):
+        self.socket = zmq.cs_bind(port)
         while True:
-            newImage = self.recvImageInfo()
-            command = self.recvSpawnCmd()
-            detail = self.recvContainerDetail()
-            tarFile = self.recvTar()
+            new_image = self.recv_image_info()
+            command = self.recv_spawn_cmd()
+            detail = self.recv_container_detail()
+            tar_file = self.recv_tar()
             time.sleep(1)
-            checkpoint = tarFile.split('.')[0]
+            checkpoint = tar_file.split('.')[0]
             container_name = checkpoint.split('_')[0] + '_' + checkpoint.split('_')[1]
-            if tarFile is not None:
-                self.unTarCheckpoint(fileName=tarFile)
-                self.restoreContainer(checkpoint, container_name, newImage, detail['network'], command=command)
+            if tar_file is not None:
+                self.untar_checkpoint(file_name=tar_file)
+                self.restore_container(checkpoint, container_name, new_image, detail['network'], command=command)
                 self.storage.update({container_name: detail})
 
     def menue(self, cmd=None):
@@ -138,4 +138,4 @@ class LiveMigration:
             self.logger.info('Your container has been migrated. You can restore it on the destination node.')
         else:
             self.logger.info('Your container is running. Other container might migrate to this node.')
-            self.notMigrate()
+            self.not_migrate()

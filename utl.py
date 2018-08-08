@@ -2,7 +2,8 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-import os, sys
+import os
+import sys
 import socket
 import struct
 import re
@@ -11,12 +12,14 @@ import shutil
 import logging
 import cpuinfo
 
+import SystemConstants
 
-def doLog(loggerName, logFile):
-    logger = logging.getLogger(loggerName)
+
+def get_logger(logger_name, log_file):
+    logger = logging.getLogger(logger_name)
     logger.setLevel(logging.DEBUG)
 
-    fl = logging.FileHandler(logFile)
+    fl = logging.FileHandler(log_file)
     fl.setLevel(logging.DEBUG)
 
     cl = logging.StreamHandler()
@@ -32,64 +35,64 @@ def doLog(loggerName, logFile):
     return logger
 
 
-def getHostName():
+def get_hostname():
     cmd = 'hostname'
     return os.popen(cmd).read().strip()
 
 
-def getUserName():
+def get_username():
     return os.getlogin().strip()
 
 
-def getHostIP():
-    host_addr = os.popen('ip addr show dev ens3 | grep -w inet | awk \'{print $2}\'', 'r').read()
-    host_addr = host_addr.split('/')[0]
-    return host_addr
+def get_host_ip():
+    host_address = os.popen('ip addr show dev ens3 | grep -w inet | awk \'{print $2}\'', 'r').read()
+    host_address = host_address.split('/')[0]
+    return host_address
 
 
-def getWorkDir():
+def get_work_dir():
     return '/var/lib/docker/tmp'
 
 
-def goToWorkDir():
-    workDir = '/var/lib/docker/tmp'
-    os.chdir(workDir)
+def go_to_work_dir():
+    work_dir = '/var/lib/docker/tmp'
+    os.chdir(work_dir)
 
 
-def tarFiles(checkpointTar, containerID, checkpointName):
-    checkpointDir = '/var/lib/docker/containers/%s/checkpoints' % containerID
-    os.chdir(checkpointDir)
-    tar_file = tarfile.TarFile.open(name=checkpointTar, mode='w')
-    checkpointTarFile = checkpointDir + '/' + checkpointName
-    tar_file.add(checkpointTarFile, arcname=os.path.basename(checkpointTarFile))
+def tar_files(checkpoint_tar, container_id, checkpoint_name):
+    checkpoint_dir = '/var/lib/docker/containers/%s/checkpoints' % container_id
+    os.chdir(checkpoint_dir)
+    tar_file = tarfile.TarFile.open(name=checkpoint_tar, mode='w')
+    checkpoint_tar_file = checkpoint_dir + '/' + checkpoint_name
+    tar_file.add(checkpoint_tar_file, arcname=os.path.basename(checkpoint_tar_file))
     tar_file.close()
-    shutil.move(checkpointTar, getWorkDir())
-    goToWorkDir()
+    shutil.move(checkpoint_tar, get_work_dir())
+    go_to_work_dir()
 
 
-def untarFile(tarFile):
-    goToWorkDir()
-    tar = tarfile.TarFile.open(name=tarFile, mode='r')
+def untar_file(tar_file):
+    go_to_work_dir()
+    tar = tarfile.TarFile.open(name=tar_file, mode='r')
     tar.extractall()
     tar.close()
-    os.remove(tarFile)
+    os.remove(tar_file)
 
 
 # socket
-def transferFile(fileName, dst_addr, port, logger):
+def transfer_file(file_name, dst_address, port, logger):
     try:
         logger.info('Prepare to send tar file to destination host.')
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect((dst_addr, port))
+        s.connect((dst_address, port))
         logger.info('Connection has been set up.')
     except socket.error as er:
         logger.error(er)
         sys.exit(1)
-    if os.path.isfile(fileName):
+    if os.path.isfile(file_name):
         fileinfo_size = struct.calcsize('128sl')
-        fhead = struct.pack('128sl', os.path.basename(fileName).encode('utf-8'), os.stat(fileName).st_size)
+        fhead = struct.pack('128sl', os.path.basename(file_name).encode('utf-8'), os.stat(file_name).st_size)
         s.send(fhead)
-        fp = open(fileName, 'rb')
+        fp = open(file_name, 'rb')
         while True:
             data = fp.read(1024)
             if not data:
@@ -99,47 +102,47 @@ def transferFile(fileName, dst_addr, port, logger):
         fp.close()
         s.close()
     else:
-        logger.error('File %s not exists.' % fileName)
+        logger.error('File %s not exists.' % file_name)
         sys.exit(1)
 
 
 # socket
-def recvFile(logger, port=3300):
+def recv_file(logger):
     try:
-        recvSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        recvSocket.bind(('', port))
-        recvSocket.listen(20)
-        logger.info('Waiting for client to connect...')
-        conn, addr = recvSocket.accept()
+        recv_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        recv_socket.bind(('', SystemConstants.CONTAINER_LM_PORT))
+        recv_socket.listen(20)
+        logger.info('Waiting for client to ps_connect...')
+        conn, addr = recv_socket.accept()
         logger.info('Client has connected to server...')
-        goToWorkDir()
+        go_to_work_dir()
         fileinfo_size = struct.calcsize('128sl')
         fhead = conn.recv(fileinfo_size)
-        fn, fileSize = struct.unpack('128sl', fhead)
-        fileName = fn.decode('utf-8')
-        fileName = fileName.strip('\00')
+        fn, file_size = struct.unpack('128sl', fhead)
+        file_name = fn.decode('utf-8')
+        file_name = file_name.strip('\00')
         logger.info('Received file info: %s' % fn)
-        logger.info('File size: ' + str(fileSize))
-        filenewName = os.path.join('/var/lib/docker/tmp/', fileName)
-        with open(filenewName, 'wb') as tarFile:
+        logger.info('File size: ' + str(file_size))
+        filenew_name = os.path.join('/var/lib/docker/tmp/', file_name)
+        with open(filenew_name, 'wb') as tarFile:
             logger.info('Start receiving file...')
-            tempSize = fileSize
+            temp_size = file_size
             while True:
-                if tempSize > 1024:
+                if temp_size > 1024:
                     data = conn.recv(1024)
                 else:
-                    data = conn.recv(tempSize)
+                    data = conn.recv(temp_size)
                 if not data:
                     break
                 tarFile.write(data)
-                tempSize -= len(data)
-                if tempSize == 0:
+                temp_size -= len(data)
+                if temp_size == 0:
                     break
             logger.info('Receiving file finished, connection will be closed...')
         conn.close()
-        recvSocket.close()
+        recv_socket.close()
         logger.info('Connection has been closed...')
-        return fileName
+        return file_name
     except Exception as ex:
         logger.error(ex)
         return None

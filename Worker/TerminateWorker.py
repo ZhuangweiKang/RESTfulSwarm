@@ -4,21 +4,21 @@
 
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 import psutil
-import DockerHelper as dh
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import docker_api as dh
 import utl
 
 PROCNAME = 'python3'
-docker_client = dh.setClient()
+docker_client = dh.set_client()
 
 
 def kill_worker():
-    os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.getUserName())
+    os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.get_username())
 
     # leave swarm
-    dh.leaveSwarm(docker_client)
+    dh.leave_swarm(docker_client)
     # clean containers
     print(os.popen('docker rm -f $(docker ps -aq)', 'r'))
 

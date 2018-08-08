@@ -7,8 +7,8 @@ from Scheduler.Scheduler import Scheduler
 
 
 class NodeScheduler(Scheduler):
-    def __init__(self, db, workers_col_name, worker_resource_col_name):
-        super(NodeScheduler, self).__init__(db, workers_col_name, worker_resource_col_name)
+    def __init__(self, db):
+        super(NodeScheduler, self).__init__(db)
 
     def cores_scheduling_algorithm(self, jobs_details, free_cores):
         pass

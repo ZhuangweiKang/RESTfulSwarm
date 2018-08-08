@@ -3,7 +3,7 @@
 # Author: Zhuangwei Kang
 
 from abc import ABCMeta, abstractmethod
-import MongoDBHelper as mg
+import mongodb_api as mg
 import utl
 from Scheduler.Scheduler import Scheduler
 
@@ -11,8 +11,8 @@ from Scheduler.Scheduler import Scheduler
 class BinPackingScheduler(Scheduler):
     __metaclass__ = ABCMeta
 
-    def __init__(self, db, workers_col_name, worker_resource_col_name):
-        super(BinPackingScheduler, self).__init__(db, workers_col_name, worker_resource_col_name)
+    def __init__(self, db):
+        super(BinPackingScheduler, self).__init__(db)
 
     @abstractmethod
     def cores_scheduling_algorithm(self, jobs_details, free_cores):
@@ -50,18 +50,6 @@ class BinPackingScheduler(Scheduler):
         return self.process_cores_scheduling_result(bf_result, core_requests, mem_request_arr, available_workers)
 
     def process_cores_scheduling_result(self, schedule, core_request, mem_request_arr, available_workers):
-        # print('Schedule:')
-        # print(schedule)
-        #
-        # print('Core Requests:')
-        # print(core_request)
-        #
-        # print('Memory request array:')
-        # print(mem_request_arr)
-        #
-        # print('Available Workers:')
-        # print(available_workers)
-
         job_index = 0
         result = []
         waiting_plan = []
@@ -87,10 +75,8 @@ class BinPackingScheduler(Scheduler):
                     key = list(available_workers.keys())[item[1]]
                     available_workers[key].pop(0)
 
-                result_item = (core_request[job_index][0],
-                        list(core_request[job_index][1].keys())[task_index],
-                        list(available_workers.keys())[item[1]],
-                        cores)
+                result_item = (core_request[job_index][0], list(core_request[job_index][1].keys())[task_index],
+                               list(available_workers.keys())[item[1]], cores)
 
                 temp_result.append(result_item)
 

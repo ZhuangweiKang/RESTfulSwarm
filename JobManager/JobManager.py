@@ -4,27 +4,23 @@
 
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 import requests
 import argparse
 import utl
 import time
 import json
 import threading
-from Scheduler import BestFitScheduler
-from Scheduler import FirstFitScheduler
-from Scheduler import NodeScheduler
-from Scheduler import BestFitDecreasingScheduler
-from Scheduler import FirstFitDecreasingScheduler
-import ZMQHelper as zmq
-import MongoDBHelper as mHelper
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from Scheduler import BestFitScheduler, FirstFitScheduler, BestFitDecreasingScheduler, FirstFitDecreasingScheduler, NodeScheduler
+import zmq_api as zmq
+import mongodb_api as mg
+import SystemConstants
 
 
-class JobManager:
-    def __init__(self, gm_addr, gm_port, db, scheduler, wait):
-        self.gm_addr = gm_addr
-        self.gm_port = gm_port
+class JobManager(object):
+    def __init__(self, gm_address, db, scheduler, wait):
+        self.gm_address = gm_address
         self.db = db
         self.scheduler = scheduler
         self.workersInfoCol = self.db['WorkersInfo']
@@ -32,19 +28,19 @@ class JobManager:
         self.wait = wait
 
         # listening msg from FrontEnd
-        self.socket = zmq.csBind(port='2990')
+        self.socket = zmq.cs_bind(port=SystemConstants.JM_PORT)
 
     # Initialize global manager(Swarm manager node)
     def init_gm(self):
-        url = 'http://%s:%s/RESTfulSwarm/GM/init' % (self.gm_addr, self.gm_port)
+        url = 'http://%s:%s/RESTfulSwarm/GM/init' % (self.gm_address, SystemConstants.GM_PORT)
         print(requests.get(url=url).content)
 
     # Create a single task(container) using a Json file
     def new_task(self, data):
-        url = 'http://%s:%s/RESTfulSwarm/GM/newtask' % (self.gm_addr, self.gm_port)
+        url = 'http://%s:%s/RESTfulSwarm/GM/request_new_task' % (self.gm_address, SystemConstants.GM_PORT)
         print(requests.post(url=url, json=data).content)
 
-    def containerMigration(self, data):
+    def container_migration(self, data):
         dest_node_name = (data['to'].split('@'))[0]
         dest_node_info = self.scheduler.get_node_info(dest_node_name)
         if dest_node_info is None:
@@ -58,8 +54,8 @@ class JobManager:
 
             filter_key = 'job_info.tasks.%s.container_name' % container
             target_key = 'job_info.tasks.%s.node' % container
-            mHelper.update_doc(job_col, filter_key=filter_key, filter_value=container,
-                               target_key=target_key, target_value=dest_node_name)
+            mg.update_doc(job_col, filter_key=filter_key, filter_value=container, target_key=target_key,
+                          target_value=dest_node_name)
 
             # get cores id from source node
             job_info = list(job_col.find({}))[0]
@@ -80,19 +76,19 @@ class JobManager:
 
             # update cpuset_cpus in job info collection
             target_key = 'job_info.tasks.%s.cpuset_cpus' % container
-            mHelper.update_doc(job_col, filter_key=filter_key, filter_value=container,
-                               target_key=target_key, target_value=','.join(free_cores))
+            mg.update_doc(job_col, filter_key=filter_key, filter_value=container, target_key=target_key,
+                          target_value=','.join(free_cores))
 
             # release cores in source node
             src_node_name = self.scheduler.find_container(data['container'])
             for core in cores:
                 target_key = 'CPUs.%s' % core
-                mHelper.update_doc(self.workersInfoCol, 'hostname', src_node_name, target_key, False)
+                mg.update_doc(self.workersInfoCol, 'hostname', src_node_name, target_key, False)
 
             # mark cores in destination node as busy
             for core in free_cores:
                 target_key = 'CPUs.%s' % core
-                mHelper.update_doc(self.workersInfoCol, 'hostname', dest_node_name, target_key, True)
+                mg.update_doc(self.workersInfoCol, 'hostname', dest_node_name, target_key, True)
 
             # get free memory from both source node and destination node
             src_worker_info = list(self.workersInfoCol.find({'hostname': src_node_name}))[0]
@@ -103,41 +99,38 @@ class JobManager:
             update_src_mem = str(utl.memory_size_translator(src_free_mem) + mem_limit) + 'm'
             update_dest_mem = str(utl.memory_size_translator(new_free_mem) - mem_limit) + 'm'
 
-            mHelper.update_doc(self.workersInfoCol, 'hostname', src_node_name, 'MemFree', update_src_mem)
-            mHelper.update_doc(self.workersInfoCol, 'hostname', dest_node_name, 'MemFree', update_dest_mem)
+            mg.update_doc(self.workersInfoCol, 'hostname', src_node_name, 'MemFree', update_src_mem)
+            mg.update_doc(self.workersInfoCol, 'hostname', dest_node_name, 'MemFree', update_dest_mem)
 
             # pre-process migration json file
             data.update({'from': data['from'].split('@')[1]})
             data.update({'to': data['to'].split('@')[1]})
 
             # update worker resource collection for both workers
-            mHelper.update_workers_resource_col(workers_col=self.workersInfoCol,
-                                                hostname=src_node_name,
-                                                workers_resource_col=self.workers_resource_col)
-            mHelper.update_workers_resource_col(workers_col=self.workersInfoCol,
-                                                hostname=dest_node_name,
-                                                workers_resource_col=self.workers_resource_col)
-
+            mg.update_workers_resource_col(workers_col=self.workersInfoCol, hostname=src_node_name,
+                                           workers_resource_col=self.workers_resource_col)
+            mg.update_workers_resource_col(workers_col=self.workersInfoCol, hostname=dest_node_name,
+                                           workers_resource_col=self.workers_resource_col)
             return data
 
     # Migrate a container
     # !!!Note: Assuming destination node always has enough cores to hold the migrated container
-    def doMigrate(self, data):
+    def do_migrate(self, data):
         try:
-            data = self.containerMigration(data)
-            url = 'http://%s:%s/RESTfulSwarm/GM/requestMigrate' % (self.gm_addr, self.gm_port)
+            data = self.container_migration(data)
+            url = 'http://%s:%s/RESTfulSwarm/GM/request_migrate' % (self.gm_address, SystemConstants.GM_PORT)
             print(requests.post(url=url, json=data).content)
             return True
         except Exception as ex:
             print(ex)
             return False
 
-    def doGroupMigration(self, data):
+    def do_group_migration(self, data):
         try:
             for index, item in enumerate(data[:]):
-                new_item = self.containerMigration(item)
+                new_item = self.container_migration(item)
                 data[index].update(new_item)
-            url = 'http://%s:%s/RESTfulSwarm/GM/requestGroupMigration' % (self.gm_addr, self.gm_port)
+            url = 'http://%s:%s/RESTfulSwarm/GM/request_group_migration' % (self.gm_address, SystemConstants.GM_PORT)
             print(requests.post(url=url, json=data).content)
             return True
         except Exception as ex:
@@ -145,7 +138,7 @@ class JobManager:
             return False
 
     # Update container resources(cpu & mem)
-    def updateContainer(self, data):
+    def update_container(self, data):
         # Update Job Info collection
         new_cpu = data['cpuset_cpus']
         new_mem = data['mem_limit']
@@ -167,12 +160,12 @@ class JobManager:
         # update cpu
         target_key = 'job_info.tasks.%s.cpuset_cpus' % container_name
         target_value = new_cpu
-        mHelper.update_doc(job_col, filter_key, filter_value, target_key, target_value)
+        mg.update_doc(job_col, filter_key, filter_value, target_key, target_value)
 
         # update memory
         target_key = 'job_info.tasks.%s.mem_limit' % container_name
         target_value = new_mem
-        mHelper.update_doc(job_col, filter_key, filter_value, target_key, target_value)
+        mg.update_doc(job_col, filter_key, filter_value, target_key, target_value)
 
         # ----------------------------------------------------------------------
         # Update WorkersInfo Collection
@@ -181,11 +174,11 @@ class JobManager:
         # update cpu
         for core in current_cpu:
             key = 'CPUs.%s' % core
-            mHelper.update_doc(self.workersInfoCol, 'hostname', node, key, False)
+            mg.update_doc(self.workersInfoCol, 'hostname', node, key, False)
 
         for core in new_cpu:
             key = 'CPUs.%s' % core
-            mHelper.update_doc(self.workersInfoCol, 'hostname', node, key, True)
+            mg.update_doc(self.workersInfoCol, 'hostname', node, key, True)
 
         # update memory, and we assuming memory unit is always m
         current_mem = utl.memory_size_translator(current_mem)
@@ -195,45 +188,44 @@ class JobManager:
         new_mem = utl.memory_size_translator(new_mem)
         current_mem -= new_mem
         current_mem = str(current_mem) + 'm'
-        mHelper.update_doc(self.workersInfoCol, 'hostname', node, 'MemFree', current_mem)
+        mg.update_doc(self.workersInfoCol, 'hostname', node, 'MemFree', current_mem)
 
         # update worker resource Info collection
-        mHelper.update_workers_resource_col(workers_col=self.workersInfoCol,
-                                            hostname=node,
-                                            workers_resource_col=self.workers_resource_col)
+        mg.update_workers_resource_col(workers_col=self.workersInfoCol, hostname=node,
+                                       workers_resource_col=self.workers_resource_col)
 
-        url = 'http://%s:%s/RESTfulSwarm/GM/requestUpdateContainer' % (self.gm_addr, self.gm_port)
+        url = 'http://%s:%s/RESTfulSwarm/GM/request_update_container' % (self.gm_address, SystemConstants.GM_PORT)
         print(requests.post(url=url, json=data).content)
 
     # Leave Swarm
-    def leaveSwarm(self, hostname):
-        col_names = mHelper.get_all_cols(self.db)
+    def leave_swarm(self, hostname):
+        col_names = mg.get_all_cols(self.db)
         cols = []
         # get collection cursor objs
         for col_name in col_names:
-            cols.append(mHelper.get_col(self.db, col_name))
-        mHelper.update_tasks(cols, hostname)
+            cols.append(mg.get_col(self.db, col_name))
+        mg.update_tasks(cols, hostname)
 
         # remove the node(document) from WorkersInfo collection
-        mHelper.delete_document(self.workersInfoCol, 'hostname', hostname)
+        mg.delete_document(self.workersInfoCol, 'hostname', hostname)
 
         data = {'hostname': hostname}
-        url = 'http://%s:%s/RESTfulSwarm/GM/requestLeave' % (self.gm_addr, self.gm_port)
+        url = 'http://%s:%s/RESTfulSwarm/GM/request_leave' % (self.gm_address, SystemConstants.GM_PORT)
         print(requests.post(url=url, json=data).content)
 
-    def dumpContainer(self, data):
-        url = 'http://%s:%s/RESTfulSwarm/GM/checkpointCons' % (self.gm_addr, self.gm_port)
+    def dump_container(self, data):
+        url = 'http://%s:%s/RESTfulSwarm/GM/checkpoint_cons' % (self.gm_address, SystemConstants.GM_PORT)
         print(requests.post(url=url, json=data).content)
 
-    def newJobNotify(self):
+    def new_job_notify(self):
         job_queue = []
         timer = time.time()
 
-        def preprocess_job(msg):
+        def pre_process_job(_msg):
             # read db, parse job resources request
-            job_name = msg[1]
-            job_col = mHelper.get_col(self.db, job_name)
-            col_data = mHelper.find_col(job_col)[0]
+            job_name = _msg[1]
+            job_col = mg.get_col(self.db, job_name)
+            col_data = mg.find_col(job_col)[0]
             # core request format: {$task_name: $core}}
             core_requests = {}
             # memory request format: {$task_name: $mem}
@@ -241,7 +233,7 @@ class JobManager:
             target_nodes = []
             target_cpuset = []
             for task in col_data['job_info']['tasks'].items():
-                core_requests.update({task[0]: task[1]['cpu_count']})
+                core_requests.update({task[0]: task[1]['req_cores']})
                 mem_requests.update({task[0]: task[1]['mem_limit']})
                 target_nodes.append(task[1]['node'])
                 target_cpuset.append(task[1]['cpuset_cpus'])
@@ -254,12 +246,6 @@ class JobManager:
             waiting_decision = schedule[1]
 
             if len(schedule_decision) > 0:
-                # print('-------------Scheduling decision-----------')
-                # print(schedule_decision)
-                #
-                # print('---------------waiting decision----------')
-                # print(waiting_decision)
-
                 # update Job collection
                 self.scheduler.update_job_info(schedule_decision)
 
@@ -281,8 +267,8 @@ class JobManager:
                 elif time.time() - timer >= self.wait:
                     jobs_details = []
                     temp_job_queue = []
-                    for index, msg in enumerate(job_queue_snap_shoot[:]):
-                        jobs_details.append((msg[1], preprocess_job(msg)))
+                    for index, _msg in enumerate(job_queue_snap_shoot[:]):
+                        jobs_details.append((_msg[1], pre_process_job(_msg)))
 
                     waiting_decision = schedule_resource(jobs_details)
 
@@ -294,11 +280,12 @@ class JobManager:
                                 job_queue.remove(job)
                             job_queue_snap_shoot.remove(job)
 
-                    for msg in temp_job_queue:
-                        url = 'http://%s:%s/RESTfulSwarm/GM/requestNewJob' % (self.gm_addr, self.gm_port)
-                        job_name = msg[1]
-                        job_col = mHelper.get_col(self.db, job_name)
-                        col_data = mHelper.find_col(job_col)[0]
+                    for _msg in temp_job_queue:
+                        url = 'http://%s:%s/RESTfulSwarm/GM/request_new_job' % (self.gm_address,
+                                                                                SystemConstants.GM_PORT)
+                        job_name = _msg[1]
+                        job_col = mg.get_col(self.db, job_name)
+                        col_data = mg.find_col(job_col)[0]
 
                         del col_data['_id']
                         print(requests.post(url=url, json=col_data).content)
@@ -312,22 +299,21 @@ class JobManager:
         while True:
             msg = self.socket.recv_string()
             msg = msg.split()
-
             if msg[0] == 'SwitchScheduler':
                 # make sure no job in job queue
                 job_queue = []
                 self.socket.send_string('Ack')
                 new_scheduler = msg[1]
                 if new_scheduler == 'first-fit':
-                    self.scheduler = FirstFitScheduler.FirstFitScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
+                    self.scheduler = FirstFitScheduler.FirstFitScheduler(self.db)
                 elif new_scheduler == 'best-fit':
-                    self.scheduler = BestFitScheduler.BestFitScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
+                    self.scheduler = BestFitScheduler.BestFitScheduler(self.db)
                 elif new_scheduler == 'best-fit-decreasing':
-                    self.scheduler = BestFitDecreasingScheduler.BestFitDecreasingScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
+                    self.scheduler = BestFitDecreasingScheduler.BestFitDecreasingScheduler(self.db)
                 elif new_scheduler == 'first-fit-decreasing':
-                    self.scheduler = FirstFitDecreasingScheduler.FirstFitDecreasingScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
+                    self.scheduler = FirstFitDecreasingScheduler.FirstFitDecreasingScheduler(self.db)
                 elif new_scheduler == 'no-scheduler':
-                    self.scheduler = NodeScheduler.NodeScheduler(self.db, 'WorkersInfo', 'WorkersResourceInfo')
+                    self.scheduler = NodeScheduler.NodeScheduler(self.db)
             else:
                 self.socket.send_string('Ack')
                 job_queue.append(msg)
@@ -335,34 +321,28 @@ class JobManager:
 
 def main():
     # parser = argparse.ArgumentParser()
-    # parser.add_argument('-ga', '--gaddr', type=str, help='Global manager node address.')
-    # parser.add_argument('-gp', '--gport', type=str, default='3100', help='Global manager node port number.')
-    # parser.add_argument('-ma', '--maddr', type=str, help='MongoDB node address.')
-    # parser.add_argument('-mp', '--mport', type=int, default=27017, help='MongoDB port number.')
+    # parser.add_argument('--GM', type=str, help='Global manager node address.')
+    # parser.add_argument('--db', type=str, help='MongoDB node address.')
     # parser.add_argument('-w', '--wait', type=int, default=3, help='Waiting time for Job Manager in seconds.')
     # parser.add_argument('-s', '--scheduling', type=str, choices=['first-fit', 'best-fit'], default='best-fit',
     #                     help='Scheduling algorithm option.')
     #
     # args = parser.parse_args()
-    # gm_addr = args.gaddr
-    # gm_port = args.gport
+    # gm_address = args.GM
     #
-    # mongo_addr = args.maddr
-    # mongo_port = args.mport
+    # db_address = args.db
     #
     # scheduling_strategy = args.scheduling
     #
     # wait = args.wait
 
-    os.chdir('/home/%s/RESTfulSwarmLM/JobManager' % utl.getUserName())
+    os.chdir('/home/%s/RESTfulSwarmLM/JobManager' % utl.get_username())
 
     with open('JobManagerInit.json') as f:
         data = json.load(f)
-    gm_addr = data['global_manager_addr']
-    gm_port = data['global_manager_port']
+    gm_address = data['gm_address']
 
-    mongo_addr = data['mongo_addr']
-    mongo_port = data['mongo_port']
+    db_address = data['db_address']
 
     wait = data['wait_time']
     
@@ -372,91 +352,92 @@ def main():
             scheduling_strategy = strategy
             break
 
-    db_name = 'RESTfulSwarmDB'
-    db_client = mHelper.get_client(address=mongo_addr, port=mongo_port)
-    db = mHelper.get_db(db_client, db_name)
+    db_client = mg.get_client(address=db_address, port=SystemConstants.MONGODB_PORT)
+    db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
 
     # choose scheduler
     # default scheduling strategy is best-fit
     if scheduling_strategy == 'first-fit':
-        scheduler = FirstFitScheduler.FirstFitScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
+        scheduler = FirstFitScheduler.FirstFitScheduler(db)
     elif scheduling_strategy == 'first-fit-decreasing':
-        scheduler = FirstFitDecreasingScheduler.FirstFitDecreasingScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
+        scheduler = FirstFitDecreasingScheduler.FirstFitDecreasingScheduler(db)
     elif scheduling_strategy == 'best-fir-decreasing':
-        scheduler = BestFitDecreasingScheduler.BestFitDecreasingScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
+        scheduler = BestFitDecreasingScheduler.BestFitDecreasingScheduler(db)
     elif scheduling_strategy == 'no-scheduler':
-        scheduler = NodeScheduler.NodeScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
+        scheduler = NodeScheduler.NodeScheduler(db)
     else:
-        scheduler = BestFitScheduler.BestFitScheduler(db, 'WorkersInfo', 'WorkersResourceInfo')
+        scheduler = BestFitScheduler.BestFitScheduler(db)
 
-    job_manager = JobManager(gm_addr=gm_addr, gm_port=gm_port, db=db, scheduler=scheduler, wait=wait)
+    job_manager = JobManager(gm_address=gm_address, db=db, scheduler=scheduler, wait=wait)
 
-    fe_notify_thr = threading.Thread(target=job_manager.newJobNotify, args=())
+    fe_notify_thr = threading.Thread(target=job_manager.new_job_notify(), args=())
     fe_notify_thr.setDaemon(True)
     fe_notify_thr.start()
 
     job_manager.init_gm()
 
-    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+    os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 
-    while True:
-        pass
-        # print('--------------RESTfulSwarm Menu--------------')
-        # print('1. Init Swarm')
-        # print('2. Create task(one container)')
-        # print('3. Check point a group containers')
-        # print('4. Migrate a container')
-        # print('5. Migrate a group of containers')
-        # print('6. Update Container')
-        # print('7. Leave Swarm')
-        # print('8. Describe Workers')
-        # print('9. Describe Manager')
-        # print('10. Exit')
-        # try:
-        #     get_input = int(input('Please enter your choice: '))
-        #     if get_input == 1:
-        #         job_manager.init_gm()
-        #     elif get_input == 2:
-        #         json_path = input('Task Json file path: ')
-        #         with open(json_path, 'r') as f:
-        #             data = json.load(f)
-        #         job_manager.new_task(data)
-        #     elif get_input == 3:
-        #         json_path = input('Checkpoint Json file path: ')
-        #         with open(json_path, 'r') as f:
-        #             data = json.load(f)
-        #         job_manager.dumpContainer(data)
-        #     elif get_input == 4:
-        #         json_path = input('Migration Json file path: ')
-        #         with open(json_path, 'r') as f:
-        #             data = json.load(f)
-        #         job_manager.doMigrate(data)
-        #     elif get_input == 5:
-        #         migrate_json = input('Group migration Json file: ')
-        #         with open(migrate_json, 'r') as f:
-        #             data = json.load(f)
-        #         job_manager.doGroupMigration(data)
-        #     elif get_input == 6:
-        #         json_path = input('New resource configuration Json file:')
-        #         with open(json_path, 'r') as f:
-        #             data = json.load(f)
-        #         job_manager.updateContainer(data)
-        #     elif get_input == 7:
-        #         hostname = input('Node hostname: ')
-        #         job_manager.leaveSwarm(hostname)
-        #     elif get_input == 8:
-        #         hostname = input('Node hostname: ')
-        #         url = 'http://%s:%s/RESTfulSwarm/GM/%s/describeWorker' % (gm_addr, gm_port, hostname)
-        #         print(requests.get(url=url).content.decode('utf-8'))
-        #     elif get_input == 9:
-        #         hostname = input('Node hostname: ')
-        #         url = 'http://%s:%s/RESTfulSwarm/GM/%s/describeManager' % (gm_addr, gm_port, hostname)
-        #         print(requests.get(url=url).content.decode('utf-8'))
-        #     elif get_input == 10:
-        #         print('Thanks for using RESTfulSwarmLM, bye.')
-        #         break
-        # except ValueError as er:
-        #     print(er)
+    # while True:
+    #     pass
+    #     print('--------------RESTfulSwarm Menu--------------')
+    #     print('1. Init Swarm')
+    #     print('2. Create task(one container)')
+    #     print('3. Check point a group containers')
+    #     print('4. Migrate a container')
+    #     print('5. Migrate a group of containers')
+    #     print('6. Update Container')
+    #     print('7. Leave Swarm')
+    #     print('8. Describe Workers')
+    #     print('9. Describe Manager')
+    #     print('10. Exit')
+    #     try:
+    #         get_input = int(input('Please enter your choice: '))
+    #         if get_input == 1:
+    #             job_manager.init_gm()
+    #         elif get_input == 2:
+    #             json_path = input('Task Json file path: ')
+    #             with open(json_path, 'r') as f:
+    #                 data = json.load(f)
+    #             job_manager.new_task(data)
+    #         elif get_input == 3:
+    #             json_path = input('Checkpoint Json file path: ')
+    #             with open(json_path, 'r') as f:
+    #                 data = json.load(f)
+    #             job_manager.dump_container(data)
+    #         elif get_input == 4:
+    #             json_path = input('Migration Json file path: ')
+    #             with open(json_path, 'r') as f:
+    #                 data = json.load(f)
+    #             job_manager.do_migrate(data)
+    #         elif get_input == 5:
+    #             migrate_json = input('Group migration Json file: ')
+    #             with open(migrate_json, 'r') as f:
+    #                 data = json.load(f)
+    #             job_manager.do_group_migration(data)
+    #         elif get_input == 6:
+    #             json_path = input('New resource configuration Json file:')
+    #             with open(json_path, 'r') as f:
+    #                 data = json.load(f)
+    #             job_manager.update_container(data)
+    #         elif get_input == 7:
+    #             hostname = input('Node hostname: ')
+    #             job_manager.leave_swarm(hostname)
+    #         elif get_input == 8:
+    #             hostname = input('Node hostname: ')
+    #             url = 'http://%s:%s/RESTfulSwarm/GM/%s/describe_worker' % (gm_address, SystemConstants.GM_PORT,
+    #                                                                        hostname)
+    #             print(requests.get(url=url).content.decode('utf-8'))
+    #         elif get_input == 9:
+    #             hostname = input('Node hostname: ')
+    #             url = 'http://%s:%s/RESTfulSwarm/GM/%s/describe_manager' % (gm_address, SystemConstants.GM_PORT,
+    #                                                                         hostname)
+    #             print(requests.get(url=url).content.decode('utf-8'))
+    #         elif get_input == 10:
+    #             print('Thanks for using RESTfulSwarm, bye.')
+    #             break
+    #     except ValueError as er:
+    #         print(er)
 
 
 if __name__ == '__main__':

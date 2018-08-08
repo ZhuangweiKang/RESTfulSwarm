@@ -4,50 +4,41 @@
 
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from FrontEnd import FrontEnd as fe
-from JobManager import JobManager as jm
-from GlobalManager import GlobalManager as gm
-from Discovery import Discovery as dc
-
-from Client import BurstyStressClient as bursty_client
-from Client import IncrementalStressClient as incremental_client
-from Client import RandomStressClient as random_client
-from Client import SteadyStressClient as steay_client
-
-import multiprocessing
+import json
 import paramiko as pk
 import time
-import MongoDBHelper as mg
-import DockerHelper as dh
-import json
+import multiprocessing
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from FrontEnd import FrontEnd as FE
+from JobManager import JobManager as JM
+from GlobalManager import GlobalManager as GM
+from Discovery import Discovery as DC
+from Client import BurstyStressClient as BSC
+from Client import IncrementalStressClient as ISC
+from Client import RandomStressClient as RSC
+from Client import SteadyStressClient as SSC
+import mongodb_api as mg
+import docker_api as docker
+import SystemConstants
 
 
-class ManagementEngine:
-    def __init__(self, db_packet, workers_info, private_key_file):
-        db_addr = db_packet['address']
-        db_pwd = db_packet['pwd']
-        db_port = db_packet['port']
-        db_usr = db_packet['user']
-        self.db_name = db_packet['database']
-        self.mg_client = mg.get_client(usr=db_usr, pwd=db_pwd, address=db_addr, port=db_port)
-        self.db = mg.get_db(self.mg_client, db_name=self.db_name)
-        self.workers_info = workers_info
-        self.private_key_file = private_key_file
+class ManagementEngine(object):
+    def __init__(self, _db_address, _workers_info):
+        self.mg_client = mg.get_client(usr=SystemConstants.MONGODB_USR, pwd=SystemConstants.MONGODB_PWD,
+                                       address=_db_address, port=SystemConstants.MONGODB_PORT)
+        self.db = mg.get_db(self.mg_client, db_name=SystemConstants.MONGODB_NAME)
+        self.workers_info = _workers_info
 
-    def clear_db(self):
+    def reset_db(self):
         all_cols = mg.get_all_cols(self.db)
-        # for col in all_cols:
-        #     mg.drop_col(self.mg_client, self.db_name, col)
-
-        if 'WorkersResourceInfo' in all_cols:
+        if SystemConstants.WorkersResourceInfo in all_cols:
             # Drop worker resource info collection
-            mg.drop_col(self.mg_client, self.db_name, 'WorkersResourceInfo')
+            mg.drop_col(self.mg_client, SystemConstants.MONGODB_NAME, SystemConstants.WorkersResourceInfo)
 
-        if 'WorkersInfo' in all_cols:
+        if SystemConstants.WorkersInfo in all_cols:
             # Reset worker info collection
-            workers_info_col = mg.get_col(self.db, 'WorkersInfo')
+            workers_info_col = mg.get_col(self.db, SystemConstants.WorkersInfo)
             workers_info_data = mg.find_col(workers_info_col)
             for index, worker in enumerate(workers_info_data[:]):
                 for cpu in worker['CPUs']:
@@ -59,103 +50,94 @@ class ManagementEngine:
                               target_value=workers_info_data[index]['CPUs'])
         print('Reset MongoDB.')
 
-    def clear_master(self):
+    @staticmethod
+    def clear_master():
         # let master node leave swarm
-        dh.leaveSwarm(dh.setClient())
+        docker.leave_swarm(docker.set_client())
         print('Master node left swarm.')
 
-    def launch_fe(self):
-        fe_pro = multiprocessing.Process(
+    @staticmethod
+    def launch_fe():
+        fe_process = multiprocessing.Process(
             name='FrontEnd',
-            target=fe.main
+            target=FE.main
         )
-        fe_pro.daemon = True
-        fe_pro.start()
+        fe_process.daemon = True
+        fe_process.start()
         print('Launched FrontEnd.')
-        return fe_pro
+        return fe_process
 
-    def launch_jm(self):
-        jm_pro = multiprocessing.Process(
+    @staticmethod
+    def launch_jm():
+        jm_process = multiprocessing.Process(
             name='JobManager',
-            target=jm.main
+            target=JM.main
         )
-        jm_pro.daemon = True
-        jm_pro.start()
+        jm_process.daemon = True
+        jm_process.start()
         print('Launched JobManager.')
-        return jm_pro
+        return jm_process
 
-    def launch_gm(self):
-        gm_pro = multiprocessing.Process(
+    @staticmethod
+    def launch_gm():
+        gm_process = multiprocessing.Process(
             name='GlobalManager',
-            target=gm.main
+            target=GM.main
         )
-        gm_pro.daemon = True
-        gm_pro.start()
+        gm_process.daemon = True
+        gm_process.start()
         print('Launched GlobalManager.')
-        return gm_pro
+        return gm_process
 
-    def launch_discovery(self):
-        dc_pro = multiprocessing.Process(
+    @staticmethod
+    def launch_discovery():
+        dc_process = multiprocessing.Process(
             name='Discovery',
-            target=dc.main
+            target=DC.Discovery.main()
         )
-        dc_pro.daemon = True
-        dc_pro.start()
+        dc_process.daemon = True
+        dc_process.start()
         print('Launched Discovery.')
-        return dc_pro
+        return dc_process
 
-    def ssh_exec_cmd(self, addr, usr, cmd):
-        key = pk.RSAKey.from_private_key_file(self.private_key_file)
+    @staticmethod
+    def ssh_exec_cmd(address, usr, cmd):
+        key = pk.RSAKey.from_private_key_file(SystemConstants.PRIVATE_KEY)
         con = pk.SSHClient()
         con.set_missing_host_key_policy(pk.AutoAddPolicy)
-        con.connect(hostname=addr, username=usr, pkey=key)
+        con.connect(hostname=address, username=usr, pkey=key)
         con.exec_command(cmd)
-        print('Executed command %s on worker %s' % (cmd, addr))
+        print('Executed command %s on worker %s' % (cmd, address))
 
     def launch_workers(self):
         for worker in self.workers_info:
-            self.ssh_exec_cmd(addr=worker['address'], usr=worker['user'], cmd=worker['launch_worker'])
+            self.ssh_exec_cmd(address=worker['address'], usr=worker['user'], cmd=worker['launch_worker'])
             time.sleep(1)
         print('Waiting for workers joining.')
-        while len(dh.getNodeList(dh.setClient())) == 0:
+        while len(docker.get_node_list(docker.set_client())) == 0:
             pass
         print('Launched all workers.')
 
-    def launch_client(self, session_id):
-        client_proc = multiprocessing.Process(
+    @staticmethod
+    def launch_client(session_id):
+        client_process = multiprocessing.Process(
             name='Client',
-            target=incremental_client.main,
+            target=ISC.IncrementalStressClient.main,
             args=(session_id, )
         )
-        client_proc.daemon = True
-        client_proc.start()
+        client_process.daemon = True
+        client_process.start()
         print('Launched Client.')
-        return client_proc
+        return client_process
 
-    def shutdown_fe(self, fe_pro):
-        fe_pro.terminate()
-        print('Shutdown FrontEnd.')
-
-    def shutdown_jm(self, jm_pro):
-        jm_pro.terminate()
-        print('Shutdown JobManager.')
-
-    def shutdown_gm(self, gm_pro):
-        gm_pro.terminate()
-        print('Shutdown GlobalManager.')
-
-    def shutdown_discovery(self, dc_pro):
-        dc_pro.terminate()
-        print('Shutdown Discovery.')
+    @staticmethod
+    def shutdown_process(process):
+        process.terminate()
 
     def shutdown_workers(self):
         for worker in self.workers_info:
             self.ssh_exec_cmd(worker['address'], worker['user'], worker['kill_worker'])
         print('Shutdown all workers.')
-
-    def shutdown_client(self, client_pro):
-        client_pro.terminate()
-        print('Shutdown Client.')
 
     def launch_system(self):
         print('Start launching system.')
@@ -163,34 +145,43 @@ class ManagementEngine:
         time.sleep(1)
         self.shutdown_workers()
         time.sleep(1)
-        self.clear_db()
+        self.reset_db()
         time.sleep(1)
-        fe_proc = self.launch_fe()
+        fe_process = self.launch_fe()
         time.sleep(1)
-        gm_proc = self.launch_gm()
+        gm_process = self.launch_gm()
         time.sleep(1)
-        jm_proc = self.launch_jm()
+        jm_process = self.launch_jm()
         time.sleep(1)
-        dc_proc = self.launch_discovery()
+        dc_process = self.launch_discovery()
         time.sleep(1)
         self.launch_workers()
         time.sleep(5)
         session_id = str(int(time.time()))
-        client_proc = self.launch_client(session_id=session_id)
-        return fe_proc, jm_proc, gm_proc, dc_proc, client_proc
+        client_process = self.launch_client(session_id=session_id)
+        return fe_process, jm_process, gm_process, dc_process, client_process
 
-    def shutdown_system(self, fe_proc, jm_proc, gm_proc, dc_proc, client_proc):
+    def shutdown_system(self, fe_process, jm_process, gm_process, dc_process, client_process):
         print('Start shutting down system.')
-        self.clear_db()
-        self.shutdown_client(client_proc)
-        self.shutdown_fe(fe_proc)
-        self.shutdown_jm(jm_proc)
-        self.shutdown_gm(gm_proc)
-        self.shutdown_discovery(dc_proc)
+        self.reset_db()
+        print('Reset MongoDB.')
+        self.shutdown_process(client_process)
+        print('Reset client.')
+        self.shutdown_process(fe_process)
+        print('Reset FrontEnd.')
+        self.shutdown_process(jm_process)
+        print('Reset JobManager.')
+        self.shutdown_process(gm_process)
+        print('Reset GlobalManager.')
+        self.shutdown_process(dc_process)
+        print('Reset Discovery.')
         self.shutdown_workers()
+        print('Reset Workers.')
         self.clear_master()
+        print('Reset Master.')
         time.sleep(5)
-        self.clear_db()
+        self.reset_db()
+        print('Reset MongoDB.')
 
     def main(self):
         while True:
@@ -207,10 +198,7 @@ class ManagementEngine:
 if __name__ == '__main__':
     with open('DBinfo.json') as f:
         db_packet = json.load(f)
-
     with open('WorkersInfo.json') as f:
         workers_info = json.load(f)
-
-    private_key_file = 'private_key.pem'
-    me = ManagementEngine(db_packet=db_packet, workers_info=workers_info, private_key_file=private_key_file)
+    me = ManagementEngine(_db_address=db_packet['address'], _workers_info=workers_info)
     me.main()

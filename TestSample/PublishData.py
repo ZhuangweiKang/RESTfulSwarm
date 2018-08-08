@@ -3,7 +3,7 @@
 # Author: Zhuangwei Kang
 
 import time
-import ZMQHelper as zmq
+import zmq_api as zmq
 
 
 '''
@@ -12,7 +12,7 @@ GlobalManager publishes numbers like a busybox container
 def main():
     port = '3000'
     topic = 'number'
-    socket = zmq.bind(port)
+    socket = zmq.ps_bind(port)
     i = 0
     while True:
         socket.send('%s %s' % (topic, str(i)))

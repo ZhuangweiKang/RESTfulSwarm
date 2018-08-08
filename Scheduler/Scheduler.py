@@ -3,18 +3,17 @@
 # Author: Zhuangwei Kang
 
 from abc import ABCMeta, abstractmethod
-import MongoDBHelper as mg
-import time
-import utl
+import mongodb_api as mg
+import SystemConstants
 
 
 class Scheduler(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self, db, workers_col_name, worker_resource_col_name):
+    def __init__(self, db):
         self.db = db
-        self.workers_col = mg.get_col(self.db, workers_col_name)
-        self.workers_resource_col = mg.get_col(self.db, worker_resource_col_name)
+        self.workers_col = mg.get_col(self.db, SystemConstants.WorkersInfo)
+        self.workers_resource_col = mg.get_col(self.db, SystemConstants.WorkersResourceInfo)
 
     @abstractmethod
     def cores_scheduling_algorithm(self, jobs_details, free_cores):
@@ -91,5 +90,5 @@ class Scheduler(object):
         '''
         try:
             return list(self.workers_col.find({'hostname': node_name}))[0]
-        except Exception:
-            return None
+        except Exception as ex:
+            print(ex)

@@ -1,7 +1,5 @@
 {
-  "address": "10.52.0.124",
-  "mongo_addr": "10.52.0.124",
-  "mongo_port": 27017,
-  "job_manager_addr": "10.52.0.124",
-  "job_manager_port": "2990"
+  "fe_address": "10.52.0.124",
+  "db_address": "10.52.0.124",
+  "jm_address": "10.52.0.124"
 }

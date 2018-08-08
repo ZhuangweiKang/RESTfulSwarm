@@ -2,47 +2,47 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-import os, sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
+import os
+import sys
+import math
 import json
 import random
 import time
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import utl
-import math
 from Client.StressClient import StressClient
 
 
 class BurstyStressClient(StressClient):
-    def __init__(self, lmda):
+    def __init__(self, __lambda):
         super(StressClient, self).__init__()
-        self.lmda = lmda
+        self.__lambda = __lambda
 
     def feed_func(self, time_stamp):
-        return math.ceil(random.expovariate(self.lmda))
+        return math.ceil(random.expovariate(self.__lambda))
 
+    @staticmethod
+    def main(session_id):
+        # parser = argparse.ArgumentParser()
+        # parser.add_argument('-a', '--address', type=str, help='Front end node address.')
+        # args = parser.parse_args()
+        # fe_address = args.address
 
-def main(session_id):
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('-a', '--address', type=str, help='Front end node address.')
-    # parser.add_argument('-p', '--port', type=str, default='5001', help='Front end node port number.')
-    # args = parser.parse_args()
-    # fe_addr = args.address
-    # fe_port = args.port
-    os.chdir('/home/%s/RESTfulSwarmLM/Client' % utl.getUserName())
-    try:
-        json_path = 'BurstyStressClientInfo.json'
-        with open(json_path, 'r') as f:
-            data = json.load(f)
-        client = BurstyStressClient(lmda=data['lambda'])
-        client.init_fields()
-        client.feed_jobs(session_id)
-    except ValueError as er:
-        print(er)
+        os.chdir('/home/%s/RESTfulSwarmLM/Client' % utl.get_username())
 
-    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+        try:
+            json_path = 'BurstyStressClientInfo.json'
+            with open(json_path, 'r') as f:
+                data = json.load(f)
+            client = BurstyStressClient(__lambda=data['lambda'])
+            client.feed_jobs(session_id)
+        except Exception as ex:
+            print(ex)
+
+        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.get_username())
 
 
 if __name__ == '__main__':
-    _session_id = str(int(time.time()))
-    main(_session_id)
+    session = str(int(time.time()))
+    BurstyStressClient.main(session)

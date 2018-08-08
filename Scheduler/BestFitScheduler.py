@@ -6,8 +6,8 @@ from Scheduler.BinPackingScheduler import BinPackingScheduler
 
 
 class BestFitScheduler(BinPackingScheduler):
-    def __init__(self, db, workers_col_name, worker_resource_col_name):
-        super(BestFitScheduler, self).__init__(db, workers_col_name, worker_resource_col_name)
+    def __init__(self, db):
+        super(BestFitScheduler, self).__init__(db)
 
     def cores_scheduling_algorithm(self, jobs_details, free_cores):
         core_requests = [(job[0], job[1][0]) for job in jobs_details]
@@ -16,7 +16,8 @@ class BestFitScheduler(BinPackingScheduler):
             req_cores.extend(list(item[1].values()))
         return self.best_fit(requested_resources=req_cores, free_resources=free_cores)
 
-    def best_fit(self, requested_resources, free_resources):
+    @staticmethod
+    def best_fit(requested_resources, free_resources):
         '''
         Best fit algorithm for scheduling resources
         :param requested_resources: a list of requested resources

@@ -3,48 +3,45 @@
 # Author: Zhuangwei Kang
 
 import os, sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 import json
 import random
 import time
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import utl
 from Client.StressClient import StressClient
 
 
 class RandomStressClient(StressClient):
-    def __init__(self, lower_bound, upper_bound):
+    def __init__(self, __lower_bound, __upper_bound):
         super(StressClient, self).__init__()
-        self.lower_bound = lower_bound
-        self.upper_bound = upper_bound
+        self.__lower_bound = __lower_bound
+        self.__upper_bound = __upper_bound
 
     def feed_func(self, time_stamp):
-        return random.randint(self.lower_bound, self.upper_bound)
+        return random.randint(self.__lower_bound, self.__upper_bound)
 
+    @staticmethod
+    def main(session_id):
+        # parser = argparse.ArgumentParser()
+        # parser.add_argument('-a', '--address', type=str, help='Front end node address.')
+        # args = parser.parse_args()
+        # fe_address = args.address
 
-def main(session_id):
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('-a', '--address', type=str, help='Front end node address.')
-    # parser.add_argument('-p', '--port', type=str, default='5001', help='Front end node port number.')
-    # args = parser.parse_args()
-    # fe_addr = args.address
-    # fe_port = args.port
+        os.chdir('/home/%s/RESTfulSwarmLM/Client' % utl.get_username())
 
-    os.chdir('/home/%s/RESTfulSwarmLM/Client' % utl.getUserName())
+        try:
+            json_path = 'RandomStressClientInfo.json'
+            with open(json_path, 'r') as f:
+                data = json.load(f)
+            client = RandomStressClient(__lower_bound=data['lower_bound'], __upper_bound=data['upper_bound'])
+            client.feed_jobs(session_id)
+        except ValueError as er:
+            print(er)
 
-    try:
-        json_path = 'RandomStressClientInfo.json'
-        with open(json_path, 'r') as f:
-            data = json.load(f)
-        client = RandomStressClient(lower_bound=data['lower_bound'], upper_bound=data['upper_bound'])
-        client.init_fields()
-        client.feed_jobs(session_id)
-    except ValueError as er:
-        print(er)
-
-    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.get_username())
 
 
 if __name__ == '__main__':
-    _session_id = str(int(time.time()))
-    main(session_id=_session_id)
+    session = str(int(time.time()))
+    RandomStressClient.main(session)

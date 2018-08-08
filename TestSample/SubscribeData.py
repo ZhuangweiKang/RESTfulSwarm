@@ -3,14 +3,14 @@
 # Author: Zhuangwei Kang
 
 import logging
-import ZMQHelper as zmq
+import zmq_api as zmq
 import argparse
 
 
 def main(address, port):
     logger = doLog()
-    socket = zmq.connect(address, port)
-    zmq.subscribeTopic(socket, 'number')
+    socket = zmq.ps_connect(address, port)
+    zmq.subscribe_topic(socket, 'number')
     while True:
         data = socket.recv()
         number = data.split()

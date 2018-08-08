@@ -1,4 +1,3 @@
 {
-  "mongo_addr": "10.52.0.124",
-  "mongo_port": 27017
+  "db_address": "10.52.0.124"
 }

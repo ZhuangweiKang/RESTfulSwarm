@@ -3,25 +3,25 @@
 # Author: Zhuangwei Kang
 
 import docker
+import docker.errors
+import docker.types
 import os
 import time
-import datetime
-import json
 
 
-def setClient():
+def set_client():
     return docker.from_env()
 
 
-def buildImage(client, path, tag):
+def build_image(client, path, tag):
     return client.images.build(path=path, tag=tag)
 
 
-def pullImage(client, repository):
+def pull_image(client, repository):
     client.images.pull(repository)
 
 
-def runContainer(client, image, name, detach=True, network=None, command=None, cpuset_cpus=None, mem_limit=None, ports=None, volumes=None, environment=None):
+def run_container(client, image, name, detach=True, network=None, command=None, cpuset_cpus=None, mem_limit=None, ports=None, volumes=None, environment=None):
     return client.containers.run(
         image=image,
         name=name,
@@ -36,22 +36,22 @@ def runContainer(client, image, name, detach=True, network=None, command=None, c
     )
 
 
-def updateContainer(client, container_name, cpuset_cpus, mem_limit):
-    container = getContainer(client=client, name=container_name)
+def update_container(client, container_name, cpuset_cpus, mem_limit):
+    container = get_container(client=client, name=container_name)
     if container is not None:
         container.update(cpuset_cpus=cpuset_cpus, mem_limit=mem_limit)
         return True
     return False
 
 
-def getContainer(client, name):
+def get_container(client, name):
     try:
         return client.containers.get(name)
     except docker.errors.NotFound:
         return None
 
 
-def checkImage(client, tag):
+def check_image(client, tag):
     images = client.images.list()
     for image in images:
         if tag in image.tags:
@@ -59,7 +59,7 @@ def checkImage(client, tag):
     return False
 
 
-def checkContainer(client, container_name):
+def check_container(client, container_name):
     try:
         client.containers.get(container_name)
         return True
@@ -67,84 +67,86 @@ def checkContainer(client, container_name):
         return False
 
 
-def deleteContainer(container):
+def delete_container(container):
     container.remove(force=True)
 
 
-def getContainerID(client, container):
+def get_container_id(client, container):
     return client.containers.get(container).id
 
 
-def checkpoint(checkpoint_name, containerID, leave_running=False):
+def checkpoint(checkpoint_name, container_id, leave_running=False):
     print(checkpoint_name, int(round(time.time() * 1000)))
     if leave_running:
-        checkpoint_cmd = 'docker checkpoint create --leave-running ' + containerID + ' ' + checkpoint_name
+        checkpoint_cmd = 'docker checkpoint create --leave-running ' + container_id + ' ' + checkpoint_name
     else:
-        checkpoint_cmd = 'docker checkpoint create ' + containerID + ' ' + checkpoint_name
+        checkpoint_cmd = 'docker checkpoint create ' + container_id + ' ' + checkpoint_name
     print(os.popen(checkpoint_cmd, 'r').read())
     print(checkpoint_name, int(round(time.time() * 1000)))
 
 
-def restore(containerID, checkpoint_dir, checkpoint_name):
+def restore(container_id, checkpoint_dir, checkpoint_name):
     # checkpoint_dir = '/var/lib/docker/containers/%s/checkpoints/' % containerID
-    restore_cmd = 'docker start --checkpoint-dir=%s --checkpoint=%s %s' % (checkpoint_dir, checkpoint_name, containerID)
+    restore_cmd = 'docker start --checkpoint-dir=%s --checkpoint=%s %s' \
+                  % (checkpoint_dir, checkpoint_name, container_id)
     print(os.popen(restore_cmd, 'r').read())
 
 
-def initSwarm(client, advertise_addr):
+def init_swarm(client, advertise_addr):
     client.swarm.init(advertise_addr=advertise_addr)
 
 
-def joinSwarm(client, token, address):
+def join_swarm(client, token, address):
     client.swarm.join(remote_addrs=[address], join_token=token)
 
 
-def leaveSwarm(client):
+def leave_swarm(client):
     try:
         client.swarm.leave(force=True)
-    except Exception:
-        pass
+    except Exception as ex:
+        print(ex)
 
-def getNodeList(client):
+
+def get_node_list(client):
     return client.nodes.list(filters={'role': 'worker'})
 
 
-def getJoinToken():
+def get_join_token():
     cmd = 'docker swarm join-token worker -q'
     return os.popen(cmd, 'r').read()
 
 
-def deleteNode(node_name):
+def delete_node(node_name):
     cmd = 'docker node rm %s' % node_name
     os.system(cmd)
 
 
-def createNetwork(client, name, driver='overlay', attachable=True, subnet=None):
+def create_network(client, name, driver='overlay', attachable=True, subnet=None):
     ipam_pool = docker.types.IPAMPool(subnet=subnet)
     ipam_config = docker.types.IPAMConfig(pool_configs=[ipam_pool])
     client.networks.create(name=name, driver=driver, ipam=ipam_config, attachable=attachable)
 
 
-def getContainerIP(container_name):
+def get_container_ip(container_name):
     cmd = 'docker inspect -f \'{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}\' %s' % container_name
     return os.popen(cmd, 'r').read()
 
 
-def createContainer(client, image, name, network=None, command=None):
+def create_container(client, image, name, network=None, command=None):
     client.containers.create(image=image, name=name, detach=True, network=network, command=command)
 
 
-def commitContainer(client, name, repository, imageName, tag='latest'):
-    container = getContainer(client, name)
-    getTags(client, imageName)
+def commit_container(client, name, repository, image_name, tag='latest'):
+    container = get_container(client, name)
+    get_tags(client, image_name)
     container.commit(repository=repository, tag=tag)
     client.images.push(repository, tag=tag)
     return repository + ':' + tag
 
 
-def getTags(client, imageName):
-    tags = client.images.get(imageName).tags
-    image = client.images.get(imageName)
+def get_tags(client, image_name):
+    tags = client.images.get(image_name).tags
+    image = client.images.get(image_name)
     temp = []
     for tag in tags:
         tag = tag.split(':')[1]
@@ -154,11 +156,11 @@ def getTags(client, imageName):
         max_tag = 0.0
     else:
         max_tag = max(temp)
-    image.tag(repository=imageName, tag=str(max_tag+0.1))
-    client.images.push(repository=imageName, tag=str(max_tag+0.1))
+    image.tag(repository=image_name, tag=str(max_tag+0.1))
+    client.images.push(repository=image_name, tag=str(max_tag+0.1))
 
 
-def verifyNetwork(client, network):
+def verify_network(client, network):
     # get a list of network objects
     networks = client.networks.list()
     # get a list of network name
@@ -168,42 +170,37 @@ def verifyNetwork(client, network):
     return True
 
 
-def checkNodeIP(client, nodeIP):
-    nodes = getNodeList(client)
+def check_node_ip(client, node_ip):
+    nodes = get_node_list(client)
     for node in nodes:
-        if (node.attrs)['Status']['Addr'] == nodeIP:
+        if node.attrs['Status']['Addr'] == node_ip:
             return True
     return False
 
 
-def checkNodeHostName(client, host):
-    nodes = getNodeList(client)
+def check_node_hostname(client, host):
+    nodes = get_node_list(client)
     for node in nodes:
-        if (node.attrs)['Description']['Hostname'] == host:
+        if node.attrs['Description']['Hostname'] == host:
             return False
     return True
 
 
-def getNodeInfo(client, name):
+def get_node_info(client, name):
     try:
         node = client.nodes.get(name)
         return node.attrs
     except Exception as ex:
-        return None
+        print(ex)
 
 
-def removeNode(name):
+def remove_node(name):
     cmd = 'docker node rm -f %s' % name
     print(os.popen(cmd).read())
 
 
-def prun_network(client, filter=None):
-    '''
-    :param force: boolean type
-    :param filter: dictionary type
-    :return:
-    '''
-    return client.networks.prune(filters=filter)
+def prune_network(client, _filter=None):
+    return client.networks.prune(filters=_filter)
 
 
 def rm_networks(client, networks):

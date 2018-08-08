@@ -29,8 +29,8 @@ def find_col(col):
 def filter_col(col, filter_key, filter_value):
     try:
         return list(col.find({filter_key: filter_value}))[0]
-    except Exception:
-        return None
+    except Exception as ex:
+        print(ex)
 
 
 def get_all_cols(db):

@@ -4,20 +4,19 @@
 
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 import json
 from flask import *
 import time
-import utl
-import argparse
-from datetime import datetime
-from datetime import timedelta
 import threading
 from flasgger import Swagger, swag_from
-import DockerHelper as dHelper
-import ZMQHelper as zmq
-import MongoDBHelper as mg
+import argparse
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import utl
+import docker_api as docker
+import zmq_api as zmq
+import mongodb_api as mg
+import SystemConstants
 
 app = Flask(__name__)
 
@@ -41,19 +40,16 @@ template = {
 
 swagger = Swagger(app, template=template)
 
-host_addr = None
+gm_address = None
 dockerClient = None
 pubSocket = None
 
-m_addr = None
-m_port = None
-mongo_client = None
-db_name = 'RESTfulSwarmDB'
-workers_collection_name = 'WorkersInfo'
-workers_resources = 'WorkersResourceInfo'
+db_address = None
+db_client = None
 db = None
 worker_col = None
 worker_resource_col = None
+
 job_buffer = []
 
 
@@ -62,8 +58,8 @@ job_buffer = []
 def init():
     global pubSocket
     try:
-        pubSocket = zmq.bind('3100')
-        initSwarmEnv()
+        pubSocket = zmq.ps_bind(SystemConstants.GM_PUB_PORT)
+        init_swarm_env()
         response = 'OK: Initialize Swarm environment succeed.'
         return response, 200
     except Exception as ex:
@@ -71,28 +67,29 @@ def init():
         return response, 500
 
 
-def initSwarmEnv():
-    dHelper.initSwarm(dockerClient, advertise_addr=host_addr)
+def init_swarm_env():
+    docker.init_swarm(dockerClient, advertise_addr=gm_address)
     app.logger.info('Init Swarm environment.')
 
 
-def createOverlayNetwork(network, driver, subnet):
-    dHelper.createNetwork(dockerClient, name=network, driver=driver, subnet=subnet)
+def create_overlay_network(network, driver, subnet):
+    docker.create_network(dockerClient, name=network, driver=driver, subnet=subnet)
     app.logger.info('Build overlay network: %s.' % network)
 
 
-@app.route('/RESTfulSwarm/GM/requestJoin', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/request_join', methods=['POST'])
 @swag_from('./Flasgger/requestJoin.yml', validation=True)
-def requestJoin():
+def request_join():
     data = request.get_json()
     hostname = data['hostname']
-    worker_addr = data['address']
+    worker_address = data['address']
     if hostname is not None:
-        if dHelper.checkNodeHostName(dockerClient, hostname):
+        if docker.check_node_hostname(dockerClient, hostname):
             # configure nfs setting
             def configure_nfs():
                 with open('/etc/exports', 'a') as f:
-                    new_worker = '/var/nfs/RESTfulSwarm/     %s(rw,sync,no_root_squash,no_subtree_check)\n' % worker_addr
+                    new_worker = '/var/nfs/RESTfulSwarm/     %s(rw,sync,no_root_squash,no_subtree_check)\n' \
+                                 % worker_address
                     f.write(new_worker)
                 # restart nfs
                 os.system('sudo systemctl restart nfs-kernel-server')
@@ -100,28 +97,30 @@ def requestJoin():
             configure_nfs()
 
             init_worker_info(hostname, data['CPUs'], data['MemFree'])
-            remote_addr = host_addr + ':2377'
-            join_token = dHelper.getJoinToken()
-            response = '%s join %s %s' % (hostname, remote_addr, join_token)
+            remote_address = gm_address + ':2377'
+            join_token = docker.get_join_token()
+            response = '%s join %s %s' % (hostname, remote_address, join_token)
             pubSocket.send_string(response)
             app.logger.info('Send manager address and join token to worker node.')
             return response, 200
         else:
             response = 'Error: Node already in Swarm environment.'
+            app.logger.error(response)
             return response, 400
     else:
         response = 'Error: Please enter the IP address of node.'
+        app.logger.error(response)
         return response, 406
 
 
-def init_worker_info(hostname, cpus, memfree):
+def init_worker_info(hostname, cores_num, mem_free):
     cores = {}
-    for i in range(cpus):
+    for i in range(cores_num):
         cores.update({str(i): False})
     worker_info = {
         'hostname':  hostname,
         'CPUs': cores,
-        'MemFree': memfree
+        'MemFree': mem_free
     }
     # Write initial worker information into database
     if mg.filter_col(worker_col, 'hostname', hostname) is None:
@@ -131,11 +130,11 @@ def init_worker_info(hostname, cpus, memfree):
     mg.update_workers_resource_col(worker_col, hostname, worker_resource_col)
 
 
-def newContainer(data):
+def new_container(data):
     node = data['node']
-    if dHelper.checkNodeHostName(dockerClient, node) is False:
-        pubContent = '%s new_container %s' % (node, json.dumps(data))
-        pubSocket.send_string(pubContent)
+    if docker.check_node_hostname(dockerClient, node) is False:
+        msg = '%s new_container %s' % (node, json.dumps(data))
+        pubSocket.send_string(msg)
         app.logger.info('Create a new container in node %s.' % node)
         response = 'OK'
     else:
@@ -144,45 +143,41 @@ def newContainer(data):
     return response
 
 
-@app.route('/RESTfulSwarm/GM/requestNewContainer', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/request_new_task', methods=['POST'])
 @swag_from('./Flasgger/requestNewContainer.yml', validation=True)
-def requestNewContainer():
+def request_new_task():
     try:
         data = request.get_json()
-        newContainer(data)
+        new_container(data)
         return 'OK', 200
     except Exception as ex:
         return ex, 400
 
 
-@app.route('/RESTfulSwarm/GM/requestNewJob', methods=['POST'])
-def requestNewJob():
+@app.route('/RESTfulSwarm/GM/request_new_job', methods=['POST'])
+def request_new_job():
     data = request.get_json()
     # create overlay network if not exists
-    if dHelper.verifyNetwork(dockerClient, data['job_info']['network']['name']):
-        createOverlayNetwork(network=data['job_info']['network']['name'],
-                             driver=data['job_info']['network']['driver'],
-                             subnet=data['job_info']['network']['subnet'])
+    if docker.verify_network(dockerClient, data['job_info']['network']['name']):
+        create_overlay_network(network=data['job_info']['network']['name'],
+                               driver=data['job_info']['network']['driver'],
+                               subnet=data['job_info']['network']['subnet'])
 
     try:
         # make directory for nfs
-        job_nfs_path = '/var/nfs/RESTfulSwarm/%s' % data['job_name']
-        os.mkdir(path=job_nfs_path)
+        nfs_master_path = '/var/nfs/RESTfulSwarm/%s' % data['job_name']
+        os.mkdir(path=nfs_master_path)
 
         for task in list(data['job_info']['tasks'].keys()):
             data['job_info']['tasks'][task].update({'network': data['job_info']['network']['name']})
 
         # deploy job
         for item in data['job_info']['tasks'].values():
-            newContainer(item)
+            new_container(item)
 
         # update job status
         mg.update_doc(db[data['job_name']], 'job_name', data['job_name'], 'status', 'Deployed')
         mg.update_doc(db[data['job_name']], 'job_name', data['job_name'], 'start_time', time.time())
-
-        # print('------------------------------')
-        # print(data['job_name'])
-        # print('------------------------------')
 
         # update task status
         for task in data['job_info']['tasks'].keys():
@@ -191,128 +186,131 @@ def requestNewJob():
             mg.update_doc(db[data['job_name']], filter_key, task, target_key, 'Deployed')
 
         job_buffer.append(data['job_name'])
-
         return 'OK', 200
     except Exception as ex:
-        return str(ex), 400
+        return app.logger.error(ex)
 
 
-@app.route('/RESTfulSwarm/GM/checkpointCons', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/checkpoint_cons', methods=['POST'])
 @swag_from('./Flasgger/checkpointCons.yml', validation=True)
-def checkpointCons():
+def checkpoint_cons():
     data = request.get_json()
     for item in data:
-        if dHelper.checkNodeHostName(dockerClient, item['node']):
+        if docker.check_node_hostname(dockerClient, item['node']):
             return 'Node %s is unavailable.' % item['node'], 400
-        pubContent = '%s checkpoints %s' % (item['node'], json.dumps(item['containers']))
-        pubSocket.send_string(pubContent)
+        msg = '%s checkpoints %s' % (item['node'], json.dumps(item['containers']))
+        pubSocket.send_string(msg)
         app.logger.info('Checkpoint containers %s on node %s' % (json.dumps(item['containers']), item['node']))
     return 'OK', 200
 
 
-def containerMigration(data):
+def container_migration(data):
     src = data['from']
     dst = data['to']
     container = data['container']
     info = data['info']
-    checkSrc = dHelper.checkNodeIP(dockerClient, src)
-    checkDst = dHelper.checkNodeIP(dockerClient, dst)
-    if checkSrc is False:
+    check_src = docker.check_node_ip(dockerClient, src)
+    check_dst = docker.check_node_ip(dockerClient, dst)
+    if check_src is False:
         response = 'Error: %s is an invalid address.' % src
         raise Exception(response)
-    elif checkDst is False:
+    elif check_dst is False:
         response = 'Error: %s is an invalid address.' % dst
         raise Exception(response)
     else:
-        jsonForm = {'src': src, 'dst': dst, 'container': container, 'info': info}
-        pubContent = '%s migrate %s' % (src, json.dumps(jsonForm))
-        pubSocket.send_string(pubContent)
+        json_obj = {'src': src, 'dst': dst, 'container': container, 'info': info}
+        msg = '%s migrate %s' % (src, json.dumps(json_obj))
+        pubSocket.send_string(msg)
         response = 'OK'
         app.logger.info('Migrate container %s from %s to %s.' % (container, src, dst))
     return response, 200
 
 
-@app.route('/RESTfulSwarm/GM/requestMigrate', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/request_migrate', methods=['POST'])
 @swag_from('./Flasgger/requestMigrate.yml', validation=True)
-def requestMigrate():
+def request_migrate():
     try:
         data = request.get_json()
-        return containerMigration(data)
+        return container_migration(data)
     except Exception as ex:
         return str(ex), 400
 
 
-@app.route('/RESTfulSwarm/GM/requestGroupMigration', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/request_group_migration', methods=['POST'])
 @swag_from('./Flasgger/requestGroupMigration.yml', validation=True)
-def requestGroupMigration():
+def request_group_migration():
     try:
         data = request.get_json()
         for item in data:
-            containerMigration(item)
+            container_migration(item)
         return 'OK', 200
     except Exception as ex:
+        app.logger.error(ex)
         return str(ex), 400
 
 
-@app.route('/RESTfulSwarm/GM/requestLeave', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/request_leave', methods=['POST'])
 @swag_from('./Flasgger/requestLeave.yml', validation=True)
-def requestLeave():
+def request_leave():
     hostname = request.get_json()['hostname']
-    checkNode = dHelper.checkNodeHostName(client=dockerClient, host=hostname)
-    if checkNode is False:
-        pubContent = '%s leave' % hostname
-        pubSocket.send_string(pubContent)
+    check_node = docker.check_node_hostname(client=dockerClient, host=hostname)
+    if check_node is False:
+        msg = '%s leave' % hostname
+        pubSocket.send_string(msg)
         # force delete the node on Manager side
-        dHelper.removeNode(hostname)
+        docker.remove_node(hostname)
         app.logger.info('Node %s left Swarm environment.' % hostname)
         return 'OK', 200
     else:
-        return 'Error: Host %s is not in Swarm environment.' % hostname, 400
+        response = 'Error: Host %s is not in Swarm environment.' % hostname
+        app.logger.error(response)
+        return response, 400
 
 
-@app.route('/RESTfulSwarm/GM/requestUpdateContainer', methods=['POST'])
+@app.route('/RESTfulSwarm/GM/request_update_container', methods=['POST'])
 @swag_from('./Flasgger/requestUpdateContainer.yml', validation=True)
-def requestUpdateContainer():
-    newInfo = request.get_json()
-    node = newInfo['node']
-    container = newInfo['container_name']
-    if dHelper.checkNodeHostName(client=dockerClient, host=node) is False:
-        newInfo = json.dumps(newInfo)
-        pubSocket.send_string('%s update %s' % (node, newInfo))
+def request_update_container():
+    update_info = request.get_json()
+    node = update_info['node']
+    container = update_info['container_name']
+    if docker.check_node_hostname(client=dockerClient, host=node) is False:
+        update_info = json.dumps(update_info)
+        pubSocket.send_string('%s update %s' % (node, update_info))
         app.logger.info('%s updated container %s' % (node, container))
         return 'OK', 200
     else:
-        return 'Error: requested node %s is not in Swarm environment.' % node, 400
+        response = 'Error: requested node %s is not in Swarm environment.' % node
+        return response, 400
 
 
-@app.route('/RESTfulSwarm/GM/getWorkerList', methods=['GET'])
+@app.route('/RESTfulSwarm/GM/get_worker_list', methods=['GET'])
 @swag_from('./Flasgger/getWorkerList.yml')
-def getWorkerList():
-    nodes = dHelper.getNodeList(dockerClient)
+def get_worker_list():
+    nodes = docker.get_node_list(dockerClient)
     response = []
     for node in nodes:
         response.append(node.attrs)
     return jsonify(response), 200
 
 
-def describeNode(hostname):
-    nodeinfo = dHelper.getNodeInfo(dockerClient, hostname)
-    if nodeinfo is None:
+def describe_node(hostname):
+    node_info = docker.get_node_info(dockerClient, hostname)
+    if node_info is None:
         return 'The requested node is unavailable.', 400
     else:
-        return jsonify(nodeinfo), 200
+        return jsonify(node_info), 200
 
 
-@app.route('/RESTfulSwarm/GM/<hostname>/describeWorker', methods=['GET'])
+@app.route('/RESTfulSwarm/GM/<hostname>/describe_worker', methods=['GET'])
 @swag_from('./Flasgger/describeWorker.yml')
-def describeWorker(hostname):
-    return describeNode(hostname)
+def describe_worker(hostname):
+    return describe_node(hostname)
 
 
-@app.route('/RESTfulSwarm/GM/<hostname>/describeManager', methods=['GET'])
+@app.route('/RESTfulSwarm/GM/<hostname>/describe_manager', methods=['GET'])
 @swag_from('./Flasgger/describeManager.yml')
-def describeManager(hostname):
-    return describeNode(hostname)
+def describe_manager(hostname):
+    return describe_node(hostname)
 
 
 def main():
@@ -320,33 +318,29 @@ def main():
     with open('/etc/exports', 'w') as f:
         f.write('')
 
-    os.chdir('/home/%s/RESTfulSwarmLM/GlobalManager' % utl.getUserName())
+    os.chdir('/home/%s/RESTfulSwarmLM/GlobalManager' % utl.get_username())
 
-    global m_addr
-    global m_port
-    global mongo_client
+    global db_address
+    global db_client
     global db
     global worker_col
     global worker_resource_col
-    global host_addr
+    global gm_address
     global dockerClient
 
     with open('GlobalManagerInit.json') as f:
         data = json.load(f)
-    g_addr = data['global_manager_addr']
-    gport = data['global_manager_port']
+    gm_address = data['gm_address']
 
-    host_addr = g_addr
-    dockerClient = dHelper.setClient()
+    dockerClient = docker.set_client()
 
     # mongodb
-    m_addr = data['mongo_addr']
-    m_port = data['mongo_port']
+    db_address = data['db_address']
 
-    mongo_client = mg.get_client(address=m_addr, port=m_port)
-    db = mg.get_db(mongo_client, db_name)
-    worker_col = mg.get_col(db, workers_collection_name)
-    worker_resource_col = mg.get_col(db, workers_resources)
+    db_client = mg.get_client(address=db_address, port=SystemConstants.MONGODB_PORT)
+    db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
+    worker_col = mg.get_col(db, SystemConstants.WorkersInfo)
+    worker_resource_col = mg.get_col(db, SystemConstants.WorkersResourceInfo)
 
     # periodically prune unused network
     def prune_nw():
@@ -357,7 +351,7 @@ def main():
                 if job_info is not None and job_info['status'] == 'Down':
                     networks.append(job_info['job_info']['network']['name'])
                     job_buffer.remove(job)
-            dHelper.rm_networks(dockerClient, networks)
+            docker.rm_networks(dockerClient, networks)
             print('Remove networks:', networks)
             time.sleep(60)
 
@@ -365,26 +359,18 @@ def main():
     prune_nw_thr.daemon = True
     prune_nw_thr.start()
 
-    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.getUserName())
+    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.get_username())
 
-    app.run(host=g_addr, port=gport, debug=False)
+    app.run(host=gm_address, port=SystemConstants.GM_PORT, debug=False)
 
 
 if __name__ == '__main__':
     # parser = argparse.ArgumentParser()
-    # parser.add_argument('-ga', '--gaddr', type=str, help='The IP address of your Global Manager node.')
-    # parser.add_argument('-gp', '--gport', type=int, default=5000, help='The port number you want to run your manager node.')
-    # parser.add_argument('-ma', '--maddr', type=str, help='MongoDB address.')
-    # parser.add_argument('-mp', '--mport', type=int, default=27017, help='MongoDB port.')
+    # parser.add_argument('--GM', type=str, help='The IP address of your Global Manager node.')
+    # parser.add_argument('--db', type=str, help='MongoDB address.')
     # args = parser.parse_args()
-    # g_addr = args.gaddr
-    # gport = args.gport
-    #
-    # host_addr = utl.getHostIP()
-    # dockerClient = dHelper.setClient()
-    #
-    # # mongodb
-    # m_addr = args.maddr
-    # m_port = args.mport
+    # gm_address = args.GM
+    # dockerClient = docker.set_client()
+    # db_address = args.db
 
     main()
