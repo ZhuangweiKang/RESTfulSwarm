@@ -1,6 +1,6 @@
 #!/bin/bash
 
-installPythonLibs(){
+install_python_libs(){
     # install pip3
     apt-get install -y python3-pip python3-dev python3-setuptools xmlto asciidoc
 
@@ -9,7 +9,7 @@ installPythonLibs(){
 }
 
 
-installDocker(){
+install_docker(){
     # check if docker exists
     docker_check=$(which docker)
 
@@ -40,7 +40,7 @@ installDocker(){
 }
 
 
-installCRIU(){
+install_criu(){
     # check if CRIU exists
     criu_check=$(which criu)
     if [ "$criu_check" = "" ];
@@ -60,7 +60,7 @@ installCRIU(){
 }
 
 
-installDB(){
+install_db(){
     # install mongodb 3.2 on ubuntu 16.04
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
     echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
@@ -81,7 +81,7 @@ installDB(){
 }
 
 
-installWeave(){
+install_weave(){
     # install weave plugin and enable multicast feature
     docker plugin install weaveworks/net-plugin:latest_release
     docker plugin disable weaveworks/net-plugin:latest_release
@@ -90,7 +90,7 @@ installWeave(){
 }
 
 
-installNFSMaster(){
+install_nfs_master(){
     # configure nfs
     apt-get update
     apt-get install nfs-kernel-server
@@ -99,7 +99,7 @@ installNFSMaster(){
 }
 
 
-installNFSClient(){
+install_nfs_client(){
     # configure NFS
     apt-get update
     apt-get install nfs-common
@@ -110,22 +110,22 @@ main(){
     apt-get update && install libltdl7
     if [ "$1" = "DB" ]
     then
-        installDB $2 $3 $4
+        install_db $2 $3 $4
         return 1
     fi
-    installPythonLibs
+    install_python_libs
     if [ "$1" = "GM" ]
     then
-        installDocker
-        installCRIU
-        installWeave
-        installNFSMaster
+        install_docker
+        install_criu
+        install_weave
+        install_nfs_master
     elif [ "$1" = "Worker" ]
     then
-        installDocker
-        installCRIU
-        installWeave
-        installNFSClient
+        install_docker
+        install_criu
+        install_weave
+        install_nfs_client
     fi
     return 1
 }
