@@ -3,20 +3,18 @@
 # Author: Zhuangwei Kang
 
 import os
-import sys
 import json
-from flask import *
 import time
-import threading
-from flasgger import Swagger, swag_from
 import argparse
+import threading
+from flask import *
+from flasgger import Swagger, swag_from
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import utl
+import SystemConstants
 import docker_api as docker
 import zmq_api as zmq
 import mongodb_api as mg
-import SystemConstants
 
 app = Flask(__name__)
 

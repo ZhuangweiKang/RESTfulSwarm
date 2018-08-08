@@ -3,10 +3,8 @@
 # Author: Zhuangwei Kang
 
 import os
-import sys
 import psutil
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import docker_api as dh
 import utl
 

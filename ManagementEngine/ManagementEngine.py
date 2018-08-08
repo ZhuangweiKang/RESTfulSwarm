@@ -8,16 +8,15 @@ import json
 import paramiko as pk
 import time
 import multiprocessing
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from FrontEnd import FrontEnd as FE
 from JobManager import JobManager as JM
 from GlobalManager import GlobalManager as GM
 from Discovery import Discovery as DC
-from Client import BurstyStressClient as BSC
-from Client import IncrementalStressClient as ISC
-from Client import RandomStressClient as RSC
-from Client import SteadyStressClient as SSC
+from Client.BurstyStressClient import BurstyStressClient
+from Client.IncrementalStressClient import IncrementalStressClient
+from Client.SteadyStressClient import SteadyStressClient
+from Client.RandomStressClient import RandomStressClient
 import mongodb_api as mg
 import docker_api as docker
 import SystemConstants
@@ -122,7 +121,7 @@ class ManagementEngine(object):
     def launch_client(session_id):
         client_process = multiprocessing.Process(
             name='Client',
-            target=ISC.IncrementalStressClient.main,
+            target=IncrementalStressClient.main,
             args=(session_id, )
         )
         client_process.daemon = True

@@ -3,7 +3,6 @@
 # Author: Zhuangwei Kang
 
 import os
-import sys
 import requests
 import argparse
 import utl
@@ -11,8 +10,11 @@ import time
 import json
 import threading
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from Scheduler import BestFitScheduler, FirstFitScheduler, BestFitDecreasingScheduler, FirstFitDecreasingScheduler, NodeScheduler
+from Scheduler.BestFitScheduler import BestFitScheduler
+from Scheduler.FirstFitScheduler import FirstFitScheduler
+from Scheduler.BestFitDecreasingScheduler import BestFitDecreasingScheduler
+from Scheduler.FirstFitDecreasingScheduler import FirstFitDecreasingScheduler
+from Scheduler.NodeScheduler import NodeScheduler
 import zmq_api as zmq
 import mongodb_api as mg
 import SystemConstants
@@ -305,15 +307,15 @@ class JobManager(object):
                 self.socket.send_string('Ack')
                 new_scheduler = msg[1]
                 if new_scheduler == 'first-fit':
-                    self.scheduler = FirstFitScheduler.FirstFitScheduler(self.db)
+                    self.scheduler = FirstFitScheduler(self.db)
                 elif new_scheduler == 'best-fit':
-                    self.scheduler = BestFitScheduler.BestFitScheduler(self.db)
+                    self.scheduler = BestFitScheduler(self.db)
                 elif new_scheduler == 'best-fit-decreasing':
-                    self.scheduler = BestFitDecreasingScheduler.BestFitDecreasingScheduler(self.db)
+                    self.scheduler = BestFitDecreasingScheduler(self.db)
                 elif new_scheduler == 'first-fit-decreasing':
-                    self.scheduler = FirstFitDecreasingScheduler.FirstFitDecreasingScheduler(self.db)
+                    self.scheduler = FirstFitDecreasingScheduler(self.db)
                 elif new_scheduler == 'no-scheduler':
-                    self.scheduler = NodeScheduler.NodeScheduler(self.db)
+                    self.scheduler = NodeScheduler(self.db)
             else:
                 self.socket.send_string('Ack')
                 job_queue.append(msg)
@@ -358,15 +360,15 @@ def main():
     # choose scheduler
     # default scheduling strategy is best-fit
     if scheduling_strategy == 'first-fit':
-        scheduler = FirstFitScheduler.FirstFitScheduler(db)
+        scheduler = FirstFitScheduler(db)
     elif scheduling_strategy == 'first-fit-decreasing':
-        scheduler = FirstFitDecreasingScheduler.FirstFitDecreasingScheduler(db)
+        scheduler = FirstFitDecreasingScheduler(db)
     elif scheduling_strategy == 'best-fir-decreasing':
-        scheduler = BestFitDecreasingScheduler.BestFitDecreasingScheduler(db)
+        scheduler = BestFitDecreasingScheduler(db)
     elif scheduling_strategy == 'no-scheduler':
-        scheduler = NodeScheduler.NodeScheduler(db)
+        scheduler = NodeScheduler(db)
     else:
-        scheduler = BestFitScheduler.BestFitScheduler(db)
+        scheduler = BestFitScheduler(db)
 
     job_manager = JobManager(gm_address=gm_address, db=db, scheduler=scheduler, wait=wait)
 

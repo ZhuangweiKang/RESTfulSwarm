@@ -5,14 +5,12 @@
 # FrontEnd is only responsible for storing job information into database and sending notification to JobManager
 
 import os
-import sys
 import json
 from flask import *
 import time
 import argparse
 from flasgger import Swagger, swag_from
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import mongodb_api as mg
 import zmq_api as zmq
 import utl

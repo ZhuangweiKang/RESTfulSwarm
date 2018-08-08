@@ -21,14 +21,14 @@ installDocker(){
 
         # run docker without sudo
         groupadd docker
-        usermod -aG docker $USER
+        usermod -aG docker \$USER
     fi
 
     # check docker experimental feature
     docker_version=$(docker version | grep Experimental)
     docker_version=${docker_version:15}
 
-    if [ $docker_version = "false" ];
+    if [ "$docker_version" = "false" ];
     then
         echo "{\"experimental\": true}" > /etc/docker/daemon.json
         # restart docker daemon

@@ -4,12 +4,10 @@
 
 
 import os
-import sys
 import time
 import json
 import argparse
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import mongodb_api as mg
 import SystemConstants
 import zmq_api as zmq

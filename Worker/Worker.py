@@ -3,7 +3,6 @@
 # Author: Zhuangwei Kang
 
 import os
-import sys
 import multiprocessing
 import threading
 import requests
@@ -13,7 +12,6 @@ import random
 import math
 import time
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from live_migration import LiveMigration
 import docker_api as docker
 import zmq_api as zmq

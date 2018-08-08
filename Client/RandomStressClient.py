@@ -2,12 +2,11 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-import os, sys
+import os
 import json
 import random
 import time
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import utl
 from Client.StressClient import StressClient
 
