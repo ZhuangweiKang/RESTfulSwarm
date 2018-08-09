@@ -96,7 +96,7 @@ class StressClient(object):
 
             # mount directory in container to /nfs/RESTfulSwarm/ directory in host machine
             host_dir = '/nfs/RESTfulSwarm/%s/%s' % (job_name, task_name)
-            volume = {host_dir: {'ps_bind': '/home/mnt/', 'mode': 'rw'}}
+            volume = {host_dir: {'bind': '/home/mnt/', 'mode': 'rw'}}
 
             task = self.Task(task_name, image, req_cores, mem_limit, volume=volume, node=node, cpuset_cpus=cpuset_cpus,
                              deadline=random.randint(0, 20))
@@ -146,19 +146,18 @@ class StressClient(object):
                     else:
                         break
                 session_id = str(int(time.time()))
+
                 # Switch scheduler
-                if choice == 2:
-                    url = 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/first-fit' % \
-                          (self.fe_address, SystemConstants.FE_PORT)
-                elif choice == 3:
-                    url = 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/best-fit-decreasing' % \
-                          (self.fe_address, SystemConstants.FE_PORT)
-                elif choice == 4:
-                    url = 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/first-fit-decreasing' % \
-                          (self.fe_address, SystemConstants.FE_PORT)
-                else:
-                    url = 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/best-fit' % \
-                          (self.fe_address, SystemConstants.FE_PORT)
+                url = {
+                    1: 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/best-fit' %
+                       (self.fe_address, SystemConstants.FE_PORT),
+                    2: 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/first-fit' %
+                       (self.fe_address, SystemConstants.FE_PORT),
+                    3: 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/best-fit-decreasing' %
+                       (self.fe_address, SystemConstants.FE_PORT),
+                    4: 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/first-fit-decreasing' %
+                       (self.fe_address, SystemConstants.FE_PORT)
+                }.get(choice, 1)
 
                 requests.get(url=url)
                 print('------------------------------------------------')

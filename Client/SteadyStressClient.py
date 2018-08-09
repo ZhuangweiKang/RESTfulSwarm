@@ -25,7 +25,7 @@ class SteadyStressClient(StressClient):
         # args = parser.parse_args()
         # fe_address = args.address
 
-        os.chdir('/home/%s/RESTfulSwarmLM/Client' % utl.get_username())
+        os.chdir('/home/%s/RESTfulSwarm/Client' % utl.get_username())
 
         try:
             json_path = 'SteadyStressClientInfo.json'
@@ -33,10 +33,10 @@ class SteadyStressClient(StressClient):
                 data = json.load(f)
             client = SteadyStressClient(__steady_constant=data['feed_constant'])
             client.feed_jobs(session_id)
-        except ValueError as er:
-            print(er)
+        except Exception as ex:
+            print(ex)
 
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.get_username())
+        os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 
 
 if __name__ == '__main__':

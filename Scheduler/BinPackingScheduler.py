@@ -19,11 +19,11 @@ class BinPackingScheduler(Scheduler):
         pass
 
     def schedule_resources(self, jobs_details):
-        '''
-        Check if we have enough capacity to deploy a job
-        :param jobs_details: [($job_name, [{$task_name: $cpu_count}, {$task_name: $mem_limit}])]
-        :return: [$($job_name, $task_name, $worker_name, [$core])] + [$waiting_job]
-        '''
+        # '''
+        # Check if we have enough capacity to deploy a job
+        # :param jobs_details: [($job_name, [{$task_name: $cpu_count}, {$task_name: $mem_limit}])]
+        # :return: [$($job_name, $task_name, $worker_name, [$core])] + [$waiting_job]
+        # '''
 
         # core_requests = [(job_name, {task1: cpu_count})]
         core_requests = [(job[0], job[1][0]) for job in jobs_details]
@@ -35,16 +35,14 @@ class BinPackingScheduler(Scheduler):
 
         # available free cores of each worker node
         free_cores = []
-        for item in list(available_workers.values()):
-            free_cores.append(len(item))
+        map(lambda _item: free_cores.append(len(_item)), list(available_workers.values()))
 
         # apply core scheduling algorithm on data
         bf_result = self.cores_scheduling_algorithm(jobs_details=jobs_details, free_cores=free_cores)
 
         # requested mem_limit for each task
         mem_request_arr = []
-        for item in mem_requests:
-            mem_request_arr.extend(list(item[1].values()))
+        map(lambda _item: mem_request_arr.extend(list(_item[1].values())), mem_requests)
 
         # process schedule result
         return self.process_cores_scheduling_result(bf_result, core_requests, mem_request_arr, available_workers)

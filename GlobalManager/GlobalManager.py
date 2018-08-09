@@ -83,6 +83,7 @@ def request_join():
     worker_address = data['address']
     if hostname is not None:
         if docker.check_node_hostname(dockerClient, hostname):
+
             # configure nfs setting
             def configure_nfs():
                 with open('/etc/exports', 'a') as f:
@@ -91,7 +92,6 @@ def request_join():
                     f.write(new_worker)
                 # restart nfs
                 os.system('sudo systemctl restart nfs-kernel-server')
-
             configure_nfs()
 
             init_worker_info(hostname, data['CPUs'], data['MemFree'])
@@ -113,8 +113,7 @@ def request_join():
 
 def init_worker_info(hostname, cores_num, mem_free):
     cores = {}
-    for i in range(cores_num):
-        cores.update({str(i): False})
+    map(lambda i: cores.update({str(i): False}), range(cores_num))
     worker_info = {
         'hostname':  hostname,
         'CPUs': cores,
@@ -166,12 +165,11 @@ def request_new_job():
         nfs_master_path = '/var/nfs/RESTfulSwarm/%s' % data['job_name']
         os.mkdir(path=nfs_master_path)
 
-        for task in list(data['job_info']['tasks'].keys()):
-            data['job_info']['tasks'][task].update({'network': data['job_info']['network']['name']})
+        map(lambda _task: data['job_info']['tasks'][_task].update({'network': data['job_info']['network']['name']}),
+            data['job_info']['tasks'])
 
         # deploy job
-        for item in data['job_info']['tasks'].values():
-            new_container(item)
+        map(new_container, list(data['job_info']['tasks'].values()))
 
         # update job status
         mg.update_doc(db[data['job_name']], 'job_name', data['job_name'], 'status', 'Deployed')
@@ -239,8 +237,7 @@ def request_migrate():
 def request_group_migration():
     try:
         data = request.get_json()
-        for item in data:
-            container_migration(item)
+        map(lambda item: container_migration(item), data)
         return 'OK', 200
     except Exception as ex:
         app.logger.error(ex)
@@ -286,17 +283,13 @@ def request_update_container():
 def get_worker_list():
     nodes = docker.get_node_list(dockerClient)
     response = []
-    for node in nodes:
-        response.append(node.attrs)
+    map(lambda node: response.append(node.attrs), nodes)
     return jsonify(response), 200
 
 
 def describe_node(hostname):
     node_info = docker.get_node_info(dockerClient, hostname)
-    if node_info is None:
-        return 'The requested node is unavailable.', 400
-    else:
-        return jsonify(node_info), 200
+    return 'The requested node is unavailable.', 400 if node_info is None else jsonify(node_info), 200
 
 
 @app.route('/RESTfulSwarm/GM/<hostname>/describe_worker', methods=['GET'])
@@ -316,7 +309,7 @@ def main():
     with open('/etc/exports', 'w') as f:
         f.write('')
 
-    os.chdir('/home/%s/RESTfulSwarmLM/GlobalManager' % utl.get_username())
+    os.chdir('/home/%s/RESTfulSwarm/GlobalManager' % utl.get_username())
 
     global db_address
     global db_client
@@ -357,7 +350,7 @@ def main():
     prune_nw_thr.daemon = True
     prune_nw_thr.start()
 
-    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.get_username())
+    os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 
     app.run(host=gm_address, port=SystemConstants.GM_PORT, debug=False)
 

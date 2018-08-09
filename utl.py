@@ -89,7 +89,7 @@ def transfer_file(file_name, dst_address, port, logger):
         logger.error(er)
         sys.exit(1)
     if os.path.isfile(file_name):
-        fileinfo_size = struct.calcsize('128sl')
+        # fileinfo_size = struct.calcsize('128sl')
         fhead = struct.pack('128sl', os.path.basename(file_name).encode('utf-8'), os.stat(file_name).st_size)
         s.send(fhead)
         fp = open(file_name, 'rb')
@@ -128,10 +128,7 @@ def recv_file(logger):
             logger.info('Start receiving file...')
             temp_size = file_size
             while True:
-                if temp_size > 1024:
-                    data = conn.recv(1024)
-                else:
-                    data = conn.recv(temp_size)
+                data = conn.recv(1024) if temp_size > 1024 else conn.recv(temp_size)
                 if not data:
                     break
                 tarFile.write(data)
@@ -161,20 +158,18 @@ def get_total_mem():
 
 # convert memory size to mB
 def memory_size_translator(mem_size):
-    '''
-    :param mem_size: b/k/m/g
-    :return: mem_size: m
-    '''
+    # '''
+    # :param mem_size: b/k/m/g
+    # :return: mem_size: m
+    # '''
     # remove 'B' and blank from input str
     mem_size = mem_size.replace(' ', '')
     mem_size = mem_size.replace('B', '')
     num = float(re.findall(r"\d+\.?\d*", mem_size)[0])
     unit = mem_size[-1]
-    if unit == 'm':
-        return num
-    elif unit == 'k':
-        return num / 1000
-    elif unit == 'b':
-        return num / 1000 / 1000
-    elif unit == 'g':
-        return num * 1000
+    return {
+        'm': num,
+        'k': num / 1000,
+        'b': num / 1000 / 1000,
+        'g': num * 1000
+    }.get(unit)

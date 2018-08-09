@@ -152,10 +152,7 @@ def get_tags(client, image_name):
         tag = tag.split(':')[1]
         if tag != 'latest':
             temp.append(float(tag))
-    if len(temp) == 0:
-        max_tag = 0.0
-    else:
-        max_tag = max(temp)
+    max_tag = 0.0 if len(temp) == 0 else max(temp)
     image.tag(repository=image_name, tag=str(max_tag+0.1))
     client.images.push(repository=image_name, tag=str(max_tag+0.1))
 
@@ -165,9 +162,7 @@ def verify_network(client, network):
     networks = client.networks.list()
     # get a list of network name
     networks = [network.name for network in networks]
-    if network in networks:
-        return False
-    return True
+    return False if network in networks else True
 
 
 def check_node_ip(client, node_ip):
@@ -206,6 +201,4 @@ def prune_network(client, _filter=None):
 def rm_networks(client, networks):
     # remove a list of networks
     all_networks = client.networks.list()
-    for nw in all_networks:
-        if nw.name in networks:
-            nw.remove()
+    map(lambda nw: nw.remove() if nw.name in networks else None, all_networks)

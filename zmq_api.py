@@ -6,7 +6,7 @@
 import zmq
 
 
-# -------- C/S socket
+# C/S socket
 def cs_connect(address, port):
     context = zmq.Context()
     socket = context.socket(zmq.REQ)
@@ -22,7 +22,7 @@ def cs_bind(port):
     return socket
 
 
-# -------- Pub/Sub Socket
+# Pub/Sub Socket
 def ps_connect(address, port):
     context = zmq.Context()
     socket = context.socket(zmq.SUB)

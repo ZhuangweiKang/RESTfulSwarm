@@ -13,7 +13,7 @@ docker_client = dh.set_client()
 
 
 def kill_worker():
-    os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.get_username())
+    os.chdir('/home/%s/RESTfulSwarm/Worker' % utl.get_username())
 
     # leave swarm
     dh.leave_swarm(docker_client)

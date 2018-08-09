@@ -83,14 +83,14 @@ class JobManager(object):
 
             # release cores in source node
             src_node_name = self.scheduler.find_container(data['container'])
-            for core in cores:
-                target_key = 'CPUs.%s' % core
-                mg.update_doc(self.workersInfoCol, 'hostname', src_node_name, target_key, False)
+            map(lambda _core:
+                mg.update_doc(self.workersInfoCol, 'hostname', src_node_name, 'CPUs.%s' % _core, False),
+                cores)
 
             # mark cores in destination node as busy
-            for core in free_cores:
-                target_key = 'CPUs.%s' % core
-                mg.update_doc(self.workersInfoCol, 'hostname', dest_node_name, target_key, True)
+            map(lambda _core:
+                mg.update_doc(self.workersInfoCol, 'hostname', dest_node_name, 'CPUs.%s' % _core, True),
+                cores)
 
             # get free memory from both source node and destination node
             src_worker_info = list(self.workersInfoCol.find({'hostname': src_node_name}))[0]
@@ -99,10 +99,10 @@ class JobManager(object):
 
             # update memory field in both source node and destination node
             update_src_mem = str(utl.memory_size_translator(src_free_mem) + mem_limit) + 'm'
-            update_dest_mem = str(utl.memory_size_translator(new_free_mem) - mem_limit) + 'm'
+            update_dst_mem = str(utl.memory_size_translator(new_free_mem) - mem_limit) + 'm'
 
             mg.update_doc(self.workersInfoCol, 'hostname', src_node_name, 'MemFree', update_src_mem)
-            mg.update_doc(self.workersInfoCol, 'hostname', dest_node_name, 'MemFree', update_dest_mem)
+            mg.update_doc(self.workersInfoCol, 'hostname', dest_node_name, 'MemFree', update_dst_mem)
 
             # pre-process migration json file
             data.update({'from': data['from'].split('@')[1]})
@@ -174,13 +174,13 @@ class JobManager(object):
         current_cpu = current_cpu.split(',')
         new_cpu = new_cpu.split(',')
         # update cpu
-        for core in current_cpu:
-            key = 'CPUs.%s' % core
-            mg.update_doc(self.workersInfoCol, 'hostname', node, key, False)
+        map(lambda _core:
+            mg.update_doc(self.workersInfoCol, 'hostname', node, 'CPUs.%s' % _core, False),
+            current_cpu)
 
-        for core in new_cpu:
-            key = 'CPUs.%s' % core
-            mg.update_doc(self.workersInfoCol, 'hostname', node, key, True)
+        map(lambda _core:
+            mg.update_doc(self.workersInfoCol, 'hostname', node, 'CPUs.%s' % _core, True),
+            new_cpu)
 
         # update memory, and we assuming memory unit is always m
         current_mem = utl.memory_size_translator(current_mem)
@@ -204,8 +204,7 @@ class JobManager(object):
         col_names = mg.get_all_cols(self.db)
         cols = []
         # get collection cursor objs
-        for col_name in col_names:
-            cols.append(mg.get_col(self.db, col_name))
+        map(lambda col_name: cols.append(mg.get_col(self.db, col_name)), col_names)
         mg.update_tasks(cols, hostname)
 
         # remove the node(document) from WorkersInfo collection
@@ -269,13 +268,13 @@ class JobManager(object):
                 elif time.time() - timer >= self.wait:
                     jobs_details = []
                     temp_job_queue = []
-                    for index, _msg in enumerate(job_queue_snap_shoot[:]):
-                        jobs_details.append((_msg[1], pre_process_job(_msg)))
+
+                    map(lambda _msg: jobs_details.append((_msg[1], pre_process_job(_msg))), job_queue_snap_shoot[:])
 
                     waiting_decision = schedule_resource(jobs_details)
 
                     # remove scheduled jobs
-                    for index, job in enumerate(job_queue_snap_shoot[:]):
+                    for job in enumerate(job_queue_snap_shoot[:]):
                         if job[1] not in waiting_decision:
                             temp_job_queue.append(job)
                             if job in job_queue:
@@ -306,16 +305,13 @@ class JobManager(object):
                 job_queue = []
                 self.socket.send_string('Ack')
                 new_scheduler = msg[1]
-                if new_scheduler == 'first-fit':
-                    self.scheduler = FirstFitScheduler(self.db)
-                elif new_scheduler == 'best-fit':
-                    self.scheduler = BestFitScheduler(self.db)
-                elif new_scheduler == 'best-fit-decreasing':
-                    self.scheduler = BestFitDecreasingScheduler(self.db)
-                elif new_scheduler == 'first-fit-decreasing':
-                    self.scheduler = FirstFitDecreasingScheduler(self.db)
-                elif new_scheduler == 'no-scheduler':
-                    self.scheduler = NodeScheduler(self.db)
+                self.scheduler = {
+                    'first-fit': FirstFitScheduler(self.db),
+                    'first-fit-decreasing': FirstFitDecreasingScheduler(self.db),
+                    'best-fit': BestFitScheduler(self.db),
+                    'best-fir-decreasing': BestFitDecreasingScheduler(self.db),
+                    'no-scheduler': NodeScheduler(self.db)
+                }.get(new_scheduler)
             else:
                 self.socket.send_string('Ack')
                 job_queue.append(msg)
@@ -338,7 +334,7 @@ def main():
     #
     # wait = args.wait
 
-    os.chdir('/home/%s/RESTfulSwarmLM/JobManager' % utl.get_username())
+    os.chdir('/home/%s/RESTfulSwarm/JobManager' % utl.get_username())
 
     with open('JobManagerInit.json') as f:
         data = json.load(f)
@@ -359,16 +355,13 @@ def main():
 
     # choose scheduler
     # default scheduling strategy is best-fit
-    if scheduling_strategy == 'first-fit':
-        scheduler = FirstFitScheduler(db)
-    elif scheduling_strategy == 'first-fit-decreasing':
-        scheduler = FirstFitDecreasingScheduler(db)
-    elif scheduling_strategy == 'best-fir-decreasing':
-        scheduler = BestFitDecreasingScheduler(db)
-    elif scheduling_strategy == 'no-scheduler':
-        scheduler = NodeScheduler(db)
-    else:
-        scheduler = BestFitScheduler(db)
+    scheduler = {
+        'first-fit': FirstFitScheduler(db),
+        'first-fit-decreasing': FirstFitDecreasingScheduler(db),
+        'best-fit': BestFitScheduler(db),
+        'best-fir-decreasing': BestFitDecreasingScheduler(db),
+        'no-scheduler': NodeScheduler(db)
+    }.get(scheduling_strategy, 'best-fit')
 
     job_manager = JobManager(gm_address=gm_address, db=db, scheduler=scheduler, wait=wait)
 

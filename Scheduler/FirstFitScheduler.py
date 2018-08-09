@@ -12,18 +12,17 @@ class FirstFitScheduler(BinPackingScheduler):
     def cores_scheduling_algorithm(self, jobs_details, free_cores):
         core_requests = [(job[0], job[1][0]) for job in jobs_details]
         req_cores = []
-        for item in core_requests:
-            req_cores.extend(list(item[1].values()))
+        map(lambda item: req_cores.extend(list(item[1].values())), core_requests)
         return self.first_fit(requested_resources=req_cores, free_resources=free_cores)
 
     @staticmethod
     def first_fit(requested_resources, free_resources):
-        '''
-        First fit algorithm for scheduling resources
-        :param requested_resources: a list of requested resources
-        :param free_resources: a list of free resources
-        :return: A list of tuples, best fit result [($request_index, $resource_index)]
-        '''
+        # '''
+        # First fit algorithm for scheduling resources
+        # :param requested_resources: a list of requested resources
+        # :param free_resources: a list of free resources
+        # :return: A list of tuples, best fit result [($request_index, $resource_index)]
+        # '''
         result = []
         for i, req in enumerate(requested_resources[:]):
             fit = False

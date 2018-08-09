@@ -27,7 +27,7 @@ class BurstyStressClient(StressClient):
         # args = parser.parse_args()
         # fe_address = args.address
 
-        os.chdir('/home/%s/RESTfulSwarmLM/Client' % utl.get_username())
+        os.chdir('/home/%s/RESTfulSwarm/Client' % utl.get_username())
 
         try:
             json_path = 'BurstyStressClientInfo.json'
@@ -38,7 +38,7 @@ class BurstyStressClient(StressClient):
         except Exception as ex:
             print(ex)
 
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.get_username())
+        os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 
 
 if __name__ == '__main__':

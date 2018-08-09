@@ -27,7 +27,7 @@ class RandomStressClient(StressClient):
         # args = parser.parse_args()
         # fe_address = args.address
 
-        os.chdir('/home/%s/RESTfulSwarmLM/Client' % utl.get_username())
+        os.chdir('/home/%s/RESTfulSwarm/Client' % utl.get_username())
 
         try:
             json_path = 'RandomStressClientInfo.json'
@@ -35,10 +35,10 @@ class RandomStressClient(StressClient):
                 data = json.load(f)
             client = RandomStressClient(__lower_bound=data['lower_bound'], __upper_bound=data['upper_bound'])
             client.feed_jobs(session_id)
-        except ValueError as er:
+        except Exception as er:
             print(er)
 
-        os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.get_username())
+        os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 
 
 if __name__ == '__main__':

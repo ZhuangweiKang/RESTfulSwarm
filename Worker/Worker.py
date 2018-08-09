@@ -99,8 +99,7 @@ class Worker:
                         thr.setDaemon(True)
                         threads.append(thr)
 
-                    for thr in threads:
-                        thr.start()
+                    map(lambda _thr: _thr.start(), threads)
                 elif msg_type == 'migrate':
                     info = json.loads(' '.join(msg[1:]))
                     dst = info['dst']
@@ -126,8 +125,6 @@ class Worker:
                     container_name = info['container_name']
                     del info['node']
                     self.storage.update({container_name: info})
-                    # self.deleteOldContainer(container_name)
-                    # self.pull_image(self.storage[container_name]['image'])
                     job_name = container_name.split('_')[0]
                     volume_dir = '/nfs/RESTfulSwarm/%s/%s' % (job_name, container_name)
                     os.mkdir(path=volume_dir)
@@ -144,14 +141,14 @@ class Worker:
                     docker.leave_swarm(self.docker_client)
                     self.logger.info('Leave Swarm environment.')
             except Exception as ex:
-                self.logger.debug(ex)
+                self.logger.error(ex)
 
     def listen_worker_message(self):
         lm_controller = LiveMigration(logger=self.logger, docker_client=self.docker_client, storage=self.storage)
         lm_controller.not_migrate(SystemConstants.WORKER_PORT)
 
-    def join_swarm(self, remote_addr, join_token):
-        docker.join_swarm(self.docker_client, join_token, remote_addr)
+    def join_swarm(self, remote_address, join_token):
+        docker.join_swarm(self.docker_client, join_token, remote_address)
         self.logger.info('Worker node join the Swarm environment.')
 
     def delete_old_container(self, name):
@@ -228,20 +225,18 @@ class Worker:
 
     @staticmethod
     def main(worker_init):
-        '''
-        parser = argparse.ArgumentParser()
-        parser.add_argument('--GM', type=str, help='Global Manager IP address.')
-        parser.add_argument('--worker', type=str, help='Self IP address')
-        parser.add_argument('--discovery', type=str, help='Discovery server address.')
-        parser.add_argument('-f', '--frequency', type=int, default=20, help='Worker node task monitor frequency (s).')
-        args = parser.parse_args()
-        gm_address = args.GM
-        worker_address = args.worker
-        dis_address = args.discovery
-        frequency = args.frequency
-        '''
+        # parser = argparse.ArgumentParser()
+        # parser.add_argument('--GM', type=str, help='Global Manager IP address.')
+        # parser.add_argument('--worker', type=str, help='Self IP address')
+        # parser.add_argument('--discovery', type=str, help='Discovery server address.')
+        # parser.add_argument('-f', '--frequency', type=int, default=20, help='Worker node task monitor frequency (s).')
+        # args = parser.parse_args()
+        # gm_address = args.GM
+        # worker_address = args.worker
+        # dis_address = args.discovery
+        # frequency = args.frequency
 
-        os.chdir('/home/%s/RESTfulSwarmLM/Worker' % utl.get_username())
+        os.chdir('/home/%s/RESTfulSwarm/Worker' % utl.get_username())
 
         with open(worker_init) as f:
             data = json.load(f)

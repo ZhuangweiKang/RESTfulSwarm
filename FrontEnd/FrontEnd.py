@@ -38,26 +38,26 @@ template = {
 
 swagger = Swagger(app, template=template)
 
-__db_address__ = None
-__db__ = None
-__socket__ = None
+db_address = None
+db = None
+socket = None
 
 
 @app.route('/RESTfulSwarm/FE/request_new_job', methods=['POST'])
 @swag_from('FrontEnd.yml', validation=True)
 def request_new_job():
-    global __socket__
+    global socket
     # Write job data into MongoDB
     data = request.get_json()
     data.update({'submit_time': time.time()})
     col_name = data['job_name']
-    m_col = mg.get_col(__db__, col_name)
+    m_col = mg.get_col(db, col_name)
     mg.insert_doc(m_col, data)
 
     # Notify job manager
     msg = 'newJob %s' % col_name
-    __socket__.send_string(msg)
-    __socket__.recv_string()
+    socket.send_string(msg)
+    socket.recv_string()
     return 'OK', 200
 
 
@@ -66,33 +66,31 @@ def request_new_job():
 def switch_scheduler(new_scheduler):
     # Notify Job Manager to switch scheduler
     msg = 'SwitchScheduler %s' % new_scheduler
-    __socket__.send_string(msg)
-    __socket__.recv_string()
+    socket.send_string(msg)
+    socket.recv_string()
     return 'OK', 200
 
 
 def main():
-    os.chdir('/home/%s/RESTfulSwarmLM/FrontEnd' % utl.get_username())
+    os.chdir('/home/%s/RESTfulSwarm/FrontEnd' % utl.get_username())
 
-    global __db_address__
-    global __socket__
-    global __db__
+    global db_address
+    global socket
+    global db
 
     with open('FrontEndInit.json') as f:
         data = json.load(f)
 
-    __db_address__ = data['db_address']
-
-    db_client = mg.get_client(address=__db_address__, port=SystemConstants.MONGODB_PORT)
-    __db__ = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
+    db_address = data['db_address']
+    db_client = mg.get_client(address=db_address, port=SystemConstants.MONGODB_PORT)
+    db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
 
     jm_address = data['jm_address']
-    jm_port = SystemConstants.JM_PORT
-    __socket__ = zmq.cs_connect(jm_address, jm_port)
+    socket = zmq.cs_connect(jm_address, SystemConstants.JM_PORT)
 
     fe_address = data['fe_address']
 
-    os.chdir('/home/%s/RESTfulSwarmLM/ManagementEngine' % utl.get_username())
+    os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 
     app.run(host=fe_address, port=SystemConstants.FE_PORT, debug=False)
 

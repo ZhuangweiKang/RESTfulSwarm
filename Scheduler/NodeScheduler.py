@@ -14,11 +14,11 @@ class NodeScheduler(Scheduler):
         pass
 
     def schedule_resources(self, jobs_details):
-        '''
-        Check if we have enough capacity to deploy a job
-        :param jobs_details: [($job_name, [{$task_name: $cpu_count}, {$task_name: $mem_limit}, [$node], [$cpuset_cpus]])]
-        :return: [$($job_name, $task_name, $worker_name, [$core])] + [$waiting_job]
-        '''
+        # '''
+        # Check if we have enough capacity to deploy a job
+        # :param jobs_details: [($job_name, [{$task_name: $cpu_count}, {$task_name: $mem_limit}, [$node], [$cpuset_cpus]])]
+        # :return: [$($job_name, $task_name, $worker_name, [$core])] + [$waiting_job]
+        # '''
         scheduling_decision = []
         waiting_decision = []
         for job in jobs_details:

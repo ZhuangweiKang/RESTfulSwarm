@@ -55,19 +55,16 @@ class Scheduler(object):
     # update worker resource collection
     def update_worker_resource_info(self, schedule):
         hosts = []
-        for item in schedule:
-            # get hostname
-            hosts.append(item[2])
+        map(lambda item: hosts.append(item[2]), schedule)
         hosts = set(hosts)
-        for host in hosts:
-            mg.update_workers_resource_col(self.workers_col, host, self.workers_resource_col)
+        map(lambda host: mg.update_workers_resource_col(self.workers_col, host, self.workers_resource_col), hosts)
 
     def find_container(self, container_name):
-        '''
-        Find the worker node the container is locating
-        :param container_name:
-        :return: return node hostname
-        '''
+        # '''
+        # Find the worker node the container is locating
+        # :param container_name:
+        # :return: return node hostname
+        # '''
         collections = self.db.collection_names(include_system_collections=False)
         temp = []
         for collection in collections:
@@ -76,18 +73,14 @@ class Scheduler(object):
             temp = list(jobs_col.find({filter_key: container_name}))
             if len(temp) != 0:
                 break
-        if len(temp) == 0:
-            return None
-        else:
-            temp = temp[0]
-            return temp['job_info']['tasks'][container_name]['node']
+        return temp[0]['job_info']['tasks'][container_name]['node'] if len(temp) != 0 else None
 
     def get_node_info(self, node_name):
-        '''
-        Get node information by node_name
-        :param node_name:
-        :return: A python dict if the node is available, or None if not
-        '''
+        # '''
+        # Get node information by node_name
+        # :param node_name:
+        # :return: A python dict if the node is available, or None if not
+        # '''
         try:
             return list(self.workers_col.find({'hostname': node_name}))[0]
         except Exception as ex:
