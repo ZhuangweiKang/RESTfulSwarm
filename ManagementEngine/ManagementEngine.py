@@ -24,11 +24,11 @@ import SystemConstants
 
 
 class ManagementEngine(object):
-    def __init__(self, __db_address, __workers_info):
+    def __init__(self, db_address, workers_details):
         self.__db_client = mg.get_client(usr=SystemConstants.MONGODB_USR, pwd=SystemConstants.MONGODB_PWD,
-                                         address=__db_address, port=SystemConstants.MONGODB_PORT)
+                                         address=db_address, port=SystemConstants.MONGODB_PORT)
         self.__db = mg.get_db(self.__db_client, db_name=SystemConstants.MONGODB_NAME)
-        self.__workers_info = __workers_info
+        self.__workers_info = workers_details
 
     def reset_db(self):
         all_cols = mg.get_all_cols(self.__db)
@@ -200,5 +200,5 @@ if __name__ == '__main__':
         db_packet = json.load(f)
     with open('WorkersInfo.json') as f:
         workers_info = json.load(f)
-    me = ManagementEngine(__db_address=db_packet['address'], __workers_info=workers_info)
+    me = ManagementEngine(db_address=db_packet['address'], workers_details=workers_info)
     me.main()
