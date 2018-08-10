@@ -3,19 +3,16 @@
 # Author: Zhuangwei Kang
 
 import time
-import zmq_api as zmq
+from Messenger import Messenger
 
 
-'''
-GlobalManager publishes numbers like a busybox container
-'''
 def main():
     port = '3000'
     topic = 'number'
-    socket = zmq.ps_bind(port)
+    messenger = Messenger('Pub/Sub', port=port)
     i = 0
     while True:
-        socket.send('%s %s' % (topic, str(i)))
+        messenger.publish('%s %s' % (topic, str(i)))
         print('Send numeric string: %d' % i)
         time.sleep(2)
         i += 1

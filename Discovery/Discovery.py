@@ -10,7 +10,7 @@ import argparse
 
 import mongodb_api as mg
 import SystemConstants
-import zmq_api as zmq
+from Messenger import Messenger
 import utl
 
 
@@ -20,7 +20,7 @@ class Discovery(object):
         self.__db = mg.get_db(_db_client, SystemConstants.MONGODB_NAME)
         self.__workers_info = mg.get_col(self.__db, SystemConstants.WorkersInfo)
         self.__workers_resource_info = mg.get_col(self.__db, SystemConstants.WorkersResourceInfo)
-        self.__socket = zmq.cs_bind(SystemConstants.DISCOVERY_PORT)
+        self.__messenger = Messenger('C/S', port=SystemConstants.DISCOVERY_PORT)
         self.__logger = utl.get_logger('DiscoveryLogger', 'DiscoveryLog.log')
 
     def discovery(self):
@@ -90,11 +90,10 @@ class Discovery(object):
 
         while True:
             try:
-                msg_pack = self.__socket.recv_string()
-                self.__logger.info('Recv msg: %s' % msg_pack)
-                self.__socket.send_string('Ack')
-                msg_pack = msg_pack.split(',')
-                map(update_db, msg_pack)
+                _msg = self.__messenger.receive(feedback='Ack')
+                self.__logger.info('Recv msg: %s' % _msg)
+                _msg = _msg.split(',')
+                map(update_db, _msg)
             except Exception as ex:
                 self.__logger.error(ex)
 

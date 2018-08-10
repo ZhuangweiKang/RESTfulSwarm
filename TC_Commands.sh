@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # 排队规则 qdisc(queueing discipline )
 # Class类，用来表示不同的流量控制策略
 # Filter规则，用来将用户（IP）划入具体的控制策略（class）中， filter 划分的标志位可用 u32 打标功能或 IPtables 的 set-mark (大多使用iptables 来做标记)功能来实现。

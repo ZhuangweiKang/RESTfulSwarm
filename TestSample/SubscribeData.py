@@ -3,16 +3,16 @@
 # Author: Zhuangwei Kang
 
 import logging
-import zmq_api as zmq
+from Messenger import Messenger
 import argparse
 
 
 def main(address, port):
     logger = doLog()
-    socket = zmq.ps_connect(address, port)
-    zmq.subscribe_topic(socket, 'number')
+    messenger = Messenger('Pub/Sub', address=address, port=port)
+    messenger.subscribe_topic('number')
     while True:
-        data = socket.recv()
+        data = messenger.subscribe()
         number = data.split()
         logger.info(number)
 

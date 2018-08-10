@@ -1,8 +1,6 @@
 #!/usr/bin/env /usr/local/bin/python
 # encoding: utf-8
 # Author: Zhuangwei Kang
-#
-# FrontEnd is only responsible for storing job information into database and sending notification to JobManager
 
 import os
 import json
@@ -12,7 +10,7 @@ import argparse
 from flasgger import Swagger, swag_from
 
 import mongodb_api as mg
-import zmq_api as zmq
+from Messenger import Messenger
 import utl
 import SystemConstants
 
@@ -40,13 +38,13 @@ swagger = Swagger(app, template=template)
 
 db_address = None
 db = None
-socket = None
+messenger = None
 
 
 @app.route('/RESTfulSwarm/FE/request_new_job', methods=['POST'])
 @swag_from('FrontEnd.yml', validation=True)
 def request_new_job():
-    global socket
+    global messenger
     # Write job data into MongoDB
     data = request.get_json()
     data.update({'submit_time': time.time()})
@@ -55,19 +53,16 @@ def request_new_job():
     mg.insert_doc(m_col, data)
 
     # Notify job manager
-    msg = 'newJob %s' % col_name
-    socket.send_string(msg)
-    socket.recv_string()
+    messenger.send('newJob', col_name)
     return 'OK', 200
 
 
 @app.route('/RESTfulSwarm/FE/switch_scheduler/<new_scheduler>', methods=['GET'])
 @swag_from('SwitchScheduler.yml')
 def switch_scheduler(new_scheduler):
+    global messenger
     # Notify Job Manager to switch scheduler
-    msg = 'SwitchScheduler %s' % new_scheduler
-    socket.send_string(msg)
-    socket.recv_string()
+    messenger.send('SwitchScheduler', new_scheduler)
     return 'OK', 200
 
 
@@ -75,7 +70,7 @@ def main():
     os.chdir('/home/%s/RESTfulSwarm/FrontEnd' % utl.get_username())
 
     global db_address
-    global socket
+    global messenger
     global db
 
     with open('FrontEndInit.json') as f:
@@ -86,7 +81,7 @@ def main():
     db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
 
     jm_address = data['jm_address']
-    socket = zmq.cs_connect(jm_address, SystemConstants.JM_PORT)
+    messenger = Messenger('C/S', address=jm_address, port=SystemConstants.JM_PORT)
 
     fe_address = data['fe_address']
 

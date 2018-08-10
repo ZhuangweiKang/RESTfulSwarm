@@ -13,7 +13,7 @@ from flasgger import Swagger, swag_from
 import utl
 import SystemConstants
 import docker_api as docker
-import zmq_api as zmq
+from Messenger import Messenger
 import mongodb_api as mg
 
 app = Flask(__name__)
@@ -40,7 +40,7 @@ swagger = Swagger(app, template=template)
 
 gm_address = None
 dockerClient = None
-pubSocket = None
+messenger = None
 
 db_address = None
 db_client = None
@@ -54,9 +54,9 @@ job_buffer = []
 @app.route('/RESTfulSwarm/GM/init', methods=['GET'])
 @swag_from('./Flasgger/init.yml')
 def init():
-    global pubSocket
+    global messenger
     try:
-        pubSocket = zmq.ps_bind(SystemConstants.GM_PUB_PORT)
+        messenger = Messenger('Pub/Sub', port=SystemConstants.GM_PUB_PORT)
         init_swarm_env()
         response = 'OK: Initialize Swarm environment succeed.'
         return response, 200
@@ -78,6 +78,7 @@ def create_overlay_network(network, driver, subnet):
 @app.route('/RESTfulSwarm/GM/request_join', methods=['POST'])
 @swag_from('./Flasgger/requestJoin.yml', validation=True)
 def request_join():
+    global messenger
     data = request.get_json()
     hostname = data['hostname']
     worker_address = data['address']
@@ -98,7 +99,7 @@ def request_join():
             remote_address = gm_address + ':2377'
             join_token = docker.get_join_token()
             response = '%s join %s %s' % (hostname, remote_address, join_token)
-            pubSocket.send_string(response)
+            messenger.publish(response)
             app.logger.info('Send manager address and join token to worker node.')
             return response, 200
         else:
@@ -128,10 +129,11 @@ def init_worker_info(hostname, cores_num, mem_free):
 
 
 def new_container(data):
+    global messenger
     node = data['node']
     if docker.check_node_hostname(dockerClient, node) is False:
         msg = '%s new_container %s' % (node, json.dumps(data))
-        pubSocket.send_string(msg)
+        messenger.publish(msg)
         app.logger.info('Create a new container in node %s.' % node)
         response = 'OK'
     else:
@@ -190,17 +192,19 @@ def request_new_job():
 @app.route('/RESTfulSwarm/GM/checkpoint_cons', methods=['POST'])
 @swag_from('./Flasgger/checkpointCons.yml', validation=True)
 def checkpoint_cons():
+    global messenger
     data = request.get_json()
     for item in data:
         if docker.check_node_hostname(dockerClient, item['node']):
             return 'Node %s is unavailable.' % item['node'], 400
         msg = '%s checkpoints %s' % (item['node'], json.dumps(item['containers']))
-        pubSocket.send_string(msg)
+        messenger.publish(msg)
         app.logger.info('Checkpoint containers %s on node %s' % (json.dumps(item['containers']), item['node']))
     return 'OK', 200
 
 
 def container_migration(data):
+    global messenger
     src = data['from']
     dst = data['to']
     container = data['container']
@@ -216,10 +220,9 @@ def container_migration(data):
     else:
         json_obj = {'src': src, 'dst': dst, 'container': container, 'info': info}
         msg = '%s migrate %s' % (src, json.dumps(json_obj))
-        pubSocket.send_string(msg)
-        response = 'OK'
+        messenger.publish(msg)
         app.logger.info('Migrate container %s from %s to %s.' % (container, src, dst))
-    return response, 200
+    return 'OK', 200
 
 
 @app.route('/RESTfulSwarm/GM/request_migrate', methods=['POST'])
@@ -251,7 +254,7 @@ def request_leave():
     check_node = docker.check_node_hostname(client=dockerClient, host=hostname)
     if check_node is False:
         msg = '%s leave' % hostname
-        pubSocket.send_string(msg)
+        messenger.send_string(msg)
         # force delete the node on Manager side
         docker.remove_node(hostname)
         app.logger.info('Node %s left Swarm environment.' % hostname)
@@ -265,12 +268,13 @@ def request_leave():
 @app.route('/RESTfulSwarm/GM/request_update_container', methods=['POST'])
 @swag_from('./Flasgger/requestUpdateContainer.yml', validation=True)
 def request_update_container():
+    global messenger
     update_info = request.get_json()
     node = update_info['node']
     container = update_info['container_name']
     if docker.check_node_hostname(client=dockerClient, host=node) is False:
         update_info = json.dumps(update_info)
-        pubSocket.send_string('%s update %s' % (node, update_info))
+        messenger.publish('%s update %s' % (node, update_info))
         app.logger.info('%s updated container %s' % (node, container))
         return 'OK', 200
     else:

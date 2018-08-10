@@ -15,43 +15,43 @@ from Scheduler.FirstFitScheduler import FirstFitScheduler
 from Scheduler.BestFitDecreasingScheduler import BestFitDecreasingScheduler
 from Scheduler.FirstFitDecreasingScheduler import FirstFitDecreasingScheduler
 from Scheduler.NodeScheduler import NodeScheduler
-import zmq_api as zmq
+from Messenger import Messenger
 import mongodb_api as mg
 import SystemConstants
 
 
 class JobManager(object):
-    def __init__(self, gm_address, db, scheduler, wait):
-        self.gm_address = gm_address
-        self.db = db
-        self.scheduler = scheduler
-        self.workersInfoCol = self.db['WorkersInfo']
-        self.workers_resource_col = self.db['WorkersResourceInfo']
-        self.wait = wait
+    def __init__(self, __gm_address, __db, __scheduler, __wait):
+        self.__gm_address = __gm_address
+        self.__db = __db
+        self.__scheduler = __scheduler
+        self.__workersInfoCol = self.__db['WorkersInfo']
+        self.__workers_resource_col = self.__db['WorkersResourceInfo']
+        self.__wait = __wait
 
         # listening msg from FrontEnd
-        self.socket = zmq.cs_bind(port=SystemConstants.JM_PORT)
+        self.__messenger = Messenger('C/S', port=SystemConstants.JM_PORT)
 
     # Initialize global manager(Swarm manager node)
     def init_gm(self):
-        url = 'http://%s:%s/RESTfulSwarm/GM/init' % (self.gm_address, SystemConstants.GM_PORT)
+        url = 'http://%s:%s/RESTfulSwarm/GM/init' % (self.__gm_address, SystemConstants.GM_PORT)
         print(requests.get(url=url).content)
 
     # Create a single task(container) using a Json file
     def new_task(self, data):
-        url = 'http://%s:%s/RESTfulSwarm/GM/request_new_task' % (self.gm_address, SystemConstants.GM_PORT)
+        url = 'http://%s:%s/RESTfulSwarm/GM/request_new_task' % (self.__gm_address, SystemConstants.GM_PORT)
         print(requests.post(url=url, json=data).content)
 
     def container_migration(self, data):
         dest_node_name = (data['to'].split('@'))[0]
-        dest_node_info = self.scheduler.get_node_info(dest_node_name)
+        dest_node_info = self.__scheduler.get_node_info(dest_node_name)
         if dest_node_info is None:
             er = 'Migration failed, because node %s is not in Swarm environment.'
             raise Exception(er)
         else:
             # update node name
             job_name = data['job']
-            job_col = self.db[job_name]
+            job_col = self.__db[job_name]
             container = data['container']
 
             filter_key = 'job_info.tasks.%s.container_name' % container
@@ -82,18 +82,18 @@ class JobManager(object):
                           target_value=','.join(free_cores))
 
             # release cores in source node
-            src_node_name = self.scheduler.find_container(data['container'])
+            src_node_name = self.__scheduler.find_container(data['container'])
             map(lambda _core:
-                mg.update_doc(self.workersInfoCol, 'hostname', src_node_name, 'CPUs.%s' % _core, False),
+                mg.update_doc(self.__workersInfoCol, 'hostname', src_node_name, 'CPUs.%s' % _core, False),
                 cores)
 
             # mark cores in destination node as busy
             map(lambda _core:
-                mg.update_doc(self.workersInfoCol, 'hostname', dest_node_name, 'CPUs.%s' % _core, True),
+                mg.update_doc(self.__workersInfoCol, 'hostname', dest_node_name, 'CPUs.%s' % _core, True),
                 cores)
 
             # get free memory from both source node and destination node
-            src_worker_info = list(self.workersInfoCol.find({'hostname': src_node_name}))[0]
+            src_worker_info = list(self.__workersInfoCol.find({'hostname': src_node_name}))[0]
             src_free_mem = src_worker_info['MemFree']
             new_free_mem = dest_node_info['MemFree']
 
@@ -101,18 +101,18 @@ class JobManager(object):
             update_src_mem = str(utl.memory_size_translator(src_free_mem) + mem_limit) + 'm'
             update_dst_mem = str(utl.memory_size_translator(new_free_mem) - mem_limit) + 'm'
 
-            mg.update_doc(self.workersInfoCol, 'hostname', src_node_name, 'MemFree', update_src_mem)
-            mg.update_doc(self.workersInfoCol, 'hostname', dest_node_name, 'MemFree', update_dst_mem)
+            mg.update_doc(self.__workersInfoCol, 'hostname', src_node_name, 'MemFree', update_src_mem)
+            mg.update_doc(self.__workersInfoCol, 'hostname', dest_node_name, 'MemFree', update_dst_mem)
 
             # pre-process migration json file
             data.update({'from': data['from'].split('@')[1]})
             data.update({'to': data['to'].split('@')[1]})
 
             # update worker resource collection for both workers
-            mg.update_workers_resource_col(workers_col=self.workersInfoCol, hostname=src_node_name,
-                                           workers_resource_col=self.workers_resource_col)
-            mg.update_workers_resource_col(workers_col=self.workersInfoCol, hostname=dest_node_name,
-                                           workers_resource_col=self.workers_resource_col)
+            mg.update_workers_resource_col(workers_col=self.__workersInfoCol, hostname=src_node_name,
+                                           workers_resource_col=self.__workers_resource_col)
+            mg.update_workers_resource_col(workers_col=self.__workersInfoCol, hostname=dest_node_name,
+                                           workers_resource_col=self.__workers_resource_col)
             return data
 
     # Migrate a container
@@ -120,7 +120,7 @@ class JobManager(object):
     def do_migrate(self, data):
         try:
             data = self.container_migration(data)
-            url = 'http://%s:%s/RESTfulSwarm/GM/request_migrate' % (self.gm_address, SystemConstants.GM_PORT)
+            url = 'http://%s:%s/RESTfulSwarm/GM/request_migrate' % (self.__gm_address, SystemConstants.GM_PORT)
             print(requests.post(url=url, json=data).content)
             return True
         except Exception as ex:
@@ -132,7 +132,7 @@ class JobManager(object):
             for index, item in enumerate(data[:]):
                 new_item = self.container_migration(item)
                 data[index].update(new_item)
-            url = 'http://%s:%s/RESTfulSwarm/GM/request_group_migration' % (self.gm_address, SystemConstants.GM_PORT)
+            url = 'http://%s:%s/RESTfulSwarm/GM/request_group_migration' % (self.__gm_address, SystemConstants.GM_PORT)
             print(requests.post(url=url, json=data).content)
             return True
         except Exception as ex:
@@ -148,7 +148,7 @@ class JobManager(object):
         container_name = data['container_name']
         job = data['job']
 
-        job_col = self.db[job]
+        job_col = self.__db[job]
         filter_key = 'job_info.tasks.%s.container_name' % container_name
         filter_value = container_name
 
@@ -175,47 +175,47 @@ class JobManager(object):
         new_cpu = new_cpu.split(',')
         # update cpu
         map(lambda _core:
-            mg.update_doc(self.workersInfoCol, 'hostname', node, 'CPUs.%s' % _core, False),
+            mg.update_doc(self.__workersInfoCol, 'hostname', node, 'CPUs.%s' % _core, False),
             current_cpu)
 
         map(lambda _core:
-            mg.update_doc(self.workersInfoCol, 'hostname', node, 'CPUs.%s' % _core, True),
+            mg.update_doc(self.__workersInfoCol, 'hostname', node, 'CPUs.%s' % _core, True),
             new_cpu)
 
         # update memory, and we assuming memory unit is always m
         current_mem = utl.memory_size_translator(current_mem)
-        worker_info = list(self.workersInfoCol.find({'hostname': node}))[0]
+        worker_info = list(self.__workersInfoCol.find({'hostname': node}))[0]
         free_mem = utl.memory_size_translator(worker_info['MemFree'])
         current_mem = free_mem + current_mem
         new_mem = utl.memory_size_translator(new_mem)
         current_mem -= new_mem
         current_mem = str(current_mem) + 'm'
-        mg.update_doc(self.workersInfoCol, 'hostname', node, 'MemFree', current_mem)
+        mg.update_doc(self.__workersInfoCol, 'hostname', node, 'MemFree', current_mem)
 
         # update worker resource Info collection
-        mg.update_workers_resource_col(workers_col=self.workersInfoCol, hostname=node,
-                                       workers_resource_col=self.workers_resource_col)
+        mg.update_workers_resource_col(workers_col=self.__workersInfoCol, hostname=node,
+                                       workers_resource_col=self.__workers_resource_col)
 
-        url = 'http://%s:%s/RESTfulSwarm/GM/request_update_container' % (self.gm_address, SystemConstants.GM_PORT)
+        url = 'http://%s:%s/RESTfulSwarm/GM/request_update_container' % (self.__gm_address, SystemConstants.GM_PORT)
         print(requests.post(url=url, json=data).content)
 
     # Leave Swarm
     def leave_swarm(self, hostname):
-        col_names = mg.get_all_cols(self.db)
+        col_names = mg.get_all_cols(self.__db)
         cols = []
         # get collection cursor objs
-        map(lambda col_name: cols.append(mg.get_col(self.db, col_name)), col_names)
+        map(lambda col_name: cols.append(mg.get_col(self.__db, col_name)), col_names)
         mg.update_tasks(cols, hostname)
 
         # remove the node(document) from WorkersInfo collection
-        mg.delete_document(self.workersInfoCol, 'hostname', hostname)
+        mg.delete_document(self.__workersInfoCol, 'hostname', hostname)
 
         data = {'hostname': hostname}
-        url = 'http://%s:%s/RESTfulSwarm/GM/request_leave' % (self.gm_address, SystemConstants.GM_PORT)
+        url = 'http://%s:%s/RESTfulSwarm/GM/request_leave' % (self.__gm_address, SystemConstants.GM_PORT)
         print(requests.post(url=url, json=data).content)
 
     def dump_container(self, data):
-        url = 'http://%s:%s/RESTfulSwarm/GM/checkpoint_cons' % (self.gm_address, SystemConstants.GM_PORT)
+        url = 'http://%s:%s/RESTfulSwarm/GM/checkpoint_cons' % (self.__gm_address, SystemConstants.GM_PORT)
         print(requests.post(url=url, json=data).content)
 
     def new_job_notify(self):
@@ -225,7 +225,7 @@ class JobManager(object):
         def pre_process_job(_msg):
             # read db, parse job resources request
             job_name = _msg[1]
-            job_col = mg.get_col(self.db, job_name)
+            job_col = mg.get_col(self.__db, job_name)
             col_data = mg.find_col(job_col)[0]
             # core request format: {$task_name: $core}}
             core_requests = {}
@@ -241,20 +241,20 @@ class JobManager(object):
             return core_requests, mem_requests, target_nodes, target_cpuset
 
         def schedule_resource(jobs_details):
-            schedule = self.scheduler.schedule_resources(jobs_details)
+            schedule = self.__scheduler.schedule_resources(jobs_details)
 
             schedule_decision = schedule[0]
             waiting_decision = schedule[1]
 
             if len(schedule_decision) > 0:
                 # update Job collection
-                self.scheduler.update_job_info(schedule_decision)
+                self.__scheduler.update_job_info(schedule_decision)
 
                 # update WorkersInfo collection
-                self.scheduler.update_workers_info(schedule_decision)
+                self.__scheduler.update_workers_info(schedule_decision)
 
                 # update worker resource collection
-                self.scheduler.update_worker_resource_info(schedule_decision)
+                self.__scheduler.update_worker_resource_info(schedule_decision)
 
             return waiting_decision
 
@@ -265,7 +265,7 @@ class JobManager(object):
                 job_queue_snap_shoot = job_queue[:]
                 if len(job_queue_snap_shoot) == 0:
                     continue
-                elif time.time() - timer >= self.wait:
+                elif time.time() - timer >= self.__wait:
                     jobs_details = []
                     temp_job_queue = []
 
@@ -282,10 +282,10 @@ class JobManager(object):
                             job_queue_snap_shoot.remove(job)
 
                     for _msg in temp_job_queue:
-                        url = 'http://%s:%s/RESTfulSwarm/GM/request_new_job' % (self.gm_address,
+                        url = 'http://%s:%s/RESTfulSwarm/GM/request_new_job' % (self.__gm_address,
                                                                                 SystemConstants.GM_PORT)
                         job_name = _msg[1]
-                        job_col = mg.get_col(self.db, job_name)
+                        job_col = mg.get_col(self.__db, job_name)
                         col_data = mg.find_col(job_col)[0]
 
                         del col_data['_id']
@@ -298,22 +298,20 @@ class JobManager(object):
         execute_thr.start()
 
         while True:
-            msg = self.socket.recv_string()
+            msg = self.__messenger.receive('Ack')
             msg = msg.split()
             if msg[0] == 'SwitchScheduler':
                 # make sure no job in job queue
                 job_queue = []
-                self.socket.send_string('Ack')
                 new_scheduler = msg[1]
-                self.scheduler = {
-                    'first-fit': FirstFitScheduler(self.db),
-                    'first-fit-decreasing': FirstFitDecreasingScheduler(self.db),
-                    'best-fit': BestFitScheduler(self.db),
-                    'best-fir-decreasing': BestFitDecreasingScheduler(self.db),
-                    'no-scheduler': NodeScheduler(self.db)
+                self.__scheduler = {
+                    'first-fit': FirstFitScheduler(self.__db),
+                    'first-fit-decreasing': FirstFitDecreasingScheduler(self.__db),
+                    'best-fit': BestFitScheduler(self.__db),
+                    'best-fir-decreasing': BestFitDecreasingScheduler(self.__db),
+                    'no-scheduler': NodeScheduler(self.__db)
                 }.get(new_scheduler)
             else:
-                self.socket.send_string('Ack')
                 job_queue.append(msg)
 
 
@@ -363,7 +361,7 @@ def main():
         'no-scheduler': NodeScheduler(db)
     }.get(scheduling_strategy, 'best-fit')
 
-    job_manager = JobManager(gm_address=gm_address, db=db, scheduler=scheduler, wait=wait)
+    job_manager = JobManager(__gm_address=gm_address, __db=db, __scheduler=scheduler, __wait=wait)
 
     fe_notify_thr = threading.Thread(target=job_manager.new_job_notify(), args=())
     fe_notify_thr.setDaemon(True)

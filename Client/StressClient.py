@@ -141,8 +141,8 @@ class StressClient(object):
                 while True:
                     try:
                         choice = int(input('What\'s your choice? '))
-                    except ValueError:
-                        continue
+                    except ValueError as er:
+                        print(er)
                     else:
                         break
                 session_id = str(int(time.time()))

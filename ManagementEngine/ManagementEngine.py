@@ -23,21 +23,21 @@ import SystemConstants
 
 
 class ManagementEngine(object):
-    def __init__(self, _db_address, _workers_info):
-        self.mg_client = mg.get_client(usr=SystemConstants.MONGODB_USR, pwd=SystemConstants.MONGODB_PWD,
-                                       address=_db_address, port=SystemConstants.MONGODB_PORT)
-        self.db = mg.get_db(self.mg_client, db_name=SystemConstants.MONGODB_NAME)
-        self.workers_info = _workers_info
+    def __init__(self, __db_address, __workers_info):
+        self.__db_client = mg.get_client(usr=SystemConstants.MONGODB_USR, pwd=SystemConstants.MONGODB_PWD,
+                                         address=__db_address, port=SystemConstants.MONGODB_PORT)
+        self.__db = mg.get_db(self.__db_client, db_name=SystemConstants.MONGODB_NAME)
+        self.__workers_info = __workers_info
 
     def reset_db(self):
-        all_cols = mg.get_all_cols(self.db)
+        all_cols = mg.get_all_cols(self.__db)
         if SystemConstants.WorkersResourceInfo in all_cols:
             # Drop worker resource info collection
-            mg.drop_col(self.mg_client, SystemConstants.MONGODB_NAME, SystemConstants.WorkersResourceInfo)
+            mg.drop_col(self.__db_client, SystemConstants.MONGODB_NAME, SystemConstants.WorkersResourceInfo)
 
         if SystemConstants.WorkersInfo in all_cols:
             # Reset worker info collection
-            workers_info_col = mg.get_col(self.db, SystemConstants.WorkersInfo)
+            workers_info_col = mg.get_col(self.__db, SystemConstants.WorkersInfo)
             workers_info_data = mg.find_col(workers_info_col)
             for index, worker in enumerate(workers_info_data[:]):
                 for cpu in worker['CPUs']:
@@ -109,7 +109,7 @@ class ManagementEngine(object):
         print('Executed command %s on worker %s' % (cmd, address))
 
     def launch_workers(self):
-        for worker in self.workers_info:
+        for worker in self.__workers_info:
             self.ssh_exec_cmd(address=worker['address'], usr=worker['user'], cmd=worker['launch_worker'])
             time.sleep(1)
         print('Waiting for workers joining.')
@@ -135,7 +135,7 @@ class ManagementEngine(object):
 
     def shutdown_workers(self):
         map(lambda worker: self.ssh_exec_cmd(worker['address'], worker['user'], worker['kill_worker']),
-            self.workers_info)
+            self.__workers_info)
         print('Shutdown all workers.')
 
     def launch_system(self):
@@ -199,5 +199,5 @@ if __name__ == '__main__':
         db_packet = json.load(f)
     with open('WorkersInfo.json') as f:
         workers_info = json.load(f)
-    me = ManagementEngine(_db_address=db_packet['address'], _workers_info=workers_info)
+    me = ManagementEngine(__db_address=db_packet['address'], __workers_info=workers_info)
     me.main()
