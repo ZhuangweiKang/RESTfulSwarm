@@ -9,6 +9,7 @@ import paramiko as pk
 import time
 import multiprocessing
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from FrontEnd import FrontEnd as FE
 from JobManager import JobManager as JM
 from GlobalManager import GlobalManager as GM

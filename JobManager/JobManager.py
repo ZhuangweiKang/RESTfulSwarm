@@ -2,7 +2,7 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-import os
+import os, sys
 import requests
 import argparse
 import utl
@@ -10,6 +10,7 @@ import time
 import json
 import threading
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Scheduler.BestFitScheduler import BestFitScheduler
 from Scheduler.FirstFitScheduler import FirstFitScheduler
 from Scheduler.BestFitDecreasingScheduler import BestFitDecreasingScheduler
