@@ -9,7 +9,7 @@ from Messenger import Messenger
 def main():
     port = '3000'
     topic = 'number'
-    messenger = Messenger('Pub/Sub', port=port)
+    messenger = Messenger(messenger_type='Pub/Sub', port=port)
     i = 0
     while True:
         messenger.publish('%s %s' % (topic, str(i)))

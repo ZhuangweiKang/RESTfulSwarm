@@ -2,6 +2,8 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
+import sys
+import traceback
 from abc import ABCMeta, abstractmethod
 import mongodb_api as mg
 import SystemConstants
@@ -84,4 +86,4 @@ class Scheduler(object):
         try:
             return list(self.workers_col.find({'hostname': node_name}))[0]
         except Exception as ex:
-            print(ex)
+            traceback.print_exc(sys.stdout)

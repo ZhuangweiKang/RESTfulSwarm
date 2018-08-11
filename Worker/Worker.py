@@ -2,7 +2,8 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-import os
+import os, sys
+import traceback
 import multiprocessing
 import threading
 import requests
@@ -12,6 +13,7 @@ import random
 import math
 import time
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from live_migration import LiveMigration
 import docker_api as docker
 from Messenger import Messenger
@@ -20,12 +22,12 @@ import SystemConstants
 
 
 class Worker:
-    def __init__(self, __gm_address, __worker_address, __dis_address, __task_monitor_frequency):
+    def __init__(self, gm_address, worker_address, dis_address, task_monitor_frequency):
         self.__logger = utl.get_logger('WorkerLogger', 'worker.log')
-        self.__messenger = Messenger('Pub/Sub', __gm_address, SystemConstants.GM_PUB_PORT)
+        self.__messenger = Messenger(messenger_type='Pub/Sub', address=gm_address, port=SystemConstants.GM_PUB_PORT)
         self.__docker_client = docker.set_client()
-        self.__gm_address = __gm_address
-        self.__host_address = __worker_address
+        self.__gm_address = gm_address
+        self.__host_address = worker_address
         self.__hostname = utl.get_hostname()
 
         self.__messenger.subscribe_topic(self.__hostname)
@@ -35,14 +37,14 @@ class Worker:
         # format: {$container : $containerInfo}
         self.storage = {}
 
-        self.dis_address = __dis_address
-        self.task_monitor_frequency = __task_monitor_frequency
+        self.dis_address = dis_address
+        self.task_monitor_frequency = task_monitor_frequency
 
     def monitor(self, dis_address, frequency=0.1):
         client = docker.set_client()
         time.sleep(frequency)
         hostname = utl.get_hostname()
-        cs_messenger = Messenger('C/S', address=dis_address, port=SystemConstants.DISCOVERY_PORT)
+        cs_messenger = Messenger(messenger_type='C/S', address=dis_address, port=SystemConstants.DISCOVERY_PORT)
         time_end = math.floor(time.time())
         deployed_tasks = []
         while True:
@@ -77,7 +79,8 @@ class Worker:
                 time.sleep(frequency)
 
             except Exception as ex:
-                self.__logger.debug(ex)
+                traceback.print_exc(file=sys.stdout)
+                self.__logger.error(ex)
 
     def listen_manager_msg(self):
         while True:
@@ -116,10 +119,12 @@ class Worker:
                             lm_controller.migrate(dst_address=dst, cmd=temp_container['command'],
                                                   container_detail=container_info)
                         except Exception as ex:
+                            traceback.print_exc(file=sys.stdout)
                             self.__logger.error(ex)
                             self.storage.update({container: temp_container})
                     except Exception as ex:
                         self.__logger.error(ex)
+                        traceback.print_exc(file=sys.stdout)
                 elif msg_type == 'new_container':
                     info = json.loads(' '.join(msg[1:]))
                     container_name = info['container_name']
@@ -141,6 +146,7 @@ class Worker:
                     docker.leave_swarm(self.__docker_client)
                     self.__logger.info('Leave Swarm environment.')
             except Exception as ex:
+                traceback.print_exc(file=sys.stdout)
                 self.__logger.error(ex)
 
     def listen_worker_message(self):
@@ -190,8 +196,8 @@ class Worker:
         return container
 
     def controller(self):
-        manager_monitor_thr = threading.Thread(target=self.listen_manager_msg(), args=())
-        peer_monitor_thr = threading.Thread(target=self.listen_worker_message(), args=())
+        manager_monitor_thr = threading.Thread(target=self.listen_manager_msg, args=())
+        peer_monitor_thr = threading.Thread(target=self.listen_worker_message, args=())
         container_monitor_thr = threading.Thread(target=self.monitor,
                                                  args=(self.dis_address, self.task_monitor_frequency,))
         container_monitor_thr.daemon = True
@@ -249,6 +255,7 @@ class Worker:
 
         worker.controller()
         worker.request_join_swarm()
+
         while True:
             pass
 
@@ -264,6 +271,5 @@ if __name__ == '__main__':
         target=Worker.main,
         args=(worker_init_json, )
     )
-    pro.daemon = True
     pro.start()
     pro.join()

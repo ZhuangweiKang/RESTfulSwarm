@@ -2,6 +2,7 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
+import traceback
 import utl
 import time
 import random
@@ -56,7 +57,7 @@ class LiveMigration:
         return docker.commit_container(self.__docker_client, name, repository, image_name)
 
     def migrate(self, dst_address, port='3200', cmd=None, container_detail=None):
-        self.__messenger = Messenger('C/S', address=dst_address, port=port)
+        self.__messenger = Messenger(messenger_type='C/S', address=dst_address, port=port)
         checkpoint_name, tar_name = self.dump_container()
 
         self.commit_con(self.__name, self.__image, self.__image)
@@ -116,7 +117,7 @@ class LiveMigration:
         self.__logger.info('Container has been restored...')
 
     def not_migrate(self, port='3200'):
-        self.__messenger = Messenger('C/S', port=port)
+        self.__messenger = Messenger(messenger_type='C/S', port=port)
         while True:
             new_image = self.recv_image_info()
             command = self.recv_spawn_cmd()

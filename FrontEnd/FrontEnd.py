@@ -2,13 +2,14 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-import os
+import os, sys
 import json
 from flask import *
 import time
 import argparse
 from flasgger import Swagger, swag_from
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import mongodb_api as mg
 from Messenger import Messenger
 import utl
@@ -81,7 +82,7 @@ def main():
     db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
 
     jm_address = data['jm_address']
-    messenger = Messenger('C/S', address=jm_address, port=SystemConstants.JM_PORT)
+    messenger = Messenger(messenger_type='C/S', address=jm_address, port=SystemConstants.JM_PORT)
 
     fe_address = data['fe_address']
 

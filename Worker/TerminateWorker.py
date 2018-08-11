@@ -18,7 +18,7 @@ def kill_worker():
     # leave swarm
     dh.leave_swarm(docker_client)
     # clean containers
-    print(os.popen('docker rm -f $(docker ps -aq)', 'r'))
+    os.system('docker rm -f $(docker ps -aq)')
 
     # kill process
     for proc in psutil.process_iter():

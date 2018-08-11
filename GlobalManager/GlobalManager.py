@@ -2,8 +2,9 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-import os
+import os, sys
 import json
+import traceback
 import time
 import argparse
 import threading
@@ -56,11 +57,12 @@ job_buffer = []
 def init():
     global messenger
     try:
-        messenger = Messenger('Pub/Sub', port=SystemConstants.GM_PUB_PORT)
+        messenger = Messenger(messenger_type='Pub/Sub', port=SystemConstants.GM_PUB_PORT)
         init_swarm_env()
         response = 'OK: Initialize Swarm environment succeed.'
         return response, 200
     except Exception as ex:
+        traceback.print_exc(file=sys.stdout)
         response = 'Error: %s' % ex
         return response, 500
 
@@ -150,6 +152,7 @@ def request_new_task():
         new_container(data)
         return 'OK', 200
     except Exception as ex:
+        traceback.print_exc(file=sys.stdout)
         return ex, 400
 
 
@@ -186,6 +189,7 @@ def request_new_job():
         job_buffer.append(data['job_name'])
         return 'OK', 200
     except Exception as ex:
+        traceback.print_exc(file=sys.stdout)
         return app.logger.error(ex)
 
 
@@ -232,6 +236,7 @@ def request_migrate():
         data = request.get_json()
         return container_migration(data)
     except Exception as ex:
+        traceback.print_exc(file=sys.stdout)
         return str(ex), 400
 
 
@@ -243,6 +248,7 @@ def request_group_migration():
         map(lambda item: container_migration(item), data)
         return 'OK', 200
     except Exception as ex:
+        traceback.print_exc(file=sys.stdout)
         app.logger.error(ex)
         return str(ex), 400
 

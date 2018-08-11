@@ -3,7 +3,8 @@
 # Author: Zhuangwei Kang
 
 
-import os
+import os, sys
+import traceback
 import time
 import json
 import argparse
@@ -15,12 +16,12 @@ import utl
 
 
 class Discovery(object):
-    def __init__(self, __db_address):
-        _db_client = mg.get_client(address=__db_address, port=SystemConstants.MONGODB_PORT)
+    def __init__(self, db_address):
+        _db_client = mg.get_client(address=db_address, port=SystemConstants.MONGODB_PORT)
         self.__db = mg.get_db(_db_client, SystemConstants.MONGODB_NAME)
         self.__workers_info = mg.get_col(self.__db, SystemConstants.WorkersInfo)
         self.__workers_resource_info = mg.get_col(self.__db, SystemConstants.WorkersResourceInfo)
-        self.__messenger = Messenger('C/S', port=SystemConstants.DISCOVERY_PORT)
+        self.__messenger = Messenger(messenger_type='C/S', port=SystemConstants.DISCOVERY_PORT)
         self.__logger = utl.get_logger('DiscoveryLogger', 'DiscoveryLog.log')
 
     def discovery(self):
@@ -94,8 +95,8 @@ class Discovery(object):
                 self.__logger.info('Recv msg: %s' % _msg)
                 _msg = _msg.split(',')
                 map(update_db, _msg)
-            except Exception as ex:
-                self.__logger.error(ex)
+            except Exception:
+                traceback.print_exc(file=sys.stdout)
 
     @staticmethod
     def main():

@@ -3,6 +3,7 @@
 # Author: Zhuangwei Kang
 
 import os, sys
+import traceback
 import requests
 import argparse
 import utl
@@ -22,16 +23,16 @@ import SystemConstants
 
 
 class JobManager(object):
-    def __init__(self, __gm_address, __db, __scheduler, __wait):
-        self.__gm_address = __gm_address
-        self.__db = __db
-        self.__scheduler = __scheduler
+    def __init__(self, gm_address, db, scheduler, wait):
+        self.__gm_address = gm_address
+        self.__db = db
+        self.__scheduler = scheduler
         self.__workersInfoCol = self.__db['WorkersInfo']
         self.__workers_resource_col = self.__db['WorkersResourceInfo']
-        self.__wait = __wait
+        self.__wait = wait
 
         # listening msg from FrontEnd
-        self.__messenger = Messenger('C/S', port=SystemConstants.JM_PORT)
+        self.__messenger = Messenger(messenger_type='C/S', port=SystemConstants.JM_PORT)
 
     # Initialize global manager(Swarm manager node)
     def init_gm(self):
@@ -125,7 +126,7 @@ class JobManager(object):
             print(requests.post(url=url, json=data).content)
             return True
         except Exception as ex:
-            print(ex)
+            traceback.print_exc(file=sys.stdout)
             return False
 
     def do_group_migration(self, data):
@@ -137,7 +138,7 @@ class JobManager(object):
             print(requests.post(url=url, json=data).content)
             return True
         except Exception as ex:
-            print(ex)
+            traceback.print_exc(file=sys.stdout)
             return False
 
     # Update container resources(cpu & mem)
@@ -315,124 +316,124 @@ class JobManager(object):
             else:
                 job_queue.append(msg)
 
+    @staticmethod
+    def main():
+        # parser = argparse.ArgumentParser()
+        # parser.add_argument('--GM', type=str, help='Global manager node address.')
+        # parser.add_argument('--db', type=str, help='MongoDB node address.')
+        # parser.add_argument('-w', '--wait', type=int, default=3, help='Waiting time for Job Manager in seconds.')
+        # parser.add_argument('-s', '--scheduling', type=str, choices=['first-fit', 'best-fit'], default='best-fit',
+        #                     help='Scheduling algorithm option.')
+        #
+        # args = parser.parse_args()
+        # gm_address = args.GM
+        #
+        # db_address = args.db
+        #
+        # scheduling_strategy = args.scheduling
+        #
+        # wait = args.wait
 
-def main():
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('--GM', type=str, help='Global manager node address.')
-    # parser.add_argument('--db', type=str, help='MongoDB node address.')
-    # parser.add_argument('-w', '--wait', type=int, default=3, help='Waiting time for Job Manager in seconds.')
-    # parser.add_argument('-s', '--scheduling', type=str, choices=['first-fit', 'best-fit'], default='best-fit',
-    #                     help='Scheduling algorithm option.')
-    #
-    # args = parser.parse_args()
-    # gm_address = args.GM
-    #
-    # db_address = args.db
-    #
-    # scheduling_strategy = args.scheduling
-    #
-    # wait = args.wait
+        os.chdir('/home/%s/RESTfulSwarm/JobManager' % utl.get_username())
 
-    os.chdir('/home/%s/RESTfulSwarm/JobManager' % utl.get_username())
+        with open('JobManagerInit.json') as f:
+            data = json.load(f)
+        gm_address = data['gm_address']
 
-    with open('JobManagerInit.json') as f:
-        data = json.load(f)
-    gm_address = data['gm_address']
+        db_address = data['db_address']
 
-    db_address = data['db_address']
+        wait = data['wait_time']
 
-    wait = data['wait_time']
-    
-    scheduling_strategy = data['scheduling_strategy']
-    for strategy in scheduling_strategy:
-        if scheduling_strategy[strategy] == 1:
-            scheduling_strategy = strategy
-            break
+        scheduling_strategy = data['scheduling_strategy']
+        for strategy in scheduling_strategy:
+            if scheduling_strategy[strategy] == 1:
+                scheduling_strategy = strategy
+                break
 
-    db_client = mg.get_client(address=db_address, port=SystemConstants.MONGODB_PORT)
-    db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
+        db_client = mg.get_client(address=db_address, port=SystemConstants.MONGODB_PORT)
+        db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
 
-    # choose scheduler
-    # default scheduling strategy is best-fit
-    scheduler = {
-        'first-fit': FirstFitScheduler(db),
-        'first-fit-decreasing': FirstFitDecreasingScheduler(db),
-        'best-fit': BestFitScheduler(db),
-        'best-fir-decreasing': BestFitDecreasingScheduler(db),
-        'no-scheduler': NodeScheduler(db)
-    }.get(scheduling_strategy, 'best-fit')
+        # choose scheduler
+        # default scheduling strategy is best-fit
+        scheduler = {
+            'first-fit': FirstFitScheduler(db),
+            'first-fit-decreasing': FirstFitDecreasingScheduler(db),
+            'best-fit': BestFitScheduler(db),
+            'best-fir-decreasing': BestFitDecreasingScheduler(db),
+            'no-scheduler': NodeScheduler(db)
+        }.get(scheduling_strategy, 'best-fit')
 
-    job_manager = JobManager(__gm_address=gm_address, __db=db, __scheduler=scheduler, __wait=wait)
+        job_manager = JobManager(gm_address=gm_address, db=db, scheduler=scheduler, wait=wait)
 
-    fe_notify_thr = threading.Thread(target=job_manager.new_job_notify(), args=())
-    fe_notify_thr.setDaemon(True)
-    fe_notify_thr.start()
+        fe_notify_thr = threading.Thread(target=job_manager.new_job_notify, args=())
+        fe_notify_thr.setDaemon(True)
+        fe_notify_thr.start()
 
-    job_manager.init_gm()
+        job_manager.init_gm()
 
-    os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
+        os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 
-    # while True:
-    #     pass
-    #     print('--------------RESTfulSwarm Menu--------------')
-    #     print('1. Init Swarm')
-    #     print('2. Create task(one container)')
-    #     print('3. Check point a group containers')
-    #     print('4. Migrate a container')
-    #     print('5. Migrate a group of containers')
-    #     print('6. Update Container')
-    #     print('7. Leave Swarm')
-    #     print('8. Describe Workers')
-    #     print('9. Describe Manager')
-    #     print('10. Exit')
-    #     try:
-    #         get_input = int(input('Please enter your choice: '))
-    #         if get_input == 1:
-    #             job_manager.init_gm()
-    #         elif get_input == 2:
-    #             json_path = input('Task Json file path: ')
-    #             with open(json_path, 'r') as f:
-    #                 data = json.load(f)
-    #             job_manager.new_task(data)
-    #         elif get_input == 3:
-    #             json_path = input('Checkpoint Json file path: ')
-    #             with open(json_path, 'r') as f:
-    #                 data = json.load(f)
-    #             job_manager.dump_container(data)
-    #         elif get_input == 4:
-    #             json_path = input('Migration Json file path: ')
-    #             with open(json_path, 'r') as f:
-    #                 data = json.load(f)
-    #             job_manager.do_migrate(data)
-    #         elif get_input == 5:
-    #             migrate_json = input('Group migration Json file: ')
-    #             with open(migrate_json, 'r') as f:
-    #                 data = json.load(f)
-    #             job_manager.do_group_migration(data)
-    #         elif get_input == 6:
-    #             json_path = input('New resource configuration Json file:')
-    #             with open(json_path, 'r') as f:
-    #                 data = json.load(f)
-    #             job_manager.update_container(data)
-    #         elif get_input == 7:
-    #             hostname = input('Node hostname: ')
-    #             job_manager.leave_swarm(hostname)
-    #         elif get_input == 8:
-    #             hostname = input('Node hostname: ')
-    #             url = 'http://%s:%s/RESTfulSwarm/GM/%s/describe_worker' % (gm_address, SystemConstants.GM_PORT,
-    #                                                                        hostname)
-    #             print(requests.get(url=url).content.decode('utf-8'))
-    #         elif get_input == 9:
-    #             hostname = input('Node hostname: ')
-    #             url = 'http://%s:%s/RESTfulSwarm/GM/%s/describe_manager' % (gm_address, SystemConstants.GM_PORT,
-    #                                                                         hostname)
-    #             print(requests.get(url=url).content.decode('utf-8'))
-    #         elif get_input == 10:
-    #             print('Thanks for using RESTfulSwarm, bye.')
-    #             break
-    #     except ValueError as er:
-    #         print(er)
+        # while True:
+        #     pass
+        #     print('--------------RESTfulSwarm Menu--------------')
+        #     print('1. Init Swarm')
+        #     print('2. Create task(one container)')
+        #     print('3. Check point a group containers')
+        #     print('4. Migrate a container')
+        #     print('5. Migrate a group of containers')
+        #     print('6. Update Container')
+        #     print('7. Leave Swarm')
+        #     print('8. Describe Workers')
+        #     print('9. Describe Manager')
+        #     print('10. Exit')
+        #     try:
+        #         get_input = int(input('Please enter your choice: '))
+        #         if get_input == 1:
+        #             job_manager.init_gm()
+        #         elif get_input == 2:
+        #             json_path = input('Task Json file path: ')
+        #             with open(json_path, 'r') as f:
+        #                 data = json.load(f)
+        #             job_manager.new_task(data)
+        #         elif get_input == 3:
+        #             json_path = input('Checkpoint Json file path: ')
+        #             with open(json_path, 'r') as f:
+        #                 data = json.load(f)
+        #             job_manager.dump_container(data)
+        #         elif get_input == 4:
+        #             json_path = input('Migration Json file path: ')
+        #             with open(json_path, 'r') as f:
+        #                 data = json.load(f)
+        #             job_manager.do_migrate(data)
+        #         elif get_input == 5:
+        #             migrate_json = input('Group migration Json file: ')
+        #             with open(migrate_json, 'r') as f:
+        #                 data = json.load(f)
+        #             job_manager.do_group_migration(data)
+        #         elif get_input == 6:
+        #             json_path = input('New resource configuration Json file:')
+        #             with open(json_path, 'r') as f:
+        #                 data = json.load(f)
+        #             job_manager.update_container(data)
+        #         elif get_input == 7:
+        #             hostname = input('Node hostname: ')
+        #             job_manager.leave_swarm(hostname)
+        #         elif get_input == 8:
+        #             hostname = input('Node hostname: ')
+        #             url = 'http://%s:%s/RESTfulSwarm/GM/%s/describe_worker' % (gm_address, SystemConstants.GM_PORT,
+        #                                                                        hostname)
+        #             print(requests.get(url=url).content.decode('utf-8'))
+        #         elif get_input == 9:
+        #             hostname = input('Node hostname: ')
+        #             url = 'http://%s:%s/RESTfulSwarm/GM/%s/describe_manager' % (gm_address, SystemConstants.GM_PORT,
+        #                                                                         hostname)
+        #             print(requests.get(url=url).content.decode('utf-8'))
+        #         elif get_input == 10:
+        #             print('Thanks for using RESTfulSwarm, bye.')
+        #             break
+        #     except ValueError as er:
+        #         print(er)
 
 
 if __name__ == '__main__':
-    main()
+    JobManager.main()

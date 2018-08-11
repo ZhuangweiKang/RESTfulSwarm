@@ -6,11 +6,11 @@ import zmq
 
 
 class Messenger(object):
-    def __init__(self, *args, **kwargs):
-        if args == 'C/S':
+    def __init__(self, messenger_type, **kwargs):
+        if messenger_type == 'C/S':
             self.agent = self.cs_connect(address=kwargs['address'], port=kwargs['port']) if len(kwargs) == 2 \
                 else self.cs_bind(port=kwargs['port'])
-        elif args == 'Pub/Sub':
+        elif messenger_type == 'Pub/Sub':
             self.agent = self.ps_connect(address=kwargs['address'], port=kwargs['port']) if len(kwargs) == 2 \
                 else self.ps_bind(port=kwargs['port'])
 

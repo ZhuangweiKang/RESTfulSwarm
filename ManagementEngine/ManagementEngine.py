@@ -14,10 +14,12 @@ from FrontEnd import FrontEnd as FE
 from JobManager import JobManager as JM
 from GlobalManager import GlobalManager as GM
 from Discovery import Discovery as DC
-from Client.BurstyStressClient import BurstyStressClient
-from Client.IncrementalStressClient import IncrementalStressClient
-from Client.SteadyStressClient import SteadyStressClient
-from Client.RandomStressClient import RandomStressClient
+
+from Client import BurstyStressClient as BC
+from Client import IncrementalStressClient as IC
+from Client import RandomStressClient as RC
+from Client import SteadyStressClient as SC
+
 import mongodb_api as mg
 import docker_api as docker
 import SystemConstants
@@ -71,7 +73,7 @@ class ManagementEngine(object):
     def launch_jm():
         jm_process = multiprocessing.Process(
             name='JobManager',
-            target=JM.main
+            target=JM.JobManager.main
         )
         jm_process.daemon = True
         jm_process.start()
@@ -93,7 +95,7 @@ class ManagementEngine(object):
     def launch_discovery():
         dc_process = multiprocessing.Process(
             name='Discovery',
-            target=DC.Discovery.main()
+            target=DC.Discovery.main
         )
         dc_process.daemon = True
         dc_process.start()
@@ -108,6 +110,7 @@ class ManagementEngine(object):
         con.connect(hostname=address, username=usr, pkey=key)
         con.exec_command(cmd)
         print('Executed command %s on worker %s' % (cmd, address))
+        con.close()
 
     def launch_workers(self):
         for worker in self.__workers_info:
@@ -122,7 +125,7 @@ class ManagementEngine(object):
     def launch_client(session_id):
         client_process = multiprocessing.Process(
             name='Client',
-            target=IncrementalStressClient.main,
+            target=IC.IncrementalStressClient.main,
             args=(session_id, )
         )
         client_process.daemon = True
@@ -135,7 +138,7 @@ class ManagementEngine(object):
         process.terminate()
 
     def shutdown_workers(self):
-        map(lambda worker: self.ssh_exec_cmd(worker['address'], worker['user'], worker['kill_worker']),
+        map((lambda worker: self.ssh_exec_cmd(worker['address'], worker['user'], worker['kill_worker'])),
             self.__workers_info)
         print('Shutdown all workers.')
 
@@ -156,7 +159,7 @@ class ManagementEngine(object):
         dc_process = self.launch_discovery()
         time.sleep(1)
         self.launch_workers()
-        time.sleep(5)
+        time.sleep(1)
         session_id = str(int(time.time()))
         client_process = self.launch_client(session_id=session_id)
         return fe_process, jm_process, gm_process, dc_process, client_process

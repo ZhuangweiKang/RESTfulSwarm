@@ -2,6 +2,7 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
+import traceback
 import random
 import time
 import json
@@ -48,7 +49,7 @@ class StressClient(object):
     __metaclass__ = ABCMeta
 
     def __init__(self):
-        with open('StressClientInfo.json', 'r') as f:
+        with open('StressClientInfo.json') as f:
             data = json.load(f)
         self.subnet = data['subnet']
         self.image_name = data['image_name']
@@ -141,8 +142,8 @@ class StressClient(object):
                 while True:
                     try:
                         choice = int(input('What\'s your choice? '))
-                    except ValueError as er:
-                        print(er)
+                    except ValueError:
+                        traceback.print_exc()
                     else:
                         break
                 session_id = str(int(time.time()))

@@ -2,20 +2,22 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-import os
+import os, sys
+import traceback
 import json
 import random
 import time
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import utl
 from Client.StressClient import StressClient
 
 
 class RandomStressClient(StressClient):
-    def __init__(self, __lower_bound, __upper_bound):
-        super(StressClient, self).__init__()
-        self.__lower_bound = __lower_bound
-        self.__upper_bound = __upper_bound
+    def __init__(self, lower_bound, upper_bound):
+        super(RandomStressClient, self).__init__()
+        self.__lower_bound = lower_bound
+        self.__upper_bound = upper_bound
 
     def feed_func(self, time_stamp):
         return random.randint(self.__lower_bound, self.__upper_bound)
@@ -33,10 +35,10 @@ class RandomStressClient(StressClient):
             json_path = 'RandomStressClientInfo.json'
             with open(json_path, 'r') as f:
                 data = json.load(f)
-            client = RandomStressClient(__lower_bound=data['lower_bound'], __upper_bound=data['upper_bound'])
+            client = RandomStressClient(lower_bound=data['lower_bound'], upper_bound=data['upper_bound'])
             client.feed_jobs(session_id)
-        except Exception as er:
-            print(er)
+        except Exception:
+            traceback.print_exc()
 
         os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 

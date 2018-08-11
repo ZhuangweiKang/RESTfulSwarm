@@ -9,7 +9,7 @@ import argparse
 
 def main(address, port):
     logger = doLog()
-    messenger = Messenger('Pub/Sub', address=address, port=port)
+    messenger = Messenger(messenger_type='Pub/Sub', address=address, port=port)
     messenger.subscribe_topic('number')
     while True:
         data = messenger.subscribe()
