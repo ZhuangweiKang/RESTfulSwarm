@@ -184,7 +184,6 @@ class ManagementEngine(object):
         print('Reset Master.')
         time.sleep(5)
         self.reset_db()
-        print('Reset MongoDB.')
 
     def main(self):
         while True:
