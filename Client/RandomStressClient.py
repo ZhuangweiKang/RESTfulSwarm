@@ -38,7 +38,7 @@ class RandomStressClient(StressClient):
             client = RandomStressClient(lower_bound=data['lower_bound'], upper_bound=data['upper_bound'])
             client.feed_jobs(session_id)
         except Exception:
-            traceback.print_exc()
+            traceback.print_exc(file=sys.stdout)
 
         os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 

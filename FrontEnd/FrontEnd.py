@@ -54,7 +54,7 @@ def request_new_job():
     mg.insert_doc(m_col, data)
 
     # Notify job manager
-    messenger.send('newJob', col_name)
+    messenger.send(prompt='newJob', content=col_name)
     return 'OK', 200
 
 
@@ -63,7 +63,7 @@ def request_new_job():
 def switch_scheduler(new_scheduler):
     global messenger
     # Notify Job Manager to switch scheduler
-    messenger.send('SwitchScheduler', new_scheduler)
+    messenger.send(prompt='SwitchScheduler', content=new_scheduler)
     return 'OK', 200
 
 

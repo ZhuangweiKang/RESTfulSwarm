@@ -135,38 +135,38 @@ class StressClient(object):
 
         time.sleep(5)
 
-        while True:
-            choice = input('Would you like to switch to new scheduler? (y/n)')
-            if choice == 'y':
-                print('1. Best Fit\n2. First Fit\n3. Best Fit Decreasing\n4. First Fit Decreasing')
-                while True:
-                    try:
-                        choice = int(input('What\'s your choice? '))
-                    except ValueError:
-                        traceback.print_exc()
-                    else:
-                        break
-                session_id = str(int(time.time()))
-
-                # Switch scheduler
-                url = {
-                    1: 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/best-fit' %
-                       (self.fe_address, SystemConstants.FE_PORT),
-                    2: 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/first-fit' %
-                       (self.fe_address, SystemConstants.FE_PORT),
-                    3: 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/best-fit-decreasing' %
-                       (self.fe_address, SystemConstants.FE_PORT),
-                    4: 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/first-fit-decreasing' %
-                       (self.fe_address, SystemConstants.FE_PORT)
-                }.get(choice, 1)
-
-                requests.get(url=url)
-                print('------------------------------------------------')
-                print('Switch Scheduler to new scheduler')
-                print('------------------------------------------------')
-
-                time.sleep(5)
-                feed(session_id)
+        # while True:
+        #     choice = input('Would you like to switch to new scheduler? (y/n)')
+        #     if choice == 'y':
+        #         print('1. Best Fit\n2. First Fit\n3. Best Fit Decreasing\n4. First Fit Decreasing')
+        #         while True:
+        #             try:
+        #                 choice = int(input('What\'s your choice? '))
+        #             except ValueError as er:
+        #                 print(er)
+        #             else:
+        #                 break
+        #         session_id = str(int(time.time()))
+        #
+        #         # Switch scheduler
+        #         url = {
+        #             1: 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/best-fit' %
+        #                (self.fe_address, SystemConstants.FE_PORT),
+        #             2: 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/first-fit' %
+        #                (self.fe_address, SystemConstants.FE_PORT),
+        #             3: 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/best-fit-decreasing' %
+        #                (self.fe_address, SystemConstants.FE_PORT),
+        #             4: 'http://%s:%s/RESTfulSwarm/FE/switch_scheduler/first-fit-decreasing' %
+        #                (self.fe_address, SystemConstants.FE_PORT)
+        #         }.get(choice, 1)
+        #
+        #         requests.get(url=url)
+        #         print('------------------------------------------------')
+        #         print('Switch Scheduler to new scheduler')
+        #         print('------------------------------------------------')
+        #
+        #         time.sleep(5)
+        #         feed(session_id)
 
     def new_job(self, data):
         url = 'http://%s:%s/RESTfulSwarm/FE/request_new_job' % (self.fe_address, SystemConstants.FE_PORT)

@@ -12,7 +12,8 @@ class FirstFitScheduler(BinPackingScheduler):
     def cores_scheduling_algorithm(self, jobs_details, free_cores):
         core_requests = [(job[0], job[1][0]) for job in jobs_details]
         req_cores = []
-        map(lambda item: req_cores.extend(list(item[1].values())), core_requests)
+        for item in core_requests:
+            req_cores.extend(list(item[1].values()))
         return self.first_fit(requested_resources=req_cores, free_resources=free_cores)
 
     @staticmethod

@@ -2,7 +2,6 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-import traceback
 import utl
 import time
 import random
@@ -22,21 +21,15 @@ class LiveMigration:
         self.__storage = __storage
 
     def send_image_info(self):
-        msg = 'image %s' % self.__image
-        self.__messenger.send_string(msg)
-        self.__messenger.recv_string()
+        self.__messenger.send(prompt='image', content=self.__image)
 
     def send_spawn_cmd(self, cmd):
-        msg = 'command %s' % cmd
         self.__logger.info('Send init command to destination node: %s' % cmd)
-        self.__messenger.send_string(msg)
-        self.__messenger.recv_string()
+        self.__messenger.send(prompt='command', content=cmd)
 
     def send_container_detail(self, container_detail):
-        msg = 'container_detail %s' % json.dumps(container_detail)
         self.__logger.info('Send container details to destination node.')
-        self.__messenger.send_string(msg)
-        self.__messenger.recv_string()
+        self.__messenger.send(prompt='container_detail', content=json.dumps(container_detail))
 
     def dump_container(self):
         checkpoint_name = self.__name + '_' + str(random.randint(1, 1000))
@@ -70,16 +63,14 @@ class LiveMigration:
         self.transfer_tar(checkpoint_name, dst_address)
 
     def recv_image_info(self):
-        msg = self.__messenger.recv_string()
-        self.__messenger.send_string('Ack')
+        msg = self.__messenger.receive('Ack')
         image = msg.split()[1]
         docker.pull_image(self.__docker_client, image)
         return image
 
     def recv_spawn_cmd(self):
         while True:
-            msg = self.__messenger.recv_string()
-            self.__messenger.send_string('Ack')
+            msg = self.__messenger.receive('Ack')
             if msg.split()[0] == 'command':
                 try:
                     command = msg.split()[1]
@@ -90,8 +81,7 @@ class LiveMigration:
 
     def recv_container_detail(self):
         while True:
-            msg = self.__messenger.recv_string()
-            self.__messenger.send_string('Ack')
+            msg = self.__messenger.receive('Ack')
             if msg.split()[0] == 'container_detail':
                 try:
                     detail = json.loads(' '.join(msg.split()[1:]))

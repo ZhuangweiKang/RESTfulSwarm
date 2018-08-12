@@ -38,7 +38,7 @@ class BurstyStressClient(StressClient):
             client = BurstyStressClient(lambda_=data['lambda'])
             client.feed_jobs(session_id)
         except Exception:
-            traceback.print_exc()
+            traceback.print_exc(file=sys.stdout)
 
         os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 

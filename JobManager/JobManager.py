@@ -3,7 +3,6 @@
 # Author: Zhuangwei Kang
 
 import os, sys
-import traceback
 import requests
 import argparse
 import utl
@@ -37,12 +36,12 @@ class JobManager(object):
     # Initialize global manager(Swarm manager node)
     def init_gm(self):
         url = 'http://%s:%s/RESTfulSwarm/GM/init' % (self.__gm_address, SystemConstants.GM_PORT)
-        print(requests.get(url=url).content)
+        requests.get(url=url)
 
     # Create a single task(container) using a Json file
     def new_task(self, data):
         url = 'http://%s:%s/RESTfulSwarm/GM/request_new_task' % (self.__gm_address, SystemConstants.GM_PORT)
-        print(requests.post(url=url, json=data).content)
+        requests.post(url=url, json=data)
 
     def container_migration(self, data):
         dest_node_name = (data['to'].split('@'))[0]
@@ -85,14 +84,13 @@ class JobManager(object):
 
             # release cores in source node
             src_node_name = self.__scheduler.find_container(data['container'])
-            map(lambda _core:
-                mg.update_doc(self.__workersInfoCol, 'hostname', src_node_name, 'CPUs.%s' % _core, False),
-                cores)
+
+            for _core in cores:
+                mg.update_doc(self.__workersInfoCol, 'hostname', src_node_name, 'CPUs.%s' % _core, False)
 
             # mark cores in destination node as busy
-            map(lambda _core:
-                mg.update_doc(self.__workersInfoCol, 'hostname', dest_node_name, 'CPUs.%s' % _core, True),
-                cores)
+            for _core in cores:
+                mg.update_doc(self.__workersInfoCol, 'hostname', dest_node_name, 'CPUs.%s' % _core, True)
 
             # get free memory from both source node and destination node
             src_worker_info = list(self.__workersInfoCol.find({'hostname': src_node_name}))[0]
@@ -123,10 +121,9 @@ class JobManager(object):
         try:
             data = self.container_migration(data)
             url = 'http://%s:%s/RESTfulSwarm/GM/request_migrate' % (self.__gm_address, SystemConstants.GM_PORT)
-            print(requests.post(url=url, json=data).content)
+            requests.post(url=url, json=data)
             return True
-        except Exception as ex:
-            traceback.print_exc(file=sys.stdout)
+        except Exception:
             return False
 
     def do_group_migration(self, data):
@@ -135,10 +132,10 @@ class JobManager(object):
                 new_item = self.container_migration(item)
                 data[index].update(new_item)
             url = 'http://%s:%s/RESTfulSwarm/GM/request_group_migration' % (self.__gm_address, SystemConstants.GM_PORT)
-            print(requests.post(url=url, json=data).content)
+            requests.post(url=url, json=data)
             return True
         except Exception as ex:
-            traceback.print_exc(file=sys.stdout)
+            print(ex)
             return False
 
     # Update container resources(cpu & mem)
@@ -176,13 +173,11 @@ class JobManager(object):
         current_cpu = current_cpu.split(',')
         new_cpu = new_cpu.split(',')
         # update cpu
-        map(lambda _core:
-            mg.update_doc(self.__workersInfoCol, 'hostname', node, 'CPUs.%s' % _core, False),
-            current_cpu)
+        for _core in current_cpu:
+            mg.update_doc(self.__workersInfoCol, 'hostname', node, 'CPUs.%s' % _core, False)
 
-        map(lambda _core:
-            mg.update_doc(self.__workersInfoCol, 'hostname', node, 'CPUs.%s' % _core, True),
-            new_cpu)
+        for _core in new_cpu:
+            mg.update_doc(self.__workersInfoCol, 'hostname', node, 'CPUs.%s' % _core, True)
 
         # update memory, and we assuming memory unit is always m
         current_mem = utl.memory_size_translator(current_mem)
@@ -199,14 +194,15 @@ class JobManager(object):
                                        workers_resource_col=self.__workers_resource_col)
 
         url = 'http://%s:%s/RESTfulSwarm/GM/request_update_container' % (self.__gm_address, SystemConstants.GM_PORT)
-        print(requests.post(url=url, json=data).content)
+        requests.post(url=url, json=data)
 
     # Leave Swarm
     def leave_swarm(self, hostname):
         col_names = mg.get_all_cols(self.__db)
         cols = []
         # get collection cursor objs
-        map(lambda col_name: cols.append(mg.get_col(self.__db, col_name)), col_names)
+        for col_name in col_names:
+            cols.append(mg.get_col(self.__db, col_name))
         mg.update_tasks(cols, hostname)
 
         # remove the node(document) from WorkersInfo collection
@@ -214,11 +210,11 @@ class JobManager(object):
 
         data = {'hostname': hostname}
         url = 'http://%s:%s/RESTfulSwarm/GM/request_leave' % (self.__gm_address, SystemConstants.GM_PORT)
-        print(requests.post(url=url, json=data).content)
+        requests.post(url=url, json=data)
 
     def dump_container(self, data):
         url = 'http://%s:%s/RESTfulSwarm/GM/checkpoint_cons' % (self.__gm_address, SystemConstants.GM_PORT)
-        print(requests.post(url=url, json=data).content)
+        requests.post(url=url, json=data)
 
     def new_job_notify(self):
         job_queue = []
@@ -226,7 +222,7 @@ class JobManager(object):
 
         def pre_process_job(_msg):
             # read db, parse job resources request
-            job_name = _msg[1]
+            job_name = _msg
             job_col = mg.get_col(self.__db, job_name)
             col_data = mg.find_col(job_col)[0]
             # core request format: {$task_name: $core}}
@@ -271,13 +267,14 @@ class JobManager(object):
                     jobs_details = []
                     temp_job_queue = []
 
-                    map(lambda _msg: jobs_details.append((_msg[1], pre_process_job(_msg))), job_queue_snap_shoot[:])
+                    for _msg in job_queue_snap_shoot[:]:
+                        jobs_details.append((_msg, pre_process_job(_msg)))
 
                     waiting_decision = schedule_resource(jobs_details)
 
                     # remove scheduled jobs
-                    for job in enumerate(job_queue_snap_shoot[:]):
-                        if job[1] not in waiting_decision:
+                    for job in job_queue_snap_shoot[:]:
+                        if job not in waiting_decision:
                             temp_job_queue.append(job)
                             if job in job_queue:
                                 job_queue.remove(job)
@@ -286,12 +283,12 @@ class JobManager(object):
                     for _msg in temp_job_queue:
                         url = 'http://%s:%s/RESTfulSwarm/GM/request_new_job' % (self.__gm_address,
                                                                                 SystemConstants.GM_PORT)
-                        job_name = _msg[1]
+                        job_name = _msg
                         job_col = mg.get_col(self.__db, job_name)
                         col_data = mg.find_col(job_col)[0]
 
                         del col_data['_id']
-                        print(requests.post(url=url, json=col_data).content)
+                        requests.post(url=url, json=col_data)
 
                     timer = time.time()
 
@@ -313,8 +310,8 @@ class JobManager(object):
                     'best-fir-decreasing': BestFitDecreasingScheduler(self.__db),
                     'no-scheduler': NodeScheduler(self.__db)
                 }.get(new_scheduler)
-            else:
-                job_queue.append(msg)
+            elif msg[0] == 'newJob':
+                job_queue.append(msg[1])
 
     @staticmethod
     def main():
@@ -373,8 +370,8 @@ class JobManager(object):
 
         os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 
-        # while True:
-        #     pass
+        while True:
+            pass
         #     print('--------------RESTfulSwarm Menu--------------')
         #     print('1. Init Swarm')
         #     print('2. Create task(one container)')
@@ -422,12 +419,12 @@ class JobManager(object):
         #             hostname = input('Node hostname: ')
         #             url = 'http://%s:%s/RESTfulSwarm/GM/%s/describe_worker' % (gm_address, SystemConstants.GM_PORT,
         #                                                                        hostname)
-        #             print(requests.get(url=url).content.decode('utf-8'))
+        #             requests.get(url=url)
         #         elif get_input == 9:
         #             hostname = input('Node hostname: ')
         #             url = 'http://%s:%s/RESTfulSwarm/GM/%s/describe_manager' % (gm_address, SystemConstants.GM_PORT,
         #                                                                         hostname)
-        #             print(requests.get(url=url).content.decode('utf-8'))
+        #             requests.get(url=url)
         #         elif get_input == 10:
         #             print('Thanks for using RESTfulSwarm, bye.')
         #             break

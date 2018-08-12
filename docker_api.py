@@ -2,8 +2,7 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-import os, sys
-import traceback
+import os
 import docker
 import docker.errors
 import docker.types
@@ -49,7 +48,6 @@ def get_container(client, name):
     try:
         return client.containers.get(name)
     except docker.errors.NotFound:
-        traceback.print_exc(file=sys.stdout)
         return None
 
 
@@ -66,7 +64,6 @@ def check_container(client, container_name):
         client.containers.get(container_name)
         return True
     except docker.errors.NotFound:
-        traceback.print_exc(file=sys.stdout)
         return False
 
 
@@ -107,7 +104,6 @@ def leave_swarm(client):
     try:
         client.swarm.leave(force=True)
     except Exception as ex:
-        traceback.print_exc(sys.stdout)
         print(ex)
 
 
@@ -115,7 +111,6 @@ def get_node_list(client):
     try:
         return client.nodes.list(filters={'role': 'worker'})
     except Exception:
-        traceback.print_exc(file=sys.stdout)
         return None
 
 def get_join_token():
@@ -193,7 +188,6 @@ def get_node_info(client, name):
         node = client.nodes.get(name)
         return node.attrs
     except Exception as ex:
-        traceback.print_exc(sys.stdout)
         print(ex)
 
 
@@ -207,9 +201,10 @@ def prune_network(client, _filter=None):
 
 
 def rm_networks(client, networks):
-    try:
-        # remove a list of networks
-        all_networks = client.networks.list()
-        map(lambda nw: nw.remove() if nw.name in networks else None, all_networks)
-    except Exception:
-        traceback.print_exc(sys.stdout)
+    # remove a list of networks
+    all_networks = list(filter(lambda nw: nw.name in networks, client.networks.list()))
+    [nw.remove() for nw in all_networks]
+
+
+def list_containers(client):
+    return client.containers.list(all=True)

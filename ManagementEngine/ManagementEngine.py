@@ -138,8 +138,8 @@ class ManagementEngine(object):
         process.terminate()
 
     def shutdown_workers(self):
-        map((lambda worker: self.ssh_exec_cmd(worker['address'], worker['user'], worker['kill_worker'])),
-            self.__workers_info)
+        for worker in self.__workers_info:
+            self.ssh_exec_cmd(worker['address'], worker['user'], worker['kill_worker'])
         print('Shutdown all workers.')
 
     def launch_system(self):

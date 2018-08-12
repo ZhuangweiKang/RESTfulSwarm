@@ -2,9 +2,8 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-import os, sys
+import os
 import json
-import traceback
 import time
 import argparse
 import threading
@@ -62,7 +61,6 @@ def init():
         response = 'OK: Initialize Swarm environment succeed.'
         return response, 200
     except Exception as ex:
-        traceback.print_exc(file=sys.stdout)
         response = 'Error: %s' % ex
         return response, 500
 
@@ -116,7 +114,9 @@ def request_join():
 
 def init_worker_info(hostname, cores_num, mem_free):
     cores = {}
-    map(lambda i: cores.update({str(i): False}), range(cores_num))
+    for i in range(cores_num):
+        cores.update({str(i): False})
+
     worker_info = {
         'hostname':  hostname,
         'CPUs': cores,
@@ -152,7 +152,6 @@ def request_new_task():
         new_container(data)
         return 'OK', 200
     except Exception as ex:
-        traceback.print_exc(file=sys.stdout)
         return ex, 400
 
 
@@ -170,11 +169,12 @@ def request_new_job():
         nfs_master_path = '/var/nfs/RESTfulSwarm/%s' % data['job_name']
         os.mkdir(path=nfs_master_path)
 
-        map(lambda _task: data['job_info']['tasks'][_task].update({'network': data['job_info']['network']['name']}),
-            data['job_info']['tasks'])
+        for _task in data['job_info']['tasks']:
+            data['job_info']['tasks'][_task].update({'network': data['job_info']['network']['name']})
 
         # deploy job
-        map(new_container, list(data['job_info']['tasks'].values()))
+        for _task in list(data['job_info']['tasks'].values()):
+            new_container(_task)
 
         # update job status
         mg.update_doc(db[data['job_name']], 'job_name', data['job_name'], 'status', 'Deployed')
@@ -189,8 +189,7 @@ def request_new_job():
         job_buffer.append(data['job_name'])
         return 'OK', 200
     except Exception as ex:
-        traceback.print_exc(file=sys.stdout)
-        return app.logger.error(ex)
+        return str(ex), 400
 
 
 @app.route('/RESTfulSwarm/GM/checkpoint_cons', methods=['POST'])
@@ -236,7 +235,6 @@ def request_migrate():
         data = request.get_json()
         return container_migration(data)
     except Exception as ex:
-        traceback.print_exc(file=sys.stdout)
         return str(ex), 400
 
 
@@ -245,10 +243,10 @@ def request_migrate():
 def request_group_migration():
     try:
         data = request.get_json()
-        map(lambda item: container_migration(item), data)
+        for item in data:
+            container_migration(item)
         return 'OK', 200
     except Exception as ex:
-        traceback.print_exc(file=sys.stdout)
         app.logger.error(ex)
         return str(ex), 400
 
@@ -260,7 +258,7 @@ def request_leave():
     check_node = docker.check_node_hostname(client=dockerClient, host=hostname)
     if check_node is False:
         msg = '%s leave' % hostname
-        messenger.send_string(msg)
+        messenger.publish(msg)
         # force delete the node on Manager side
         docker.remove_node(hostname)
         app.logger.info('Node %s left Swarm environment.' % hostname)
@@ -292,8 +290,7 @@ def request_update_container():
 @swag_from('./Flasgger/getWorkerList.yml')
 def get_worker_list():
     nodes = docker.get_node_list(dockerClient)
-    response = []
-    map(lambda node: response.append(node.attrs), nodes)
+    response = list(map(lambda node: node.attrs, nodes))
     return jsonify(response), 200
 
 

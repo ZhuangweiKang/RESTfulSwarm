@@ -37,7 +37,7 @@ class IncrementalStressClient(StressClient):
             client = IncrementalStressClient(coefficient=data['coefficient'], constant=data['constant'])
             client.feed_jobs(session_id)
         except Exception:
-            traceback.print_exc()
+            traceback.print_exc(file=sys.stdout)
 
         os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 

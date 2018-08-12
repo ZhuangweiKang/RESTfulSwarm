@@ -34,15 +34,15 @@ class BinPackingScheduler(Scheduler):
         available_workers = self.collect_free_cores()
 
         # available free cores of each worker node
-        free_cores = []
-        map(lambda _item: free_cores.append(len(_item)), list(available_workers.values()))
+        free_cores = list(map(lambda _item: len(_item), list(available_workers.values())))
 
         # apply core scheduling algorithm on data
         bf_result = self.cores_scheduling_algorithm(jobs_details=jobs_details, free_cores=free_cores)
 
         # requested mem_limit for each task
         mem_request_arr = []
-        map(lambda _item: mem_request_arr.extend(list(_item[1].values())), mem_requests)
+        for _item in mem_requests:
+            mem_request_arr.extend(list(_item[1].values()))
 
         # process schedule result
         return self.process_cores_scheduling_result(bf_result, core_requests, mem_request_arr, available_workers)

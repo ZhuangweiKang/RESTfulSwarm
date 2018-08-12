@@ -63,7 +63,7 @@ class Discovery(object):
                     _target_key = 'CPUs.%s' % core
                     mg.update_doc(self.__workers_info, 'hostname', worker_host, _target_key, False)
                     self.__logger.info('Release core %s status in worker %s' % (_target_key, worker_host))
-                map(update_cores, cores)
+                [update_cores(core) for core in cores]
 
                 # update memory info
                 worker_info = mg.filter_col(self.__workers_info, 'hostname', worker_host)
@@ -94,7 +94,7 @@ class Discovery(object):
                 _msg = self.__messenger.receive(feedback='Ack')
                 self.__logger.info('Recv msg: %s' % _msg)
                 _msg = _msg.split(',')
-                map(update_db, _msg)
+                [update_db(msg) for msg in _msg]
             except Exception:
                 traceback.print_exc(file=sys.stdout)
 

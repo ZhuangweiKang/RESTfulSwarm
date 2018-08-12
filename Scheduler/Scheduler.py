@@ -2,8 +2,6 @@
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
-import sys
-import traceback
 from abc import ABCMeta, abstractmethod
 import mongodb_api as mg
 import SystemConstants
@@ -56,10 +54,9 @@ class Scheduler(object):
 
     # update worker resource collection
     def update_worker_resource_info(self, schedule):
-        hosts = []
-        map(lambda item: hosts.append(item[2]), schedule)
-        hosts = set(hosts)
-        map(lambda host: mg.update_workers_resource_col(self.workers_col, host, self.workers_resource_col), hosts)
+        hosts = set(list(map(lambda item: item[2], schedule)))
+        for host in hosts:
+            mg.update_workers_resource_col(self.workers_col, host, self.workers_resource_col)
 
     def find_container(self, container_name):
         # '''
@@ -85,5 +82,5 @@ class Scheduler(object):
         # '''
         try:
             return list(self.workers_col.find({'hostname': node_name}))[0]
-        except Exception as ex:
-            traceback.print_exc(sys.stdout)
+        except Exception:
+            return None

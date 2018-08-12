@@ -101,8 +101,7 @@ class Worker:
                         thr = threading.Thread(target=docker.checkpoint, args=(checkpoint_name, container_id, True,))
                         thr.setDaemon(True)
                         threads.append(thr)
-
-                    map(lambda _thr: _thr.start(), threads)
+                    [thr.start() for thr in threads]
                 elif msg_type == 'migrate':
                     info = json.loads(' '.join(msg[1:]))
                     dst = info['dst']
@@ -119,12 +118,10 @@ class Worker:
                             lm_controller.migrate(dst_address=dst, cmd=temp_container['command'],
                                                   container_detail=container_info)
                         except Exception as ex:
-                            traceback.print_exc(file=sys.stdout)
                             self.__logger.error(ex)
                             self.storage.update({container: temp_container})
                     except Exception as ex:
                         self.__logger.error(ex)
-                        traceback.print_exc(file=sys.stdout)
                 elif msg_type == 'new_container':
                     info = json.loads(' '.join(msg[1:]))
                     container_name = info['container_name']
@@ -146,7 +143,6 @@ class Worker:
                     docker.leave_swarm(self.__docker_client)
                     self.__logger.info('Leave Swarm environment.')
             except Exception as ex:
-                traceback.print_exc(file=sys.stdout)
                 self.__logger.error(ex)
 
     def listen_worker_message(self):
@@ -227,7 +223,7 @@ class Worker:
 
     def request_leave_swarm(self):
         url = 'http://' + self.__gm_address + ':5000/RESTfulSwarm/GM/request_leave'
-        print(requests.post(url=url, json={'hostname': self.__hostname}).content)
+        requests.post(url=url, json={'hostname': self.__hostname})
 
     @staticmethod
     def main(worker_init):
@@ -271,5 +267,6 @@ if __name__ == '__main__':
         target=Worker.main,
         args=(worker_init_json, )
     )
+    pro.daemon = True
     pro.start()
     pro.join()

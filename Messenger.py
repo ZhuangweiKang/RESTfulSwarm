@@ -14,7 +14,7 @@ class Messenger(object):
             self.agent = self.ps_connect(address=kwargs['address'], port=kwargs['port']) if len(kwargs) == 2 \
                 else self.ps_bind(port=kwargs['port'])
 
-    def send(self, content, prompt=''):
+    def send(self, prompt='', content=''):
         msg = '%s %s' % (prompt, content)
         self.agent.send_string(msg)
         self.agent.recv_string()
