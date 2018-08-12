@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ManagementEngine/WorkersInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/ManagementEngine/WorkersInfo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Temp.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Temp.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worker/Worker2Init.json" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/Worker2Init.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,11 +37,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="110" column="29" lean-forward="true" selection-start-line="110" selection-start-column="29" selection-end-line="110" selection-end-column="29" />
+            <state relative-caret-position="1335">
+              <caret line="187" column="19" lean-forward="true" selection-start-line="187" selection-start-column="19" selection-end-line="187" selection-end-column="19" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
               </folding>
@@ -52,49 +49,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TerminateWorker.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Worker/TerminateWorker.py">
+      <file leaf-file-name="mongodb_api.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mongodb_api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="291">
+              <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
               <folding>
-                <element signature="e#81#90#0" expanded="true" />
+                <element signature="e#81#101#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
+      <file leaf-file-name="FrontEnd.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9284">
-              <caret line="428" column="31" selection-start-line="428" selection-start-column="31" selection-end-line="428" selection-end-column="31" />
+            <state relative-caret-position="588">
+              <caret line="53" column="12" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
               <folding>
                 <element signature="e#81#95#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="docker_api.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docker_api.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2134">
-              <caret line="101" selection-start-line="101" selection-end-line="101" />
-              <folding>
-                <element signature="e#81#90#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BinPackingScheduler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Scheduler/BinPackingScheduler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="836">
-              <caret line="41" column="43" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
-              <folding>
-                <element signature="e#81#120#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,8 +76,8 @@
       <file leaf-file-name="WorkersInfo.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ManagementEngine/WorkersInfo.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="1" selection-start-column="1" selection-end-column="1" />
+            <state relative-caret-position="264">
+              <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -121,7 +94,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Worker2Init.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Worker2Init.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Worker/Worker2Init.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="88">
@@ -142,10 +115,31 @@
       <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1650">
-              <caret line="87" column="27" selection-start-line="87" selection-start-column="24" selection-end-line="87" selection-end-column="27" />
+            <state relative-caret-position="-1892">
+              <caret line="126" column="11" selection-start-line="126" selection-start-column="11" selection-end-line="126" selection-end-column="11" />
               <folding>
                 <element signature="e#81#90#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SystemConstants.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SystemConstants.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BurstyStressClient.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/BurstyStressClient.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="550">
+              <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+              <folding>
+                <element signature="e#81#95#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -163,7 +157,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>containerInfo</find>
       <find>utl</find>
       <find>FE</find>
       <find>http</find>
@@ -182,7 +175,7 @@
       <find>threading</find>
       <find>receive</find>
       <find>ex</find>
-      <find>import traceback</find>
+      <find />
       <find>shutdown</find>
       <find>map</find>
       <find>messenger.send</find>
@@ -193,9 +186,10 @@
       <find>print(requ</find>
       <find>request_new_job</find>
       <find>nfs</find>
+      <find />
     </findStrings>
     <dirStrings>
-      <dir>C:\Users\zkty9.DESKTOP-F6K488U\Google Drive\Summer\RESTfulSwarm</dir>
+      <dir />
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -258,9 +252,9 @@
         <option value="$PROJECT_DIR$/Worker/TerminateWorker.py" />
         <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
         <option value="$PROJECT_DIR$/Worker/Worker.py" />
-        <option value="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" />
-        <option value="$PROJECT_DIR$/ManagementEngine/WorkersInfo.json" />
         <option value="$PROJECT_DIR$/Worker/Worker2Init.json" />
+        <option value="$PROJECT_DIR$/ManagementEngine/WorkersInfo.json" />
+        <option value="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" />
       </list>
     </option>
   </component>
@@ -480,13 +474,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00595" summary="upgrade docker version from 17.03 to 17.02">
-      <created>1533445114029</created>
-      <option name="number" value="00595" />
-      <option name="presentableId" value="LOCAL-00595" />
-      <option name="project" value="LOCAL" />
-      <updated>1533445114029</updated>
     </task>
     <task id="LOCAL-00596" summary="upgrade docker version from 17.03 to 17.02">
       <created>1533447793774</created>
@@ -824,7 +811,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534088248166</updated>
     </task>
-    <option name="localTasksCounter" value="644" />
+    <task id="LOCAL-00644" summary="Refactor code second time">
+      <created>1534088609879</created>
+      <option name="number" value="00644" />
+      <option name="presentableId" value="LOCAL-00644" />
+      <option name="project" value="LOCAL" />
+      <updated>1534088609879</updated>
+    </task>
+    <option name="localTasksCounter" value="645" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -881,7 +875,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.6461039" />
       <window_info anchor="right" id="Remote Host" order="3" weight="0.17803837" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4983871" visible="true" weight="0.25586355" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4983871" visible="true" weight="0.25586355" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" weight="0.32942432" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -1066,7 +1060,7 @@
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
           <ID>JavaScript-modules-diagram</ID>
-          <OriginalElement>$PROJECT_DIR$</OriginalElement>
+          <OriginalElement />
           <nodes />
           <notes />
           <edges />
@@ -1158,23 +1152,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1115">
-          <caret line="79" column="35" selection-start-line="79" selection-start-column="35" selection-end-line="79" selection-end-column="35" />
-          <folding>
-            <element signature="e#81#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SystemConstants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/RandomStressClient.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -1195,16 +1172,6 @@
           <caret line="3" selection-start-line="3" selection-end-line="3" />
           <folding>
             <element signature="e#81#91#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mongodb_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="e#81#101#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1231,13 +1198,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/BurstyStressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="880">
-          <caret line="40" column="27" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1289,16 +1249,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1650">
-          <caret line="87" column="27" selection-start-line="87" selection-start-column="24" selection-end-line="87" selection-end-column="27" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9284">
@@ -1332,23 +1282,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="110" column="29" lean-forward="true" selection-start-line="110" selection-start-column="29" selection-end-line="110" selection-end-column="29" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ManagementEngine/WorkersInfo.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="1" selection-start-column="1" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Worker/Worker1Init.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -1360,6 +1293,70 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ManagementEngine/WorkersInfo.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="53" column="12" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
+          <folding>
+            <element signature="e#81#95#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mongodb_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+          <folding>
+            <element signature="e#81#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1892">
+          <caret line="126" column="11" selection-start-line="126" selection-start-column="11" selection-end-line="126" selection-end-column="11" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SystemConstants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/BurstyStressClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+          <folding>
+            <element signature="e#81#95#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1335">
+          <caret line="187" column="19" lean-forward="true" selection-start-line="187" selection-start-column="19" selection-end-line="187" selection-end-column="19" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
