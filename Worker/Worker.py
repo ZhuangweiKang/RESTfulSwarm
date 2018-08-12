@@ -43,7 +43,6 @@ class Worker:
     def monitor(self, dis_address, frequency=0.1):
         client = docker.set_client()
         time.sleep(frequency)
-        hostname = utl.get_hostname()
         cs_messenger = Messenger(messenger_type='C/S', address=dis_address, port=SystemConstants.DISCOVERY_PORT)
         time_end = math.floor(time.time())
         deployed_tasks = []
@@ -61,7 +60,7 @@ class Worker:
                 for event in events:
                     if event['Actor']['Attributes']['name'] in self.storage.keys() and \
                             event['Actor']['Attributes']['name'] not in deployed_tasks:
-                        msg = hostname + ' ' + event['Actor']['Attributes']['name']
+                        msg = self.__hostname + ' ' + event['Actor']['Attributes']['name']
                         deployed_tasks.append(event['Actor']['Attributes']['name'])
                         msgs.append(msg)
 
