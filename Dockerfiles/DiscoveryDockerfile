@@ -8,6 +8,6 @@ RUN apt-get install -y libltdl7 python3-pip python3-dev python3-setuptools
 # install application dependencies
 RUN pip3 install py-cpuinfo pyzmq pymongo
 
-COPY RESTfulSwarmLM /home/RESTfulSwarmLM
+COPY RESTfulSwarm /home/RESTfulSwarm
 
 WORKDIR /home/RESTfulSwarmLM/Discovery
