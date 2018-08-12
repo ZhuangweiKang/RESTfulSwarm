@@ -110,7 +110,7 @@ class ManagementEngine(object):
         con.connect(hostname=address, username=usr, pkey=key)
         stdin, stdout, stderr = con.exec_command(cmd)
         print('Executed command %s on worker %s' % (cmd, address))
-        print(stdout.read(), stderr.read())
+        print('Execute result:', stdout.read(), stderr.read())
         con.close()
 
     def launch_workers(self):
