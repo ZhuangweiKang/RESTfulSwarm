@@ -142,7 +142,7 @@ def nc_gm():
           'tc qdisc add dev %s parent 1:1 handle 10: netem delay %dms %dms distribution %s \ ' \
           'tc qdisc add dev %s parent 1:2 handle 20: netem delay %dms %dms distribution %s \ ' \
           'tc filter add dev %s protocol ip parent 1:0 prio 2 u32 match ip sport %s flowid 1:1 \ ' \
-          'tc filter add dev %s protocol tcp parent 1:0 prio 1 u32 match tcp dport %s flowid 1:2 \ ' \
+          'tc filter add dev %s protocol tcp parent 1:0 prio 1 u32 match tcp dport %s flowid 1:2' \
           % (nw_device, nw_device, nw_device, nw_device, worker_delay, worker_variation, worker_distribution,
              nw_device, db_delay, db_variation, db_distribution, nw_device, worker_sport, nw_device, db_dport)
     ssh_exec_cmd(address=address, usr=usr, pkey=pkey, cmd=cmd)
