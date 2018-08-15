@@ -18,7 +18,7 @@ definitions:
       pkey:
         type: string
         description: private key
-      nw_device:
+      network_device:
         type: string
         description: network device
       dport:
