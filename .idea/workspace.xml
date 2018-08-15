@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/NetworkCenter/nc_gm.yml" beforeDir="false" afterPath="$PROJECT_DIR$/NetworkCenter/nc_gm.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,11 +37,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NetworkCenter.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NetworkCenter.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NetworkCenter/NetworkCenter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="792">
-              <caret line="161" column="53" lean-forward="true" selection-start-line="161" selection-start-column="53" selection-end-line="161" selection-end-column="53" />
+            <state relative-caret-position="372">
+              <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
               <folding>
                 <element signature="e#81#96#0" expanded="true" />
               </folding>
@@ -72,7 +72,7 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="nc_worker.yml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="nc_worker.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_worker.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
@@ -111,8 +111,8 @@
       <file leaf-file-name="nc_gm.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_gm.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+            <state relative-caret-position="437">
+              <caret line="45" column="21" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -234,8 +234,8 @@
         <option value="$PROJECT_DIR$/NetworkCenter/nc_fe.yml" />
         <option value="$PROJECT_DIR$/NetworkCenter/nc_jm.yml" />
         <option value="$PROJECT_DIR$/NetworkCenter/nc_del.yml" />
-        <option value="$PROJECT_DIR$/NetworkCenter/NetworkCenter.py" />
         <option value="$PROJECT_DIR$/NetworkCenter/nc_gm.yml" />
+        <option value="$PROJECT_DIR$/NetworkCenter/NetworkCenter.py" />
       </list>
     </option>
   </component>
@@ -248,7 +248,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="255" />
     <option name="y" value="225" />
     <option name="width" value="1035" />
@@ -430,27 +430,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528119423147</updated>
-    </task>
-    <task id="LOCAL-00605" summary="update">
-      <created>1533454248146</created>
-      <option name="number" value="00605" />
-      <option name="presentableId" value="LOCAL-00605" />
-      <option name="project" value="LOCAL" />
-      <updated>1533454248146</updated>
-    </task>
-    <task id="LOCAL-00606" summary="update">
-      <created>1533485023159</created>
-      <option name="number" value="00606" />
-      <option name="presentableId" value="LOCAL-00606" />
-      <option name="project" value="LOCAL" />
-      <updated>1533485023159</updated>
-    </task>
-    <task id="LOCAL-00607" summary="update">
-      <created>1533485889663</created>
-      <option name="number" value="00607" />
-      <option name="presentableId" value="LOCAL-00607" />
-      <option name="project" value="LOCAL" />
-      <updated>1533485889663</updated>
     </task>
     <task id="LOCAL-00608" summary="update">
       <created>1533568286379</created>
@@ -774,7 +753,28 @@
       <option name="project" value="LOCAL" />
       <updated>1534368516237</updated>
     </task>
-    <option name="localTasksCounter" value="654" />
+    <task id="LOCAL-00654" summary="add network center">
+      <created>1534368633023</created>
+      <option name="number" value="00654" />
+      <option name="presentableId" value="LOCAL-00654" />
+      <option name="project" value="LOCAL" />
+      <updated>1534368633023</updated>
+    </task>
+    <task id="LOCAL-00655" summary="add network center">
+      <created>1534368841132</created>
+      <option name="number" value="00655" />
+      <option name="presentableId" value="LOCAL-00655" />
+      <option name="project" value="LOCAL" />
+      <updated>1534368841132</updated>
+    </task>
+    <task id="LOCAL-00656" summary="add network center">
+      <created>1534370019732</created>
+      <option name="number" value="00656" />
+      <option name="presentableId" value="LOCAL-00656" />
+      <option name="project" value="LOCAL" />
+      <updated>1534370019732</updated>
+    </task>
+    <option name="localTasksCounter" value="657" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -819,7 +819,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="934" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="934" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32900432" />
@@ -1271,27 +1271,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_worker.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_gm.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+        <state relative-caret-position="437">
+          <caret line="45" column="21" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NetworkCenter/NetworkCenter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="161" column="53" lean-forward="true" selection-start-line="161" selection-start-column="53" selection-end-line="161" selection-end-column="53" />
+        <state relative-caret-position="372">
+          <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
           <folding>
             <element signature="e#81#96#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_worker.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
         </state>
       </provider>
     </entry>
