@@ -1,0 +1,61 @@
+---
+parameters:
+  - name: nc_worker
+    in: body
+    description: Apply network settings on worker
+    required: true
+    schema:
+      $ref: '#/definitions/Worker'
+
+definitions:
+  Worker:
+    type: object
+    properties:
+      address:
+        type: string
+      port:
+        type: string
+      usr:
+        type: string
+      pkey:
+        type: string
+        description: private key
+      nw_device:
+        type: string
+        description: network device
+
+      worker_sport:
+        type: string
+        description: worker source port
+      worker_delay:
+        type: int
+        description: worker delay
+      worker_variation:
+        type: int
+      worker_distribution:
+        type: string
+        enum: ['normal', 'pareto', 'paretonormal']
+
+      dis_dport:
+        type: string
+        description: discovery destination port
+      dis_delay:
+        type: int
+        description: delay for discovery
+      dis_variation:
+        type: int
+        description: variation for discovery
+      dis_distribution:
+        type: string
+        description: distribution for the delay of discovery
+        enum: ['normal', 'pareto', 'paretonormal']
+
+responses:
+  200:
+    description: OK
+    schema:
+      type: string
+  400:
+    description: Bad request
+    schema:
+      type: string

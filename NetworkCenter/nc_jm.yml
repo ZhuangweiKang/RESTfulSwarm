@@ -1,0 +1,61 @@
+---
+parameters:
+  - name: nc_jm
+    in: body
+    description: Apply network settings on job manager
+    required: true
+    schema:
+      $ref: '#/definitions/JM'
+
+definitions:
+  JM:
+    type: object
+    properties:
+      address:
+        type: string
+      port:
+        type: string
+      usr:
+        type: string
+      pkey:
+        type: string
+        description: private key
+      nw_device:
+        type: string
+        description: network device
+
+      gm_dport:
+        type: string
+        description: global manager destination port
+      gm_delay:
+        type: int
+        description: global manager delay
+      gm_variation:
+        type: int
+      gm_distribution:
+        type: string
+        enum: ['normal', 'pareto', 'paretonormal']
+
+      db_dport:
+        type: string
+        description: database destination port
+      db_delay:
+        type: int
+        description: delay for database
+      db_variation:
+        type: int
+        description: variation for database
+      dib_distribution:
+        type: string
+        description: distribution for the delay of database
+        enum: ['normal', 'pareto', 'paretonormal']
+
+responses:
+  200:
+    description: OK
+    schema:
+      type: string
+  400:
+    description: Bad request
+    schema:
+      type: string

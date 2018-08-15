@@ -1,0 +1,45 @@
+---
+parameters:
+  - name: nc_discovery
+    in: body
+    description: Apply network settings on discovery
+    required: true
+    schema:
+      $ref: '#/definitions/Discovery'
+
+definitions:
+  Discovery:
+    type: object
+    properties:
+      address:
+        type: string
+      port:
+        type: string
+      usr:
+        type: string
+      pkey:
+        type: string
+        description: private key
+      nw_device:
+        type: string
+        description: network device
+      dport:
+        type: string
+        description: destination port
+      delay:
+        type: int
+      variation:
+        type: int
+      distribution:
+        type: string
+        enum: ['normal', 'pareto', 'paretonormal']
+
+responses:
+  200:
+    description: OK
+    schema:
+      type: string
+  400:
+    description: Bad request
+    schema:
+      type: string
