@@ -37,7 +37,7 @@ def ssh_exec_cmd(address, usr, pkey, cmd):
     con.connect(hostname=address, username=usr, pkey=key)
     stdin, stdout, stderr = con.exec_command(cmd)
     print('Executed command %s on host %s' % (cmd, address))
-    print('Execution result:', stdout, stderr)
+    print('Execution result:', stdout.read(), stderr.read())
     con.close()
 
 
