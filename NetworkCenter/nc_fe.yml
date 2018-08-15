@@ -28,10 +28,10 @@ definitions:
         type: string
         description: job manager destination port
       jm_delay:
-        type: int
+        type: integer
         description: job manager delay
       jm_variation:
-        type: int
+        type: integer
       jm_distribution:
         type: string
         enum: ['normal', 'pareto', 'paretonormal']
@@ -40,10 +40,10 @@ definitions:
         type: string
         description: database destination port
       db_delay:
-        type: int
+        type: integer
         description: delay for database
       db_variation:
-        type: int
+        type: integer
         description: variation for database
       dib_distribution:
         type: string

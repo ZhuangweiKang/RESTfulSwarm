@@ -27,9 +27,9 @@ definitions:
         type: string
         description: destination port
       delay:
-        type: int
+        type: integer
       variation:
-        type: int
+        type: integer
       distribution:
         type: string
         enum: ['normal', 'pareto', 'paretonormal']

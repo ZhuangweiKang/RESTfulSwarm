@@ -28,10 +28,10 @@ definitions:
         type: string
         description: worker source port
       worker_delay:
-        type: int
+        type: integer
         description: worker delay
       worker_variation:
-        type: int
+        type: integer
       worker_distribution:
         type: string
         enum: ['normal', 'pareto', 'paretonormal']
@@ -40,10 +40,10 @@ definitions:
         type: string
         description: discovery destination port
       dis_delay:
-        type: int
+        type: integer
         description: delay for discovery
       dis_variation:
-        type: int
+        type: integer
         description: variation for discovery
       dis_distribution:
         type: string
