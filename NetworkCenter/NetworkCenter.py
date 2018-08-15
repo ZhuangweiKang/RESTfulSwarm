@@ -212,7 +212,7 @@ def nc_del():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-a', '--address', type=str, help='Network center IP address')
-    parser.add_argument('-p', '--p', type=str, help='Network center port number')
+    parser.add_argument('-p', '--port', type=str, help='Network center port number')
     args = parser.parse_args()
     address = args.address
     port = args.port
