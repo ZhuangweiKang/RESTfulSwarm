@@ -43,7 +43,7 @@ definitions:
       db_variation:
         type: integer
         description: variation for database
-      dib_distribution:
+      db_distribution:
         type: string
         description: distribution for the delay of database
         enum: ['normal', 'pareto', 'paretonormal']
