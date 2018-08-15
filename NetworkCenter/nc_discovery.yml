@@ -13,8 +13,6 @@ definitions:
     properties:
       address:
         type: string
-      port:
-        type: string
       usr:
         type: string
       pkey:
