@@ -2,10 +2,10 @@
 
 install_python_libs(){
     # install pip3
-    apt-get install -y python3-pip python3-dev python3-setuptools xmlto asciidoc
+    apt-get install -y python3-pip python3-dev python3-setuptools xmlto asciidoc build-essential libssl-dev libxml2-dev libxslt1-dev zlib1g-dev
 
     # install python packages for docker , flask, pyzmq, mongodb, cpuinfo, pandas
-    pip3 install flask docker pyzmq pymongo py-cpuinfo flasgger pandas requests
+    pip3 install flask docker pyzmq pymongo py-cpuinfo flasgger pandas requests paramiko
 }
 
 
