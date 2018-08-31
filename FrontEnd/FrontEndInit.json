@@ -1,5 +1,5 @@
 {
-  "fe_address": "10.52.0.124",
-  "db_address": "10.52.0.124",
-  "jm_address": "10.52.0.124"
+  "fe_address": "0.0.0.0",
+  "db_address": "127.0.0.1",
+  "jm_address": "127.0.0.1"
 }

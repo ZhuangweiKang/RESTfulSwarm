@@ -146,9 +146,9 @@ class ManagementEngine(object):
         print('Start launching system.')
         self.clear_master()
         time.sleep(1)
-        self.shutdown_workers()
+       # self.shutdown_workers()
         time.sleep(1)
-        self.reset_db()
+        #self.reset_db()
         time.sleep(1)
         fe_process = self.launch_fe()
         time.sleep(1)
@@ -158,17 +158,17 @@ class ManagementEngine(object):
         time.sleep(1)
         dc_process = self.launch_discovery()
         time.sleep(1)
-        self.launch_workers()
+        #self.launch_workers()
         time.sleep(1)
         session_id = str(int(time.time()))
-        client_process = self.launch_client(session_id=session_id)
+        client_process = "" #self.launch_client(session_id=session_id)
         return fe_process, jm_process, gm_process, dc_process, client_process
 
     def shutdown_system(self, fe_process, jm_process, gm_process, dc_process, client_process):
         print('Start shutting down system.')
-        self.reset_db()
+        #self.reset_db()
         print('Reset MongoDB.')
-        self.shutdown_process(client_process)
+        #self.shutdown_process(client_process)
         print('Reset client.')
         self.shutdown_process(fe_process)
         print('Reset FrontEnd.')
@@ -178,12 +178,12 @@ class ManagementEngine(object):
         print('Reset GlobalManager.')
         self.shutdown_process(dc_process)
         print('Reset Discovery.')
-        self.shutdown_workers()
+        #self.shutdown_workers()
         print('Reset Workers.')
         self.clear_master()
         print('Reset Master.')
         time.sleep(5)
-        self.reset_db()
+       # self.reset_db()
 
     def main(self):
         while True:
