@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="26b1070c-b779-4beb-b090-4dc76a7c3508" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Discovery/Discovery.py" beforeDir="false" afterPath="$PROJECT_DIR$/Discovery/Discovery.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependences.sh" beforeDir="false" afterPath="$PROJECT_DIR$/dependences.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,11 +44,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dependences.sh" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dependences.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dependences.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="118" column="22" lean-forward="true" selection-start-line="118" selection-start-column="22" selection-end-line="118" selection-end-column="22" />
+            <state relative-caret-position="426">
+              <caret line="79" column="4" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -74,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Discovery.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Discovery.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="107" column="37" selection-start-line="107" selection-start-column="37" selection-end-line="107" selection-end-column="37" />
+            <state relative-caret-position="1440">
+              <caret line="105" column="34" lean-forward="true" selection-start-line="105" selection-start-column="34" selection-end-line="105" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -124,8 +134,8 @@
         <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
         <option value="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" />
         <option value="$PROJECT_DIR$/Worker/Worker1Init.json" />
-        <option value="$PROJECT_DIR$/dependences.sh" />
         <option value="$PROJECT_DIR$/Discovery/Discovery.py" />
+        <option value="$PROJECT_DIR$/dependences.sh" />
       </list>
     </option>
   </component>
@@ -159,6 +169,11 @@
               <item name="RESTfulSwarm" type="b2602c69:ProjectViewProjectNode" />
               <item name="RESTfulSwarm" type="462c0819:PsiDirectoryNode" />
               <item name="Discovery" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RESTfulSwarm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RESTfulSwarm" type="462c0819:PsiDirectoryNode" />
+              <item name="ManagementEngine" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -202,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535748604950</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update">
+      <created>1535749773342</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1535749773342</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -216,7 +238,7 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
       <window_info anchor="bottom" id="Terminal" weight="0.32965517" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24959612" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="right" id="SciView" />
@@ -336,13 +358,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dependences.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="118" column="22" lean-forward="true" selection-start-line="118" selection-start-column="22" selection-end-line="118" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ManagementEngine/WorkersInfo.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -369,8 +384,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="107" column="37" selection-start-line="107" selection-start-column="37" selection-end-line="107" selection-end-column="37" />
+        <state relative-caret-position="1440">
+          <caret line="105" column="34" lean-forward="true" selection-start-line="105" selection-start-column="34" selection-end-line="105" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dependences.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="79" column="4" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="4" />
         </state>
       </provider>
     </entry>
