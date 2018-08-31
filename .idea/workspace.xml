@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="">
+    <list default="true" id="26b1070c-b779-4beb-b090-4dc76a7c3508" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/RESTfulSwarmLM (1).iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/RESTfulSwarmLM.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc (1).xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules (1).xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs (1).xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace (1).xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Architecture.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GlobalManager.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GraphBook.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobInfo.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobState.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Temp.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkersInfo.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkersResourceInfo.JPG" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -11,231 +31,71 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/RESTfulSwarmLM$Unittests_for_SchedulerUnitTest_TestScheduler_test_ffd.coverage" NAME="Unittests for SchedulerUnitTest.TestScheduler.test_ffd Coverage Results" MODIFIED="1533327229717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Scheduler" />
-    <SUITE FILE_PATH="coverage/RESTfulSwarmLM$Unittests_for_SchedulerUnitTest_TestScheduler_test_bf.coverage" NAME="Unittests for SchedulerUnitTest.TestScheduler.test_bf Coverage Results" MODIFIED="1533324190439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Scheduler" />
-    <SUITE FILE_PATH="coverage/RESTfulSwarmLM$test.coverage" NAME="test Coverage Results" MODIFIED="1530996773684" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FrontEnd" />
-    <SUITE FILE_PATH="coverage/RESTfulSwarmLM$Unittests_for_SchedulerUnitTest_TestScheduler_test_bfd.coverage" NAME="Unittests for SchedulerUnitTest.TestScheduler.test_bfd Coverage Results" MODIFIED="1533326069322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Scheduler" />
-    <SUITE FILE_PATH="coverage/RESTfulSwarmLM$Unittests_for_SchedulerUnitTest_TestScheduler.coverage" NAME="Unittests for SchedulerUnitTest.TestScheduler Coverage Results" MODIFIED="1533326603746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Scheduler" />
-  </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand />
-    <select />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="RESTfulSwarm" />
-  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NetworkCenter.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/NetworkCenter/NetworkCenter.py">
+    <leaf>
+      <file leaf-file-name="DiscoveryInit.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Discovery/DiscoveryInit.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
-              <folding>
-                <element signature="e#81#96#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="15">
+              <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nc_client.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_client.yml">
+      <file leaf-file-name="JobManagerInit.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/JobManager/JobManagerInit.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nc_discovery.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_discovery.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+            <state relative-caret-position="30">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="FrontEndInit.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEndInit.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="nc_worker.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_worker.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+            <state relative-caret-position="30">
+              <caret line="2" column="28" lean-forward="true" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nc_fe.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_fe.yml">
+      <file leaf-file-name="GlobalManagerInit.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManagerInit.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+            <state>
+              <caret column="1" lean-forward="true" selection-start-column="1" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nc_jm.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_jm.yml">
+      <file leaf-file-name="dependences.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dependences.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+            <state relative-caret-position="490">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SystemConstants.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SystemConstants.py">
+      <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nc_gm.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_gm.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="45" column="21" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nc_del.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_del.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+            <state relative-caret-position="-203">
+              <caret line="37" column="49" lean-forward="true" selection-start-line="37" selection-start-column="49" selection-end-line="37" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Jupyter Notebook" />
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>utl</find>
-      <find>FE</find>
-      <find>http</find>
-      <find>recei</find>
-      <find>messenger</find>
-      <find>agent</find>
-      <find>__messenger</find>
-      <find>init</find>
-      <find>print</find>
-      <find>********</find>
-      <find>process</find>
-      <find>`</find>
-      <find>*******</find>
-      <find>target</find>
-      <find>time_interval</find>
-      <find>threading</find>
-      <find>receive</find>
-      <find>ex</find>
-      <find />
-      <find>shutdown</find>
-      <find>map</find>
-      <find>messenger.send</find>
-      <find>except</find>
-      <find>traceback.prin</find>
-      <find>traceback</find>
-      <find>print(</find>
-      <find>print(requ</find>
-      <find>request_new_job</find>
-      <find>nfs</find>
-      <find>int</find>
-    </findStrings>
-    <dirStrings>
-      <dir />
-    </dirStrings>
-  </component>
   <component name="Git.Settings">
-    <option name="PREVIOUS_COMMIT_AUTHORS">
-      <list>
-        <option value="ZhuangweiKang &lt;zkty9@mail.missouri.edu&gt;" />
-      </list>
-    </option>
-    <option name="UPDATE_TYPE" value="REBASE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/LiveMigration.py" />
-        <option value="$PROJECT_DIR$/JobManager/__init__.py" />
-        <option value="$PROJECT_DIR$/dependences.sh" />
-        <option value="$PROJECT_DIR$/Scheduler/NodeScheduler.py" />
-        <option value="$PROJECT_DIR$/TC_Commands.sh" />
-        <option value="$PROJECT_DIR$/Messager.py" />
-        <option value="$PROJECT_DIR$/zmq_api.py" />
-        <option value="&lt;cbf4250a-7c91-4bda-81d4-38b8f38d73cb&gt;/FrontEnd/FrontEnd.py" />
-        <option value="$PROJECT_DIR$/TestSample/PublishData.py" />
-        <option value="$PROJECT_DIR$/TestSample/SubscribeData.py" />
-        <option value="$PROJECT_DIR$/SystemConstants.py" />
-        <option value="$PROJECT_DIR$/Scheduler/BestFitDecreasingScheduler.py" />
-        <option value="$PROJECT_DIR$/Discovery/Discovery.py" />
-        <option value="$PROJECT_DIR$/Scheduler/BestFitScheduler.py" />
-        <option value="$PROJECT_DIR$/Scheduler/BinPackingScheduler.py" />
-        <option value="$PROJECT_DIR$/Scheduler/FirstFitScheduler.py" />
-        <option value="$PROJECT_DIR$/mongod.conf" />
-        <option value="$PROJECT_DIR$/Messenger.py" />
-        <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
-        <option value="$PROJECT_DIR$/Client/IncrementalStressClient.py" />
-        <option value="$PROJECT_DIR$/Client/RandomStressClient.py" />
-        <option value="$PROJECT_DIR$/Client/SteadyStressClient.py" />
-        <option value="$PROJECT_DIR$/Client/BurstyStressClient.py" />
-        <option value="$PROJECT_DIR$/live_migration.py" />
-        <option value="$PROJECT_DIR$/mongodb_api.py" />
-        <option value="$PROJECT_DIR$/utl.py" />
-        <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
-        <option value="$PROJECT_DIR$/Scheduler/Scheduler.py" />
-        <option value="$PROJECT_DIR$/Client/StressClient.py" />
-        <option value="$PROJECT_DIR$/docker_api.py" />
-        <option value="$PROJECT_DIR$/Worker/TerminateWorker.py" />
-        <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
-        <option value="$PROJECT_DIR$/Worker/Worker.py" />
-        <option value="$PROJECT_DIR$/Worker/Worker2Init.json" />
-        <option value="$PROJECT_DIR$/ManagementEngine/WorkersInfo.json" />
-        <option value="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" />
-        <option value="$PROJECT_DIR$/DockerFiles/ClientDockerfile" />
-        <option value="$PROJECT_DIR$/DockerFiles/DiscoveryDockerfile" />
-        <option value="$PROJECT_DIR$/DockerFiles/FrontEndDockerfile" />
-        <option value="$PROJECT_DIR$/DockerFiles/GlobalManagerDockerfile" />
-        <option value="$PROJECT_DIR$/DockerFiles/JobManagerDockerfile" />
-        <option value="$PROJECT_DIR$/NetworkCenter.py" />
-        <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.yml" />
-        <option value="$PROJECT_DIR$/NetworkCenter/nc_client.yml" />
-        <option value="$PROJECT_DIR$/NetworkCenter/nc_discovery.yml" />
-        <option value="$PROJECT_DIR$/NetworkCenter/nc_worker.yml" />
-        <option value="$PROJECT_DIR$/NetworkCenter/nc_fe.yml" />
-        <option value="$PROJECT_DIR$/NetworkCenter/nc_jm.yml" />
-        <option value="$PROJECT_DIR$/NetworkCenter/nc_del.yml" />
-        <option value="$PROJECT_DIR$/NetworkCenter/nc_gm.yml" />
-        <option value="$PROJECT_DIR$/NetworkCenter/NetworkCenter.py" />
+        <option value="$PROJECT_DIR$/Discovery/DiscoveryInit.json" />
       </list>
     </option>
   </component>
@@ -248,21 +108,16 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="255" />
-    <option name="y" value="225" />
-    <option name="width" value="1035" />
-    <option name="height" value="880" />
-  </component>
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
-      <showMembers ProjectPane="true" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -273,47 +128,19 @@
             <path>
               <item name="RESTfulSwarm" type="b2602c69:ProjectViewProjectNode" />
               <item name="RESTfulSwarm" type="462c0819:PsiDirectoryNode" />
-              <item name="FrontEnd" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RESTfulSwarm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RESTfulSwarm" type="462c0819:PsiDirectoryNode" />
               <item name="ManagementEngine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RESTfulSwarm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RESTfulSwarm" type="462c0819:PsiDirectoryNode" />
-              <item name="NetworkCenter" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
-    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MongoDB" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
-  </component>
-  <component name="RecentsManager">
-    <key name="OPEN_URL_DIALOG">
-      <recent name="http://129.114.108.18:/home/cc/RESTfulSwarm" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\kangz1\Google Drive\Summer\RESTfulSwarm\NetworkCenter" />
-      <recent name="C:\Users\kangz1\Google Drive\Summer\RESTfulSwarmLM" />
-      <recent name="C:\Users\kangz1\Google Drive\Summer\RESTfulSwarmLM\Dependences" />
-      <recent name="C:\Users\kangz1\Google Drive\Summer\RESTfulSwarmLM\Client" />
-      <recent name="C:\Users\kangz1\Google Drive\Summer\RESTfulSwarmLM\Worker" />
-    </key>
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -327,550 +154,45 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for SchedulerUnitTest.TestScheduler.test_ffd">
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="RESTfulSwarmLM" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/FrontEnd" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/FrontEnd/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="Unittests for SchedulerUnitTest.TestScheduler" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="RESTfulSwarmLM" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Scheduler" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;SchedulerUnitTest.TestScheduler&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-    </configuration>
-    <configuration name="Unittests for SchedulerUnitTest.TestScheduler.test_bf" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="RESTfulSwarmLM" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Scheduler" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;SchedulerUnitTest.TestScheduler.test_bf&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-    </configuration>
-    <configuration name="Unittests for SchedulerUnitTest.TestScheduler.test_bfd" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="RESTfulSwarmLM" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Scheduler" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;SchedulerUnitTest.TestScheduler.test_bfd&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-    </configuration>
-    <configuration name="Unittests for SchedulerUnitTest.TestScheduler.test_ffd" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="RESTfulSwarmLM" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Scheduler" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;SchedulerUnitTest.TestScheduler.test_ffd&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-    </configuration>
-    <list>
-      <item itemvalue="Python.test" />
-      <item itemvalue="Python tests.Unittests for SchedulerUnitTest.TestScheduler.test_bf" />
-      <item itemvalue="Python tests.Unittests for SchedulerUnitTest.TestScheduler" />
-      <item itemvalue="Python tests.Unittests for SchedulerUnitTest.TestScheduler.test_bfd" />
-      <item itemvalue="Python tests.Unittests for SchedulerUnitTest.TestScheduler.test_ffd" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python tests.Unittests for SchedulerUnitTest.TestScheduler.test_ffd" />
-        <item itemvalue="Python tests.Unittests for SchedulerUnitTest.TestScheduler" />
-        <item itemvalue="Python tests.Unittests for SchedulerUnitTest.TestScheduler.test_bfd" />
-        <item itemvalue="Python tests.Unittests for SchedulerUnitTest.TestScheduler.test_bf" />
-        <item itemvalue="Python.test" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e9e0762d-f996-43d0-86ef-54a25fe18868" name="Default" comment="" />
-      <created>1528119423147</created>
+      <changelist id="26b1070c-b779-4beb-b090-4dc76a7c3508" name="Default" comment="" />
+      <created>1535744537820</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1528119423147</updated>
+      <updated>1535744537820</updated>
     </task>
-    <task id="LOCAL-00608" summary="update">
-      <created>1533568286379</created>
-      <option name="number" value="00608" />
-      <option name="presentableId" value="LOCAL-00608" />
-      <option name="project" value="LOCAL" />
-      <updated>1533568286379</updated>
-    </task>
-    <task id="LOCAL-00609" summary="update">
-      <created>1533568382957</created>
-      <option name="number" value="00609" />
-      <option name="presentableId" value="LOCAL-00609" />
-      <option name="project" value="LOCAL" />
-      <updated>1533568382957</updated>
-    </task>
-    <task id="LOCAL-00610" summary="update">
-      <created>1533568947513</created>
-      <option name="number" value="00610" />
-      <option name="presentableId" value="LOCAL-00610" />
-      <option name="project" value="LOCAL" />
-      <updated>1533568947513</updated>
-    </task>
-    <task id="LOCAL-00611" summary="update">
-      <created>1533569311974</created>
-      <option name="number" value="00611" />
-      <option name="presentableId" value="LOCAL-00611" />
-      <option name="project" value="LOCAL" />
-      <updated>1533569311974</updated>
-    </task>
-    <task id="LOCAL-00612" summary="update">
-      <created>1533569604860</created>
-      <option name="number" value="00612" />
-      <option name="presentableId" value="LOCAL-00612" />
-      <option name="project" value="LOCAL" />
-      <updated>1533569604860</updated>
-    </task>
-    <task id="LOCAL-00613" summary="update">
-      <created>1533570589709</created>
-      <option name="number" value="00613" />
-      <option name="presentableId" value="LOCAL-00613" />
-      <option name="project" value="LOCAL" />
-      <updated>1533570589709</updated>
-    </task>
-    <task id="LOCAL-00614" summary="update">
-      <created>1533574495515</created>
-      <option name="number" value="00614" />
-      <option name="presentableId" value="LOCAL-00614" />
-      <option name="project" value="LOCAL" />
-      <updated>1533574495515</updated>
-    </task>
-    <task id="LOCAL-00615" summary="update">
-      <created>1533574840486</created>
-      <option name="number" value="00615" />
-      <option name="presentableId" value="LOCAL-00615" />
-      <option name="project" value="LOCAL" />
-      <updated>1533574840486</updated>
-    </task>
-    <task id="LOCAL-00616" summary="update">
-      <created>1533578640846</created>
-      <option name="number" value="00616" />
-      <option name="presentableId" value="LOCAL-00616" />
-      <option name="project" value="LOCAL" />
-      <updated>1533578640846</updated>
-    </task>
-    <task id="LOCAL-00617" summary="update">
-      <created>1533579245463</created>
-      <option name="number" value="00617" />
-      <option name="presentableId" value="LOCAL-00617" />
-      <option name="project" value="LOCAL" />
-      <updated>1533579245463</updated>
-    </task>
-    <task id="LOCAL-00618" summary="update">
-      <created>1533579371920</created>
-      <option name="number" value="00618" />
-      <option name="presentableId" value="LOCAL-00618" />
-      <option name="project" value="LOCAL" />
-      <updated>1533579371921</updated>
-    </task>
-    <task id="LOCAL-00619" summary="update">
-      <created>1533579492741</created>
-      <option name="number" value="00619" />
-      <option name="presentableId" value="LOCAL-00619" />
-      <option name="project" value="LOCAL" />
-      <updated>1533579492741</updated>
-    </task>
-    <task id="LOCAL-00620" summary="update">
-      <created>1533579854668</created>
-      <option name="number" value="00620" />
-      <option name="presentableId" value="LOCAL-00620" />
-      <option name="project" value="LOCAL" />
-      <updated>1533579854668</updated>
-    </task>
-    <task id="LOCAL-00621" summary="update">
-      <created>1533580152046</created>
-      <option name="number" value="00621" />
-      <option name="presentableId" value="LOCAL-00621" />
-      <option name="project" value="LOCAL" />
-      <updated>1533580152046</updated>
-    </task>
-    <task id="LOCAL-00622" summary="update">
-      <created>1533580402522</created>
-      <option name="number" value="00622" />
-      <option name="presentableId" value="LOCAL-00622" />
-      <option name="project" value="LOCAL" />
-      <updated>1533580402522</updated>
-    </task>
-    <task id="LOCAL-00623" summary="update">
-      <created>1533581200131</created>
-      <option name="number" value="00623" />
-      <option name="presentableId" value="LOCAL-00623" />
-      <option name="project" value="LOCAL" />
-      <updated>1533581200131</updated>
-    </task>
-    <task id="LOCAL-00624" summary="update">
-      <created>1533582770103</created>
-      <option name="number" value="00624" />
-      <option name="presentableId" value="LOCAL-00624" />
-      <option name="project" value="LOCAL" />
-      <updated>1533582770103</updated>
-    </task>
-    <task id="LOCAL-00625" summary="update">
-      <created>1533585344184</created>
-      <option name="number" value="00625" />
-      <option name="presentableId" value="LOCAL-00625" />
-      <option name="project" value="LOCAL" />
-      <updated>1533585344184</updated>
-    </task>
-    <task id="LOCAL-00626" summary="update">
-      <created>1533588013812</created>
-      <option name="number" value="00626" />
-      <option name="presentableId" value="LOCAL-00626" />
-      <option name="project" value="LOCAL" />
-      <updated>1533588013812</updated>
-    </task>
-    <task id="LOCAL-00627" summary="update">
-      <created>1533588196767</created>
-      <option name="number" value="00627" />
-      <option name="presentableId" value="LOCAL-00627" />
-      <option name="project" value="LOCAL" />
-      <updated>1533588196767</updated>
-    </task>
-    <task id="LOCAL-00628" summary="update README">
-      <created>1533594684516</created>
-      <option name="number" value="00628" />
-      <option name="presentableId" value="LOCAL-00628" />
-      <option name="project" value="LOCAL" />
-      <updated>1533594684516</updated>
-    </task>
-    <task id="LOCAL-00629" summary="update dependences.sh">
-      <created>1533655668141</created>
-      <option name="number" value="00629" />
-      <option name="presentableId" value="LOCAL-00629" />
-      <option name="project" value="LOCAL" />
-      <updated>1533655668142</updated>
-    </task>
-    <task id="LOCAL-00630" summary="update dependences.sh">
-      <created>1533657425326</created>
-      <option name="number" value="00630" />
-      <option name="presentableId" value="LOCAL-00630" />
-      <option name="project" value="LOCAL" />
-      <updated>1533657425326</updated>
-    </task>
-    <task id="LOCAL-00631" summary="update dependences.sh">
-      <created>1533657482269</created>
-      <option name="number" value="00631" />
-      <option name="presentableId" value="LOCAL-00631" />
-      <option name="project" value="LOCAL" />
-      <updated>1533657482269</updated>
-    </task>
-    <task id="LOCAL-00632" summary="update dependences.sh">
-      <created>1533667043055</created>
-      <option name="number" value="00632" />
-      <option name="presentableId" value="LOCAL-00632" />
-      <option name="project" value="LOCAL" />
-      <updated>1533667043055</updated>
-    </task>
-    <task id="LOCAL-00633" summary="update">
-      <created>1533676554052</created>
-      <option name="number" value="00633" />
-      <option name="presentableId" value="LOCAL-00633" />
-      <option name="project" value="LOCAL" />
-      <updated>1533676554052</updated>
-    </task>
-    <task id="LOCAL-00634" summary="update">
-      <created>1533677291583</created>
-      <option name="number" value="00634" />
-      <option name="presentableId" value="LOCAL-00634" />
-      <option name="project" value="LOCAL" />
-      <updated>1533677291583</updated>
-    </task>
-    <task id="LOCAL-00635" summary="Refactor code first time">
-      <created>1533764194344</created>
-      <option name="number" value="00635" />
-      <option name="presentableId" value="LOCAL-00635" />
-      <option name="project" value="LOCAL" />
-      <updated>1533764194345</updated>
-    </task>
-    <task id="LOCAL-00636" summary="Refactor code first time">
-      <created>1533766569305</created>
-      <option name="number" value="00636" />
-      <option name="presentableId" value="LOCAL-00636" />
-      <option name="project" value="LOCAL" />
-      <updated>1533766569306</updated>
-    </task>
-    <task id="LOCAL-00637" summary="Refactor code first time">
-      <created>1533766872345</created>
-      <option name="number" value="00637" />
-      <option name="presentableId" value="LOCAL-00637" />
-      <option name="project" value="LOCAL" />
-      <updated>1533766872345</updated>
-    </task>
-    <task id="LOCAL-00638" summary="Refactor code second time">
-      <created>1533908807588</created>
-      <option name="number" value="00638" />
-      <option name="presentableId" value="LOCAL-00638" />
-      <option name="project" value="LOCAL" />
-      <updated>1533908807588</updated>
-    </task>
-    <task id="LOCAL-00639" summary="Refactor code second time">
-      <created>1534049789561</created>
-      <option name="number" value="00639" />
-      <option name="presentableId" value="LOCAL-00639" />
-      <option name="project" value="LOCAL" />
-      <updated>1534049789562</updated>
-    </task>
-    <task id="LOCAL-00640" summary="Refactor code second time">
-      <created>1534087615772</created>
-      <option name="number" value="00640" />
-      <option name="presentableId" value="LOCAL-00640" />
-      <option name="project" value="LOCAL" />
-      <updated>1534087615782</updated>
-    </task>
-    <task id="LOCAL-00641" summary="Refactor code second time">
-      <created>1534087914463</created>
-      <option name="number" value="00641" />
-      <option name="presentableId" value="LOCAL-00641" />
-      <option name="project" value="LOCAL" />
-      <updated>1534087914463</updated>
-    </task>
-    <task id="LOCAL-00642" summary="Refactor code second time">
-      <created>1534088113725</created>
-      <option name="number" value="00642" />
-      <option name="presentableId" value="LOCAL-00642" />
-      <option name="project" value="LOCAL" />
-      <updated>1534088113725</updated>
-    </task>
-    <task id="LOCAL-00643" summary="Refactor code second time">
-      <created>1534088248166</created>
-      <option name="number" value="00643" />
-      <option name="presentableId" value="LOCAL-00643" />
-      <option name="project" value="LOCAL" />
-      <updated>1534088248166</updated>
-    </task>
-    <task id="LOCAL-00644" summary="Refactor code second time">
-      <created>1534088609879</created>
-      <option name="number" value="00644" />
-      <option name="presentableId" value="LOCAL-00644" />
-      <option name="project" value="LOCAL" />
-      <updated>1534088609879</updated>
-    </task>
-    <task id="LOCAL-00645" summary="Refactor code second time">
-      <created>1534090991963</created>
-      <option name="number" value="00645" />
-      <option name="presentableId" value="LOCAL-00645" />
-      <option name="project" value="LOCAL" />
-      <updated>1534090991963</updated>
-    </task>
-    <task id="LOCAL-00646" summary="Refactor code second time">
-      <created>1534091216544</created>
-      <option name="number" value="00646" />
-      <option name="presentableId" value="LOCAL-00646" />
-      <option name="project" value="LOCAL" />
-      <updated>1534091216544</updated>
-    </task>
-    <task id="LOCAL-00647" summary="add network center">
-      <created>1534363114143</created>
-      <option name="number" value="00647" />
-      <option name="presentableId" value="LOCAL-00647" />
-      <option name="project" value="LOCAL" />
-      <updated>1534363114143</updated>
-    </task>
-    <task id="LOCAL-00648" summary="add network center">
-      <created>1534364227563</created>
-      <option name="number" value="00648" />
-      <option name="presentableId" value="LOCAL-00648" />
-      <option name="project" value="LOCAL" />
-      <updated>1534364227563</updated>
-    </task>
-    <task id="LOCAL-00649" summary="add network center">
-      <created>1534364640950</created>
-      <option name="number" value="00649" />
-      <option name="presentableId" value="LOCAL-00649" />
-      <option name="project" value="LOCAL" />
-      <updated>1534364640950</updated>
-    </task>
-    <task id="LOCAL-00650" summary="add network center">
-      <created>1534367940553</created>
-      <option name="number" value="00650" />
-      <option name="presentableId" value="LOCAL-00650" />
-      <option name="project" value="LOCAL" />
-      <updated>1534367940553</updated>
-    </task>
-    <task id="LOCAL-00651" summary="add network center">
-      <created>1534368208165</created>
-      <option name="number" value="00651" />
-      <option name="presentableId" value="LOCAL-00651" />
-      <option name="project" value="LOCAL" />
-      <updated>1534368208165</updated>
-    </task>
-    <task id="LOCAL-00652" summary="add network center">
-      <created>1534368355390</created>
-      <option name="number" value="00652" />
-      <option name="presentableId" value="LOCAL-00652" />
-      <option name="project" value="LOCAL" />
-      <updated>1534368355390</updated>
-    </task>
-    <task id="LOCAL-00653" summary="add network center">
-      <created>1534368516237</created>
-      <option name="number" value="00653" />
-      <option name="presentableId" value="LOCAL-00653" />
-      <option name="project" value="LOCAL" />
-      <updated>1534368516237</updated>
-    </task>
-    <task id="LOCAL-00654" summary="add network center">
-      <created>1534368633023</created>
-      <option name="number" value="00654" />
-      <option name="presentableId" value="LOCAL-00654" />
-      <option name="project" value="LOCAL" />
-      <updated>1534368633023</updated>
-    </task>
-    <task id="LOCAL-00655" summary="add network center">
-      <created>1534368841132</created>
-      <option name="number" value="00655" />
-      <option name="presentableId" value="LOCAL-00655" />
-      <option name="project" value="LOCAL" />
-      <updated>1534368841132</updated>
-    </task>
-    <task id="LOCAL-00656" summary="add network center">
-      <created>1534370019732</created>
-      <option name="number" value="00656" />
-      <option name="presentableId" value="LOCAL-00656" />
-      <option name="project" value="LOCAL" />
-      <updated>1534370019732</updated>
-    </task>
-    <option name="localTasksCounter" value="657" />
     <servers />
   </component>
-  <component name="TestHistory">
-    <history-entry file="Unittests_for_SchedulerUnitTest_TestScheduler - 2018.08.03 at 15h 03m 03s.xml">
-      <configuration name="Unittests for SchedulerUnitTest.TestScheduler" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_SchedulerUnitTest_TestScheduler - 2018.08.03 at 15h 03m 25s.xml">
-      <configuration name="Unittests for SchedulerUnitTest.TestScheduler" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_SchedulerUnitTest_TestScheduler_test_ffd - 2018.08.03 at 15h 09m 33s.xml">
-      <configuration name="Unittests for SchedulerUnitTest.TestScheduler.test_ffd" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_SchedulerUnitTest_TestScheduler_test_ffd - 2018.08.03 at 15h 10m 36s.xml">
-      <configuration name="Unittests for SchedulerUnitTest.TestScheduler.test_ffd" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_SchedulerUnitTest_TestScheduler_test_ffd - 2018.08.03 at 15h 10m 49s.xml">
-      <configuration name="Unittests for SchedulerUnitTest.TestScheduler.test_ffd" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_SchedulerUnitTest_TestScheduler_test_ffd - 2018.08.03 at 15h 12m 17s.xml">
-      <configuration name="Unittests for SchedulerUnitTest.TestScheduler.test_ffd" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_SchedulerUnitTest_TestScheduler_test_ffd - 2018.08.03 at 15h 12m 35s.xml">
-      <configuration name="Unittests for SchedulerUnitTest.TestScheduler.test_ffd" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_SchedulerUnitTest_TestScheduler_test_ffd - 2018.08.03 at 15h 12m 50s.xml">
-      <configuration name="Unittests for SchedulerUnitTest.TestScheduler.test_ffd" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_SchedulerUnitTest_TestScheduler_test_ffd - 2018.08.03 at 15h 13m 26s.xml">
-      <configuration name="Unittests for SchedulerUnitTest.TestScheduler.test_ffd" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_SchedulerUnitTest_TestScheduler_test_ffd - 2018.08.03 at 15h 13m 52s.xml">
-      <configuration name="Unittests for SchedulerUnitTest.TestScheduler.test_ffd" configurationId="tests" />
-    </history-entry>
-  </component>
-  <component name="TodoView" selected-index="2">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="934" extended-state="7" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32900432" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50067115" side_tool="true" weight="0.32330826" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3283208" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.6461039" />
-      <window_info anchor="right" id="Remote Host" order="3" weight="0.17803837" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4983871" visible="true" weight="0.2590604" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="4" weight="0.32942432" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.5162907" />
-      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="SciView" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" sideWeight="0.5016129" side_tool="true" weight="0.2510661" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="File Transfer" order="13" weight="0.32900432" />
     </layout>
-    <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3283208" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" id="Remote Host" order="3" weight="0.17803837" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4983871" visible="true" weight="0.25973153" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32900432" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32957393" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.5162907" />
-      <window_info anchor="right" id="Database" order="5" weight="0.32942432" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.6461039" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50067115" side_tool="true" weight="0.32330826" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="SciView" order="4" />
-      <window_info id="Favorites" order="2" sideWeight="0.5016129" side_tool="true" weight="0.2510661" />
-      <window_info anchor="bottom" id="File Transfer" order="13" weight="0.32900432" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32957393" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -878,420 +200,83 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update FrontEnd" />
-    <MESSAGE value="Add Swagger" />
-    <MESSAGE value="Add Discovery block &amp; Task Monitor on worker node." />
-    <MESSAGE value="Add Node init json file, prepare to test module." />
-    <MESSAGE value="Update Discovery" />
-    <MESSAGE value="Add FirstFit scheduling algorithm" />
-    <MESSAGE value="update job status" />
-    <MESSAGE value="update args for testing WorkersResourceInfo collection" />
-    <MESSAGE value="Add log for StressClient" />
-    <MESSAGE value="Add node list and cpuset list in preprocess_job()" />
-    <MESSAGE value="Encapsulate bin packing scheduling feature into BinPackingScheduler" />
-    <MESSAGE value="Update NodeScheduler(refactor job_detail instead of reading DB)" />
-    <MESSAGE value="Update sample task image to a python sleeper image,&#10;sleep time in the range of (30, 60) seconds." />
-    <MESSAGE value="Add NFS sharing directory" />
-    <MESSAGE value="debug worker" />
-    <MESSAGE value="Update" />
-    <MESSAGE value="debug network prune" />
-    <MESSAGE value="upgrade docker version from 17.03 to 17.02" />
-    <MESSAGE value="upgrade" />
-    <MESSAGE value="update README" />
-    <MESSAGE value="update dependences.sh" />
-    <MESSAGE value="update" />
-    <MESSAGE value="Refactor code first time" />
-    <MESSAGE value="Refactor code second time" />
-    <MESSAGE value="add network center" />
-    <option name="LAST_COMMIT_MESSAGE" value="add network center" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <default-breakpoints>
-        <breakpoint type="python-exception">
-          <properties notifyOnTerminate="true" exception="BaseException">
-            <option name="notifyOnTerminate" value="true" />
-          </properties>
-        </breakpoint>
-      </default-breakpoints>
-      <option name="time" value="17" />
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Discovery/DiscoveryInit.json">
+    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="29" lean-forward="true" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
+        <state relative-caret-position="202">
+          <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManagerInit.json">
+    <entry file="file://$PROJECT_DIR$/Scheduler/SchedulerUnitTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/paramiko/client.py" />
-    <entry file="file://$PROJECT_DIR$/Client/StressClientInfo.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scheduler/BestFitDecreasingScheduler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scheduler/NodeScheduler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="24" column="28" lean-forward="true" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scheduler/BestFitScheduler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="52" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="15" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scheduler/FirstFitScheduler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="52" selection-start-line="15" selection-start-column="52" selection-end-line="15" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mongod.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="40" lean-forward="true" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Messenger.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/RandomStressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/SteadyStressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/live_migration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="e#81#91#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="98" column="16" selection-start-line="98" selection-start-column="16" selection-end-line="98" selection-end-column="16" />
-          <folding>
-            <element signature="e#82#96#0" expanded="true" />
-            <element signature="e#919#4295#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scheduler/Scheduler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/IncrementalStressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
-          <folding>
-            <element signature="e#81#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/StressClient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="117" column="26" lean-forward="true" selection-start-line="117" selection-start-column="26" selection-end-line="117" selection-end-column="26" />
-          <folding>
-            <element signature="e#81#97#0" expanded="true" />
-            <element signature="e#289#1522#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scheduler/FirstFitDecreasingScheduler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Scheduler/BinPackingScheduler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="41" column="43" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docker_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2134">
-          <caret line="101" selection-start-line="101" selection-end-line="101" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9284">
-          <caret line="428" column="31" selection-start-line="428" selection-start-column="31" selection-end-line="428" selection-end-column="31" />
-          <folding>
-            <element signature="e#81#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/TerminateWorker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="243" column="37" selection-start-line="243" selection-start-column="27" selection-end-line="243" selection-end-column="37" />
-          <folding>
-            <element signature="e#81#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/Worker1Init.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/Worker2Init.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ManagementEngine/WorkersInfo.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DockerFiles/ClientDockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DockerFiles/DiscoveryDockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="36" lean-forward="true" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DockerFiles/FrontEndDockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="36" lean-forward="true" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DockerFiles/GlobalManagerDockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DockerFiles/JobManagerDockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="36" lean-forward="true" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+        <state relative-caret-position="-1614">
+          <caret line="13" column="77" lean-forward="true" selection-start-line="13" selection-start-column="77" selection-end-line="13" selection-end-column="77" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mongodb_api.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+        <state relative-caret-position="135">
+          <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
           <folding>
             <element signature="e#81#101#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+    <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="126" column="11" selection-start-line="126" selection-start-column="11" selection-end-line="126" selection-end-column="11" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="355">
+          <caret line="104" column="32" selection-start-line="104" selection-start-column="19" selection-end-line="104" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/BurstyStressClient.py">
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ManagementEngine/DBinfo.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Discovery/DiscoveryInit.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
-          <folding>
-            <element signature="e#81#95#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="15">
+          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JobManager/JobManagerInit.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEndInit.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="28" lean-forward="true" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManagerInit.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1" lean-forward="true" selection-start-column="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dependences.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_client">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
-          <caret line="118" column="28" lean-forward="true" selection-start-line="118" selection-start-column="28" selection-end-line="118" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="86" column="21" selection-start-line="86" selection-start-column="17" selection-end-line="86" selection-end-column="21" />
-          <folding>
-            <element signature="e#81#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_fe.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_jm.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_del.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_client.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_discovery.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEndInit.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SystemConstants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_worker.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NetworkCenter/nc_gm.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="45" column="21" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NetworkCenter/NetworkCenter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
-          <folding>
-            <element signature="e#81#96#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-203">
+          <caret line="37" column="49" lean-forward="true" selection-start-line="37" selection-start-column="49" selection-end-line="37" selection-end-column="49" />
         </state>
       </provider>
     </entry>
