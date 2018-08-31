@@ -16,8 +16,8 @@ import utl
 
 
 class Discovery(object):
-    def __init__(self, db_address):
-        _db_client = mg.get_client(address=db_address, port=SystemConstants.MONGODB_PORT)
+    def __init__(self, db_info):
+        _db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'], address=db_info['address'], port=SystemConstants.MONGODB_PORT)
         self.__db = mg.get_db(_db_client, SystemConstants.MONGODB_NAME)
         self.__workers_info = mg.get_col(self.__db, SystemConstants.WorkersInfo)
         self.__workers_resource_info = mg.get_col(self.__db, SystemConstants.WorkersResourceInfo)
@@ -102,12 +102,10 @@ class Discovery(object):
     def main():
         os.chdir('/home/%s/RESTfulSwarm/Discovery' % utl.get_username())
 
-        with open('DiscoveryInit.json') as f:
-            data = json.load(f)
+        with open('../DBInfo.json') as f:
+            db_info = json.load(f)
 
-        db_address = data['db_address']
-
-        discovery = Discovery(db_address)
+        discovery = Discovery(db_info)
         discovery.__logger.info('Initialized Discovery block.')
         discovery.discovery()
 
