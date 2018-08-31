@@ -337,7 +337,8 @@ class JobManager(object):
             data = json.load(f)
         gm_address = data['gm_address']
 
-        db_address = data['db_address']
+        with open('../DBInfo.json') as f:
+            db_info = json.load(f)
 
         wait = data['wait_time']
 
@@ -347,7 +348,7 @@ class JobManager(object):
                 scheduling_strategy = strategy
                 break
 
-        db_client = mg.get_client(address=db_address, port=SystemConstants.MONGODB_PORT)
+        db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'], address=db_info['address'], port=SystemConstants.MONGODB_PORT)
         db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
 
         # choose scheduler

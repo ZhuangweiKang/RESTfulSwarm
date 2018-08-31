@@ -1,6 +1,5 @@
 {
   "gm_address": "127.0.0.1",
-  "db_address": "127.0.0.1",
   "wait_time": 0.1,
   "scheduling_strategy": {
     "best-fit": 1,

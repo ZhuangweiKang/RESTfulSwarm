@@ -18,26 +18,6 @@ import mongodb_api as mg
 
 app = Flask(__name__)
 
-template = {
-  "swagger": "2.0",
-  "info": {
-    "title": "RESTfulSwarm",
-    "description": "An RESTful application for Docker Swarm.",
-    "contact": {
-      "responsibleDeveloper": "Zhuangwei Kang",
-      "email": "zhuangwei.kang@vanderbilt.edu"
-    },
-    "version": "0.0.1"
-  },
-  "host": "129.114.108.18:5000",
-  "basePath": "",  # base bash for blueprint registration
-  "schemes": [
-    "http",
-  ]
-}
-
-swagger = Swagger(app, template=template)
-
 gm_address = None
 dockerClient = None
 messenger = None
@@ -330,12 +310,33 @@ def main():
         data = json.load(f)
     gm_address = data['gm_address']
 
+    template = {
+        "swagger": "2.0",
+        "info": {
+            "title": "RESTfulSwarm",
+            "description": "An RESTful application for Docker Swarm.",
+            "contact": {
+                "responsibleDeveloper": "Zhuangwei Kang",
+                "email": "zhuangwei.kang@vanderbilt.edu"
+            },
+            "version": "0.0.1"
+        },
+        "host": '%s:%s' % (gm_address, SystemConstants.GM_PORT),
+        "basePath": "",  # base bash for blueprint registration
+        "schemes": [
+            "http",
+        ]
+    }
+
+    swagger = Swagger(app, template=template)
+
     dockerClient = docker.set_client()
 
     # mongodb
-    db_address = data['db_address']
+    with open('../DBInfo.json') as f:
+        db_info = json.load(f)
 
-    db_client = mg.get_client(address=db_address, port=SystemConstants.MONGODB_PORT)
+    db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'], address=db_info['address'], port=SystemConstants.MONGODB_PORT)
     db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
     worker_col = mg.get_col(db, SystemConstants.WorkersInfo)
     worker_resource_col = mg.get_col(db, SystemConstants.WorkersResourceInfo)

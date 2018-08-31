@@ -26,9 +26,9 @@ import SystemConstants
 
 
 class ManagementEngine(object):
-    def __init__(self, db_address, workers_details):
-        self.__db_client = mg.get_client(usr=SystemConstants.MONGODB_USR, pwd=SystemConstants.MONGODB_PWD,
-                                         address=db_address, port=SystemConstants.MONGODB_PORT)
+    def __init__(self, db_info, workers_details):
+        self.__db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'],
+                                         address=db_info['address'], port=SystemConstants.MONGODB_PORT)
         self.__db = mg.get_db(self.__db_client, db_name=SystemConstants.MONGODB_NAME)
         self.__workers_info = workers_details
 
@@ -146,9 +146,9 @@ class ManagementEngine(object):
         print('Start launching system.')
         self.clear_master()
         time.sleep(1)
-       # self.shutdown_workers()
+        # self.shutdown_workers()
         time.sleep(1)
-        #self.reset_db()
+        # self.reset_db()
         time.sleep(1)
         fe_process = self.launch_fe()
         time.sleep(1)
@@ -198,9 +198,11 @@ class ManagementEngine(object):
 
 
 if __name__ == '__main__':
-    with open('DBinfo.json') as f:
-        db_packet = json.load(f)
     with open('WorkersInfo.json') as f:
         workers_info = json.load(f)
-    me = ManagementEngine(db_address=db_packet['address'], workers_details=workers_info)
+
+    with open('../DBInfo.json') as f:
+        db_info = json.load(f)
+
+    me = ManagementEngine(db_info=db_info, workers_details=workers_info)
     me.main()

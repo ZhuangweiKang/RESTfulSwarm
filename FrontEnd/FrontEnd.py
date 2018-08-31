@@ -17,54 +17,9 @@ import SystemConstants
 
 app = Flask(__name__)
 
-template = {
-  "swagger": "2.0",
-  "info": {
-    "title": "RESTfulSwarm",
-    "description": "An RESTful application for Docker Swarm.",
-    "contact": {
-      "responsibleDeveloper": "Zhuangwei Kang",
-      "email": "zhuangwei.kang@vanderbilt.edu"
-    },
-    "version": "0.0.1"
-  },
-  "host": "129.114.108.18:5001",
-  "basePath": "",  # base bash for blueprint registration
-  "schemes": [
-    "http",
-  ]
-}
-
-swagger = Swagger(app, template=template)
-
 db_address = None
 db = None
 messenger = None
-
-
-@app.route('/RESTfulSwarm/FE/request_new_job', methods=['POST'])
-@swag_from('FrontEnd.yml', validation=True)
-def request_new_job():
-    global messenger
-    # Write job data into MongoDB
-    data = request.get_json()
-    data.update({'submit_time': time.time()})
-    col_name = data['job_name']
-    m_col = mg.get_col(db, col_name)
-    mg.insert_doc(m_col, data)
-
-    # Notify job manager
-    messenger.send(prompt='newJob', content=col_name)
-    return 'OK', 200
-
-
-@app.route('/RESTfulSwarm/FE/switch_scheduler/<new_scheduler>', methods=['GET'])
-@swag_from('SwitchScheduler.yml')
-def switch_scheduler(new_scheduler):
-    global messenger
-    # Notify Job Manager to switch scheduler
-    messenger.send(prompt='SwitchScheduler', content=new_scheduler)
-    return 'OK', 200
 
 
 def main():
@@ -77,14 +32,59 @@ def main():
     with open('FrontEndInit.json') as f:
         data = json.load(f)
 
-    db_address = data['db_address']
-    db_client = mg.get_client(address=db_address, port=SystemConstants.MONGODB_PORT)
+    with open('../DBInfo.json') as f:
+        db_info = json.load(f)
+
+    db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'], address=db_info['address'], port=SystemConstants.MONGODB_PORT)
     db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
 
     jm_address = data['jm_address']
     messenger = Messenger(messenger_type='C/S', address=jm_address, port=SystemConstants.JM_PORT)
 
     fe_address = data['fe_address']
+
+    template = {
+        "swagger": "2.0",
+        "info": {
+            "title": "RESTfulSwarm",
+            "description": "An RESTful application for Docker Swarm.",
+            "contact": {
+                "responsibleDeveloper": "Zhuangwei Kang",
+                "email": "zhuangwei.kang@vanderbilt.edu"
+            },
+            "version": "0.0.1"
+        },
+        "host": '%s:%s' % (fe_address, SystemConstants.FE_PORT),
+        "basePath": "",  # base bash for blueprint registration
+        "schemes": [
+            "http",
+        ]
+    }
+
+    swagger = Swagger(app, template=template)
+
+    @app.route('/RESTfulSwarm/FE/request_new_job', methods=['POST'])
+    @swag_from('FrontEnd.yml', validation=True)
+    def request_new_job():
+        global messenger
+        # Write job data into MongoDB
+        data = request.get_json()
+        data.update({'submit_time': time.time()})
+        col_name = data['job_name']
+        m_col = mg.get_col(db, col_name)
+        mg.insert_doc(m_col, data)
+
+        # Notify job manager
+        messenger.send(prompt='newJob', content=col_name)
+        return 'OK', 200
+
+    @app.route('/RESTfulSwarm/FE/switch_scheduler/<new_scheduler>', methods=['GET'])
+    @swag_from('SwitchScheduler.yml')
+    def switch_scheduler(new_scheduler):
+        global messenger
+        # Notify Job Manager to switch scheduler
+        messenger.send(prompt='SwitchScheduler', content=new_scheduler)
+        return 'OK', 200
 
     os.chdir('/home/%s/RESTfulSwarm/ManagementEngine' % utl.get_username())
 
