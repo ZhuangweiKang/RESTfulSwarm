@@ -82,7 +82,7 @@ install_db(){
     systemctl restart mongod
 
     # create user and db
-    printf "use $3\ndb.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"readWrite\", db: \"$3\" } ] } )" | mongo
+    printf "use $3\n db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"readWrite\", db: \"$3\" } ] } )" | mongo
 
     # write database information into DBInfo.json
     echo "{\"user\": \""$1"\", \"pwd\": \""$2"\", \"db_name\": \""$3"\"}" >> DBInfo.json
