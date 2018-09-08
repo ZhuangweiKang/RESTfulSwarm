@@ -70,13 +70,13 @@ install_db(){
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
     echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
     apt-get update
-    apt-get install mongodb-org
+    apt-get install -y mongodb-org
     systemctl daemon-reload
     systemctl start mongod
     systemctl status mongod
 
     # create admin user
-    mongo --eval "use $3;db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdmin\", db: \"$3\" } ] } );"
+    printf "use $3\ndb.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdmin\", db: \"$3\" } ] } )" | mongo
 
     sleep 1
 
