@@ -80,7 +80,7 @@ install_db(){
 
     # create user and db
     echo "use admin" > initdb.js
-    echo "db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"readWrite\", db: \"$3\" } ] } )" >> initdb.js
+    echo "db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdminAnyDatabase\", db: \"admin\" } ] } )" >> initdb.js
 
     mongo < initdb.js
 
