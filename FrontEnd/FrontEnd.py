@@ -55,7 +55,7 @@ def main():
             "version": "0.0.1"
         },
         "host": '%s:%s' % (fe_address, SystemConstants.FE_PORT),
-        "basePath": "",  # base bash for blueprint registration
+        "basePath": "",
         "schemes": [
             "http",
         ]

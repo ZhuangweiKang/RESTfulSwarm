@@ -322,7 +322,7 @@ def main():
             "version": "0.0.1"
         },
         "host": '%s:%s' % (gm_address, SystemConstants.GM_PORT),
-        "basePath": "",  # base bash for blueprint registration
+        "basePath": "",
         "schemes": [
             "http",
         ]
