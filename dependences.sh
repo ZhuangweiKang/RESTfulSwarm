@@ -77,7 +77,8 @@ install_db(){
     systemctl restart mongod
 
     # create user and db
-    printf "use $3\n db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"readWrite\", db: \"$3\" } ] } )" | mongo
+    echo "use $3 \n db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"readWrite\", db: \"$3\" } ] } )" >> initdb.js
+    mongo < initdb.js
 
      # reconfigure mongodb to allow remote access
     mv ./mongod.conf /etc/mongod.conf
