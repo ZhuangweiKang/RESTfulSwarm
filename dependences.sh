@@ -73,8 +73,6 @@ install_db(){
     apt-get install -y mongodb-org
     systemctl restart mongod
 
-    sleep 3
-
     systemctl status mongod
     systemctl enable mongod
     systemctl restart mongod
