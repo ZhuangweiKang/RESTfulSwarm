@@ -73,17 +73,14 @@ install_db(){
     apt-get install -y mongodb-org
     systemctl start mongod
 
-    sleep 5
+    sleep 10
 
     systemctl status mongod
     systemctl enable mongod
     systemctl restart mongod
 
     # create user and db
-    echo "use admin" > initdb.js
-    echo "db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdminAnyDatabase\", db: \"admin\" } ] } )" >> initdb.js
-
-    mongo < initdb.js
+    mongo --eval "use admin; db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdminAnyDatabase\", db: \"admin\" } ] } );"
 
     sleep 1
 
