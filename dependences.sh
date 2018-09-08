@@ -76,7 +76,7 @@ install_db(){
     systemctl enable mongod
 
     # create user and db
-    echo "use $3; db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"readWrite\", db: \"$3\" } ] } );" >> initdb.js
+    echo "use $3; db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"readWrite\", db: \"$3\" } ] } );" > initdb.js
     mongo -u "$1" -p "$2" --authenticationDatabase "$3" < initdb.js
 
      # reconfigure mongodb to allow remote access
@@ -84,7 +84,7 @@ install_db(){
     systemctl restart mongod
 
     # write database information into DBInfo.json
-    echo "{\"user\": \""$1"\", \"pwd\": \""$2"\", \"db_name\": \""$3"\"}" >> DBInfo.json
+    echo "{\"user\": \""$1"\", \"pwd\": \""$2"\", \"db_name\": \""$3"\"}" > DBInfo.json
 }
 
 
