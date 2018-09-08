@@ -72,12 +72,15 @@ install_db(){
     apt-get update
     apt-get install -y mongodb-org
     systemctl start mongod
+    sleep 2
     systemctl status mongod
     systemctl enable mongod
 
     # create user and db
     echo "use $3; db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"readWrite\", db: \"$3\" } ] } );" > initdb.js
     mongo -u "$1" -p "$2" --authenticationDatabase "$3" < initdb.js
+
+    sleep 1
 
      # reconfigure mongodb to allow remote access
     mv ./mongod.conf /etc/mongod.conf

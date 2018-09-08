@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="26b1070c-b779-4beb-b090-4dc76a7c3508" name="Default" comment="">
+    <list default="true" id="26b1070c-b779-4beb-b090-4dc76a7c3508" name="Default" comment="update database creation command">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dependences.sh" beforeDir="false" afterPath="$PROJECT_DIR$/dependences.sh" afterDir="false" />
     </list>
@@ -26,8 +26,8 @@
       <file leaf-file-name="dependences.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dependences.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="75" column="27" lean-forward="true" selection-start-line="75" selection-start-column="27" selection-end-line="75" selection-end-column="27" />
+            <state relative-caret-position="339">
+              <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
             </state>
           </provider>
         </entry>
@@ -35,8 +35,8 @@
       <file leaf-file-name="mongod.conf" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mongod.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-21">
-              <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+            <state relative-caret-position="125">
+              <caret line="31" column="3" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -69,6 +69,7 @@
         <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
         <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
         <option value="$PROJECT_DIR$/mongodb_api.py" />
+        <option value="$PROJECT_DIR$/mongod.conf" />
         <option value="$PROJECT_DIR$/dependences.sh" />
       </list>
     </option>
@@ -204,7 +205,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536422332929</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update database creation command">
+      <created>1536422880399</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1536422880399</updated>
+    </task>
+    <task id="LOCAL-00012" summary="update database creation command">
+      <created>1536422996292</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1536422996292</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -244,7 +259,8 @@
     <MESSAGE value="update" />
     <MESSAGE value="Init db info while installing dependences" />
     <MESSAGE value="Add dependences in case of docker installation failed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add dependences in case of docker installation failed" />
+    <MESSAGE value="update database creation command" />
+    <option name="LAST_COMMIT_MESSAGE" value="update database creation command" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Worker/Worker1Init.json">
@@ -609,15 +625,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mongod.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-21">
-          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+        <state relative-caret-position="125">
+          <caret line="31" column="3" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dependences.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="75" column="27" lean-forward="true" selection-start-line="75" selection-start-column="27" selection-end-line="75" selection-end-column="27" />
+        <state relative-caret-position="339">
+          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
         </state>
       </provider>
     </entry>
