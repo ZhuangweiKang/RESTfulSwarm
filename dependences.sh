@@ -85,6 +85,8 @@ install_db(){
 
      # reconfigure mongodb to allow remote access
     mv ./mongod.conf /etc/mongod.conf
+
+    systemctl daemon-reload
     systemctl restart mongod
     systemctl status mongod
 
