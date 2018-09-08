@@ -77,7 +77,7 @@ install_db(){
     systemctl enable mongod
 
     # create user
-    mongo --eval "use admin; db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdminAnyDatabase\", db: \"admin\" } ] } );"
+    printf "use admin; db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdminAnyDatabase\", db: \"admin\" } ] } );" | mongo
 
     sleep 1
 
