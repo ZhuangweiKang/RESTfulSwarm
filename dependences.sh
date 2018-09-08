@@ -70,10 +70,11 @@ install_db(){
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
     echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
     apt-get update
-    apt-get install -y mongodb-org
-    sleep 2
+    apt-get install mongodb-org
     systemctl start mongod
-    sleep 2
+
+    sleep 1
+
     systemctl status mongod
     systemctl enable mongod
 
@@ -88,6 +89,7 @@ install_db(){
      # reconfigure mongodb to allow remote access
     mv ./mongod.conf /etc/mongod.conf
     systemctl restart mongod
+    systemctl status mongod
 
     # write database information into DBInfo.json
     echo "{\"user\": \""$1"\", \"pwd\": \""$2"\", \"db_name\": \""$3"\"}" > DBInfo.json
