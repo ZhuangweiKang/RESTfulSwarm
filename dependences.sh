@@ -1,9 +1,12 @@
 #!/bin/bash
 
-install_python_libs(){
-    # install pip3
-    apt-get install -y python3-pip python3-dev python3-setuptools xmlto asciidoc build-essential libssl-dev libxml2-dev libxslt1-dev zlib1g-dev
+install_base_dependences(){
+    apt-get update
+    apt-get install -y python3-pip python3-dev python3-setuptools xmlto asciidoc build-essential libssl-dev libxml2-dev libxslt1-dev zlib1g-dev libltdl7 libaio1 libnet1 libnl-3-200 libprotobuf-c1 libprotobuf9v5 libprotobuf-lite9v5 libprotoc9v5 python-pkg-resources python-meld3
+}
 
+
+install_python_libs(){
     # install python packages for docker , flask, pyzmq, mongodb, cpuinfo, pandas
     pip3 install flask docker pyzmq pymongo py-cpuinfo flasgger pandas requests paramiko
 }
@@ -21,7 +24,7 @@ install_docker(){
 
         # run docker without sudo
         groupadd docker
-        usermod -aG docker \$USER
+        usermod -aG docker ubuntu
     fi
 
     # check docker experimental feature
@@ -36,6 +39,9 @@ install_docker(){
     fi
 
     echo $(docker version)
+
+    # remove installed pkg
+    rm docker-ce_17.12.0~ce-0~ubuntu_amd64.deb
 }
 
 
@@ -109,7 +115,8 @@ install_nfs_client(){
 }
 
 main(){
-    apt-get update && install libltdl7
+    install_base_dependences
+
     if [ "$1" = "DB" ]
     then
         install_db $2 $3 $4
