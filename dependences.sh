@@ -73,13 +73,14 @@ install_db(){
     apt-get install -y mongodb-org
     service mongod start
     systemctl status mongod
-    systemctl enable mongod
-    systemctl restart mongod
 
-    # create user and db
-    mongo --host 127.0.0.1:27017 --eval "use admin; db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdminAnyDatabase\", db: \"admin\" } ] } );"
+    # create user
+    mongo --eval "use admin; db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdminAnyDatabase\", db: \"admin\" } ] } );"
 
     sleep 1
+
+    systemctl enable mongod
+    systemctl restart mongod
 
      # reconfigure mongodb to allow remote access
     mv ./mongod.conf /etc/mongod.conf
