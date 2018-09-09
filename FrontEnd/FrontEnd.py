@@ -41,7 +41,8 @@ def main():
     jm_address = data['jm_address']
     messenger = Messenger(messenger_type='C/S', address=jm_address, port=SystemConstants.JM_PORT)
 
-    fe_address = data['fe_address']
+    # fe_address = data['fe_address']
+    fe_address = utl.get_local_address()
 
     template = {
         "swagger": "2.0",

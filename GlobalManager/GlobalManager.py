@@ -334,9 +334,6 @@ def main():
 
     dockerClient = docker.set_client()
 
-    # init swarm master node
-    init_swarm_env()
-
     # mongodb
     with open('../DBInfo.json') as f:
         db_info = json.load(f)
