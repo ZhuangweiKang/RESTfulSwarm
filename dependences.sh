@@ -83,7 +83,7 @@ install_db(){
     systemctl restart mongod
 
     # write database information into DBInfo.json
-    echo "{\"user\": \""$1"\", \"pwd\": \""$2"\", \"db_name\": \""$3"\", \"address\": \""$4"\"}" > DBInfo.json
+    echo "{\"user\": \"$1\", \"pwd\": \"$2\", \"db_name\": \"$3\", \"address\": \"$4\"}" > DBInfo.json
 }
 
 
