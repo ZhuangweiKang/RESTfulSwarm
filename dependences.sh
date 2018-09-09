@@ -73,10 +73,12 @@ install_db(){
     apt-get install -y mongodb-org
     systemctl daemon-reload
     systemctl start mongod
-    # systemctl status mongod
+    systemctl status mongod
 
     # create admin user
-    printf "use $3\ndb.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdmin\", db: \"$3\" } ] } )" | mongo
+    echo "use $3" > initdb.js
+    echo "db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdmin\", db: \"$3\" } ] } )" >> initdb.js
+    mongo < initdb.js
 
     systemctl enable mongod
     systemctl restart mongod
