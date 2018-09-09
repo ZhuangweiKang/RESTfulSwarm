@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="26b1070c-b779-4beb-b090-4dc76a7c3508" name="Default" comment="group actors info into one json file: ActorsInfo.json">
+    <list default="true" id="26b1070c-b779-4beb-b090-4dc76a7c3508" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dependences.sh" beforeDir="false" afterPath="$PROJECT_DIR$/dependences.sh" afterDir="false" />
     </list>
@@ -14,6 +14,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="FrontEnd.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="409">
+              <caret line="34" column="37" lean-forward="true" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+              <folding>
+                <element signature="e#81#95#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ActorsInfo.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ActorsInfo.json">
           <provider selected="true" editor-type-id="text-editor">
@@ -23,11 +35,53 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="JobManager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="352" lean-forward="true" selection-start-line="352" selection-end-line="352" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="dependences.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dependences.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="85" column="100" selection-start-line="85" selection-start-column="100" selection-end-line="85" selection-end-column="100" />
+            <state relative-caret-position="199">
+              <caret line="79" column="82" selection-start-line="79" selection-start-column="82" selection-end-line="79" selection-end-column="82" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mongodb_api.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mongodb_api.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-22">
+              <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+              <folding>
+                <element signature="e#81#101#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="460">
+              <caret line="204" column="30" lean-forward="true" selection-start-line="204" selection-start-column="30" selection-end-line="204" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="431">
+              <caret line="334" column="30" lean-forward="true" selection-start-line="334" selection-start-column="30" selection-end-line="334" selection-end-column="30" />
+              <folding>
+                <element signature="e#81#90#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -54,12 +108,9 @@
         <option value="$PROJECT_DIR$/Discovery/DiscoveryInit.json" />
         <option value="$PROJECT_DIR$/FrontEnd/FrontEndInit.json" />
         <option value="$PROJECT_DIR$/JobManager/JobManagerInit.json" />
-        <option value="$PROJECT_DIR$/Discovery/Discovery.py" />
-        <option value="$PROJECT_DIR$/mongodb_api.py" />
         <option value="$PROJECT_DIR$/mongod.conf" />
         <option value="$PROJECT_DIR$/initdb.js" />
         <option value="$PROJECT_DIR$/ManagementEngine/WorkersInfo.json" />
-        <option value="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Worker/Worker1Init.json" />
         <option value="$PROJECT_DIR$/live_migration.py" />
@@ -67,10 +118,13 @@
         <option value="$PROJECT_DIR$/GlobalManager/GlobalManagerInit.json" />
         <option value="$PROJECT_DIR$/utl.py" />
         <option value="$PROJECT_DIR$/Worker/Worker.py" />
-        <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
-        <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
-        <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
         <option value="$PROJECT_DIR$/ActorsInfo.json" />
+        <option value="$PROJECT_DIR$/mongodb_api.py" />
+        <option value="$PROJECT_DIR$/Discovery/Discovery.py" />
+        <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
+        <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
+        <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
+        <option value="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" />
         <option value="$PROJECT_DIR$/dependences.sh" />
       </list>
     </option>
@@ -140,20 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1535744537820</updated>
-    </task>
-    <task id="LOCAL-00022" summary="update database creation command">
-      <created>1536425598051</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1536425598052</updated>
-    </task>
-    <task id="LOCAL-00023" summary="update database creation command">
-      <created>1536432070622</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1536432070622</updated>
     </task>
     <task id="LOCAL-00024" summary="update database creation command">
       <created>1536432417468</created>
@@ -484,7 +524,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536470839996</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="update">
+      <created>1536508801654</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1536508801654</updated>
+    </task>
+    <task id="LOCAL-00072" summary="update">
+      <created>1536509217293</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1536509217293</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -553,9 +607,9 @@
     <MESSAGE value="update Worker" />
     <MESSAGE value="Fix init swarm master node bug" />
     <MESSAGE value="Fix bug at GM, 0.0.0.0 is wrong" />
-    <MESSAGE value="update" />
     <MESSAGE value="group actors info into one json file: ActorsInfo.json" />
-    <option name="LAST_COMMIT_MESSAGE" value="group actors info into one json file: ActorsInfo.json" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ManagementEngine/WorkersInfo.json">
@@ -731,13 +785,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Discovery/DiscoveryInit.json" />
-    <entry file="file://$PROJECT_DIR$/Scheduler/SchedulerUnitTest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2860">
-          <caret line="18" column="10" lean-forward="true" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mongod.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="682">
@@ -767,6 +814,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="246">
           <caret line="96" column="10" lean-forward="true" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -774,6 +824,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="616">
           <caret line="82" column="16" lean-forward="true" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="16" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -781,20 +834,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
           <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="64" column="24" selection-start-line="64" selection-start-column="24" selection-end-line="64" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
         </state>
       </provider>
     </entry>
@@ -807,25 +846,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Worker/Worker1Init.json" />
-    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7502">
-          <caret line="341" selection-start-line="341" selection-end-line="341" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JobManager/JobManagerInit.json" />
     <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEndInit.json" />
-    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1694">
-          <caret line="82" column="27" selection-start-line="82" selection-start-column="27" selection-end-line="82" selection-end-column="27" />
-          <folding>
-            <element signature="e#81#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/StressClient.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-154">
@@ -840,30 +862,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2068">
-          <caret line="106" column="17" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python36/site-packages/pymongo/collection.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
           <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mongodb_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <element signature="e#81#101#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -874,10 +876,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="334" column="30" lean-forward="true" selection-start-line="334" selection-start-column="30" selection-end-line="334" selection-end-column="30" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FrontEnd/FrontEnd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="34" column="37" lean-forward="true" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+          <folding>
+            <element signature="e#81#95#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JobManager/JobManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="352" lean-forward="true" selection-start-line="352" selection-end-line="352" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="204" column="30" lean-forward="true" selection-start-line="204" selection-start-column="30" selection-end-line="204" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scheduler/SchedulerUnitTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="19" column="44" lean-forward="true" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mongodb_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-22">
+          <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+          <folding>
+            <element signature="e#81#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dependences.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="85" column="100" selection-start-line="85" selection-start-column="100" selection-end-line="85" selection-end-column="100" />
+        <state relative-caret-position="199">
+          <caret line="79" column="82" selection-start-line="79" selection-start-column="82" selection-end-line="79" selection-end-column="82" />
         </state>
       </provider>
     </entry>
