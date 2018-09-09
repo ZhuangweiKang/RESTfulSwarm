@@ -28,7 +28,7 @@ An environment for core simulation based on Docker Swarm
 
 # configure DB
 # example: ./dependences.sh DB myusr mypwd mydb
-./dependences.sh DB $usr $pwd $db
+./dependences.sh DB $usr $pwd $db $address
 # add user and reconfigure mongodb to allow remote access
 mongo < initdb.js
 mv ./mongod.conf /etc/mongod.conf
