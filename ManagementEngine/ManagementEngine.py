@@ -148,7 +148,7 @@ class ManagementEngine(object):
         time.sleep(1)
         # self.shutdown_workers()
         time.sleep(1)
-        # self.reset_db()
+        self.reset_db()
         time.sleep(1)
         fe_process = self.launch_fe()
         time.sleep(1)
