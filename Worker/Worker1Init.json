@@ -1,6 +1,6 @@
 {
-  "worker_address": "129.59.234.232",
-  "gm_address": "129.59.234.231",
-  "dis_address": "129.59.234.231",
+  "worker_address": "ec2-52-37-181-177.us-west-2.compute.amazonaws.com",
+  "gm_address": "ec2-34-219-58-82.us-west-2.compute.amazonaws.com",
+  "dis_address": "ec2-34-219-58-82.us-west-2.compute.amazonaws.com",
   "frequency": 5
 }
