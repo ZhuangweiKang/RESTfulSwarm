@@ -58,10 +58,10 @@ class StressClient(object):
         self.task_mem = data['task_mem']
         self.time_interval = data['time_interval']
 
-        with open('ClientInit.json') as f:
+        with open('../ActorsInfo.json') as f:
             data = json.load(f)
 
-        self.fe_address = data['fe_address']
+        self.fe_address = data['FE']['address']
 
         self.logger = utl.get_logger('StressClientLogger', 'StressClient.log')
 

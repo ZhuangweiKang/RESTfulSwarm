@@ -1,5 +1,5 @@
 {
-  "subnet": "10.52.1.0/16",
+  "subnet": "172.31.0.0/16",
   "image_name": "zhuangweikang/sleeper",
   "task_count": 4,
   "task_cores": 4,
