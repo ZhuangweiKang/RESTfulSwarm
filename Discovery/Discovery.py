@@ -49,6 +49,7 @@ class Discovery(object):
                     if job_details['job_info']['tasks'][job]['status'] != 'Down':
                         flag = False
                 if flag:
+                    print('_________________________________________________')
                     mg.update_doc(job_col, 'job_name', job_name, 'status', 'Down')
                     mg.update_doc(job_col, 'job_name', job_name, 'end_time', time.time())
 
