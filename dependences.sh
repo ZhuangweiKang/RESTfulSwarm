@@ -78,8 +78,6 @@ install_db(){
     # create admin user
     printf "use $3\ndb.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdmin\", db: \"$3\" } ] } )" | mongo
 
-    sleep 1
-
     systemctl enable mongod
     systemctl restart mongod
 
