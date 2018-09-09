@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="26b1070c-b779-4beb-b090-4dc76a7c3508" name="Default" comment="">
+    <list default="true" id="26b1070c-b779-4beb-b090-4dc76a7c3508" name="Default" comment="update database creation command">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dependences.sh" beforeDir="false" afterPath="$PROJECT_DIR$/dependences.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,11 +24,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dependences.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dependences.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dependences.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="80" column="40" lean-forward="true" selection-start-line="80" selection-start-column="40" selection-end-line="80" selection-end-column="40" />
+            <state>
+              <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="176">
+                <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -70,7 +83,9 @@
         <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
         <option value="$PROJECT_DIR$/mongodb_api.py" />
         <option value="$PROJECT_DIR$/mongod.conf" />
+        <option value="$PROJECT_DIR$/initdb.js" />
         <option value="$PROJECT_DIR$/dependences.sh" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -134,20 +149,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1535744537820</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Add dependences in case of docker installation failed">
-      <created>1536421960691</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1536421960691</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Add dependences in case of docker installation failed">
-      <created>1536422332929</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1536422332929</updated>
     </task>
     <task id="LOCAL-00011" summary="update database creation command">
       <created>1536422880399</created>
@@ -478,7 +479,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536454120062</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="update database creation command">
+      <created>1536454313373</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1536454313374</updated>
+    </task>
+    <task id="LOCAL-00059" summary="update database creation command">
+      <created>1536454459376</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1536454459376</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -492,7 +507,7 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32868022" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19127516" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19127516" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -522,13 +537,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="update database creation command" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mongod.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="31" selection-start-line="31" selection-end-line="31" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dependences.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1716">
@@ -773,14 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ManagementEngine/WorkersInfo.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -882,10 +882,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/initdb.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="4" selection-start-column="4" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dependences.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="80" column="40" lean-forward="true" selection-start-line="80" selection-start-column="40" selection-end-line="80" selection-end-column="40" />
+        <state>
+          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="176">
+            <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

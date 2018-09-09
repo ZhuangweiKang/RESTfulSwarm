@@ -76,21 +76,11 @@ install_db(){
     systemctl status mongod
 
     # create admin user
-#    echo "use $3" > initdb.js
-#    echo "db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdmin\", db: \"$3\" } ] } )" >> initdb.js
-#    mongo localhost:27017/test initdb.js
-
-    mongo test --eval "use $3; db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdmin\", db: \"$3\" } ] } )"
+    echo "use $3" > initdb.js
+    echo "db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdmin\", db: \"$3\" } ] } )" >> initdb.js
 
     systemctl enable mongod
     systemctl restart mongod
-
-     # reconfigure mongodb to allow remote access
-    mv ./mongod.conf /etc/mongod.conf
-
-    systemctl daemon-reload
-    systemctl restart mongod
-    systemctl status mongod
 
     # write database information into DBInfo.json
     echo "{\"user\": \""$1"\", \"pwd\": \""$2"\", \"db_name\": \""$3"\"}" > DBInfo.json
