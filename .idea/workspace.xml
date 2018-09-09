@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="26b1070c-b779-4beb-b090-4dc76a7c3508" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/GlobalManager/GlobalManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/docker_api.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,8 +18,8 @@
       <file leaf-file-name="ManagementEngine.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="185" column="9" selection-start-line="185" selection-start-column="9" selection-end-line="185" selection-end-column="9" />
+            <state relative-caret-position="234">
+              <caret line="86" column="24" selection-start-line="86" selection-start-column="24" selection-end-line="86" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -31,11 +33,53 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Worker1Init.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Worker1Init.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Worker/Worker1Init.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="1" column="31" lean-forward="true" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="31" />
+            <state relative-caret-position="66">
+              <caret line="3" column="66" selection-start-line="3" selection-start-column="66" selection-end-line="3" selection-end-column="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Worker.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="311">
+              <caret line="145" lean-forward="true" selection-start-line="145" selection-end-line="145" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="live_migration.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/live_migration.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="19" column="32" lean-forward="true" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GlobalManager.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-62">
+              <caret line="336" column="4" selection-start-line="336" selection-start-column="4" selection-end-line="336" selection-end-column="4" />
+              <folding>
+                <element signature="e#81#90#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="docker_api.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docker_api.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="466">
+              <caret line="115" column="44" selection-start-line="115" selection-start-column="44" selection-end-line="115" selection-end-column="44" />
+              <folding>
+                <element signature="e#81#90#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -69,6 +113,7 @@
       <find>gm_address</find>
       <find>apt-get</find>
       <find>$US</find>
+      <find>init</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -83,10 +128,8 @@
         <option value="$PROJECT_DIR$/GlobalManager/GlobalManagerInit.json" />
         <option value="$PROJECT_DIR$/JobManager/JobManager.py" />
         <option value="$PROJECT_DIR$/JobManager/JobManagerInit.json" />
-        <option value="$PROJECT_DIR$/Worker/Worker1Init.json" />
         <option value="$PROJECT_DIR$/Discovery/Discovery.py" />
         <option value="$PROJECT_DIR$/FrontEnd/FrontEnd.py" />
-        <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
         <option value="$PROJECT_DIR$/mongodb_api.py" />
         <option value="$PROJECT_DIR$/mongod.conf" />
         <option value="$PROJECT_DIR$/initdb.js" />
@@ -94,6 +137,10 @@
         <option value="$PROJECT_DIR$/ManagementEngine/ManagementEngine.py" />
         <option value="$PROJECT_DIR$/dependences.sh" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/Worker/Worker1Init.json" />
+        <option value="$PROJECT_DIR$/live_migration.py" />
+        <option value="$PROJECT_DIR$/docker_api.py" />
+        <option value="$PROJECT_DIR$/GlobalManager/GlobalManager.py" />
       </list>
     </option>
   </component>
@@ -121,6 +168,16 @@
             <path>
               <item name="RESTfulSwarm" type="b2602c69:ProjectViewProjectNode" />
               <item name="RESTfulSwarm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RESTfulSwarm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RESTfulSwarm" type="462c0819:PsiDirectoryNode" />
+              <item name="GlobalManager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RESTfulSwarm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RESTfulSwarm" type="462c0819:PsiDirectoryNode" />
+              <item name="Images" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="RESTfulSwarm" type="b2602c69:ProjectViewProjectNode" />
@@ -167,20 +224,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1535744537820</updated>
-    </task>
-    <task id="LOCAL-00016" summary="update database creation command">
-      <created>1536424080736</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1536424080736</updated>
-    </task>
-    <task id="LOCAL-00017" summary="update database creation command">
-      <created>1536424280365</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1536424280365</updated>
     </task>
     <task id="LOCAL-00018" summary="update database creation command">
       <created>1536424694591</created>
@@ -511,7 +554,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536465225607</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="add db address while init DBinfo.json">
+      <created>1536465454999</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1536465454999</updated>
+    </task>
+    <task id="LOCAL-00066" summary="update Worker">
+      <created>1536465701224</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1536465701226</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -555,23 +612,10 @@
     <MESSAGE value="update README" />
     <MESSAGE value="update Worker address" />
     <MESSAGE value="add db address while init DBinfo.json" />
-    <option name="LAST_COMMIT_MESSAGE" value="add db address while init DBinfo.json" />
+    <MESSAGE value="update Worker" />
+    <option name="LAST_COMMIT_MESSAGE" value="update Worker" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dependences.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1716">
-          <caret line="78" column="37" lean-forward="true" selection-start-line="78" selection-start-column="37" selection-end-line="78" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/Worker1Init.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5474">
@@ -804,13 +848,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="641">
-          <caret line="241" column="36" selection-start-line="241" selection-start-column="36" selection-end-line="241" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Discovery/DiscoveryInit.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -880,16 +917,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="338" column="19" selection-start-line="338" selection-start-column="19" selection-end-line="338" selection-end-column="19" />
-          <folding>
-            <element signature="e#81#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mongod.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="682">
@@ -921,13 +948,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="185" column="9" selection-start-line="185" selection-start-column="9" selection-end-line="185" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dependences.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="353">
@@ -937,8 +957,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Worker/Worker1Init.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="31" lean-forward="true" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="31" />
+        <state relative-caret-position="66">
+          <caret line="3" column="66" selection-start-line="3" selection-start-column="66" selection-end-line="3" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Worker/Worker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="145" lean-forward="true" selection-start-line="145" selection-end-line="145" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/live_migration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="19" column="32" lean-forward="true" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="115" column="44" selection-start-line="115" selection-start-column="44" selection-end-line="115" selection-end-column="44" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ManagementEngine/ManagementEngine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="86" column="24" selection-start-line="86" selection-start-column="24" selection-end-line="86" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GlobalManager/GlobalManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-62">
+          <caret line="336" column="4" selection-start-line="336" selection-start-column="4" selection-end-line="336" selection-end-column="4" />
+          <folding>
+            <element signature="e#81#90#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

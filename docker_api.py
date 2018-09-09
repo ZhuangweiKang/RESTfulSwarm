@@ -3,10 +3,12 @@
 # Author: Zhuangwei Kang
 
 import os
+import sys
 import docker
 import docker.errors
 import docker.types
 import time
+import traceback
 
 
 def set_client():
@@ -111,7 +113,9 @@ def get_node_list(client):
     try:
         return client.nodes.list(filters={'role': 'worker'})
     except Exception:
+        traceback.print_exc(file=sys.stderr)
         return None
+
 
 def get_join_token():
     cmd = 'docker swarm join-token worker -q'
