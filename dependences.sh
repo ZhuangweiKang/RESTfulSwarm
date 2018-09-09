@@ -121,7 +121,7 @@ main(){
 
     if [ "$1" = "DB" ]
     then
-        install_db $2 $3 $4
+        install_db $2 $3 $4 $5
         return 1
     fi
     if [ "$1" = "GM" ]
