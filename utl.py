@@ -50,6 +50,42 @@ def get_host_ip():
     return host_address
 
 
+def ip_is_local(ip_string):
+    """
+    Uses a regex to determine if the input ip is on a local network. Returns a boolean.
+    It's safe here, but never use a regex for IP verification if from a potentially dangerous source.
+    """
+    combined_regex = "(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(^192\.168\.)"
+    return re.match(combined_regex, ip_string) is not None # is not None is just a sneaky way of converting to a boolean
+
+
+def get_local_address():
+    # socket.getaddrinfo returns a bunch of info, so we just get the IPs it returns with this list comprehension.
+    local_ips = [x[4][0] for x in socket.getaddrinfo(socket.gethostname(), 80)
+                 if ip_is_local(x[4][0])]
+
+    # select the first IP, if there is one.
+    local_ip = local_ips[0] if len(local_ips) > 0 else None
+
+    # If the previous method didn't find anything, use this less desirable method that lets your OS figure out which
+    # interface to use.
+    if not local_ip:
+        # create a standard UDP socket ( SOCK_DGRAM is UDP, SOCK_STREAM is TCP )
+        temp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        try:
+            # Open a connection to one of Google's DNS servers. Preferably change this to a server in your control.
+            temp_socket.connect(('8.8.8.8', 9))
+            # Get the interface used by the socket.
+            local_ip = temp_socket.getsockname()[0]
+        except socket.error:
+            # Only return 127.0.0.1 if nothing else has been found.
+            local_ip = "127.0.0.1"
+        finally:
+            # Always dispose of sockets when you're done!
+            temp_socket.close()
+    return local_ip
+
+
 def get_work_dir():
     return '/var/lib/docker/tmp'
 
