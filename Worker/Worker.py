@@ -216,6 +216,9 @@ class Worker:
 
         # configure nfs
         if response.status_code == 200:
+            cmd = 'sudo umount %s:/var/nfs/RESTfulSwarm' % self.__gm_address
+            os.system(cmd)
+
             # mount to the directory on nfs host server(GlobalManager)
             cmd = 'sudo mount %s:/var/nfs/RESTfulSwarm /nfs/RESTfulSwarm' % self.__gm_address
             os.system(cmd)
