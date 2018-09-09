@@ -38,8 +38,8 @@
       <file leaf-file-name="Discovery.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="45" column="48" selection-start-line="45" selection-start-column="48" selection-end-line="45" selection-end-column="48" />
+            <state relative-caret-position="513">
+              <caret line="50" column="78" selection-start-line="50" selection-start-column="78" selection-end-line="50" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -232,20 +232,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1535744537820</updated>
-    </task>
-    <task id="LOCAL-00041" summary="update database creation command">
-      <created>1536442745613</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1536442745613</updated>
-    </task>
-    <task id="LOCAL-00042" summary="update database creation command">
-      <created>1536443158533</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1536443158533</updated>
     </task>
     <task id="LOCAL-00043" summary="update database creation command">
       <created>1536443449288</created>
@@ -576,7 +562,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536532095305</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="prune network is not working">
+      <created>1536532675188</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1536532675188</updated>
+    </task>
+    <task id="LOCAL-00091" summary="prune network is not working">
+      <created>1536533061967</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1536533061967</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -956,8 +956,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Discovery/Discovery.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="45" column="48" selection-start-line="45" selection-start-column="48" selection-end-line="45" selection-end-column="48" />
+        <state relative-caret-position="513">
+          <caret line="50" column="78" selection-start-line="50" selection-start-column="78" selection-end-line="50" selection-end-column="78" />
         </state>
       </provider>
     </entry>

@@ -46,10 +46,12 @@ class Discovery(object):
                 # update job status if necessary
                 flag = True
                 for job in job_details['job_info']['tasks']:
+                    print('_________________________________________________')
+                    print(job_details['job_info']['tasks'][job]['status'])
+                    print('_________________________________________________')
                     if job_details['job_info']['tasks'][job]['status'] != 'Down':
                         flag = False
                 if flag:
-                    print('_________________________________________________')
                     mg.update_doc(job_col, 'job_name', job_name, 'status', 'Down')
                     mg.update_doc(job_col, 'job_name', job_name, 'end_time', time.time())
 
