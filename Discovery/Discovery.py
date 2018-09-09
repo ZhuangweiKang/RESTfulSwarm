@@ -44,8 +44,8 @@ class Discovery(object):
                 mg.update_doc(job_col, filter_key, task_name, target_key, 'Down')
 
                 # update job status if necessary
-                check = list(filter(lambda _job: _job['status'] != 'Down',
-                                    list(job_details['job_info']['tasks'].values())))
+                check = list(filter(lambda task: task['status'] != 'Down',
+                                    job_details['job_info']['tasks']))
                 if len(check) == 0:
                     mg.update_doc(job_col, 'job_name', job_name, 'status', 'Down')
                     mg.update_doc(job_col, 'job_name', job_name, 'end_time', time.time())
