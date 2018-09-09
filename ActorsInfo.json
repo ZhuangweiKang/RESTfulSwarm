@@ -1,0 +1,22 @@
+{
+  "FE": {
+    "address": "ec2-34-219-58-82.us-west-2.compute.amazonaws.com"
+  },
+  "JM": {
+    "address": "ec2-34-219-58-82.us-west-2.compute.amazonaws.com",
+    "wait_time": 0.1,
+    "scheduling_strategy": {
+      "best-fit": 1,
+      "first-fit": 0,
+      "first-fit-decreasing": 0,
+      "best-fit-decreasing": 0,
+      "no-scheduler": 0
+    }
+  },
+  "GM": {
+    "address": "ec2-34-219-58-82.us-west-2.compute.amazonaws.com"
+  },
+  "DC": {
+    "address": "ec2-34-219-58-82.us-west-2.compute.amazonaws.com"
+  }
+}

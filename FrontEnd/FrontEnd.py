@@ -29,7 +29,7 @@ def main():
     global messenger
     global db
 
-    with open('FrontEndInit.json') as f:
+    with open('../ActorsInfo.json') as f:
         data = json.load(f)
 
     with open('../DBInfo.json') as f:
@@ -38,7 +38,7 @@ def main():
     db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'], address=db_info['address'], port=SystemConstants.MONGODB_PORT)
     db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
 
-    jm_address = data['jm_address']
+    jm_address = data['JM']['address']
     messenger = Messenger(messenger_type='C/S', address=jm_address, port=SystemConstants.JM_PORT)
 
     # fe_address = data['fe_address']
@@ -65,7 +65,7 @@ def main():
     swagger = Swagger(app, template=template)
 
     @app.route('/RESTfulSwarm/FE/request_new_job', methods=['POST'])
-    @swag_from('FrontEnd.yml', validation=True)
+    @swag_from('./Flasgger/FrontEnd.yml', validation=True)
     def request_new_job():
         global messenger
         # Write job data into MongoDB
@@ -80,7 +80,7 @@ def main():
         return 'OK', 200
 
     @app.route('/RESTfulSwarm/FE/switch_scheduler/<new_scheduler>', methods=['GET'])
-    @swag_from('SwitchScheduler.yml')
+    @swag_from('./Flasgger/SwitchScheduler.yml')
     def switch_scheduler(new_scheduler):
         global messenger
         # Notify Job Manager to switch scheduler

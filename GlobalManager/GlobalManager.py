@@ -306,10 +306,6 @@ def main():
     global gm_address
     global dockerClient
 
-    # with open('GlobalManagerInit.json') as f:
-    #     data = json.load(f)
-    # gm_address = data['gm_address']
-
     gm_address = utl.get_local_address()
 
     template = {

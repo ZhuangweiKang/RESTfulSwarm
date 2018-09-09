@@ -333,9 +333,12 @@ class JobManager(object):
 
         os.chdir('/home/%s/RESTfulSwarm/JobManager' % utl.get_username())
 
-        with open('JobManagerInit.json') as f:
+        with open('../ActorsInfo.json') as f:
             data = json.load(f)
-        gm_address = data['gm_address']
+
+        gm_address = data['GM']['address']
+
+        data = data['JM']
 
         with open('../DBInfo.json') as f:
             db_info = json.load(f)

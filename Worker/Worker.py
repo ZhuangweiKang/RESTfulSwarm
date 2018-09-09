@@ -225,7 +225,7 @@ class Worker:
         requests.post(url=url, json={'hostname': self.__hostname})
 
     @staticmethod
-    def main(worker_init):
+    def main(frequency):
         # parser = argparse.ArgumentParser()
         # parser.add_argument('--GM', type=str, help='Global Manager IP address.')
         # parser.add_argument('--worker', type=str, help='Self IP address')
@@ -239,12 +239,13 @@ class Worker:
 
         os.chdir('/home/%s/RESTfulSwarm/Worker' % utl.get_username())
 
-        with open(worker_init) as f:
+        with open('../ActorsInfo.json') as f:
             data = json.load(f)
-        gm_address = data['gm_address']
-        worker_address = data['worker_address']
-        dis_address = data['dis_address']
-        frequency = data['frequency']
+        gm_address = data['GM']['address']
+        # worker_address = data['worker_address']
+        worker_address = utl.get_local_address()
+        dis_address = data['DC']['address']
+        frequency = frequency
 
         worker = Worker(gm_address, worker_address, dis_address, frequency)
 
@@ -257,14 +258,14 @@ class Worker:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--file', type=str, default='Worker1Init.json', help='Worker node init json file path.')
+    parser.add_argument('-f', '--frequency', type=int, default=5, help='Frequency of sending data to Discovery.')
     args = parser.parse_args()
-    worker_init_json = args.file
+    frequency = args.frequency
 
     pro = multiprocessing.Process(
         name='Worker',
         target=Worker.main,
-        args=(worker_init_json, )
+        args=(frequency, )
     )
     pro.daemon = True
     pro.start()
