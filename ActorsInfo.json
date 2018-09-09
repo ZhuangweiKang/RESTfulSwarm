@@ -1,9 +1,9 @@
 {
   "FE": {
-    "address": "ec2-34-219-58-82.us-west-2.compute.amazonaws.com"
+    "address": "129.59.234.231"
   },
   "JM": {
-    "address": "ec2-34-219-58-82.us-west-2.compute.amazonaws.com",
+    "address": "129.59.234.231",
     "wait_time": 0.1,
     "scheduling_strategy": {
       "best-fit": 1,
@@ -14,9 +14,9 @@
     }
   },
   "GM": {
-    "address": "ec2-34-219-58-82.us-west-2.compute.amazonaws.com"
+    "address": "129.59.234.231"
   },
   "DC": {
-    "address": "ec2-34-219-58-82.us-west-2.compute.amazonaws.com"
+    "address": "129.59.234.231"
   }
 }
