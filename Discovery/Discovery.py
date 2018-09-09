@@ -48,9 +48,6 @@ class Discovery(object):
                 # update job status if necessary
                 flag = True
                 for task in job_details['job_info']['tasks']:
-                    print('_________________________________________________')
-                    print(job_details['job_info']['tasks'][task]['status'])
-                    print('_________________________________________________')
                     if job_details['job_info']['tasks'][task]['status'] != 'Down':
                         flag = False
                 if flag:
