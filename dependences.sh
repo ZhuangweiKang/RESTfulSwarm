@@ -76,9 +76,11 @@ install_db(){
     systemctl status mongod
 
     # create admin user
-    echo "use $3" > initdb.js
-    echo "db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdmin\", db: \"$3\" } ] } )" >> initdb.js
-    mongo localhost:27017/test initdb.js
+#    echo "use $3" > initdb.js
+#    echo "db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdmin\", db: \"$3\" } ] } )" >> initdb.js
+#    mongo localhost:27017/test initdb.js
+
+    mongo --eval "use $3; db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"userAdmin\", db: \"$3\" } ] } )"
 
     systemctl enable mongod
     systemctl restart mongod
