@@ -27,7 +27,7 @@ import SystemConstants
 
 class ManagementEngine(object):
     def __init__(self, db_info, workers_details):
-        self.__db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'],
+        self.__db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'], db_name=db_info['db_name'],
                                          address=db_info['address'], port=SystemConstants.MONGODB_PORT)
         self.__db = mg.get_db(self.__db_client, db_name=SystemConstants.MONGODB_NAME)
         self.__workers_info = workers_details

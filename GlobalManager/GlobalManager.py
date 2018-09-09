@@ -334,7 +334,8 @@ def main():
     with open('../DBInfo.json') as f:
         db_info = json.load(f)
 
-    db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'], address=db_info['address'], port=SystemConstants.MONGODB_PORT)
+    db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'], db_name=db_info['db_name'],
+                              address=db_info['address'], port=SystemConstants.MONGODB_PORT)
     db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
     worker_col = mg.get_col(db, SystemConstants.WorkersInfo)
     worker_resource_col = mg.get_col(db, SystemConstants.WorkersResourceInfo)

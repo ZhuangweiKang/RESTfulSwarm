@@ -17,7 +17,8 @@ import utl
 
 class Discovery(object):
     def __init__(self, db_info):
-        _db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'], address=db_info['address'], port=SystemConstants.MONGODB_PORT)
+        _db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'], db_name=db_info['db_name'],
+                                   address=db_info['address'], port=SystemConstants.MONGODB_PORT)
         self.__db = mg.get_db(_db_client, SystemConstants.MONGODB_NAME)
         self.__workers_info = mg.get_col(self.__db, SystemConstants.WorkersInfo)
         self.__workers_resource_info = mg.get_col(self.__db, SystemConstants.WorkersResourceInfo)

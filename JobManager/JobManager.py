@@ -351,7 +351,8 @@ class JobManager(object):
                 scheduling_strategy = strategy
                 break
 
-        db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'], address=db_info['address'], port=SystemConstants.MONGODB_PORT)
+        db_client = mg.get_client(usr=db_info['user'], pwd=db_info['pwd'], db_name=db_info['db_name'],
+                                  address=db_info['address'], port=SystemConstants.MONGODB_PORT)
         db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
 
         # choose scheduler

@@ -7,8 +7,8 @@ import time
 
 
 # return a mongodb client
-def get_client(usr, pwd, address='127.0.0.1', port='27017'):
-    url = 'mongodb://%s:%s@%s:%s/RESTfulSwarmDB' % (usr, pwd, address, port)
+def get_client(usr, pwd, db_name, address='127.0.0.1', port='27017'):
+    url = 'mongodb://%s:%s@%s:%s/%s' % (usr, pwd, address, port, db_name)
     return mg.MongoClient(url)
 
 
