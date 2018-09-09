@@ -113,14 +113,17 @@ install_nfs_client(){
 }
 
 main(){
+    echo "Installing base dependencies..."
     install_base_dependences
+
+    echo "Installing python libraries..."
+    install_python_libs
 
     if [ "$1" = "DB" ]
     then
         install_db $2 $3 $4
         return 1
     fi
-    install_python_libs
     if [ "$1" = "GM" ]
     then
         install_docker

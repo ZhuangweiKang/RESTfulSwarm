@@ -18,9 +18,9 @@ An environment for core simulation based on Docker Swarm
 
 ```Bash
 # configure SC/FE/JM
-./dependences.sh SC
-./dependences.sh FE
-./dependences.sh JM
+./dependences.sh
+./dependences.sh
+./dependences.sh
 
 # configure GM
 ./dependences.sh GM
