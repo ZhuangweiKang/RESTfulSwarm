@@ -111,9 +111,9 @@ class Worker:
                         temp_container = self.storage[container]
                         del self.storage[container]
                         try:
-                            lm_controller = LiveMigration(__image=temp_container['image'], __name=container,
-                                                          __network=temp_container['network'], __logger=self.__logger,
-                                                          __docker_client=self.__docker_client)
+                            lm_controller = LiveMigration(image=temp_container['image'], name=container,
+                                                          network=temp_container['network'], logger=self.__logger,
+                                                          docker_client=self.__docker_client)
                             lm_controller.migrate(dst_address=dst, cmd=temp_container['command'],
                                                   container_detail=container_info)
                         except Exception as ex:
@@ -145,7 +145,7 @@ class Worker:
                 self.__logger.error(ex)
 
     def listen_worker_message(self):
-        lm_controller = LiveMigration(__logger=self.__logger, __docker_client=self.__docker_client, __storage=self.storage)
+        lm_controller = LiveMigration(logger=self.__logger, docker_client=self.__docker_client, storage=self.storage)
         lm_controller.not_migrate(SystemConstants.WORKER_PORT)
 
     def join_swarm(self, remote_address, join_token):

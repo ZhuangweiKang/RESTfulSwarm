@@ -11,14 +11,14 @@ from Messenger import Messenger
 
 
 class LiveMigration:
-    def __init__(self, __image=None, __name=None, __network=None, __logger=None, __docker_client=None, __storage=None):
-        self.__image = __image
-        self.__name = __name
-        self.__logger = __logger
-        self.__docker_client = __docker_client
+    def __init__(self, image=None, name=None, network=None, logger=None, docker_client=None, storage=None):
+        self.__image = image
+        self.__name = name
+        self.__logger = logger
+        self.__docker_client = docker_client
         self.__messenger = None
-        self.__network = __network
-        self.__storage = __storage
+        self.__network = network
+        self.__storage = storage
 
     def send_image_info(self):
         self.__messenger.send(prompt='image', content=self.__image)
