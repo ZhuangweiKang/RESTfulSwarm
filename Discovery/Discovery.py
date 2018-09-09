@@ -44,12 +44,11 @@ class Discovery(object):
                 mg.update_doc(job_col, filter_key, task_name, target_key, 'Down')
 
                 # update job status if necessary
-                check = []
-                for task in job_details['job_info']['tasks'].values():
-                    if task['status'] != 'Down':
-                        check.append(task)
-
-                if len(check) == 0:
+                flag = True
+                for job in job_details['job_info']['tasks']:
+                    if job_details['job_info']['tasks'][job]['status'] != 'Down':
+                        flag = False
+                if flag:
                     mg.update_doc(job_col, 'job_name', job_name, 'status', 'Down')
                     mg.update_doc(job_col, 'job_name', job_name, 'end_time', time.time())
 
