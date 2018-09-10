@@ -43,12 +43,13 @@ class Discovery(object):
                 target_key = 'job_info.tasks.%s.status' % task_name
                 mg.update_doc(job_col, filter_key, task_name, target_key, 'Down')
 
-                # update job status if necessary
+                # update job status if all tasks are down
                 flag = True
                 for task in job_details['job_info']['tasks']:
                     if job_details['job_info']['tasks'][task]['status'] != 'Down':
-                        print(job_details['job_info']['tasks'][task]['container_name'])
                         flag = False
+                    else:
+                        print(job_details['job_info']['tasks'][task]['container_name'])
                 if flag:
                     mg.update_doc(job_col, 'job_name', job_name, 'status', 'Down')
                     mg.update_doc(job_col, 'job_name', job_name, 'end_time', time.time())
