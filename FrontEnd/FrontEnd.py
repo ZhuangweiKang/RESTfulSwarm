@@ -6,7 +6,6 @@ import os, sys
 import json
 from flask import *
 import time
-import argparse
 from flasgger import Swagger, swag_from
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -42,7 +41,6 @@ def main():
     jm_address = data['JM']['address']
     messenger = Messenger(messenger_type='C/S', address=jm_address, port=SystemConstants.JM_PORT)
 
-    # fe_address = data['fe_address']
     fe_address = utl.get_local_address()
 
     template = {
@@ -94,20 +92,4 @@ def main():
 
 
 if __name__ == '__main__':
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('--FE', type=str, help='The FrontEnd node IP address.')
-    # parser.add_argument('--db', type=str, help='MongoDB node address.')
-    # parser.add_argument('--JM', type=str, help='Job Manager address.')
-    # args = parser.parse_args()
-    #
-    # # db
-    # db_address = args.db
-    # db_client = mg.get_client(address=db_address, port=SystemConstants.MONGODB_PORT)
-    # db = mg.get_db(db_client, SystemConstants.MONGODB_NAME)
-    #
-    # # socket that is used to send job notification to job manager
-    # jm_address = args.JM
-    # socket = zmq.cs_connect(jm_address, SystemConstants.JM_PORT)
-    # fe_address = args.FE
-    #
     main()

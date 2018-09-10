@@ -363,12 +363,4 @@ def main():
 
 
 if __name__ == '__main__':
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('--GM', type=str, help='The IP address of your Global Manager node.')
-    # parser.add_argument('--db', type=str, help='MongoDB address.')
-    # args = parser.parse_args()
-    # gm_address = args.GM
-    # dockerClient = docker.set_client()
-    # db_address = args.db
-
     main()

@@ -229,23 +229,11 @@ class Worker:
 
     @staticmethod
     def main(frequency):
-        # parser = argparse.ArgumentParser()
-        # parser.add_argument('--GM', type=str, help='Global Manager IP address.')
-        # parser.add_argument('--worker', type=str, help='Self IP address')
-        # parser.add_argument('--discovery', type=str, help='Discovery server address.')
-        # parser.add_argument('-f', '--frequency', type=int, default=20, help='Worker node task monitor frequency (s).')
-        # args = parser.parse_args()
-        # gm_address = args.GM
-        # worker_address = args.worker
-        # dis_address = args.discovery
-        # frequency = args.frequency
-
         os.chdir('/home/%s/RESTfulSwarm/Worker' % utl.get_username())
 
         with open('../ActorsInfo.json') as f:
             data = json.load(f)
         gm_address = data['GM']['address']
-        # worker_address = data['worker_address']
         worker_address = utl.get_local_address()
         dis_address = data['DC']['address']
         frequency = frequency

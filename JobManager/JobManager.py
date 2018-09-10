@@ -4,7 +4,6 @@
 
 import os, sys
 import requests
-import argparse
 import utl
 import time
 import json
@@ -315,22 +314,6 @@ class JobManager(object):
 
     @staticmethod
     def main():
-        # parser = argparse.ArgumentParser()
-        # parser.add_argument('--GM', type=str, help='Global manager node address.')
-        # parser.add_argument('--db', type=str, help='MongoDB node address.')
-        # parser.add_argument('-w', '--wait', type=int, default=3, help='Waiting time for Job Manager in seconds.')
-        # parser.add_argument('-s', '--scheduling', type=str, choices=['first-fit', 'best-fit'], default='best-fit',
-        #                     help='Scheduling algorithm option.')
-        #
-        # args = parser.parse_args()
-        # gm_address = args.GM
-        #
-        # db_address = args.db
-        #
-        # scheduling_strategy = args.scheduling
-        #
-        # wait = args.wait
-
         os.chdir('/home/%s/RESTfulSwarm/JobManager' % utl.get_username())
 
         with open('../ActorsInfo.json') as f:

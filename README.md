@@ -8,7 +8,7 @@ An environment for core simulation based on Docker Swarm
 
 * Ubuntu 16.04
 * Python 3
-* Docker 17.12 (with experimental feature)
+* Docker >=17.12 (with experimental feature)
 * CRIU
 * Flask
 * ZeroMQ
@@ -38,15 +38,92 @@ systemctl status mongod
 
 ## Notion
 
+* Actor：Main components in the skeleton
+  1. FE: FrontEnd
+  2. JM: JobManager
+  3. GM: GlobalManager
+  4. DC: Discovery
+
 * Job: A list of containers with same network 
   1. Job name format: 'job'Submit_time-session_id
      >> example: job1533585500968-1533585495
+
 * Task: Container in Docker
   1. Task name format: jobname_task
      >> example: job1533585500968-1533585495_task1
 * Session:
   1. ManagementEngine launch the system once
-  
+
+* Job Definition(sample):
+  ```json
+   {
+      "job_name": "job1533585500968-1533585495",
+      "job_info": {
+        "network": {
+          "name": "RESTfulSwarmNetwork",
+          "driver": "overlay",
+          "subnet": "129.59.0.0/16"
+        },
+        "tasks": {
+          "job1533585500968-1533585495_task1": {
+            "container_name": "job1533585500968-1533585495_task1",
+            "node": "",
+            "image": "image_name",
+            "detach": true,
+            "command": "",
+            "req_cores": 2,
+            "cpuset_cpus": "",
+            "mem_limit": "10m",
+            "ports": {"3000/tcp": 3000},
+            "volumes": {},
+            "environment": {},
+            "status": "Ready"
+          }
+        }
+      },
+      "status": "Ready",
+      "start_time": 0,
+      "end_time": 0
+   }  
+  ```  
+
+* Define arguments for actors(required arguments for running actor script):
+    ```json
+     {
+        "FE": {
+            "address": "129.0.0.1"
+        },
+        "JM": {
+            "address": "129.0.0.2",
+            "wait_time": 0.1,
+            "scheduling_strategy": {
+              "best-fit": 1,
+              "first-fit": 0,
+              "first-fit-decreasing": 0,
+              "best-fit-decreasing": 0,
+              "no-scheduler": 0
+            }
+        },
+        "GM": {
+            "address": "129.0.0.3"
+        },
+        "DC": {
+            "address": "129.0.0.4"
+        }
+     }
+    ```
+
+* Start System in Experimental mode (FE, JM, GM and DC are in same node):
+    1. Start ManagementEngine
+        ```bash
+        python3 Management.py
+        ``` 
+    2. Start worker
+        ```bash
+         # frequency: time interval of sending containers status to DC
+         python3 Worker.py $frequency
+        ```
+
 ## Architecture
 
 ![Architecture](./Images/Architecture.jpg)
