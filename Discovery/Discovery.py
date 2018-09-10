@@ -36,20 +36,18 @@ class Discovery(object):
                 deployed_tasks.append(task_name)
                 job_name = msg.split('_')[0]
                 job_col = mg.get_col(self.__db, job_name)
-                job_details = mg.find_col(job_col)[0]
 
                 # update job collection -- task status
                 filter_key = 'job_info.tasks.%s.container_name' % task_name
                 target_key = 'job_info.tasks.%s.status' % task_name
-                print('%s down' % task_name)
                 mg.update_doc(job_col, filter_key, task_name, target_key, 'Down')
+
+                job_details = mg.find_col(job_col)[0]
 
                 # update job status if all tasks are down
                 flag = True
                 for task in job_details['job_info']['tasks']:
                     if job_details['job_info']['tasks'][task]['status'] != 'Down':
-                        print(job_details['job_info']['tasks'][task]['container_name'])
-                        print('_____________________________________________________')
                         flag = False
                 if flag:
                     mg.update_doc(job_col, 'job_name', job_name, 'status', 'Down')
