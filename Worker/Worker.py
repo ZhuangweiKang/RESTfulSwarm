@@ -28,7 +28,7 @@ class Worker:
         self.__docker_client = docker.set_client()
         self.__gm_address = gm_address
         self.__host_address = worker_address
-        self.__hostname = utl.get_hostname()
+        self.__hostname = '%s_%s' % (worker_address, utl.get_hostname())
 
         self.__messenger.subscribe_topic(self.__hostname)
         self.__messenger.subscribe_topic(self.__host_address)
