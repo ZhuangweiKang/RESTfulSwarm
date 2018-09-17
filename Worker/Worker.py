@@ -33,7 +33,7 @@ class Worker:
             os.system('echo "%s %s" >> /etc/hosts' % (worker_address, self.__hostname))
             os.system('hostname %s' % self.__hostname)
         else:
-            self.__hostname = utl.get_hostname
+            self.__hostname = utl.get_hostname()
         self.__messenger.subscribe_topic(self.__hostname)
         self.__messenger.subscribe_topic(self.__host_address)
 
