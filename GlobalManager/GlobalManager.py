@@ -3,9 +3,11 @@
 # Author: Zhuangwei Kang
 
 import os
+import sys
 import json
 import time
 import argparse
+import traceback
 import threading
 from flask import *
 from flasgger import Swagger, swag_from
@@ -169,6 +171,7 @@ def request_new_job():
         job_buffer.append(data['job_name'])
         return 'OK', 200
     except Exception as ex:
+        traceback.print_exc(file=sys.stderr)
         return str(ex), 400
 
 
