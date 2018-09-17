@@ -28,7 +28,7 @@ class Worker:
         self.__docker_client = docker.set_client()
         self.__gm_address = gm_address
         self.__host_address = worker_address
-        if worker_address not in utl.get_hostname():
+        if '-'.join(worker_address.split('.')) not in utl.get_hostname():
             self.__hostname = '%s-%s' % ('-'.join(worker_address.split('.')), utl.get_hostname())
             os.system('echo "%s %s" >> /etc/hosts' % (worker_address, self.__hostname))
             os.system('hostname %s' % self.__hostname)
