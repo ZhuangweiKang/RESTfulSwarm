@@ -30,6 +30,7 @@ class Worker:
         self.__host_address = worker_address
         if worker_address not in utl.get_hostname():
             self.__hostname = '%s_%s' % (worker_address, utl.get_hostname())
+            os.system('hostname %s' % self.__hostname)
         else:
             self.__hostname = utl.get_hostname
         self.__messenger.subscribe_topic(self.__hostname)
