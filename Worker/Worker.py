@@ -30,6 +30,7 @@ class Worker:
         self.__host_address = worker_address
         if worker_address not in utl.get_hostname():
             self.__hostname = '%s-%s' % ('-'.join(worker_address.split('.')), utl.get_hostname())
+            os.system('echo "%s %s" >> /etc/hosts' % (worker_address, self.__hostname))
             os.system('hostname %s' % self.__hostname)
         else:
             self.__hostname = utl.get_hostname
