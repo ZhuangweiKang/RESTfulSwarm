@@ -86,7 +86,7 @@ def request_join():
             # notify the worker node update "hostname" to worker's ID in swarm mode
             while True:
                 worker_id = docker.get_node_id(dockerClient, worker_address)
-                if not worker_id:
+                if worker_id is not None:
                     break
             print('Worker %s id is %s' % (worker_address, worker_id))
             worker_id_msg = '%s ID %s' % (worker_address, worker_id)
