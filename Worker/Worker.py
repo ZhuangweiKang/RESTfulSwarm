@@ -28,13 +28,7 @@ class Worker:
         self.__docker_client = docker.set_client()
         self.__gm_address = gm_address
         self.__host_address = worker_address
-        if '-'.join(worker_address.split('.')) not in utl.get_hostname():
-            self.__hostname = '%s-%s' % ('-'.join(worker_address.split('.')), utl.get_hostname())
-            os.system('echo "%s %s" >> /etc/hosts' % (worker_address, self.__hostname))
-            os.system('hostname %s' % self.__hostname)
-        else:
-            self.__hostname = utl.get_hostname()
-        self.__messenger.subscribe_topic(self.__hostname)
+        self.__hostname = utl.get_hostname()
         self.__messenger.subscribe_topic(self.__host_address)
 
         # local storage
@@ -95,6 +89,10 @@ class Worker:
                     remote_address = msg[1]
                     join_token = msg[2]
                     self.join_swarm(remote_address, join_token)
+                elif msg_type == 'ID':
+                    worker_id = msg[1]
+                    self.__hostname = worker_id
+                    self.__messenger.subscribe_topic(self.__hostname)
                 elif msg_type == 'checkpoints':
                     data = json.loads(' '.join(msg[1:]))
                     threads = []

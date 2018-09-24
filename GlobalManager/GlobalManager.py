@@ -65,7 +65,7 @@ def request_join():
     hostname = data['hostname']
     worker_address = data['address']
     if hostname is not None:
-        if docker.check_node_hostname(dockerClient, hostname):
+        if docker.check_node_ip(client=dockerClient, node_ip=worker_address) is False:
 
             # configure nfs setting
             def configure_nfs():
@@ -77,12 +77,22 @@ def request_join():
                 os.system('sudo systemctl restart nfs-kernel-server')
             configure_nfs()
 
-            init_worker_info(hostname, data['CPUs'], data['MemFree'])
             remote_address = gm_address + ':2377'
             join_token = docker.get_join_token()
-            response = '%s join %s %s' % (hostname, remote_address, join_token)
+            response = '%s join %s %s' % (worker_address, remote_address, join_token)
             messenger.publish(response)
             app.logger.info('Send manager address and join token to worker node.')
+
+            # notify the worker node update "hostname" to worker's ID in swarm mode
+            while True:
+                worker_id = docker.get_node_id(dockerClient, worker_address)
+                if not worker_id:
+                    break
+            worker_id_msg = '%s ID %s' % (worker_address, worker_id)
+            messenger.publish(worker_id_msg)
+            app.logger.info('Send worker\'s ID to worker node.')
+
+            init_worker_info(worker_id, data['CPUs'], data['MemFree'])
             return response, 200
         else:
             response = 'Error: Node already in Swarm environment.'

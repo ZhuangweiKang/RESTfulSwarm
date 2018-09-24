@@ -182,9 +182,17 @@ def check_node_ip(client, node_ip):
 def check_node_hostname(client, host):
     nodes = get_node_list(client)
     for node in nodes:
-        if node.attrs['Description']['Hostname'] == host:
+        if node.attrs['ID'] == host:
             return False
     return True
+
+
+def get_node_id(client, node_ip):
+    nodes = get_node_list(client)
+    for node in nodes:
+        if node.attrs['Status']['Addr'] == node_ip:
+            return node.attrs['ID']
+    return None
 
 
 def get_node_info(client, name):
