@@ -88,6 +88,7 @@ def request_join():
                 worker_id = docker.get_node_id(dockerClient, worker_address)
                 if not worker_id:
                     break
+            print('Worker %s id is %s' % (worker_address, worker_id))
             worker_id_msg = '%s ID %s' % (worker_address, worker_id)
             messenger.publish(worker_id_msg)
             app.logger.info('Send worker\'s ID to worker node.')
