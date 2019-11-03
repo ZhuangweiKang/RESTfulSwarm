@@ -75,17 +75,27 @@ install_db(){
     systemctl start mongod
     systemctl status mongod
 
+    # disable mongodb auth
+    sed -i '/authorization/s/enabled/disabled/g' /etc/mongod.conf
+    systemctl restart mongod
+
     # create admin user
     echo "use $3" > initdb.js
     echo "db.createUser( { user: \"$1\", pwd: \"$2\", roles: [ { role: \"readWrite\", db: \"$3\" } ] } )" >> initdb.js
+
+    # create user and database
+    mongo < initdb.json
 
     systemctl enable mongod
     systemctl restart mongod
 
     # write database information into DBInfo.json
     echo "{\"user\": \"$1\", \"pwd\": \"$2\", \"db_name\": \"$3\", \"address\": \"$4\"}" > DBInfo.json
-}
 
+    # enable mongodb auth
+    sed -i '/authorization/s/disabled/enable/g' /etc/mongod.conf
+    systemctl restart mongod
+}
 
 install_weave(){
     # install weave plugin and enable multicast feature
