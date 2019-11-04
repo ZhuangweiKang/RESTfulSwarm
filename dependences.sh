@@ -93,7 +93,7 @@ install_db(){
     echo "{\"user\": \"$1\", \"pwd\": \"$2\", \"db_name\": \"$3\", \"address\": \"$4\"}" > DBInfo.json
 
     # enable mongodb auth
-    sed -i '/authorization/s/disabled/enable/g' /etc/mongod.conf
+    sed -i '/authorization/s/disabled/enabled/g' /etc/mongod.conf
     systemctl restart mongod
 }
 
