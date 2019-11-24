@@ -101,7 +101,7 @@ class StressClient(object):
             volume = {host_dir: {'bind': '/home/mnt/', 'mode': 'rw'}}
 
             task = self.Task(task_name, image, req_cores, mem_limit, volume=volume, node=node, cpuset_cpus=cpuset_cpus,
-                             deadline=random.randint(0, 20))
+                             deadline=random.randint(0, 20), command='5')
             task = task.generate_task()
             job['job_info']['tasks'].update({task_name: task})
         

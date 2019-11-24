@@ -1,9 +1,9 @@
 {
   "subnet": "129.59.0.0/16",
-  "image_name": "zhuangweikang/sleeper",
+  "image_name": "aduermael/sleeper",
   "task_count": 4,
   "task_cores": 2,
   "task_mem": 50,
   "time_interval": 1,
-  "run_count": 5
+  "run_count": 1
 }
