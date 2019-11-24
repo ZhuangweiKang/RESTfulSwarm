@@ -1,4 +1,4 @@
-#!/usr/bin/env /usr/local/bin/python
+#!/usr/bin/python3.7
 # encoding: utf-8
 # Author: Zhuangwei Kang
 

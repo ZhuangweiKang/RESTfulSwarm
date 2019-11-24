@@ -1,4 +1,4 @@
-#!/usr/bin/env /usr/local/bin/python
+#!/usr/bin/python3.7
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
@@ -11,10 +11,10 @@ WORKER_PORT = '3200'
 CONTAINER_LM_PORT = '3300'
 
 MONGODB_USR = 'admin'
-MONGODB_PWD = 'kzw'
+MONGODB_PWD = 'root'
 MONGODB_PORT = '27017'
 MONGODB_NAME = 'RESTfulSwarmDB'
 WorkersInfo = 'WorkersInfo'
 WorkersResourceInfo = 'WorkersResourceInfo'
 
-PRIVATE_KEY = 'private_key.pem'
+PRIVATE_KEY = '~/.ssh/id_rsa'

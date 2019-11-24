@@ -1,9 +1,9 @@
 {
   "FE": {
-    "address": "129.59.234.231"
+    "address": "10.0.0.13"
   },
   "JM": {
-    "address": "129.59.234.231",
+    "address": "10.0.0.13",
     "wait_time": 0.1,
     "scheduling_strategy": {
       "best-fit": 1,
@@ -14,9 +14,9 @@
     }
   },
   "GM": {
-    "address": "129.59.234.231"
+    "address": "10.0.0.13"
   },
   "DC": {
-    "address": "129.59.234.231"
+    "address": "10.0.0.13"
   }
 }

@@ -4,5 +4,6 @@
   "task_count": 4,
   "task_cores": 2,
   "task_mem": 50,
-  "time_interval": 5
+  "time_interval": 1,
+  "run_count": 5
 }

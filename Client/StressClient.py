@@ -57,6 +57,7 @@ class StressClient(object):
         self.task_cores = data['task_cores']
         self.task_mem = data['task_mem']
         self.time_interval = data['time_interval']
+        self.run_count = data['run_count']
 
         with open('../ActorsInfo.json') as f:
             data = json.load(f)
@@ -103,6 +104,8 @@ class StressClient(object):
                              deadline=random.randint(0, 20))
             task = task.generate_task()
             job['job_info']['tasks'].update({task_name: task})
+        
+        print(json.dumps(job))
         return job
 
     @abstractmethod
@@ -112,13 +115,14 @@ class StressClient(object):
     def feed_jobs(self, session_id):
         jobs_count = 0
 
-        max_turns = 5 * self.time_interval
+        #### specify how many turns client can submit jobs
+        max_turns = self.run_count * self.time_interval
         start_time = time.time()
 
         def feed(session):
             nonlocal jobs_count
             time_index = 0
-            while time_index <= max_turns:
+            while time_index < max_turns:
                 job_count = self.feed_func(time_index)
                 self.logger.info('Time Index----%d  /   Job#----%d' % (time_index, job_count))
                 jobs_count += job_count
