@@ -1,4 +1,4 @@
-#!/usr/bin/env /usr/local/bin/python
+#!/usr/bin/python3.7
 # encoding: utf-8
 # Author: Zhuangwei Kang
 
@@ -251,7 +251,7 @@ class Worker:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--frequency', type=int, default=5, help='Frequency of sending data to Discovery.')
+    parser.add_argument('-f', '--frequency', type=float, default=0.2, help='Frequency of sending data to Discovery.')
     args = parser.parse_args()
     frequency = args.frequency
 
